@@ -1,0 +1,4 @@
+This folder is empty.
+
+Personal note 180212 : scpartner/member, reserve, comment, manageall(empty), manageinfo
+					   scmain/host , reserve

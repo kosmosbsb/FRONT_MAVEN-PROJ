@@ -1,0 +1,18 @@
+@font-face {
+	font-family: Kakao Light;
+	src: local("?"), url(../fonts/Kakao-aLt.eot?#iefix) format("embedded-opentype"), url(../fonts/Kakao-aLt.woff) format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: Kakao Regular;
+	src: local("?"), url(../fonts/Kakao-bRg.eot?#iefix) format("embedded-opentype"), url(../fonts/Kakao-bRg.woff) format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: Kakao Bold;
+	src: local("?"), url(../fonts/Kakao-cBd.eot?#iefix) format("embedded-opentype"), url(../fonts/Kakao-cBd.woff) format("woff");
+	font-weight: normal;
+	font-style: normal;
+}

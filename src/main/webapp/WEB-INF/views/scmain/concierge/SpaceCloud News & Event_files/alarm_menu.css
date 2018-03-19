@@ -1,0 +1,213 @@
+.notification-canvas .tab-content a {
+	color: rgb(33, 33, 33);
+}
+.notification-canvas-container {
+	top: 0px; width: 0px; right: 0px; bottom: 0px; position: fixed; z-index: 999999; -ms-overflow-x: hidden; -ms-overflow-y: auto;
+}
+.notification-canvas-backdrop {
+	background: rgb(0, 0, 0); top: 0px; width: 100%; height: 100%; right: 0px; position: fixed; z-index: 1100; opacity: 0.5;
+}
+.site-alarm-head a.text-btn {
+	top: 18px; text-align: right; right: 12px; color: rgb(153, 153, 153); font-size: 13px; display: block; position: absolute; z-index: 50;
+}
+.site-alarm-head .goback.btn {
+	padding: 6px 16px; border: 0px currentColor; border-image: none; top: 10px; line-height: 1.4285; font-size: 16px; position: absolute;
+}
+.site-alarm-body .board-alaram {
+	text-align: left; color: rgb(255, 255, 255); padding-bottom: 10px; font-size: 15px; margin-top: 59px; border-bottom-color: rgb(60, 60, 59); border-bottom-width: 1px; border-bottom-style: solid; display: block;
+}
+.notification-canvas {
+	margin: 0px; transition:transform 300ms; top: 0px; width: 300px; height: 100%; right: 0px; overflow: hidden; padding-left: 0px; position: absolute; z-index: 1500; min-width: 0px; box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.16), 0px 2px 10px 0px rgba(0,0,0,0.12); transform: translate3d(500px, 0px, 0px); webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+.notification_show .notification-canvas {
+	transform: translate3d(0px, 0px, 0px);
+}
+body.offcanvas-expanded {
+	overflow: hidden;
+}
+body.offcanvas-expanded {
+	width: 100%; overflow: visible; padding-right: 0px !important;
+}
+.offcanvas {
+	top: 0px; right: 0px; bottom: 0px; position: fixed; z-index: 150000;
+}
+.notification-canvas .site-alarm-head {
+	background: rgb(255, 255, 255); top: 0px; width: 100%; color: rgb(33, 33, 33); position: absolute; z-index: 50;
+}
+.notification-canvas .site-alarm-head header {
+	padding: 12px 0px; text-align: center; font-size: 20px;
+}
+.notification-canvas .site-alarm-head .zmdi-long-arrow-left {
+	left: 20px; top: 50%; color: rgb(255, 255, 255); font-size: 24px; margin-top: -16px; position: absolute; cursor: pointer;
+}
+.notification-canvas .tab-content .txt-btn {
+	width: 100%; text-align: right; color: rgb(189, 189, 189); margin-top: 15px; display: inline-block;
+}
+.tab-content .notify-body {
+	padding: 0px 15px;
+}
+.site-alarm-body .notify-body .board-alaram {
+	text-align: left; padding-bottom: 10px; font-size: 15px; margin-top: 25px; border-bottom-color: rgb(60, 60, 59); border-bottom-width: 1px; border-bottom-style: solid; display: block;
+}
+.site-alarm-body .notify-body :first-child.board-alaram {
+	margin-top: 0px;
+}
+.notification-canvas.alarm_slide {
+	background: rgb(255, 255, 255); width: 300px;
+}
+.notification-canvas .notify-body .tile {
+	padding-top: 13px;
+}
+.notification-canvas .notify-body :nth-child(1).tile {
+	padding-top: 0px;
+}
+.notification-canvas .alarm-setting .notify-body :nth-child(1).tile {
+	padding-top: 10px;
+}
+.notification-canvas .notify-body .tile-text {
+	width: 100%; font-size: 13px; display: block; -ms-word-wrap: break-word; max-width: 235px;
+}
+.notification-canvas .alarm-setting .notify-body .tile-text {
+	line-height: 1.4; padding-right: 35px; font-size: 13px; position: relative;
+}
+.notification-canvas .tile-text .tile-body {
+	margin: 5px 0px 10px;
+}
+.notification-canvas .tile-text .tile-body .bodytext {
+	padding: 0px 9px; line-height: 20px; border-left-color: rgb(153, 153, 153); border-left-width: 3px; border-left-style: solid;
+}
+.notification-canvas .disabled .tile-text .tile-body .bodytext {
+	color: rgb(102, 102, 102); border-left-color: rgb(238, 238, 238); border-left-width: 3px; border-left-style: solid;
+}
+.notification-canvas .tile-text .tile-body img {
+	width: 100%; height: auto; margin-bottom: 10px; max-width: 238px;
+}
+.notification-canvas .disabled .tile-text .tile-body img {
+	opacity: 0.5;
+}
+.notification-canvas .notify-body .text-sm {
+	margin: 3px 0px 14px;
+}
+.notification-canvas .alarm-setting .notify-body .text-sm {
+	margin: 4px 0px 13px; font-size: 13px;
+}
+.notification-canvas .notify-body .text-gray-bright {
+	color: rgb(133, 133, 133);
+}
+.tab-content .notify-body .tile {
+	width: 100%; padding-left: 35px; display: table; position: relative; min-height: auto;
+}
+.alarm-setting .tab-content .notify-body .tile {
+	padding-left: 0px; cursor: default;
+}
+.alarm-setting .tab-content .notify-body .tile .round-check {
+	top: 50%; width: 20px; right: 0px; margin-top: -6px; position: absolute;
+}
+.tab-content .notify-body .more.tile {
+	padding: 12px 0px;
+}
+.tab-content .notify-body .disabled.tile .tile-text {
+	color: rgb(103, 103, 103);
+}
+.tab-content .notify-body .disabled.tile .tile-text .text-gray-bright {
+	color: rgb(103, 103, 103);
+}
+.tab-content .notify-body .disabled.tile .tile-icon {
+	opacity: 0.3;
+}
+.alarm-setting .tab-content .notify-body .disabled.tile .tile-text {
+	color: rgb(255, 255, 255);
+}
+.alarm-setting .tab-content .notify-body .disabled.tile .tile-text .text-gray-bright {
+	color: rgb(133, 133, 133);
+}
+.alarm-setting .tab-content .notify-body .disabled.tile .tile-icon {
+	opacity: 1;
+}
+.tab-content .notify-body .tile .tile-content {
+	border-bottom-color: rgb(238, 238, 238); border-bottom-width: 1px; border-bottom-style: solid; display: table-cell;
+}
+.site-alarm-body .notify-body .board-alaram {
+	display: block;
+}
+.notification-canvas .notify-body :nth-child(1).tile .tile-icon {
+	left: 0px; top: 0px; position: absolute;
+}
+.notification-canvas .notify-body .tile .tile-icon {
+	left: 0px; top: 13px; position: absolute;
+}
+.tab-content .notify-body .tile .tile-icon img {
+	border-radius: 50%; width: 20px; height: 20px;
+}
+.notification-canvas .notify-body .more.tile .tile-content {
+	text-align: center; border-bottom-color: currentColor; border-bottom-width: medium; border-bottom-style: none;
+}
+.notification-canvas .zmdi-close.zmdi {
+	color: rgb(153, 153, 153);
+}
+.notifi-none {
+	width: 100%; text-align: center; color: rgb(153, 153, 153); font-weight: normal; margin-top: 145px; display: inline-block;
+}
+.notifi-none .zmdi-notifications {
+	width: 80px; height: 80px; color: rgb(188, 188, 188); line-height: 80px; font-size: 80px; margin-bottom: 24px;
+}
+.notifi-none .btl {
+	width: 80px; height: 80px; color: rgb(188, 188, 188); line-height: 80px; font-size: 80px; margin-bottom: 24px;
+}
+.tile .tile-content > div {
+	padding-top: 2px;
+}
+.site_alarm_close {
+	transform: translate3d(320px, 0px, 0px);
+}
+@media screen and (max-width:991px)
+{
+.notification-canvas {
+	left: 0px; right: auto; transform: translate3d(-500px, 0px, 0px);
+}
+}
+@media screen and (max-width:640px)
+{
+.notification-canvas .site-alarm-head .alarm-tools {
+	margin-top: -15px;
+}
+.notification-canvas .site-alarm-head .alarm-tools .zmdi {
+	display: block;
+}
+}
+@media screen and (max-width:320px)
+{
+.notification-canvas.alarm_slide {
+	width: 280px;
+}
+}
+.alarm-setting :not(ie8).checkbox-styled label {
+	padding: 0px; width: 16px;
+}
+.alarm-setting :not(ie8).radio-styled label {
+	padding: 0px; width: 16px;
+}
+.alarm-setting :not(ie8).checkbox-styled {
+	margin-top: 0px; display: inline-block; position: relative;
+}
+.alarm-setting :not(ie8).radio-styled {
+	margin-top: 0px; display: inline-block; position: relative;
+}
+.alarm-setting :not(ie8).checkbox-styled input ~ span {
+	line-height: 1; padding-left: 40px; vertical-align: text-top; display: inline-block; position: relative; cursor: pointer;
+}
+.alarm-setting :not(ie8).radio-styled input ~ span {
+	line-height: 1; padding-left: 40px; vertical-align: text-top; display: inline-block; position: relative; cursor: pointer;
+}
+.alarm-setting :not(ie8).checkbox-styled input ~ span::before {
+	background: rgb(255, 255, 255); border-radius: 3px; border: 1px solid rgb(207, 214, 217); border-image: none; left: 0px; top: 0px; width: 16px; height: 16px; text-align: left; color: rgb(255, 255, 255); line-height: 13px; text-indent: 0.07em; font-size: 14px; font-weight: 600; vertical-align: top; display: inline-block; position: absolute; content: "";
+}
+.alarm-setting :not(ie8).radio-styled input ~ span::before {
+	background: rgb(255, 255, 255); border-radius: 3px; border: 1px solid rgb(207, 214, 217); border-image: none; left: 0px; top: 0px; width: 16px; height: 16px; text-align: left; color: rgb(255, 255, 255); line-height: 13px; text-indent: 0.07em; font-size: 14px; font-weight: 600; vertical-align: top; display: inline-block; position: absolute; content: "";
+}
+.alarm-setting :not(ie8).checkbox-styled input:checked ~ span::before {
+	background: rgb(28, 144, 243); border-width: 1px 2px; border-style: solid; border-color: rgb(28, 144, 243); border-image: none; color: rgb(255, 255, 255); font-family: "Black Tie"; font-size: 9px; vertical-align: -14.28%; content: "\f012"; transform: translate(0px, 0px); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: auto;
+}
+.alarm-setting .notify-body .check {
+	top: 3px; right: 0px; position: absolute; z-index: 1;
+}
