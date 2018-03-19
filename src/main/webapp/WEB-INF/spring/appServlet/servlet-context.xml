@@ -31,6 +31,10 @@
 	
 	<context:component-scan base-package="com.kosmo.spacecloud" />
 	
-	
+	<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
+	<beans:bean id="naverLoginBO" class="com.kosmo.spacecloud.service.login.NaverLoginBO" />
+   
+	<!-- 로그인 컨트롤러 등록 -->
+	<beans:bean id="naverLoginController" class="com.kosmo.spacecloud.web.login.NaverLoginController"/> 
 	
 </beans:beans>
