@@ -38,7 +38,7 @@
 	<link rel="stylesheet" href="https://ssl.pstatic.net/spacecloud/static/web/css/deploy/20180119094222/min/guestie9fix.min.css" type="text/css">
 <![endif]-->
 
-<script src="<c:url value='/resources/js/jquery-3.3.1.min.js'/>"></script>
+<script src="<c:url value='/resources/js/jquery-3.3.1.min.js'/>"></script> 
 <script src="https://ssl.pstatic.net/spacecloud/static/web/js/deploy/20180119094222/min/jqueryScrollPlugins.min.js" type="text/javascript"></script>
 <script src="https://ssl.pstatic.net/spacecloud/static/web/js/deploy/20180119094222/min/flow.min.js" type="text/javascript"></script>
 <script src="https://ssl.pstatic.net/spacecloud/static/web/js/deploy/20180119094222/min/search.min.js" type="text/javascript"></script>
