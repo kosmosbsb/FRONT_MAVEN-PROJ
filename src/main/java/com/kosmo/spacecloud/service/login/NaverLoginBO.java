@@ -19,7 +19,7 @@ public class NaverLoginBO {
 
 	private final static String CLIENT_ID = "uI_lt9shheGFj7WC0yX9";
 	private final static String CLIENT_SECRET = "NTs_IL2XxN";
-	private final static String REDIRECT_URI = "http://localhost:8080/NaverLoginTutorial/callback";
+	private final static String REDIRECT_URI = "http://localhost:8082/spacecloud/callback";
 	
 	private final static String SESSION_STATE = "oauth_state";
 	
@@ -73,7 +73,7 @@ public class NaverLoginBO {
 	
 	/* http session에 데이터 저장 */
 	private void setSession(HttpSession session,String state){
-		session.setAttribute(SESSION_STATE, state);		
+		session.setAttribute(SESSION_STATE, state);	
 	}
 
 	/* http session에서 데이터 가져오기 */	

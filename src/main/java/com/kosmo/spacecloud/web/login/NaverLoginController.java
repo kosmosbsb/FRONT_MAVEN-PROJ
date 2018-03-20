@@ -27,15 +27,15 @@ public class NaverLoginController {
 	}
 	
     @RequestMapping("/login")
-    public ModelAndView login(HttpSession session) {
+    public String login(HttpSession session) {
         //String message = "Simple Login Page";
         //return new ModelAndView("login", "message", message);
     
     	/* 네아로 인증 URL을 생성하기 위하여 getAuthorizationUrl을 호출 */
         String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
         System.out.println("ㅎㅇㅎㅇ");
-        /* 생성한 인증 URL을 View로 전달 */
-        return new ModelAndView("/scmain/SCMain", "url", naverAuthUrl);
+        /* 생성한 인증 URL로 이동해버리기!!!  */
+        return "redirect:"+naverAuthUrl;
     }
  
     @RequestMapping("/callback")
@@ -44,12 +44,11 @@ public class NaverLoginController {
         //return new ModelAndView("callback", "message", message);
     	
     	/* 네아로 인증이 성공적으로 완료되면 code 파라미터가 전달되며 이를 통해 access token을 발급 */
+    	/*NaverLoginBO.SESSION_STATE 을 key로 세션에 박힘(로그인 상태 유지)(값은 d6179618-90ea-4023-9f75-092e502f1b26 이런 형태)*/
 		OAuth2AccessToken oauthToken = naverLoginBO.getAccessToken(session, code, state);
     	
 		String apiResult = naverLoginBO.getUserProfile(oauthToken);
-
-		//session.setAttribute("USER_ID", ); //튜토리얼을 더 보자...
-		
+		System.out.println("콜백 제발");
 		return new ModelAndView("/scmain/SCMain", "result", apiResult);
     	
     }
