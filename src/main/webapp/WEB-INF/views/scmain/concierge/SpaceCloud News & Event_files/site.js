@@ -136,11 +136,11 @@ var SITE = function(){
 			var $alarm_popup = $('#alarm_popup');
 			var $dLabel = $('#dLabel');
 		}
-		var count_check = $alarm_popup.find("li input:checkbox:checked").length; 
-		if(count_check == 0){ 
-			$dLabel.removeClass('active'); 
-		}else{ 
-			$dLabel.addClass('active'); 
+		var count_check = $alarm_popup.find("li input:checkbox:checked").length;
+		if(count_check == 0){
+			$dLabel.removeClass('active');
+		}else{
+			$dLabel.addClass('active');
 		}
 	};
 	var androidUpdateAlert = function (package) {
