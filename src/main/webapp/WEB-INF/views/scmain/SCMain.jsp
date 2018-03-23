@@ -187,7 +187,7 @@ var today = "20180208";
 						</ul>
 						<div class="service_menu">
 							
-								<a href="<c:url value='/login'/>">로그인</a>${result}
+								<a href="<c:url value='/login.do'/>">로그인</a>${result}
 							
 							<p class="copyright">
 								Powered by NAVER © NSPACE Corp.

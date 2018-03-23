@@ -26,7 +26,7 @@ public class NaverLoginController {
 		this.naverLoginBO = naverLoginBO;
 	}
 	
-    @RequestMapping("/login")
+    @RequestMapping("/login.do")
     public String login(HttpSession session) {
         //String message = "Simple Login Page";
         //return new ModelAndView("login", "message", message);
@@ -38,7 +38,7 @@ public class NaverLoginController {
         return "redirect:"+naverAuthUrl;
     }
  
-    @RequestMapping("/callback")
+    @RequestMapping("/callback.do")
     public ModelAndView callback(@RequestParam String code, @RequestParam String state, HttpSession session) throws IOException{
         //String message = "Simple Callback Page";
         //return new ModelAndView("callback", "message", message);

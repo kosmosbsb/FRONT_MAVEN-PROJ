@@ -19,7 +19,7 @@ public class NaverLoginBO {
 
 	private final static String CLIENT_ID = "uI_lt9shheGFj7WC0yX9";
 	private final static String CLIENT_SECRET = "NTs_IL2XxN";
-	private final static String REDIRECT_URI = "http://localhost:8082/spacecloud/callback";
+	private final static String REDIRECT_URI = "http://localhost:8082/spacecloud/callback.do";
 	
 	private final static String SESSION_STATE = "oauth_state";
 	

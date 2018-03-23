@@ -7,34 +7,30 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+	<!-- 
+	
+			!!!!!!!!!!!!!!!!!!여기는 공통 설정파일!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			
+	 -->
+
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
+	
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<!-- 리소스는 리소스에 두고 쓰는게 맞긴하지. -->
-	<resources mapping="/resources/**" location="/resources/" />
+	<!-- <resources mapping="/resources/**" location="/resources/" /> -->
+	<!-- 단! webapp의 어느 디렉토리에 스태틱 리소스(이미지,.css,.js등)를 두더라도 읽어 올수 있도록 설정해주자!!!-->
+	<resources mapping="/**" location="/" /> <!-- 0323(금) 혁우 수정 -->
 	
-	<!-- 단! webapp의 어느 디렉토리에 스태틱 리소스(이미지,.css,.js등)를 두더라도 읽어 올수 있도록 설정도 해주자!!!-->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="order" value="1"/><!-- 나중에 타일즈 적용한다면, 타일즈의 order가 0이야. -->
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/WEB-INF/views/" />
-		<beans:property name="suffix" value=".jsp" />
-	</beans:bean>
 	
 	<context:component-scan base-package="com.kosmo.spacecloud" />
-	
-	<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
-	<beans:bean id="naverLoginBO" class="com.kosmo.spacecloud.service.login.NaverLoginBO" />
-   
-	<!-- 로그인 컨트롤러 등록 -->
-	<beans:bean id="naverLoginController" class="com.kosmo.spacecloud.web.login.NaverLoginController"/> 
-	
+
 </beans:beans>
