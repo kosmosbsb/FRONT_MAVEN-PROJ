@@ -44,5 +44,9 @@
 	  	<filter-name>CharacterEncoding</filter-name> 
 	  	<url-pattern>/*</url-pattern>
 	  </filter-mapping>
-
+	  <!-- 3/23 박세현 서버 실행시 처음 메인화면 소스 추가  -->
+	  <welcome-file-list>
+	  	<welcome-file>start.jsp</welcome-file>	  	
+	  </welcome-file-list>
+	
 </web-app>
