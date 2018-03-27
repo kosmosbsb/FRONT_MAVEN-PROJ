@@ -41,7 +41,7 @@
     <body>
 	<div id="page">
 		<!-- 이거 그 머냐 사이드 -->
-		<jsp:include page="/WEB-INF/template/SideMenu_hw.jsp"/>
+		<jsp:include page="/WEB-INF/template/SideMenu.jsp"/>
 		
 		<!---header top---->
 		<!--header--->

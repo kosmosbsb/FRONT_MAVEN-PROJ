@@ -6,6 +6,14 @@
 
 <!-- sql 매핑하기 (Comment.xml, OneMemo.xml 참고) -->
 
-
+<mapper namespace="mybatis.KHWmapper"> 
+	<insert id="memberInsert" parameterType="MemberDTO">
+		INSERT INTO USER_NORMAL(ID,IMG,N_NICKNAME,NAME,MAIL,GENDER,AGE,N_ALARM_SMS,N_ALARM_MAIL,CREDIT,GRADE) VALUES(#{id},#{img},#{n_nickname},#{name},#{mail},#{gender},#{age},'Y','Y',0,'브론즈')
+	</insert>
+	
+	<select id="memberIsMember" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM USER_NORMAL WHERE ID=#{id}
+	</select>
+</mapper>
 
 
