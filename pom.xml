@@ -121,6 +121,12 @@
 	  		<version>2.8.1</version>
 	  	</dependency>
 	
+		<!-- JSON객체 다루기위해 추가 - 혁우 -->
+		<dependency>
+		    <groupId>com.googlecode.json-simple</groupId>
+		    <artifactId>json-simple</artifactId>
+		    <version>1.1.1</version>
+		</dependency>
 	
 		<!-- Test -->
 		<dependency>

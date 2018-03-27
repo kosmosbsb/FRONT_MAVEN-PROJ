@@ -9,7 +9,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="resources/images/icons/faviconSC2.png"/>
-        <title>SpaceCloud</title>
+        <title>팀플SC</title>
 
         <!-- Bootstrap core CSS -->
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
@@ -41,7 +41,7 @@
     <body>
 	<div id="page">
 		<!-- 이거 그 머냐 사이드 -->
-		<jsp:include page="/WEB-INF/template/SideMenu.jsp"/>
+		<jsp:include page="/WEB-INF/template/SideMenu_hw.jsp"/>
 		
 		<!---header top---->
 		<!--header--->
