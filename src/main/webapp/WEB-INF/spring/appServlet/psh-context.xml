@@ -9,5 +9,7 @@
 
 	<!-- 필요한 빈 등록 고고고 -->
 
-
+	<!--공지사항 컨트롤러  -->
+	<beans:bean id="noticeController" class="com.kosmo.spacecloud.web.psh.NoticeController"/>
+	
 </beans:beans>
