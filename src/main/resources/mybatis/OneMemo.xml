@@ -5,6 +5,7 @@
 
 <!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
 <!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
+<!-- 
 <mapper namespace="mybatis.OneMemo">
 	<select id="memoIsMember" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*) FROM member WHERE id=#{id} AND pwd=#{pwd}
@@ -33,3 +34,4 @@
 		DELETE onememo WHERE no=#{no}
 	</delete>
 </mapper>
+-->

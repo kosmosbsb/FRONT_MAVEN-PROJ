@@ -28,15 +28,60 @@
 	</bean>
 	<!-- 마이바티스 지원을 위한 빈 등록 -->    
      <!--  1]SqlSessionFactory -->
-     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+     <bean id="sqlSessionFactory_KHW" class="org.mybatis.spring.SqlSessionFactoryBean">
      	<!-- 데이타소스:데이타베이스 연결정보 -->
      	<property name="dataSource" ref="datasource"/>
      	<!-- 환경설정 파일 위치 설정 -->
-     	<property name="configLocation" value="classpath:mybatis/Configuration.xml"/>
+     	<property name="configLocation" value="classpath:mybatis/Configuration_KHW.xml"/>
+     </bean>
+     <bean id="sqlSessionFactory_CJH" class="org.mybatis.spring.SqlSessionFactoryBean">
+     	<!-- 데이타소스:데이타베이스 연결정보 -->
+     	<property name="dataSource" ref="datasource"/>
+     	<!-- 환경설정 파일 위치 설정 -->
+     	<property name="configLocation" value="classpath:mybatis/Configuration_CJH.xml"/>
+     </bean>
+     <bean id="sqlSessionFactory_PSY" class="org.mybatis.spring.SqlSessionFactoryBean">
+     	<!-- 데이타소스:데이타베이스 연결정보 -->
+     	<property name="dataSource" ref="datasource"/>
+     	<!-- 환경설정 파일 위치 설정 -->
+     	<property name="configLocation" value="classpath:mybatis/Configuration_PSY.xml"/>
+     </bean>
+     <bean id="sqlSessionFactory_PSH" class="org.mybatis.spring.SqlSessionFactoryBean">
+     	<!-- 데이타소스:데이타베이스 연결정보 -->
+     	<property name="dataSource" ref="datasource"/>
+     	<!-- 환경설정 파일 위치 설정 -->
+     	<property name="configLocation" value="classpath:mybatis/Configuration_PSH.xml"/>
+     </bean>
+     <bean id="sqlSessionFactory_SJH" class="org.mybatis.spring.SqlSessionFactoryBean">
+     	<!-- 데이타소스:데이타베이스 연결정보 -->
+     	<property name="dataSource" ref="datasource"/>
+     	<!-- 환경설정 파일 위치 설정 -->
+     	<property name="configLocation" value="classpath:mybatis/Configuration_SJH.xml"/>
+     </bean>
+     <bean id="sqlSessionFactory_IMY" class="org.mybatis.spring.SqlSessionFactoryBean">
+     	<!-- 데이타소스:데이타베이스 연결정보 -->
+     	<property name="dataSource" ref="datasource"/>
+     	<!-- 환경설정 파일 위치 설정 -->
+     	<property name="configLocation" value="classpath:mybatis/Configuration_IMY.xml"/>
      </bean>
      <!-- 2]SqlSessionTemplate -->
-     <bean id="sqlMapper" class="org.mybatis.spring.SqlSessionTemplate">
-     	<constructor-arg ref="sqlSessionFactory"/>
+     <bean id="sqlMapper_KHW" class="org.mybatis.spring.SqlSessionTemplate">
+     	<constructor-arg ref="sqlSessionFactory_KHW"/>
+     </bean>
+     <bean id="sqlMapper_CJH" class="org.mybatis.spring.SqlSessionTemplate">
+     	<constructor-arg ref="sqlSessionFactory_CJH"/>
+     </bean>
+     <bean id="sqlMapper_PSH" class="org.mybatis.spring.SqlSessionTemplate">
+     	<constructor-arg ref="sqlSessionFactory_PSH"/>
+     </bean>
+     <bean id="sqlMapper_PSY" class="org.mybatis.spring.SqlSessionTemplate">
+     	<constructor-arg ref="sqlSessionFactory_PSY"/>
+     </bean>
+     <bean id="sqlMapper_SJH" class="org.mybatis.spring.SqlSessionTemplate">
+     	<constructor-arg ref="sqlSessionFactory_SJH"/>
+     </bean>
+     <bean id="sqlMapper_IMY" class="org.mybatis.spring.SqlSessionTemplate">
+     	<constructor-arg ref="sqlSessionFactory_IMY"/>
      </bean>
      
 </beans>

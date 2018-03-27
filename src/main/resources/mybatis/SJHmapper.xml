@@ -1,25 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
- PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
- "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE configuration
+ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
-<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
-<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
-<mapper namespace="mybatis.Comment">
-	<insert id="commentInsert" parameterType="commentDto">
-		INSERT INTO commenttbl(cno,title,no,id) VALUES(SEQ_COMMENTTBL.NEXTVAL,#{title},#{no},#{id})
-	</insert>
-	<select id="commentSelectList" parameterType="java.util.Map" resultType="commentDto">
-		SELECT c.*,name FROM commenttbl c JOIN member m ON c.id=m.id WHERE no=#{no} ORDER BY cno DESC	
-	</select>
-	<update id="commentUpdate" parameterType="commentDto">
-		UPDATE commenttbl SET title=#{title} WHERE cno=#{cno}
-	</update>
-	<delete id="commentDelete" parameterType="commentDto">
-		DELETE FROM commenttbl WHERE cno=#{cno}
-	</delete>
-	<delete id="commentDeleteByNo" parameterType="oneMemoDto">
-		DELETE commenttbl WHERE no=#{no}
-	</delete>
-	
-</mapper>
+
+<!-- sql 매핑하기 (Comment.xml, OneMemo.xml 참고) -->
+
+
+
+

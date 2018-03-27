@@ -6,16 +6,23 @@
      1]데이타베이스 연결정보 설정
      2]매퍼파일의 위치정보 설정
  -->
-<configuration>
+ 
+ <!-- 설정 참고 내용!!!
+<configuration> -->
 	
 	 <!-- 자바빈 별칭:매퍼파일에서 환경설정 파일로 위치됨. -->
+	 <!-- 
 	 <typeAliases>
 	 	<typeAlias alias="oneMemoDto" type="com.kosmo.onememo.service.OneMemoDto"/>
 	 	<typeAlias alias="commentDto" type="com.kosmo.onememo.service.CommentDto"/>
-	 </typeAliases>	
+	 </typeAliases>	 -->
 	 <!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑) 정보 설정 -->	
+	 <!-- 
 	 <mappers>
 	 	<mapper resource="mybatis/OneMemo.xml"/>
 	 	<mapper resource="mybatis/Comment.xml"/>
 	 </mappers>
 </configuration>
+-->
+
+<configuration></configuration>
