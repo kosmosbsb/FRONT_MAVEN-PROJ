@@ -21,9 +21,9 @@
 	
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<!-- 리소스는 리소스에 두고 쓰는게 맞긴하지. -->
-	<!-- <resources mapping="/resources/**" location="/resources/" /> -->
+	<resources mapping="/resources/**" location="/resources/" />
 	<!-- 단! webapp의 어느 디렉토리에 스태틱 리소스(이미지,.css,.js등)를 두더라도 읽어 올수 있도록 설정해주자!!!-->
-	<resources mapping="/**" location="/" /> <!-- 0323(금) 혁우 수정 -->
+	<!-- <resources mapping="/**" location="/" /> --> <!-- 0323(금) 혁우 수정 -->
 	
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="order" value="1"/><!-- 나중에 타일즈 적용한다면, 타일즈의 order가 0이야. -->

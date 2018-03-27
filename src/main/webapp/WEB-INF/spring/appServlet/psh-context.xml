@@ -7,8 +7,6 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- 필요한 빈 등록 고고고 -->
-
 	<!--공지사항 컨트롤러  -->
 	<beans:bean id="noticeController" class="com.kosmo.spacecloud.web.psh.NoticeController"/>
 	
