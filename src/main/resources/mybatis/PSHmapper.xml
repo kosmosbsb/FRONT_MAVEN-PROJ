@@ -7,5 +7,7 @@
 <!-- sql 매핑하기 (Comment.xml, OneMemo.xml 참고) -->
 
 <mapper namespace="mybatis.PSHmapper"> 
-		
+	<select id="noticeSelectList" resultType="NoticeDTO">
+		SELECT * FROM NOTICE
+	</select>
 </mapper>

@@ -18,8 +18,8 @@ public class NoticeDAO implements NoticeService{
 	private SqlSessionTemplate sqlMapper_PSH;
 
 	@Override
-	public List<NoticeDTO> selectList(Map map) {
-		return sqlMapper_PSH.selectList("noticeSelectList", map);
+	public List<NoticeDTO> selectList() {
+		return sqlMapper_PSH.selectList("noticeSelectList");
 	}
 	
 }

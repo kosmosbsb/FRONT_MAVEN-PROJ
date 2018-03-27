@@ -8,22 +8,22 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="resources/images/icons/faviconSC2.png"/>
+        <link rel="icon" href="<c:url value='/resources/images/icons/faviconSC2.png'/>"/>
         <title>팀플SC</title>
-
         <!-- Bootstrap core CSS -->
-        <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-        <link href="resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        
+        <link href="<c:url value='/resources/css/bootstrap.min.css'/>" rel="stylesheet">
+        <link href="<c:url value='/resources/font-awesome/css/font-awesome.min.css'/>" rel="stylesheet" type="text/css" />
         <!-- Custom styles for this template -->
-        <link href="resources/css/style.css" rel="stylesheet">
-        <link href="resources/fonts/antonio-exotic/stylesheet.css" rel="stylesheet">
-        <link rel="resources/stylesheet" href="css/lightbox.min.css">
-        <link href="resources/css/responsive.css" rel="stylesheet">
-        <script src="resources/js/jquery.min.js" type="text/javascript"></script>
-        <script src="resources/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="resources/js/lightbox-plus-jquery.min.js" type="text/javascript"></script>
-        <script src="resources/js/instafeed.min.js" type="text/javascript"></script>
-        <script src="resources/js/custom.js" type="text/javascript"></script>
+        <link href=" <c:url value='/resources/css/style.css'/>" rel="stylesheet">
+        <link href="<c:url value='/resources/fonts/antonio-exotic/stylesheet.css'/>" rel="stylesheet">
+        <link rel="<c:url value='/resources/stylesheet'/>" href="css/lightbox.min.css">
+        <link href="<c:url value='/resources/css/responsive.css'/>" rel="stylesheet">
+        <script src="<c:url value='/resources/js/jquery.min.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/resources/js/bootstrap.min.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/resources/js/lightbox-plus-jquery.min.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/resources/js/instafeed.min.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/resources/js/custom.js'/>" type="text/javascript"></script>
         <script>
         $(function(){
         	$("#menu-close").click(function(e) {
@@ -66,13 +66,14 @@
 					<div class="row">
 						<div class="col-md-1" align="left" style="margin-top: -20px; right: 200px;">
 							<a href="#">
-								<img src='resources/images/icons/prev_ico.png'/>
+								<img src='<c:url value='/resources/images/icons/prev_ico.png'/>'/>
 							</a>
 						</div>
+						
 						<div>
 							<div id="logo" style="margin-top: -1.8em; right: 150px; position: relative;">
 								<a href="index.html">
-									<img src="resources/images/custom/sclogo2.png" alt="logo" width=160px height=38px>
+									<img src="<c:url value='/resources/images/custom/sclogo2.png'/>" alt="logo" width=160px height=38px>
 								</a>
 								<!--<a href="index.html"><span>vacay</span>home</a>-->
 							</div>
@@ -99,56 +100,13 @@
                 </tr>
               </thead>
               <tbody>
+              <c:forEach var="item" items="${noticeList}" varStatus="loop">
                 <tr>
-                  <td>공지사항</td>
-                  <td>[인디워커스데이] 발걸음이 스토리가 되는 도시작가들이 온다 "써본 사람"</td>
-                  <td>2018-03-26</td>
+                  <td>${item.category }</td>
+                  <td>${item.title }</td>
+                  <td>${item.regidate }</td>
                 </tr>
-                <tr>
-                  <td>공지사항</td>
-                  <td>[인디워커스데이] 발걸음이 스토리가 되는 도시작가들이 온다 "써본 사람"</td>
-                  <td>2018-03-26</td>
-                </tr>
-                <tr>
-                  <td>공지사항</td>
-                  <td>[인디워커스데이] 발걸음이 스토리가 되는 도시작가들이 온다 "써본 사람"</td>
-                  <td>2018-03-26</td>
-                </tr>
-                <tr>
-                  <td>공지사항</td>
-                  <td>[인디워커스데이] 발걸음이 스토리가 되는 도시작가들이 온다 "써본 사람"</td>
-                  <td>2018-03-26</td>
-                </tr>
-                <tr>
-                  <td>공지사항</td>
-                  <td>[인디워커스데이] 발걸음이 스토리가 되는 도시작가들이 온다 "써본 사람"</td>
-                  <td>2018-03-26</td>
-                </tr>
-                <tr>
-                  <td>공지사항</td>
-                  <td>[인디워커스데이] 발걸음이 스토리가 되는 도시작가들이 온다 "써본 사람"</td>
-                  <td>2018-03-26</td>
-                </tr>
-                <tr>
-                  <td>공지사항</td>
-                  <td>[인디워커스데이] 발걸음이 스토리가 되는 도시작가들이 온다 "써본 사람"</td>
-                  <td>2018-03-26</td>
-                </tr>
-                <tr>
-                  <td>공지사항</td>
-                  <td>[인디워커스데이] 발걸음이 스토리가 되는 도시작가들이 온다 "써본 사람"</td>
-                  <td>2018-03-26</td>
-                </tr>
-                <tr>
-                  <td>공지사항</td>
-                  <td>[인디워커스데이] 발걸음이 스토리가 되는 도시작가들이 온다 "써본 사람"</td>
-                  <td>2018-03-26</td>
-                </tr>
-                <tr>
-                  <td>공지사항</td>
-                  <td>[인디워커스데이] 발걸음이 스토리가 되는 도시작가들이 온다 "써본 사람"</td>
-                  <td>2018-03-26</td>
-                </tr>
+                </c:forEach>
               </tbody>
             </table>
           </div>
