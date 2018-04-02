@@ -10,4 +10,22 @@
 	<select id="psySelectList" resultType="PsyTestDTO">
 		select S.SPACE_NAME, H.H_NICKNAME, S.IMG_MAIN FROM  SPACE S INNER JOIN USER_HOST H on S.id= H.id
 	</select>
+	<select id="reserveView" resultType="PsyTestDTO">
+		select R.RESERVE_NO, R.REGIDATE, S.SPACE_NAME, R.RESERVE_DATE, R.RESERVE_PERSON, R.ASK from RESERVE R INNER JOIN SPACE S on R.RESERVE_NO = S.SPACE_NO
+	</select>
+	<select id="reserveViewReserver" resultType="PsyTestDTO">
+		select R.RESERVE_NAME, R.RESERVE_PHONE, R.RESERVE_EMAIL from RESERVE R inner join USER_NORMAL N on R.id = N.id
+	</select>
+	<select id="reserveViewRefund" resultType="PsyTestDTO">
+		select SR.LEFTDAY8, SR.LEFTDAY7, SR.LEFTDAY6, SR.LEFTDAY5, SR.LEFTDAY4, SR.LEFTDAY3, SR.LEFTDAY2, SR.LEFTDAY1, SR.LEFTDAY0 from SPACE_REFUND SR inner join SPACE S on SR.SPACE_NO = S.SPACE_NO
+		where S.SPACE_NO=1
+	</select>
+	<select id="reserveViewSpace" resultType="PsyTestDTO">
+		select space_name, address, phone from space 
+		where space_no=1
+	</select>
+	<select id="reserveViewMoney" resultType="PsyTestDTO">
+		select RC.cancel_price, RC.cancel_comment, R.RESERVE_DATE, R.RESERVE_PERSON, RC.cancel_price from reserve_cancel RC inner join RESERVE R on RC.reserve_no = R.reserve_no 
+		where RC.reserve_no=1
+	</select>
 </mapper>

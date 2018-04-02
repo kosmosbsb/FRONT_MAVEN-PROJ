@@ -23,4 +23,29 @@ public class PsyTestServiceImpl implements PsyTestService{
 		return dao.selectList();
 	}
 
+	@Override
+	public List<PsyTestDTO> reserveView() {
+		return dao.reserveView();
+	}
+
+	@Override
+	public List<PsyTestDTO> reserveViewReserver() {
+		return dao.reserveViewReserver();
+	}
+
+	@Override
+	public List<PsyTestDTO> reserveViewRefund() {
+		return dao.reserveViewRefund();
+	}
+
+	@Override
+	public List<PsyTestDTO> reserveViewSpace() {
+		return dao.reserveViewSpace();
+	}
+
+	@Override
+	public List<PsyTestDTO> reserveViewMoney() {
+		return dao.reserveViewMoney();
+	}
+
 }

@@ -24,4 +24,29 @@ public class PsyTestDAO implements PsyTestService{
 		return sqlMapper_PSY.selectList("psySelectList");
 	}
 
+	@Override
+	public List<PsyTestDTO> reserveView() {
+		return sqlMapper_PSY.selectList("reserveView");
+	}
+
+	@Override
+	public List<PsyTestDTO> reserveViewReserver() {
+		return sqlMapper_PSY.selectList("reserveViewReserver");
+	}
+
+	@Override
+	public List<PsyTestDTO> reserveViewRefund() {
+		return sqlMapper_PSY.selectList("reserveViewRefund");
+	}
+
+	@Override
+	public List<PsyTestDTO> reserveViewSpace() {
+		return sqlMapper_PSY.selectList("reserveViewSpace");
+	}
+
+	@Override
+	public List<PsyTestDTO> reserveViewMoney() {
+		return sqlMapper_PSY.selectList("reserveViewMoney");
+	}
+
 }

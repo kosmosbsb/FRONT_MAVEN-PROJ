@@ -35,4 +35,32 @@ public class PsyController {
 		
 		return "/scmain/reserve/Template";
 	}
+	
+	@RequestMapping("/NormalReserve/ReserveView.do")
+	public String reserveInfoList(Model model)throws Exception{
+		
+		List<PsyTestDTO> list=service.reserveView();
+		List<PsyTestDTO> list2=service.reserveViewReserver();
+		List<PsyTestDTO> list3=service.reserveViewRefund();
+		List<PsyTestDTO> list4=service.reserveViewSpace();
+		List<PsyTestDTO> list5=service.reserveViewMoney();
+		
+		model.addAttribute("psyList",list);
+		model.addAttribute("reserverList",list2);
+		model.addAttribute("refundList",list3);
+		model.addAttribute("spaceList",list4);
+		model.addAttribute("moneyList",list5);
+		
+		//for(PsyTestDTO dto:list) {
+			//System.out.println(dto.getReserve_no());
+			//System.out.println(dto.getRegidate());
+			//System.out.println(dto.getSpace_name());
+			//System.out.println(dto.getReserve_date());
+			//System.out.println(dto.getReserve_person());
+			//System.out.println(dto.getAsk());
+		//}
+		
+		return "/scmain/reserve/TemplateOrigin";
+	}
+	
 }
