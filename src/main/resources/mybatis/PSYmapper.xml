@@ -6,6 +6,8 @@
 
 <!-- sql 매핑하기 (Comment.xml, OneMemo.xml 참고) -->
 
-
-
-
+<mapper namespace="mybatis.PSYmapper"> 
+	<select id="psySelectList" resultType="PsyTestDTO">
+		select S.SPACE_NAME, H.H_NICKNAME, S.IMG_MAIN FROM  SPACE S INNER JOIN USER_HOST H on S.id= H.id
+	</select>
+</mapper>

@@ -34,6 +34,7 @@
 		<li><a href="#" style="color: white;">이벤트</a></li>
 		<li><a href="#" style="color: white;">도움말</a></li>
 		<li><a href="#" style="color: white;">서비스정보</a></li>
+		<li><a href="<c:url value="/NormalReserve/Reserve.do"/>" style="color: white;">예약폼 이동 임시!</a></li>
 		<c:if test="${oauth_state != null}">
 		<li><a href="<c:url value='/logout.do'/>" style="color: white;">로그아웃</a></li>
 		</c:if>
