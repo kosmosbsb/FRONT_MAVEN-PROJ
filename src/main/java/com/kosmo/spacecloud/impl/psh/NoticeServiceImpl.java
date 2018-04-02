@@ -17,8 +17,13 @@ public class NoticeServiceImpl implements NoticeService{
 	private NoticeDAO dao;
 	
 	@Override
-	public List<NoticeDTO> selectList() {
-		return dao.selectList();
+	public List<NoticeDTO> selectList(Map map) {
+		return dao.selectList(map);
+	}
+
+	@Override
+	public int getTotalCount(Map map) {
+		return dao.getTotalCount(map);
 	}
 
 }

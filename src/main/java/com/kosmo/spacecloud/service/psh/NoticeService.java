@@ -5,9 +5,9 @@ import java.util.Map;
 
 public interface NoticeService {
 	//목록용]
-		List<NoticeDTO> selectList();
+		List<NoticeDTO> selectList(Map map);
 		//전체 레코드 수]
-		//int getTotalCount(Map map);
+		int getTotalCount(Map map);
 		//상세보기용]
 		//NoticeDTO selectOne(NoticeDTO dto);
 		//입력/수정/삭제용]

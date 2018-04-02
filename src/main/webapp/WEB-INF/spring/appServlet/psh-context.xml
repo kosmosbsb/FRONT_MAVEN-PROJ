@@ -10,4 +10,6 @@
 	<!--공지사항 컨트롤러  -->
 	<beans:bean id="noticeController" class="com.kosmo.spacecloud.web.psh.NoticeController"/>
 	
+	<context:property-placeholder location="classpath:memoresources/memo.properties"/>
+	
 </beans:beans>
