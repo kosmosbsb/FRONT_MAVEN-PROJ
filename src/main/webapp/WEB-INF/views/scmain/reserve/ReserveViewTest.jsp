@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -104,15 +103,12 @@
 		<!----resort-overview--->
 		<section class="resort-overview-block">
 			<table class="table table-hover table-bordered" id="sampleTable">
-				<h1>예약내용</h1>
+
 				<thead>
 					<tr>
-						<th>예약번호</th>
-						<th>신청일</th>
-						<th>공간명</th>
-						<th>예약 날짜</th>
-						<th>인원</th>
-						<th>요청사항</th>
+						<th>공간</th>
+						<th>호스트</th>
+						<th>사진</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -125,141 +121,15 @@
 					<c:if test="${not flag}">
 					<c:forEach var="item" items="${psyList}" varStatus="loop">
 						<tr>
-							<td>${item.reserve_no}</td>
-							<td>${item.regidate}</td>
 							<td>${item.space_name}</td>
-							<td>${item.reserve_date}</td>
-							<td>${item.reserve_person}</td>
-							<td>${item.ask}</td>
+							<td>${item.h_nickname}</td>
+							<td>${item.img_main}</td>
 						</tr>
 					</c:forEach>
 					</c:if>
 				</tbody>
 			</table>
-			<table class="table table-hover table-bordered" id="sampleTable">
-				<h1>예약자 정보</h1>
-				<thead>
-					<tr>
-						<th>예약자 이름</th>
-						<th>예약자 연락처</th>
-						<th>예약자 이메일</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:if test="${requestScope.reserverList==null}" var="flag">
-						<tr>
-							<td colspan="3"><a href="<c:url value='#'/>">등록된 자료가
-									없습니다</a></td>
-						</tr>
-					</c:if>
-					<c:if test="${not flag}">
-					<c:forEach var="item2" items="${reserverList}" varStatus="loop">
-						<tr>
-							<td>${item2.reserve_name}</td>
-							<td>${item2.reserve_phone}</td>
-							<td>${item2.reserve_email}</td>
-						</tr>
-					</c:forEach>
-					</c:if>
-				</tbody>
-			</table>
-			<table class="table table-hover table-bordered" id="sampleTable">
-				<h1>환불 규정 안내</h1>
-				<thead>
-					<tr>
-						<th>이용 8일 전</th>
-						<th>이용 7일 전</th>
-						<th>이용 6일 전</th>
-						<th>이용 5일 전</th>
-						<th>이용 4일 전</th>
-						<th>이용 3일 전</th>
-						<th>이용 2일 전</th>
-						<th>이용 전날</th>
-						<th>이용 당일</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:if test="${requestScope.refundList==null}" var="flag">
-						<tr>
-							<td colspan="3"><a href="<c:url value='#'/>">등록된 자료가
-									없습니다</a></td>
-						</tr>
-					</c:if>
-					<c:if test="${not flag}">
-					<c:forEach var="item3" items="${refundList}" varStatus="loop">
-						<tr>
-							<td><fmt:formatNumber value="${item3.leftday8 * 100}" type="number" pattern="#" />%</td>
-							<td><fmt:formatNumber value="${item3.leftday7 * 100}" type="number" pattern="#" />%</td>
-							<td><fmt:formatNumber value="${item3.leftday6 * 100}" type="number" pattern="#" />%</td>
-							<td><fmt:formatNumber value="${item3.leftday5 * 100}" type="number" pattern="#" />%</td>
-							<td><fmt:formatNumber value="${item3.leftday4 * 100}" type="number" pattern="#" />%</td>
-							<td><fmt:formatNumber value="${item3.leftday3 * 100}" type="number" pattern="#" />%</td>
-							<td><fmt:formatNumber value="${item3.leftday2 * 100}" type="number" pattern="#" />%</td>
-							<td><fmt:formatNumber value="${item3.leftday1 * 100}" type="number" pattern="#" />%</td>
-							<td><fmt:formatNumber value="${item3.leftday0 * 100}" type="number" pattern="#" />%</td>
-						</tr>
-					</c:forEach>
-					</c:if>
-				</tbody>
-			</table>
-			<table class="table table-hover table-bordered" id="sampleTable">
-				<h1>공간 간략한 정보</h1>
-				<thead>
-					<tr>
-						<th>공간명</th>
-						<th>주소</th>
-						<th>연락처</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:if test="${requestScope.spaceList==null}" var="flag">
-						<tr>
-							<td colspan="3"><a href="<c:url value='#'/>">등록된 자료가
-									없습니다</a></td>
-						</tr>
-					</c:if>
-					<c:if test="${not flag}">
-					<c:forEach var="item4" items="${spaceList}" varStatus="loop">
-						<tr>
-							<td>${item4.space_name}</td>
-							<td>${item4.address}</td>
-							<td>${item4.phone}</td>
-						</tr>
-					</c:forEach>
-					</c:if>
-				</tbody>
-			</table>
-			<table class="table table-hover table-bordered" id="sampleTable">
-				<h1>가격 정보</h1>
-				<thead>
-					<tr>
-						<th>예약 취소 날짜</th>
-						<th>취소 사유</th>
-						<th>예약 날짜(예약시간)</th>
-						<th>예약 인원</th>
-						<th>환불 가격</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:if test="${requestScope.moneyList==null}" var="flag">
-						<tr>
-							<td colspan="3"><a href="<c:url value='#'/>">등록된 자료가
-									없습니다</a></td>
-						</tr>
-					</c:if>
-					<c:if test="${not flag}">
-					<c:forEach var="item5" items="${moneyList}" varStatus="loop">
-						<tr>
-							<td>테이블에 없는 컬럼</td>
-							<td>${item5.cancel_comment}</td>
-							<td>${item5.reserve_date}</td>
-							<td>${item5.reserve_person}</td>
-							<td>${item5.cancel_price}</td>
-						</tr>
-					</c:forEach>
-					</c:if>
-				</tbody>
-			</table>
+
 		</section>
 
 		<!---footer--->
