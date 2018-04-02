@@ -8,22 +8,22 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="resources/images/icons/faviconSC2.png"/>
-        <title>팀플SC</title>
+        <link rel="icon" href="<c:url value='/resources/images/icons/faviconSC2.png'/>"/>
+        <title>SpaceCloud</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-        <link href="resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="<c:url value='/resources/css/bootstrap.min.css'/>" rel="stylesheet">
+        <link href="<c:url value='/resources/font-awesome/css/font-awesome.min.css'/>" rel="stylesheet" type="text/css" >
         <!-- Custom styles for this template -->
-        <link href="resources/css/style.css" rel="stylesheet">
-        <link href="resources/fonts/antonio-exotic/stylesheet.css" rel="stylesheet">
-        <link rel="resources/stylesheet" href="css/lightbox.min.css">
-        <link href="resources/css/responsive.css" rel="stylesheet">
-        <script src="resources/js/jquery.min.js" type="text/javascript"></script>
-        <script src="resources/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="resources/js/lightbox-plus-jquery.min.js" type="text/javascript"></script>
-        <script src="resources/js/instafeed.min.js" type="text/javascript"></script>
-        <script src="resources/js/custom.js" type="text/javascript"></script>
+        <link href="<c:url value='/resources/css/style.css'/>" rel="stylesheet">
+        <link href="<c:url value='/resources/fonts/antonio-exotic/stylesheet.css'/>" rel="stylesheet">
+        <link rel="<c:url value='/resources/stylesheet'/>" href="css/lightbox.min.css">
+        <link href="<c:url value='/resources/css/responsive.css'/>" rel="stylesheet">
+        <script src="<c:url value='/resources/js/jquery.min.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/resources/js/bootstrap.min.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/resources/js/lightbox-plus-jquery.min.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/resources/js/instafeed.min.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/resources/js/custom.js'/>" type="text/javascript"></script>
         <script>
         $(function(){
         	$("#menu-close").click(function(e) {
@@ -41,7 +41,7 @@
     <body>
 	<div id="page">
 		<!-- 이거 그 머냐 사이드 -->
-		<jsp:include page="/WEB-INF/template/SideMenu.jsp"/>
+		<jsp:include page="/WEB-INF/template/SideMenu_hw.jsp"/>
 		
 		<!---header top---->
 		<!--header--->
@@ -51,7 +51,7 @@
 					<div class="row">
 						<div class="col-md-2 col-sm-6 col-xs-6">
 							<div id="logo">
-								<a href="index.html"><img src="resources/images/custom/sclogo2.png"
+								<a href="index.html"><img src="<c:url value='/resources/images/custom/sclogo2.png'/>"
 									alt="logo" width=160px height=38px></a>
 								<!--<a href="index.html"><span>vacay</span>home</a>-->
 							</div>
@@ -76,13 +76,12 @@
 									class="collapse navigation navbar-collapse navbar-ex1-collapse remove-space">
 									<ul class="list-unstyled nav1 cl-effect-10">
 										<li><a data-hover="Home" class="active"><span>Home</span></a></li>
-										<li><a data-hover="About" href="resources/about.html"><span>About</span></a></li>
-										<li><a data-hover="Rooms" href="resources/rooms.html"><span>Rooms</span></a></li>
-										<li><a data-hover="Gallery" href="resources/gallery.html"><span>Gallery</span></a></li>
-										<li><a data-hover="Dinning" href="resources/dinning.html"><span>Dinning</span></a></li>
-										<li><a data-hover="News" href="resources/news.html"><span>News</span></a></li>
-										<li><a data-hover="Contact Us" href="resources/contact.html"><span>contact
-													Us</span></a></li>
+										<li><a data-hover="About" href="<c:url value='/resources/about.html'/>"><span>About</span></a></li>
+										<li><a data-hover="Rooms" href="<c:url value='/resources/rooms.html'/>"><span>Rooms</span></a></li>
+										<li><a data-hover="Gallery" href="<c:url value='/resources/gallery.html'/>"><span>Gallery</span></a></li>
+										<li><a data-hover="Dinning" href="<c:url value='/resources/dinning.html'/>"><span>Dinning</span></a></li>
+										<li><a data-hover="News" href="<c:url value='/resources/news.html'/>"><span>News</span></a></li>
+										<li><a data-hover="Contact Us" href="<c:url value='/resources/contact.html'/>"><span>contactUs</span></a></li>
 									</ul>
 
 								</div>
@@ -109,7 +108,7 @@
 			</ol>
 			<div class="carousel-inner">
 				<div class="item active">
-					<img src="resources/images/custom/170707_workspace_curation_banner.png"
+					<img src="<c:url value='/resources/images/custom/170707_workspace_curation_banner.png'/>"
 						style="width: 100%; height: 500px" alt="First slide">
 					<div class="carousel-caption">
 						<h2>
@@ -118,7 +117,7 @@
 					</div>
 				</div>
 				<div class="item">
-					<img src="resources/images/custom/180228_curation_banner_1.png"
+					<img src="<c:url value='/resources/images/custom/180228_curation_banner_1.png'/>"
 						style="width: 100%; height: 500px" alt="Second slide">
 					<div class="carousel-caption">
 						<h2>
@@ -127,7 +126,7 @@
 					</div>
 				</div>
 				<div class="item">
-					<img src="resources/images/custom/180228_curation_banner_3.png"
+					<img src="<c:url value='/resources/images/custom/180228_curation_banner_3.png'/>"
 						style="width: 100%; height: 500px" alt="Third slide">
 					<div class="carousel-caption">
 						<h2>

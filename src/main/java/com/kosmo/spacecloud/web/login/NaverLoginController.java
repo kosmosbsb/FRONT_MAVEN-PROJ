@@ -82,7 +82,8 @@ public class NaverLoginController {
 			memberService.insert(dto);
 		}
 		
-		//회원 이름, 닉네임, 프로필 이미지 경로, 이메일주소는 세션에 박아둘게요
+		//회원 아이디(키값), 이름, 닉네임, 프로필 이미지 경로, 이메일주소는 세션에 박아둘게요
+		session.setAttribute("USER_ID", jsonObject_tail.get("id").toString());
 		session.setAttribute("USER_NAME", jsonObject_tail.get("name").toString());
 		session.setAttribute("USER_NICNAME", jsonObject_tail.get("nickname").toString());
 		session.setAttribute("USER_PROFILE", jsonObject_tail.get("profile_image").toString());
