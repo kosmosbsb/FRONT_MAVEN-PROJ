@@ -28,27 +28,42 @@ public class NoticeController {
 	private int blockPage;
 	
 	@RequestMapping("/Notice/List.do")
-	public String list(Model model,HttpServletRequest req,@RequestParam(required=false,defaultValue="1") int nowPage)throws Exception{
+	public String list(Model model,@RequestParam Map map,HttpServletRequest req,@RequestParam(required=false,defaultValue="1") int nowPage)throws Exception{
 		
-		int totalRecordCount = service.getTotalCount(null);
+		int totalRecordCount = service.getTotalCount(map);
 		// 전체 페이지수]
 		int totalPage = (int)Math.ceil((double) totalRecordCount / pageSize);
 		// 시작 및 끝 ROWNUM구하기]
 		int start = (nowPage - 1) * pageSize + 1;
 		int end = nowPage * pageSize;
 		
-		Map map = new HashMap();
+		
 		map.put("start",start);
 		map.put("end", end);
+		
+		System.out.println("start"+start);
+		System.out.println("end"+end);
+		
 		
 		List<NoticeDTO> list=service.selectList(map);
 		String pagingString=PagingUtil.pagingBootStrapStyle(totalRecordCount,pageSize,blockPage, nowPage,req.getContextPath()+"/Notice/List.do?"); 
 		
 		model.addAttribute("noticeList",list);
 		model.addAttribute("pagingString", pagingString);
+		model.addAttribute("totalRecordCount", totalRecordCount);
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("nowPage", nowPage);
+		
+		
+		System.out.println("페이지 사이즈"+pageSize);
+		System.out.println("페이징스트링"+pagingString);
+		System.out.println("나우페이지"+nowPage);
+		System.out.println("토탈페이지"+totalPage);
+		System.out.println("블락페이지"+blockPage);
+		System.out.println("토탈레코드카운트"+totalRecordCount);
 		
 		for(NoticeDTO dto:list) {
-			System.out.println(dto.getNotice_no());
+			System.out.println("찍어"+dto.getNotice_no());
 		}
 		
 		

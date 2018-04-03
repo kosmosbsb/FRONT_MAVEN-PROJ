@@ -8,13 +8,16 @@
 
 <mapper namespace="mybatis.PSHmapper"> 
 	<select id="noticeSelectList" resultType="NoticeDTO">
-			SELECT * FROM NOTICE
+			SELECT * FROM (SELECT T.*,ROWNUM R FROM (SELECT S.* FROM NOTICE S
 		<if test="searchWord != null">
 			WHERE CONTENT LIKE '%' || #{searchWord} || '%' OR TITLE LIKE '%' || #{searchWord} || '%'
 		</if>
-		
+		ORDER BY NOTICE_NO DESC) T) WHERE R BETWEEN #{start} AND #{end}
 	</select>
 	<select id="noticeTotalCount" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*) FROM notice
+		<if test="searchWord != null">
+			WHERE CONTENT LIKE '%' || #{searchWord} || '%' OR TITLE LIKE '%' || #{searchWord} || '%'
+		</if>
 	</select>
 </mapper>
