@@ -101,6 +101,7 @@ td {
 	float: none;
 	margin-left: -5px;
 }
+
 </style>
     
     <body>
@@ -170,7 +171,7 @@ td {
 					<c:if test="${noticeList!=null}">
 		              <c:forEach var="item" items="${noticeList}" varStatus="loop">
 		                <tr class="notice_view_area">
-			                  <td>${item.category }</td>
+			                  <td style="text-align: center;">${item.category }</td>
 			                  <td class="notice_content">
 				                  <a>
 				                 	 <p>${item.title }</p>
