@@ -7,9 +7,29 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
+
+	function qCheck(){
+		
+		if($("input[name='question_title']").val().trim() == ""){
+			
+			alert("제목을 입력해주세요.");
+			$("input[name='question_title']").focus();
+			return false;
+		}
+		if($("textarea[name='question_content']").val().trim() == ""){
+			
+			alert("내용을 입력해주세요.");
+			$("textarea[name='question_content']").focus();
+			return false;
+		}
+	
+		alert("문의가 정상적으로 등록되었습니다.");
+		return true;
+	}
+	
 	$(function(){
 		$('.submenu1').hide();
-
+	
 		$('.majormenu').click(function(){
 			
 			$('.submenu1').toggle(200);
@@ -30,10 +50,10 @@
 		      }
 		    });
 		 
-	    $( "#doQuestion" ).on( "click", function() {
+	    $( ".submenu1" ).on( "click", function() {
 	      $( "#dialog" ).dialog( "open" );
 	    });
-
+	
 	    $( "#dialogExit" ).on( "click", function() {
 		      $( "#dialog" ).dialog( "close" );
 		});
@@ -62,8 +82,10 @@
 						-webkit-border-radius: 70px;"/><span style="color: white; font-size: 1.6em;">${USER_NICNAME}</span></a>
 				</div>
 			<li><a href="#" style="color: white;">보유 크래딧</a></li>
-			<li><a href="#" style="color: white;">스페이스클라우드 홈</a></li>
-			<li><a href="#" style="color: white;">내가 가고 싶은 공간</a></li>
+			<li><a href="#" style="color: white;">호스트센터 홈</a></li>
+			<li><a href="#" style="color: white;">내 공간정보 관리</a></li>
+			<li><a href="#" style="color: white;">예약 리스트</a></li>
+			<li><a href="#" style="color: white;">이용후기/Q&amp;A 관리</a></li>
 			<li class="majormenu"><a href="#" style="color: white;">1:1문의</a></li>
 			<li id="doQuestion" class="submenu1"><a href="#" style="color: white;">&nbsp;&nbsp;◎문의하기</a></li>
 			<li class="submenu1"><a href="#" style="color: white;">&nbsp;&nbsp;◎처리현황</a></li>
@@ -71,11 +93,11 @@
 			</c:if>
 		</li>
 		<li><a href="<c:url value="/Notice/List.do"/>" style="color: white;">공지사항</a></li>
-		<li><a href="#" style="color: white;">이벤트</a></li>
 		<li><a href="#" style="color: white;">도움말</a></li>
 		<li><a href="#" style="color: white;">서비스정보</a></li>
 		<c:if test="${oauth_state != null}">
 		<li><a href="<c:url value='/logout.do'/>" style="color: white;">로그아웃</a></li>
+		<li style="background-color: #5130b1"><a href="<c:url value='/spacecloud.do'/>" style="color: white;">스페이스클라우드로 이동</a></li>
 		</c:if>
 	</ul>
 </div>
@@ -91,26 +113,26 @@
 	        <div class="col-md-12" style="border-style:solid; border-color: #5130b1; float: none; margin: 0 auto;">
 	         
 
-			<form style="margin-top: 20px;margin-bottom: 20px;" action="/Question/Write.do">
-			<div class="form-group" >
-			    <label>문의유형 선택</label>
-				<select class="form-control">
-				  <option>예약</option>
-				  <option>결제</option>
-				  <option>공간</option>
-				  <option>기타</option>
-				</select>
-				
-			  </div>
-			  <div class="form-group" >
-			    <label for="exampleInputEmail1">제목</label>
-			    <input type="email" class="form-control" placeholder="제목을 입력하세요">
-			  </div>
-			 
-			  <div class="form-group" >
-			 	<label for="exampleInputEmail1">내용</label>
-			  	<textarea class="form-control" rows="7" placeholder="내용을 입력하세요"></textarea>
-			  </div>
+			<form style="margin-top: 20px;margin-bottom: 20px;" name="qForm" onsubmit="return qCheck()" action="<c:url value='/Question/Write.do'/>">
+					<div class="form-group" >
+					    <label>문의유형 선택</label>
+						<select class="form-control" name="question_type">
+						  <option value="예약">예약</option>
+						  <option value="결제">결제</option>
+						  <option value="공간">공간</option>
+						  <option value="기타">기타</option>
+						</select>
+						
+					  </div>
+					  <div class="form-group" >
+					    <label>제목</label>
+					    <input type="text" class="form-control" name="question_title" placeholder="제목을 입력하세요">
+					  </div>
+					 
+					  <div class="form-group" >
+					 	<label>내용</label>
+					  	<textarea class="form-control" rows="7" name="question_content" placeholder="내용을 입력하세요"></textarea>
+					  </div>
 			  
 			  <div class="form-group" align="center">
 			  <button type="submit" class="btn btn-success">등록</button>

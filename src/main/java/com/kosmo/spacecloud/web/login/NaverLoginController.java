@@ -101,4 +101,10 @@ public class NaverLoginController {
         return "redirect:/spacecloud.do";
     }
     
+    @RequestMapping("/SCPartnerMain.do")
+    public String partnerPageMove() {
+    	
+        return "/scpartner/SCPartnerMain";
+    }
+    
 }

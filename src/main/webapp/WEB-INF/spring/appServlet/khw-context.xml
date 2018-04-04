@@ -13,4 +13,9 @@
 	<!-- 로그인 컨트롤러 등록 -->
 	<beans:bean id="naverLoginController" class="com.kosmo.spacecloud.web.login.NaverLoginController"/> 
 	
+	<!-- 문의하기 컨트롤러 등록 -->
+	<beans:bean id="questionController" class="com.kosmo.spacecloud.web.khw.QuestionController"/>
+	
+	
+	
 </beans:beans>
