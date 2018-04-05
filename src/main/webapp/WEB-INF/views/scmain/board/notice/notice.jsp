@@ -128,9 +128,7 @@ td {
 								<!--<a href="index.html"><span>vacay</span>home</a>-->
 							</div>
 						</div>
-						<div  style="text-align: center; margin-top: -32px;">
-							<h3>공지사항</h3>
-						</div>
+						
 						
 					</div>
 				</div>
@@ -171,7 +169,7 @@ td {
 					<c:if test="${noticeList!=null}">
 		              <c:forEach var="item" items="${noticeList}" varStatus="loop">
 		                <tr class="notice_view_area">
-			                  <td style="text-align: center;">${item.category }</td>
+			                  <td style="text-align: center; height: 50px;">${item.category }</td>
 			                  <td class="notice_content">
 				                  <a>
 				                 	 <p>${item.title }</p>
