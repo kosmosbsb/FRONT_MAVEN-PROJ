@@ -18,6 +18,25 @@
 	<insert id="questionInsert" parameterType="QuestionDTO">
 		INSERT INTO USER_QUESTION VALUES(SEQ_USER_QUESTION_NO.NEXTVAL, #{question_type}, #{question_title}, #{question_content}, SYSDATE, NULL, #{id})
 	</insert>
+	
+	<insert id="memberHostInsert" parameterType="MemberDTO">
+		INSERT INTO USER_HOST(ID,H_NICKNAME,INTRODUCE,H_ALARM_SMS,H_ALARM_MAIL) VALUES(#{id},#{h_nickname},#{introduce},#{h_alarm_sms},#{h_alarm_mail})
+	</insert>
+	
+	<insert id="memberHostImgInsert" parameterType="MemberDTO">
+		INSERT INTO USER_HOST_IMG VALUES(#{id},#{img})
+	</insert>
+	
+	<select id="memberIsHost" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM USER_HOST WHERE ID=#{id}
+	</select>
+	
+	<select id="getMemberHostImg" parameterType="String" resultType="String">
+		SELECT IMG FROM USER_HOST_IMG WHERE ID=#{id}
+	</select>
+	
+	
+	
 </mapper>
 
 

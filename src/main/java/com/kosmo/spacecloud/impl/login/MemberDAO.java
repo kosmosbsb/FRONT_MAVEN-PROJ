@@ -32,6 +32,34 @@ public class MemberDAO implements MemberService{
 		return memberFlag;
 	}
 
+	@Override
+	public boolean isHost(String id) {
+		
+		boolean hostFlag = (Integer)sqlMapper_KHW.selectOne("memberIsHost",id) == 1 ? true : false;
+		
+		return hostFlag;
+	}
 
+	@Override
+	public int insertHost(MemberDTO dto) {
+		
+		return sqlMapper_KHW.insert("memberHostInsert",dto);
+	}
+
+	@Override
+	public int insertHostImg(MemberDTO dto) {
+		return sqlMapper_KHW.insert("memberHostImgInsert",dto);
+	}
+
+	@Override
+	public String getHostImg(String id) {
+		
+		String hostImgFileName = sqlMapper_KHW.selectOne("getMemberHostImg",id);
+		
+		return hostImgFileName;
+	}
+
+
+	
 	
 }

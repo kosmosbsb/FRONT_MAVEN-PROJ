@@ -1,19 +1,21 @@
 package com.kosmo.spacecloud.web.login;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
@@ -90,6 +92,9 @@ public class NaverLoginController {
 		session.setAttribute("USER_EMAIL", jsonObject_tail.get("email").toString());
 		//나중에 전화번호도 박아둬야함!!
 		
+		//업로드폴더 경로 찾는 테스트
+		//System.out.println(session.getServletContext().getRealPath("/Upload/HostImg"));
+		
 		return new ModelAndView("/scmain/SCMain", "result", jsonObject_tail);
     }
 
@@ -102,9 +107,93 @@ public class NaverLoginController {
     }
     
     @RequestMapping("/SCPartnerMain.do")
-    public String partnerPageMove() {
+    public String partnerPageMove(HttpSession session, HttpServletRequest req) {
     	
-        return "/scpartner/SCPartnerMain";
+    	//기존 호스트멤버인지 아닌지 판단, 아니라면 등록시켜야하고 맞다면 호스트 서비스 이용시킴
+    	if(memberService.isHost(session.getAttribute("USER_ID").toString())) {
+    		System.out.println("이사람은 호스트가 맞아요");
+    		
+    		//파일이 저장된 서버의 물리적 경로 얻기]
+			String hostImgFile =req.getSession().getServletContext().getRealPath("/Upload/HostImg");
+			//USER_HOST_IMG 테이블에 담궈두고 있는 파일명 덧붙이기
+			hostImgFile += "/"+memberService.getHostImg(session.getAttribute("USER_ID").toString());
+			
+			//호스트이미지 세션에 박아두기
+			session.setAttribute("USER_PROFILE", hostImgFile);
+			
+			//session.setAttribute("USER_PROFILE", "");
+    		return "scpartner/SCPartnerMain";
+    		
+    	}
+    	else {
+    		System.out.println("이사람은 호스트가 아니야");
+    		
+    		//호스트 등록페이지로 이동시켜
+    		return "scpartner/member/IntoTheHost";
+    	}
+        
+    }
+    
+    @RequestMapping("/HostImg/Upload.do")
+    public String regi_host(MultipartHttpServletRequest mhsr, HttpSession session) throws Exception{
+    	
+    	//호스트 등록안된 유저만 처리한다.
+    	if(!memberService.isHost(session.getAttribute("USER_ID").toString())) {
+		    	MemberDTO dto = new MemberDTO();
+		    	dto.setId(session.getAttribute("USER_ID").toString());
+		    	dto.setH_nickname(mhsr.getParameter("h_nickname"));
+		    	dto.setIntroduce(mhsr.getParameter("introduce"));
+		    	
+		    	if("Y".equals(mhsr.getParameter("h_alarm_sms"))) {
+		    		dto.setH_alarm_sms(mhsr.getParameter("h_alarm_sms"));
+		    	}
+		    	else {
+		    		dto.setH_alarm_sms("N");
+		    	}
+		    	if("Y".equals(mhsr.getParameter("h_alarm_mail"))) {
+		    		dto.setH_alarm_mail(mhsr.getParameter("h_alarm_mail"));
+		    	}
+		    	else {
+		    		dto.setH_alarm_mail("N");
+		    	}
+		    	memberService.insertHost(dto);
+	    	
+	    	
+			//1]서버의 물리적 경로 얻기
+	    	String phisicalPath=mhsr.getSession().getServletContext().getRealPath("/Upload/HostImg");
+	    	System.out.println( "서버의 물리적 경로: "+phisicalPath);
+			//1-1]MultipartHttpServletRequest객체의 getFile("파라미터명")메소드로
+			//    MultipartFile객체 얻기
+			MultipartFile upload= mhsr.getFile("hostImg");
+			//2]File객체 생성
+			////2-1] 파일 중복시 이름 변경
+			//String newFileName=FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
+			
+			//유저ID가 곧 파일명 (ex. IMG38502203.jpg)
+			//.으로 나눌려면 이렇게해야해... 안해주면 .을 정규식문자로 인식하니깐
+			System.out.println(upload.getOriginalFilename());
+			String[] tempStrings = upload.getOriginalFilename().split("\\.");
+			
+			File file = new File(phisicalPath+File.separator+"IMG"+session.getAttribute("USER_ID")+"."+tempStrings[tempStrings.length-1]);		
+			
+			//3]업로드 처리
+			upload.transferTo(file);
+			dto.setImg(upload.getOriginalFilename());
+			memberService.insertHostImg(dto);
+			
+			//4]리퀘스트 영역에 데이타 저장
+			mhsr.setAttribute("writer", mhsr.getParameter("writer"));
+			mhsr.setAttribute("title", mhsr.getParameter("title"));
+			//파일과 관련된 정보 저장
+			mhsr.setAttribute("original",upload.getOriginalFilename());
+			mhsr.setAttribute("size",(int)Math.ceil(upload.getSize()/1024.0));
+			mhsr.setAttribute("type",upload.getContentType());
+			//파일 오리지날 이름 (ex. picture.jpg)
+			mhsr.setAttribute("real","IMG"+session.getAttribute("USER_ID")+"."+tempStrings[tempStrings.length-1]);
+
+    	}
+    	
+    	return "redirect:/SCPartnerMain.do";
     }
     
 }

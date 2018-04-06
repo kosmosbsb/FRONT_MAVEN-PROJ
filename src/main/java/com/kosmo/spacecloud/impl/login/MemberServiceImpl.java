@@ -25,9 +25,30 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public boolean isMember(String id) {
-		// TODO Auto-generated method stub
 		return dao.isMember(id);
+	}
+
+	@Override
+	public boolean isHost(String id) {
+		return dao.isHost(id);
+	}
+
+	@Override
+	public int insertHost(MemberDTO dto) {
+		return dao.insertHost(dto);
+	}
+
+	@Override
+	public int insertHostImg(MemberDTO dto) {
+		return dao.insertHostImg(dto);
+	}
+
+	@Override
+	public String getHostImg(String id) {
+		return dao.getHostImg(id);
 	}
 	
 
+	
+	
 }

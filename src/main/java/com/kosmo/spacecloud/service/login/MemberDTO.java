@@ -6,7 +6,6 @@ public class MemberDTO {
 	
 	//일반
 	private String id;
-	private String img;
 	private String n_nickname;
 	private String name;
 	private String mail;
@@ -22,6 +21,7 @@ public class MemberDTO {
 	private String introduce;
 	private String h_alarm_sms;
 	private String h_alarm_mail;
+	private String img; //일반 유저는 이미지 따로 보관 안함. (로그인할때마다 네아로에서 얻음)
 	
 	public String getId() {
 		return id;

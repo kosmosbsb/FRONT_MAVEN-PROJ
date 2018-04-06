@@ -3,6 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
@@ -16,6 +17,7 @@
 	<!-- 문의하기 컨트롤러 등록 -->
 	<beans:bean id="questionController" class="com.kosmo.spacecloud.web.khw.QuestionController"/>
 	
-	
+	<!-- 파일 업다운을 위해 (1MB 제한)-->
+	<beans:bean p:maxUploadSize="1048576"  id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 	
 </beans:beans>

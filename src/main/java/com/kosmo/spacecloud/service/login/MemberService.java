@@ -14,4 +14,12 @@ public interface MemberService {
 		int delete(NoticeDTO dto);*/
 		
 		boolean isMember(String id); //회원여부 확인
+		
+		boolean isHost(String id); //호스트 등록 여부 확인
+		
+		int insertHost(MemberDTO dto); //호스트 등록
+		
+		int insertHostImg(MemberDTO dto); //호스트 이미지 등록
+		
+		String getHostImg(String id);
 }
