@@ -189,9 +189,14 @@
 					</div>
 					<script type="text/javascript">
 					$(function() {
-						$('#datetimepicker6').datetimepicker();
+						$('#datetimepicker6').datetimepicker({
+			                 format: 'YYYY/MM/DD',
+			                 daysOfWeekDisabled: []
+				           });
 						$('#datetimepicker7').datetimepicker({
-							useCurrent : false
+							format: 'YYYY/MM/DD',
+							useCurrent : false,
+							daysOfWeekDisabled: []
 						//Important! See issue #1075
 						});
 						$("#datetimepicker6").on(
