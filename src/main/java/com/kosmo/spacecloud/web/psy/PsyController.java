@@ -31,12 +31,11 @@ public class PsyController {
 		List<PsyTestDTO> list=service.selectList();
 		model.addAttribute("psyList",list);
 		
-		for(PsyTestDTO dto:list) {
-			System.out.println(dto.getH_nickname());
-			System.out.println(dto.getSpace_name());
-			System.out.println(dto.getImg_main());
-			System.out.println(dto.getSpace_no());
-		}
+		//for(PsyTestDTO dto:list) {
+		//	System.out.println(dto.getH_nickname());
+		//	System.out.println(dto.getSpace_name());
+		//	System.out.println(dto.getImg_main());
+		//}
 		
 		return "/scmain/reserve/Template";
 	}
@@ -91,7 +90,7 @@ public class PsyController {
 		
 		//Map map = new HashMap();
 		//map.put("nickname",session.getAttribute("USER_NICNAME"));
-		String nickname = (String)session.getAttribute("USER_NICNAME_N");
+		String nickname = (String)session.getAttribute("USER_NICNAME");
 		//System.out.println(nickname);
 		List<PsyTestDTO> list=service.reserveLoginlist(nickname);
 		model.addAttribute("reserveLoginlist",list);
@@ -133,11 +132,11 @@ public class PsyController {
 	@RequestMapping(value="/NormalReserve/ReserveForm.do", method=RequestMethod.GET)
 	public String reserveFormmove(Model model,HttpServletRequest req,HttpSession session)throws Exception{
 		
-		System.out.println(req.getParameter("sn"));
-		System.out.println("예약폼 겟방식");
-		String nickname = session.getAttribute("USER_NICNAME_N").toString();
+		//System.out.println(req.getParameter("sn"));
+		//System.out.println("예약폼 겟방식");
+		String nickname = session.getAttribute("USER_NICNAME").toString();
 		String clickedButtonParam = req.getParameter("sn");
-		System.out.println(nickname);
+		//System.out.println(nickname);
 		List<PsyTestDTO> list=service.reserveTest(nickname);
 		//System.out.println(list.size());
 		//System.out.println(list.get(1).getReserve_no());

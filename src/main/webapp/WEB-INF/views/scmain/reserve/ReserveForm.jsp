@@ -44,6 +44,7 @@
             });
         });
         </script>
+
     </head>
     <body>
 	<div id="page">
@@ -188,14 +189,9 @@
 					</div>
 					<script type="text/javascript">
 					$(function() {
-						$('#datetimepicker6').datetimepicker({
-			                 format: 'YYYY/MM/DD',
-			                 daysOfWeekDisabled: []
-				           });
+						$('#datetimepicker6').datetimepicker();
 						$('#datetimepicker7').datetimepicker({
-							format: 'YYYY/MM/DD',
-							useCurrent : false,
-							daysOfWeekDisabled: []
+							useCurrent : false
 						//Important! See issue #1075
 						});
 						$("#datetimepicker6").on(
