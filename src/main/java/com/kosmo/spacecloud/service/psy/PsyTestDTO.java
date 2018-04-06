@@ -7,14 +7,17 @@ public class PsyTestDTO {
 	private String space_name;
 	private String h_nickname;
 	private String img_main;
+	private String space_no;
 	
 	//예약 상세보기 예약내용
 	private String reserve_no;
 	private String regidate;
 	//private String space_name;중복됨
-	private String reserve_date;
+	//private String reserve_date;//180404 에 삭제함
 	private String reserve_person;
 	private String ask;
+	private String startdate;//180404에 추가함
+	private String enddate;//180404에 추가함
 	
 	//예약 상세보기 예약자 정보
 	private String reserve_name;
@@ -45,6 +48,24 @@ public class PsyTestDTO {
 	
 	
 	
+	public String getStartdate() {
+		return startdate;
+	}
+	public void setStartdate(String startdate) {
+		this.startdate = startdate;
+	}
+	public String getEnddate() {
+		return enddate;
+	}
+	public void setEnddate(String enddate) {
+		this.enddate = enddate;
+	}
+	public String getSpace_no() {
+		return space_no;
+	}
+	public void setSpace_no(String space_no) {
+		this.space_no = space_no;
+	}
 	public float getLeftday8() {
 		return leftday8;
 	}
@@ -153,12 +174,7 @@ public class PsyTestDTO {
 	public void setRegidate(String regidate) {
 		this.regidate = regidate;
 	}
-	public String getReserve_date() {
-		return reserve_date;
-	}
-	public void setReserve_date(String reserve_date) {
-		this.reserve_date = reserve_date;
-	}
+
 	public String getReserve_person() {
 		return reserve_person;
 	}

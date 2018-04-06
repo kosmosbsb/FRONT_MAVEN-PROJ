@@ -6,9 +6,9 @@ import java.util.Map;
 public interface PsyTestService {
 	
 		List<PsyTestDTO> selectList();
-		List<PsyTestDTO> reserveView();
-		List<PsyTestDTO> reserveViewReserver();
-		List<PsyTestDTO> reserveViewRefund();
-		List<PsyTestDTO> reserveViewSpace();
-		List<PsyTestDTO> reserveViewMoney();
+		List<PsyTestDTO> reserveView(String rn);
+		List<PsyTestDTO> reserveViewReserver(String rn);
+		List<PsyTestDTO> reserveViewRefund(String sn);
+		List<PsyTestDTO> reserveViewSpace(String sn);
+		List<PsyTestDTO> reserveViewMoney(String rn);
 }

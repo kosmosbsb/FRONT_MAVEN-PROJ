@@ -110,7 +110,8 @@
 						<th>예약번호</th>
 						<th>신청일</th>
 						<th>공간명</th>
-						<th>예약 날짜</th>
+						<th>예약 시작 날짜</th>
+						<th>예약 끝 날짜</th>
 						<th>인원</th>
 						<th>요청사항</th>
 					</tr>
@@ -128,7 +129,8 @@
 							<td>${item.reserve_no}</td>
 							<td>${item.regidate}</td>
 							<td>${item.space_name}</td>
-							<td>${item.reserve_date}</td>
+							<td>${item.startdate}</td>
+							<td>${item.enddate}</td>
 							<td>${item.reserve_person}</td>
 							<td>${item.ask}</td>
 						</tr>
@@ -209,6 +211,8 @@
 						<th>공간명</th>
 						<th>주소</th>
 						<th>연락처</th>
+						<th>longitude</th>
+						<th>latitude</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -224,35 +228,40 @@
 							<td>${item4.space_name}</td>
 							<td>${item4.address}</td>
 							<td>${item4.phone}</td>
+							<td>DB에 반영했으면 하지만 지금은 없는 컬럼</td>
+							<td>DB에 반영했으면 하지만 지금은 없는 컬럼</td>
 						</tr>
 					</c:forEach>
 					</c:if>
 				</tbody>
 			</table>
+			
 			<table class="table table-hover table-bordered" id="sampleTable">
 				<h1>가격 정보</h1>
 				<thead>
 					<tr>
 						<th>예약 취소 날짜</th>
 						<th>취소 사유</th>
-						<th>예약 날짜(예약시간)</th>
+						<th>예약 시작 날짜</th>
+						<th>예약 끝 날짜</th>
 						<th>예약 인원</th>
 						<th>환불 가격</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:if test="${requestScope.moneyList==null}" var="flag">
+					<c:if test="${requestScope.moneyList==null}" var="fuck">
 						<tr>
-							<td colspan="3"><a href="<c:url value='#'/>">등록된 자료가
+							<td colspan="6"><a href="<c:url value='#'/>">등록된 자료가
 									없습니다</a></td>
 						</tr>
 					</c:if>
-					<c:if test="${not flag}">
+					<c:if test="${not fuck}">
 					<c:forEach var="item5" items="${moneyList}" varStatus="loop">
 						<tr>
-							<td>테이블에 없는 컬럼</td>
+							<td>DB에 반영했으면 하지만 지금은 없는 컬럼</td>
 							<td>${item5.cancel_comment}</td>
-							<td>${item5.reserve_date}</td>
+							<td>${item5.startdate}</td>
+							<td>${item5.enddate}</td>
 							<td>${item5.reserve_person}</td>
 							<td>${item5.cancel_price}</td>
 						</tr>
@@ -260,6 +269,63 @@
 					</c:if>
 				</tbody>
 			</table>
+			<!-- Button trigger modal -->
+			<c:if test="${fuck}">
+			<button style="display: flex; justify-content: center;" type="button" class="btn btn-primary" data-toggle="modal"
+				data-target="#exampleModalCenter">예약 취소하기</button>
+			</c:if>
+			<!-- Modal -->
+			
+			<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+				role="dialog" aria-labelledby="exampleModalCenterTitle"
+				aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">Modal
+								title</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form class="form-horizontal" id="form1" action="<c:url value='/NormalReserve/ReserveCancel.do'/>" method="post">
+								<fieldset>
+								
+								<!-- Form Name -->
+								<legend>예약 취소 양식</legend>
+								
+								<!-- Text input-->
+								<div class="form-group">
+								  <label class="col-md-4 control-label" for="textinput">가격(임시)</label>  
+								  <div class="col-md-4">
+								  <input id="textinput" name="price" type="text" placeholder="" class="form-control input-md">
+								  <input type="hidden" name="rn" value="${param.rn}">
+								  <input type="hidden" name="sn" value="${param.sn}">
+								  </div>
+								</div>
+								
+								<!-- Textarea -->
+								<div class="form-group">
+								  <label class="col-md-4 control-label" for="textarea">취소 사유</label>
+								  <div class="col-md-4">                     
+								    <textarea class="form-control" id="textarea" name="comment"></textarea>
+								  </div>
+								</div>
+								
+								</fieldset>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+							<button type="submit" form="form1" class="btn btn-primary">예약 취소 신청</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
 		</section>
 
 		<!---footer--->

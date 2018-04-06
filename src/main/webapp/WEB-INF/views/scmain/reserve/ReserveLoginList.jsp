@@ -24,10 +24,6 @@
         <script src="<c:url value='/resources/js/lightbox-plus-jquery.min.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/resources/js/instafeed.min.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/resources/js/custom.js'/>" type="text/javascript"></script>
-        <script>
-        console.log("what");
-        console.log();
-        </script>
         <script>//사이드바 메뉴 스크립트
         $(function(){
         	$("#menu-close").click(function(e) {
@@ -106,11 +102,6 @@
 
 		<!----resort-overview--->
 		<section class="resort-overview-block">
-			<c:if test="${alreadyRes!=null}">
-			<script type="text/javascript">
-			alert("이미 예약신청이 되어있습니다.");
-			</script>
-			</c:if>
 			<table class="table table-hover table-bordered" id="sampleTable">
 
 				<thead>
@@ -121,22 +112,17 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:if test="${requestScope.psyList==null}" var="flag">
+					<c:if test="${requestScope.reserveLoginlist==null}" var="flag">
 						<tr>
 							<td colspan="3"><a href="<c:url value='#'/>">등록된 자료가
 									없습니다</a></td>
 						</tr>
 					</c:if>
 					<c:if test="${not flag}">
-					<c:forEach var="item" items="${psyList}" varStatus="loop">
+					<c:forEach var="item" items="${reserveLoginlist}" varStatus="loop">
 						<tr>
-							<c:if test="${oauth_state == null}">
-							<td>${item.space_name}</td>
-							</c:if>
-							<c:if test="${oauth_state != null}">
-							<td>${item.space_name}<a style="float:right" href="<c:url value='/NormalReserve/ReserveForm.do?sn=${item.space_no}'/>"
-							class="btn btn-primary">예약하기</a></td>
-							</c:if>
+							<td>${item.space_name}<a style="float:right" href="<c:url value='/NormalReserve/ReserveView.do?rn=${item.reserve_no}&sn=${item.space_no}'/>"
+							class="btn btn-primary">예약 정보 상세보기</a></td>
 							<td>${item.h_nickname}</td>
 							<td>${item.img_main}</td>
 						</tr>

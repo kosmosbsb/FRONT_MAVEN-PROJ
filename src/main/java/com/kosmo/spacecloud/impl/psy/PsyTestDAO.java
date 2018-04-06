@@ -25,28 +25,43 @@ public class PsyTestDAO implements PsyTestService{
 	}
 
 	@Override
-	public List<PsyTestDTO> reserveView() {
-		return sqlMapper_PSY.selectList("reserveView");
+	public List<PsyTestDTO> reserveView(String rn) {
+		return sqlMapper_PSY.selectList("reserveView",rn);
 	}
 
 	@Override
-	public List<PsyTestDTO> reserveViewReserver() {
-		return sqlMapper_PSY.selectList("reserveViewReserver");
+	public List<PsyTestDTO> reserveViewReserver(String rn) {
+		return sqlMapper_PSY.selectList("reserveViewReserver",rn);
 	}
 
 	@Override
-	public List<PsyTestDTO> reserveViewRefund() {
-		return sqlMapper_PSY.selectList("reserveViewRefund");
+	public List<PsyTestDTO> reserveViewRefund(String sn) {
+		return sqlMapper_PSY.selectList("reserveViewRefund",sn);
 	}
 
 	@Override
-	public List<PsyTestDTO> reserveViewSpace() {
-		return sqlMapper_PSY.selectList("reserveViewSpace");
+	public List<PsyTestDTO> reserveViewSpace(String sn) {
+		return sqlMapper_PSY.selectList("reserveViewSpace",sn);
+	}
+	@Override
+	public List<PsyTestDTO> reserveViewMoney(String rn) {
+		return sqlMapper_PSY.selectList("reserveViewMoney",rn);
 	}
 
-	@Override
-	public List<PsyTestDTO> reserveViewMoney() {
-		return sqlMapper_PSY.selectList("reserveViewMoney");
+	public List<PsyTestDTO> reserveLoginlist(String nickname) {
+		return sqlMapper_PSY.selectList("reserveLoginlist",nickname);
+	}
+
+	public int reserveCancel(PsyTestDTO dto) {
+		return sqlMapper_PSY.insert("reserveCancel",dto);
+	}
+
+	public int reserveInsert(PsyTestDTO dto) {
+		return sqlMapper_PSY.insert("reserveInsert",dto);
+	}
+
+	public List<PsyTestDTO> reserveTest(String nickname) {
+		return sqlMapper_PSY.selectList("reserveTest",nickname);
 	}
 
 }

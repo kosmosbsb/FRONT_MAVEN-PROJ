@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
 
 import com.kosmo.spacecloud.service.psh.NoticeDTO;
@@ -24,28 +25,45 @@ public class PsyTestServiceImpl implements PsyTestService{
 	}
 
 	@Override
-	public List<PsyTestDTO> reserveView() {
-		return dao.reserveView();
+	public List<PsyTestDTO> reserveView(String rn) {
+		return dao.reserveView(rn);
 	}
 
 	@Override
-	public List<PsyTestDTO> reserveViewReserver() {
-		return dao.reserveViewReserver();
+	public List<PsyTestDTO> reserveViewReserver(String rn) {
+		return dao.reserveViewReserver(rn);
 	}
 
 	@Override
-	public List<PsyTestDTO> reserveViewRefund() {
-		return dao.reserveViewRefund();
+	public List<PsyTestDTO> reserveViewRefund(String sn) {
+		return dao.reserveViewRefund(sn);
 	}
 
 	@Override
-	public List<PsyTestDTO> reserveViewSpace() {
-		return dao.reserveViewSpace();
+	public List<PsyTestDTO> reserveViewSpace(String sn) {
+		return dao.reserveViewSpace(sn);
 	}
 
 	@Override
-	public List<PsyTestDTO> reserveViewMoney() {
-		return dao.reserveViewMoney();
+	public List<PsyTestDTO> reserveViewMoney(String rn) {
+		return dao.reserveViewMoney(rn);
+	}
+
+	public List<PsyTestDTO> reserveLoginlist(String nickname) {
+		return dao.reserveLoginlist(nickname);
+	}
+
+	public int reserveCancel(PsyTestDTO dto) {
+		return dao.reserveCancel(dto);
+	}
+
+	public int reserveInsert(PsyTestDTO dto) {
+		return dao.reserveInsert(dto);
+		
+	}
+
+	public List<PsyTestDTO> reserveTest(String nickname) {
+		return dao.reserveTest(nickname);
 	}
 
 }

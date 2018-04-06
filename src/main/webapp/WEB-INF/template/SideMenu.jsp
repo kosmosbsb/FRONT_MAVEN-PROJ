@@ -93,8 +93,17 @@
 		<li><a href="#" style="color: white;">이벤트</a></li>
 		<li><a href="#" style="color: white;">도움말</a></li>
 		<li><a href="#" style="color: white;">서비스정보</a></li>
-		<li><a href="<c:url value="/NormalReserve/Reserve.do"/>" style="color: white;">예약폼 이동 임시!</a></li>
-		<li><a href="<c:url value="/NormalReserve/ReserveView.do"/>" style="color: white;">예약폼2 이동 임시!</a></li>
+		<!-- 박수영이 수정한 부분 시작 -->
+		<li>
+			<c:if test="${oauth_state == null}">
+			<a href="<c:url value='/login.do'/>" style="color: white;">예약로긴리스트 이동 임시!</a>
+			</c:if>
+			<c:if test="${oauth_state != null}">
+			<a href="<c:url value="/NormalReserve/ReserveLoginList.do"/>" style="color: white;">예약로긴리스트 이동 임시!</a>
+			</c:if>
+		</li>
+		<li><a href="<c:url value="/NormalReserve/Reserve.do"/>" style="color: white;">공간 목록 임시!</a></li>
+		<!-- 박수영이 수정한 부분 끝 -->
 		<c:if test="${oauth_state != null}">
 		<li><a href="<c:url value='/logout.do'/>" style="color: white;">로그아웃</a></li>
 		<li><a href="<c:url value='/SCPartnerMain.do'/>" style="color: white; background-color: #5130b1">호스트센터로 이동</a></li>
