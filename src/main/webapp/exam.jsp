@@ -8,198 +8,84 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="resources/images/icons/faviconSC2.png"/>
+        <link rel="icon" href="<c:url value='/resources/images/icons/faviconSC2.png'/>"/>
         <title>팀플SC</title>
-
         <!-- Bootstrap core CSS -->
-        <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-        <link href="resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="<c:url value='/resources/css/bootstrap.min.css'/>" rel="stylesheet">
+        <link href="<c:url value='/resources/font-awesome/css/font-awesome.min.css'/>" rel="stylesheet" type="text/css" />
         <!-- Custom styles for this template -->
-        <link href="resources/css/style.css" rel="stylesheet">
-        <link href="resources/fonts/antonio-exotic/stylesheet.css" rel="stylesheet">
-        <link rel="resources/stylesheet" href="css/lightbox.min.css">
-        <link href="resources/css/responsive.css" rel="stylesheet">
-        <script src="resources/js/jquery.min.js" type="text/javascript"></script>
-        <script src="resources/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="resources/js/lightbox-plus-jquery.min.js" type="text/javascript"></script>
-        <script src="resources/js/instafeed.min.js" type="text/javascript"></script>
-        <script src="resources/js/custom.js" type="text/javascript"></script>
-
+        <link href=" <c:url value='/resources/css/style.css'/>" rel="stylesheet">
+        <link href="<c:url value='/resources/fonts/antonio-exotic/stylesheet.css'/>" rel="stylesheet">
+        <link rel="<c:url value='/resources/stylesheet'/>" href="css/lightbox.min.css">
+        <link href="<c:url value='/resources/css/responsive.css'/>" rel="stylesheet">
+        <script src="<c:url value='/resources/js/jquery.min.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/resources/js/bootstrap.min.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/resources/js/lightbox-plus-jquery.min.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/resources/js/instafeed.min.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/resources/js/custom.js'/>" type="text/javascript"></script>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <!-- /////////////////////////////////////////////////////////////////// -->
     </head>
-    <body>
-	<div id="page">
+    
+<style>
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,800);
+figure.snip1132 {
+  font-family: 'Raleway', Arial, sans-serif;
+  position: relative;
+  float: left;
+  overflow: hidden;
+  margin: 10px 1%;
+  min-width: 220px;
+  max-width: 310px;
+  max-height: 220px;
+  width: 100%;
+  background: #000000;
+  color: #ffffff;
+  text-align: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+
+figure.snip1132 * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.45s ease-in-out;
+  transition: all 0.45s ease-in-out;
+}
+
+figure.snip1132 img {
+  max-width: 100%;
+  position: relative;
+  opacity: 1;
+}
+
+ figure.snip1132 a {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  z-index: 1;
+} 
+
+figure.snip1132:hover img,
+figure.snip1132.hover img {
+  -webkit-transform: scale(1.15);
+  transform: scale(1.15);
+}
+</style>
+    
+  <body>
+		 <figure class="snip1132">
+		  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample22.jpg" alt="sample22" />
+		  <a href="#"></a>
+		</figure>
 		
-		<section class="resort-overview-block">
-			<div class="album py-5 bg-light">
-				<div class="container">
-
-					<div class="row">
-						<div class="col-md-4"
-							style="margin-top: 10px; margin-bottom: 10px;">
-							<div class="card mb-4 box-shadow">
-								<img class="card-img-top"
-									data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
-									alt="Thumbnail [100%x225]"
-									src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22288%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20288%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1624c0a7e5c%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1624c0a7e5c%22%3E%3Crect%20width%3D%22288%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2294.5%22%20y%3D%22119.1%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
-									data-holder-rendered="true"
-									style="height: 225px; width: 100%; display: block;">
-								<div class="card-body">
-									<p class="card-text">This is a wider card with supporting
-										text below as a natural lead-in to additional content. This
-										content is a little bit longer.</p>
-									<div class="d-flex justify-content-between align-items-center">
-										<div class="btn-group">
-											<button type="button"
-												class="btn btn-sm btn-outline-secondary">View</button>
-											<button type="button"
-												class="btn btn-sm btn-outline-secondary">Edit</button>
-										</div>
-										<small class="text-muted">9 mins</small>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						
-						<div class="col-md-4"
-							style="margin-top: 10px; margin-bottom: 10px;">
-							<div class="card mb-4 box-shadow">
-								<img class="card-img-top"
-									data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
-									alt="Thumbnail [100%x225]"
-									src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22288%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20288%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1624c0a7e5c%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1624c0a7e5c%22%3E%3Crect%20width%3D%22288%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2294.5%22%20y%3D%22119.1%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
-									data-holder-rendered="true"
-									style="height: 225px; width: 100%; display: block;">
-								<div class="card-body">
-									<p class="card-text">This is a wider card with supporting
-										text below as a natural lead-in to additional content. This
-										content is a little bit longer.</p>
-									<div class="d-flex justify-content-between align-items-center">
-										<div class="btn-group">
-											<button type="button"
-												class="btn btn-sm btn-outline-secondary">View</button>
-											<button type="button"
-												class="btn btn-sm btn-outline-secondary">Edit</button>
-										</div>
-										<small class="text-muted">9 mins</small>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4"
-							style="margin-top: 10px; margin-bottom: 10px;">
-							<div class="card mb-4 box-shadow">
-								<img class="card-img-top"
-									data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
-									alt="Thumbnail [100%x225]"
-									src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22288%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20288%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1624c0a7e5c%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1624c0a7e5c%22%3E%3Crect%20width%3D%22288%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2294.5%22%20y%3D%22119.1%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
-									data-holder-rendered="true"
-									style="height: 225px; width: 100%; display: block;">
-								<div class="card-body">
-									<p class="card-text">This is a wider card with supporting
-										text below as a natural lead-in to additional content. This
-										content is a little bit longer.</p>
-									<div class="d-flex justify-content-between align-items-center">
-										<div class="btn-group">
-											<button type="button"
-												class="btn btn-sm btn-outline-secondary">View</button>
-											<button type="button"
-												class="btn btn-sm btn-outline-secondary">Edit</button>
-										</div>
-										<small class="text-muted">9 mins</small>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4"
-							style="margin-top: 10px; margin-bottom: 10px;">
-							<div class="card mb-4 box-shadow">
-								<img class="card-img-top"
-									data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
-									alt="Thumbnail [100%x225]"
-									src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22288%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20288%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1624c0a7e5c%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1624c0a7e5c%22%3E%3Crect%20width%3D%22288%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2294.5%22%20y%3D%22119.1%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
-									data-holder-rendered="true"
-									style="height: 225px; width: 100%; display: block;">
-								<div class="card-body">
-									<p class="card-text">This is a wider card with supporting
-										text below as a natural lead-in to additional content. This
-										content is a little bit longer.</p>
-									<div class="d-flex justify-content-between align-items-center">
-										<div class="btn-group">
-											<button type="button"
-												class="btn btn-sm btn-outline-secondary">View</button>
-											<button type="button"
-												class="btn btn-sm btn-outline-secondary">Edit</button>
-										</div>
-										<small class="text-muted">9 mins</small>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4"
-							style="margin-top: 10px; margin-bottom: 10px;">
-							<div class="card mb-4 box-shadow">
-								<img class="card-img-top"
-									data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
-									alt="Thumbnail [100%x225]"
-									src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22288%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20288%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1624c0a7e5c%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1624c0a7e5c%22%3E%3Crect%20width%3D%22288%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2294.5%22%20y%3D%22119.1%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
-									data-holder-rendered="true"
-									style="height: 225px; width: 100%; display: block;">
-								<div class="card-body">
-									<p class="card-text">This is a wider card with supporting
-										text below as a natural lead-in to additional content. This
-										content is a little bit longer.</p>
-									<div class="d-flex justify-content-between align-items-center">
-										<div class="btn-group">
-											<button type="button"
-												class="btn btn-sm btn-outline-secondary">View</button>
-											<button type="button"
-												class="btn btn-sm btn-outline-secondary">Edit</button>
-										</div>
-										<small class="text-muted">9 mins</small>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4"
-							style="margin-top: 10px; margin-bottom: 10px;">
-							<div class="card mb-4 box-shadow">
-								<img class="card-img-top"
-									data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
-									alt="Thumbnail [100%x225]"
-									src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22288%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20288%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1624c0a7e5c%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1624c0a7e5c%22%3E%3Crect%20width%3D%22288%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2294.5%22%20y%3D%22119.1%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
-									data-holder-rendered="true"
-									style="height: 225px; width: 100%; display: block;">
-								<div class="card-body">
-									<p class="card-text">This is a wider card with supporting
-										text below as a natural lead-in to additional content. This
-										content is a little bit longer.</p>
-									<div class="d-flex justify-content-between align-items-center">
-										<div class="btn-group">
-											<button type="button"
-												class="btn btn-sm btn-outline-secondary">View</button>
-											<button type="button"
-												class="btn btn-sm btn-outline-secondary">Edit</button>
-										</div>
-										<small class="text-muted">9 mins</small>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!---footer--->
-		<jsp:include page="/WEB-INF/template/Footer.jsp"/>
-
-            <!--back to top--->
-            <a style="display: none;" href="javascript:void(0);" class="scrollTop back-to-top" id="back-to-top">
-                <span><i aria-hidden="true" class="fa fa-angle-up fa-lg"></i></span>
-                <span>Top</span>
-            </a>
-
-        </div>
-    </body>
+  </body>
 </html>
+<script>
+$(".hover").mouseleave(
+  function () {
+    $(this).removeClass("hover");
+  }
+); 
+</script>
