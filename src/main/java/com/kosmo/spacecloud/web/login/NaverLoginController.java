@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -123,8 +124,11 @@ public class NaverLoginController {
     		
     		
 			//호스트이미지 세션에 박아두기 (호스트 이미지 테이블에서 파일명가져옴)
-			session.setAttribute("USER_PROFILE_H", "/Upload/HostImg/"+memberService.getHostImg(session.getAttribute("USER_ID").toString()));
-			
+    		if(memberService.getHostImg(session.getAttribute("USER_ID").toString()) != null)
+    			session.setAttribute("USER_PROFILE_H", "/Upload/HostImg/"+memberService.getHostImg(session.getAttribute("USER_ID").toString()));
+    		else
+    			session.setAttribute("USER_PROFILE_H", "NoImage");
+    		
 			//호스트 멤버 이름(닉네임)
 			session.setAttribute("USER_NICNAME_H", ((MemberDTO)memberService.getHost(session.getAttribute("USER_ID").toString())).getH_nickname());
 			
@@ -172,21 +176,25 @@ public class NaverLoginController {
 			//1-1]MultipartHttpServletRequest객체의 getFile("파라미터명")메소드로
 			//    MultipartFile객체 얻기
 			MultipartFile upload= mhsr.getFile("hostImg");
+			
 			//2]File객체 생성
 			////2-1] 파일 중복시 이름 변경
 			//String newFileName=FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
 			
 			//유저ID가 곧 파일명 (ex. IMG38502203.jpg)
-			//.으로 나눌려면 이렇게해야해... 안해주면 .을 정규식문자로 인식하니깐
-			System.out.println(upload.getOriginalFilename());
-			String[] tempStrings = upload.getOriginalFilename().split("\\.");
 			
-			File file = new File(phisicalPath+File.separator+"IMG"+session.getAttribute("USER_ID")+"."+tempStrings[tempStrings.length-1]);		
-			
-			//3]업로드 처리
-			upload.transferTo(file);
-			dto.setImg("IMG"+session.getAttribute("USER_ID")+"."+tempStrings[tempStrings.length-1]);
-			memberService.insertHostImg(dto);
+			if(!"".equals(upload.getOriginalFilename())) { //파일이 들어왔을 때면 등록해준다. 
+				System.out.println(upload.getOriginalFilename());
+				//.으로 나눌려면 이렇게해야해... 안해주면 .을 정규식문자로 인식하니깐
+				String[] tempStrings = upload.getOriginalFilename().split("\\.");
+				
+				File file = new File(phisicalPath+File.separator+"IMG"+session.getAttribute("USER_ID")+"."+tempStrings[tempStrings.length-1]);		
+				
+				//3]업로드 처리
+				upload.transferTo(file);
+				dto.setImg("IMG"+session.getAttribute("USER_ID")+"."+tempStrings[tempStrings.length-1]);
+				memberService.insertHostImg(dto);
+			}
 			
 			//4]리퀘스트 영역에 데이타 저장
 			mhsr.setAttribute("writer", mhsr.getParameter("writer"));
@@ -196,11 +204,27 @@ public class NaverLoginController {
 			mhsr.setAttribute("size",(int)Math.ceil(upload.getSize()/1024.0));
 			mhsr.setAttribute("type",upload.getContentType());
 			//파일 오리지날 이름 (ex. picture.jpg)
-			mhsr.setAttribute("real","IMG"+session.getAttribute("USER_ID")+"."+tempStrings[tempStrings.length-1]);
+			//mhsr.setAttribute("real","IMG"+session.getAttribute("USER_ID")+"."+tempStrings[tempStrings.length-1]);
 
     	}
     	
     	return "redirect:/SCPartnerMain.do";
     }
+    
+    //공간 등록 메뉴얼 파일 다운로드 
+	@RequestMapping("/SpaceRegiMenual/Download.do")
+	public void download(HttpServletRequest req, HttpServletResponse resp) throws Exception{
+		/*컨트롤러 메소드에서는 다운로드할 파일을 
+		모델에 저장만 하면됨]
+		File객체를 생성해서 모델계열에 저장만 하면
+		컨트롤러의 역할은 끝남.
+		즉 Model이나 Map이나 ModelMap으로만.*/
+		//1]파일 객체 생성
+		String pathName=req.getSession().getServletContext().getRealPath("/resources/khw")+File.separator+"스페이스클라우드_공간등록_메뉴얼.pdf";
+		File file = new File(pathName);
+		
+		FileUpDownUtils.download(req, resp,file.getName(), "/resources/khw");
+		
+	}
     
 }
