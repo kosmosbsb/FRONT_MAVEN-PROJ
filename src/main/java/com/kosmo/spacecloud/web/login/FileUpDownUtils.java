@@ -141,8 +141,9 @@ public class FileUpDownUtils {
 			int data=0;
 			while((data=bis.read())!=-1){
 				bos.write(data);
-				bos.flush();
+				//bos.flush(); //여기에 두면 개느려
 			}
+			bos.flush(); //여기에 둬야 빨라
 			//9]스트림 닫기
 			bis.close();bos.close(); 
 		}

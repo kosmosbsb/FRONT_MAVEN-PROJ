@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -209,5 +210,21 @@ public class NaverLoginController {
     	
     	return "redirect:/SCPartnerMain.do";
     }
+    
+    //공간 등록 메뉴얼 파일 다운로드 
+	@RequestMapping("/SpaceRegiMenual/Download.do")
+	public void download(HttpServletRequest req, HttpServletResponse resp) throws Exception{
+		/*컨트롤러 메소드에서는 다운로드할 파일을 
+		모델에 저장만 하면됨]
+		File객체를 생성해서 모델계열에 저장만 하면
+		컨트롤러의 역할은 끝남.
+		즉 Model이나 Map이나 ModelMap으로만.*/
+		//1]파일 객체 생성
+		String pathName=req.getSession().getServletContext().getRealPath("/resources/khw")+File.separator+"스페이스클라우드_공간등록_메뉴얼.pdf";
+		File file = new File(pathName);
+		
+		FileUpDownUtils.download(req, resp,file.getName(), "/resources/khw");
+		
+	}
     
 }
