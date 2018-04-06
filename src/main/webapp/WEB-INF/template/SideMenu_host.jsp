@@ -73,13 +73,13 @@
 			</c:if>
 			<c:if test="${oauth_state != null}">
 				<div style="text-align: center;">
-					<a style="margin-top: 50px;" href="https://nid.naver.com/user2/help/myInfo.nhn?menu=home"><img src="${USER_PROFILE}" style="
+					<a style="margin-top: 50px;" href="https://nid.naver.com/user2/help/myInfo.nhn?menu=home"><img src="<c:url value='${USER_PROFILE_H}'/>" style="
 						width: 120px; height: 120px; margin-left: 39px;
 						border: 2px solid gold;
 						border-radius: 70px;
 						-moz-border-radius: 70px;
 						-khtml-border-radius: 70px;
-						-webkit-border-radius: 70px;"/><span style="color: white; font-size: 1.6em;">${USER_NICNAME}</span></a>
+						-webkit-border-radius: 70px;"/><span style="color: white; font-size: 1.6em;">${USER_NICNAME_H}</span></a>
 				</div>
 			<li><a href="#" style="color: white;">보유 크래딧</a></li>
 			<li><a href="#" style="color: white;">호스트센터 홈</a></li>

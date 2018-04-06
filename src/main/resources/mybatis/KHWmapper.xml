@@ -35,7 +35,10 @@
 		SELECT IMG FROM USER_HOST_IMG WHERE ID=#{id}
 	</select>
 	
-	
+	<!-- 컬럼 하나하나씩 가져오지말고 맵으로 한번에 받으렴 -->
+	<select id="getMemberHost" parameterType="String" resultType="MemberDTO">
+		SELECT * FROM USER_HOST WHERE ID=#{id}
+	</select>
 	
 </mapper>
 

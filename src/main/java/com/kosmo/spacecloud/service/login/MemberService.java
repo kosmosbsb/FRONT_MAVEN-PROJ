@@ -22,4 +22,7 @@ public interface MemberService {
 		int insertHostImg(MemberDTO dto); //호스트 이미지 등록
 		
 		String getHostImg(String id);
+		
+		MemberDTO getHost(String id);
+		
 }

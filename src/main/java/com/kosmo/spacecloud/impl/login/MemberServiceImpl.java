@@ -47,6 +47,11 @@ public class MemberServiceImpl implements MemberService{
 	public String getHostImg(String id) {
 		return dao.getHostImg(id);
 	}
+
+	@Override
+	public MemberDTO getHost(String id) {
+		return dao.getHost(id);
+	}
 	
 
 	

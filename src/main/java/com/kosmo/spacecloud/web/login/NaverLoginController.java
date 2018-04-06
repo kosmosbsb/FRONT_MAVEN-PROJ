@@ -87,8 +87,8 @@ public class NaverLoginController {
 		//회원 아이디(키값), 이름, 닉네임, 프로필 이미지 경로, 이메일주소는 세션에 박아둘게요
 		session.setAttribute("USER_ID", jsonObject_tail.get("id").toString());
 		session.setAttribute("USER_NAME", jsonObject_tail.get("name").toString());
-		session.setAttribute("USER_NICNAME", jsonObject_tail.get("nickname").toString());
-		session.setAttribute("USER_PROFILE", jsonObject_tail.get("profile_image").toString());
+		session.setAttribute("USER_NICNAME_N", jsonObject_tail.get("nickname").toString()); //일반유저 이름(닉네임)
+		session.setAttribute("USER_PROFILE_N", jsonObject_tail.get("profile_image").toString()); //일반유저 호스트 이미지
 		session.setAttribute("USER_EMAIL", jsonObject_tail.get("email").toString());
 		//나중에 전화번호도 박아둬야함!!
 		
@@ -113,13 +113,20 @@ public class NaverLoginController {
     	if(memberService.isHost(session.getAttribute("USER_ID").toString())) {
     		System.out.println("이사람은 호스트가 맞아요");
     		
+    		
+    		/*	전체 파일 경로가 필요가 없었어...	*/
     		//파일이 저장된 서버의 물리적 경로 얻기]
-			String hostImgFile =req.getSession().getServletContext().getRealPath("/Upload/HostImg");
+			//String hostImgFile =req.getSession().getServletContext().getRealPath("/Upload/HostImg");
 			//USER_HOST_IMG 테이블에 담궈두고 있는 파일명 덧붙이기
-			hostImgFile += "/"+memberService.getHostImg(session.getAttribute("USER_ID").toString());
+			//hostImgFile += "\\"+memberService.getHostImg(session.getAttribute("USER_ID").toString());
+			//System.out.println(hostImgFile);
+    		
+    		
+			//호스트이미지 세션에 박아두기 (호스트 이미지 테이블에서 파일명가져옴)
+			session.setAttribute("USER_PROFILE_H", "/Upload/HostImg/"+memberService.getHostImg(session.getAttribute("USER_ID").toString()));
 			
-			//호스트이미지 세션에 박아두기
-			session.setAttribute("USER_PROFILE", hostImgFile);
+			//호스트 멤버 이름(닉네임)
+			session.setAttribute("USER_NICNAME_H", ((MemberDTO)memberService.getHost(session.getAttribute("USER_ID").toString())).getH_nickname());
 			
 			//session.setAttribute("USER_PROFILE", "");
     		return "scpartner/SCPartnerMain";
@@ -178,7 +185,7 @@ public class NaverLoginController {
 			
 			//3]업로드 처리
 			upload.transferTo(file);
-			dto.setImg(upload.getOriginalFilename());
+			dto.setImg("IMG"+session.getAttribute("USER_ID")+"."+tempStrings[tempStrings.length-1]);
 			memberService.insertHostImg(dto);
 			
 			//4]리퀘스트 영역에 데이타 저장

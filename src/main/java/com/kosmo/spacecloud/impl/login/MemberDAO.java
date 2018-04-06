@@ -59,6 +59,11 @@ public class MemberDAO implements MemberService{
 		return hostImgFileName;
 	}
 
+	@Override
+	public MemberDTO getHost(String id) {
+		return sqlMapper_KHW.selectOne("getMemberHost",id);
+	}
+
 
 	
 	
