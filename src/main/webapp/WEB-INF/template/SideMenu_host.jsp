@@ -73,7 +73,7 @@
 			</c:if>
 			<c:if test="${oauth_state != null}">
 				<div style="text-align: center;">
-					<a style="margin-top: 50px;" href="https://nid.naver.com/user2/help/myInfo.nhn?menu=home"><img src="<c:url value='${USER_PROFILE_H}'/>" style="
+					<a style="margin-top: 50px;" href="https://nid.naver.com/user2/help/myInfo.nhn?menu=home"><img src="<c:url value='${USER_PROFILE_H == "NoImage" ? "/resources/images/khw/HostUserImg.png" : USER_PROFILE_H}'/>" style="
 						width: 120px; height: 120px; margin-left: 39px;
 						border: 2px solid gold;
 						border-radius: 70px;

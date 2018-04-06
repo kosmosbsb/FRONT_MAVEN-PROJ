@@ -123,8 +123,11 @@ public class NaverLoginController {
     		
     		
 			//호스트이미지 세션에 박아두기 (호스트 이미지 테이블에서 파일명가져옴)
-			session.setAttribute("USER_PROFILE_H", "/Upload/HostImg/"+memberService.getHostImg(session.getAttribute("USER_ID").toString()));
-			
+    		if(memberService.getHostImg(session.getAttribute("USER_ID").toString()) != null)
+    			session.setAttribute("USER_PROFILE_H", "/Upload/HostImg/"+memberService.getHostImg(session.getAttribute("USER_ID").toString()));
+    		else
+    			session.setAttribute("USER_PROFILE_H", "NoImage");
+    		
 			//호스트 멤버 이름(닉네임)
 			session.setAttribute("USER_NICNAME_H", ((MemberDTO)memberService.getHost(session.getAttribute("USER_ID").toString())).getH_nickname());
 			
@@ -172,21 +175,25 @@ public class NaverLoginController {
 			//1-1]MultipartHttpServletRequest객체의 getFile("파라미터명")메소드로
 			//    MultipartFile객체 얻기
 			MultipartFile upload= mhsr.getFile("hostImg");
+			
 			//2]File객체 생성
 			////2-1] 파일 중복시 이름 변경
 			//String newFileName=FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
 			
 			//유저ID가 곧 파일명 (ex. IMG38502203.jpg)
-			//.으로 나눌려면 이렇게해야해... 안해주면 .을 정규식문자로 인식하니깐
-			System.out.println(upload.getOriginalFilename());
-			String[] tempStrings = upload.getOriginalFilename().split("\\.");
 			
-			File file = new File(phisicalPath+File.separator+"IMG"+session.getAttribute("USER_ID")+"."+tempStrings[tempStrings.length-1]);		
-			
-			//3]업로드 처리
-			upload.transferTo(file);
-			dto.setImg("IMG"+session.getAttribute("USER_ID")+"."+tempStrings[tempStrings.length-1]);
-			memberService.insertHostImg(dto);
+			if(!"".equals(upload.getOriginalFilename())) { //파일이 들어왔을 때면 등록해준다. 
+				System.out.println(upload.getOriginalFilename());
+				//.으로 나눌려면 이렇게해야해... 안해주면 .을 정규식문자로 인식하니깐
+				String[] tempStrings = upload.getOriginalFilename().split("\\.");
+				
+				File file = new File(phisicalPath+File.separator+"IMG"+session.getAttribute("USER_ID")+"."+tempStrings[tempStrings.length-1]);		
+				
+				//3]업로드 처리
+				upload.transferTo(file);
+				dto.setImg("IMG"+session.getAttribute("USER_ID")+"."+tempStrings[tempStrings.length-1]);
+				memberService.insertHostImg(dto);
+			}
 			
 			//4]리퀘스트 영역에 데이타 저장
 			mhsr.setAttribute("writer", mhsr.getParameter("writer"));
@@ -196,7 +203,7 @@ public class NaverLoginController {
 			mhsr.setAttribute("size",(int)Math.ceil(upload.getSize()/1024.0));
 			mhsr.setAttribute("type",upload.getContentType());
 			//파일 오리지날 이름 (ex. picture.jpg)
-			mhsr.setAttribute("real","IMG"+session.getAttribute("USER_ID")+"."+tempStrings[tempStrings.length-1]);
+			//mhsr.setAttribute("real","IMG"+session.getAttribute("USER_ID")+"."+tempStrings[tempStrings.length-1]);
 
     	}
     	

@@ -526,7 +526,7 @@ a)	로그인 기록: 3개월
 					     <textarea name="introduce" class="form-control" rows="3"  style="background-color: white; resize: none;" placeholder="프로필에 노출될 소개말을 입력해주세요." maxlength="30" ></textarea>
 					     <br/><br/><br/><br/>
 					     		
-					     <input type="file" id="imgUploadBtn" name="hostImg" onchange="return imgPreview(this);"/>
+					     <input type="file" id="imgUploadBtn" name="hostImg" onchange="return imgPreview(this);" style="display: none;"/>
 					     <input type="submit" id="regiBtn" value="업로드버튼" style="display: none;"/>
 					  	
 					   </form>
