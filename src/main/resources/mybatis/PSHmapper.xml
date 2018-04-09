@@ -6,7 +6,21 @@
 
 <!-- sql 매핑하기 (Comment.xml, OneMemo.xml 참고) -->
 
-<mapper namespace="mybatis.PSHmapper"> 
+<mapper namespace="mybatis.PSHmapper">
+
+<!-- 	<resultMap id="SearchDTOResult" type="SearchDTO">
+		<result property="space_no" column="space_no"/>
+		<result property="space_name" column="space_name"/>
+		<result property="heart" column="heart" />
+		<result property="rank" column="rank"/>
+		<result property="space_type" column="space_type"/>
+		<result property="address" column="address"/>
+		<result property="space_tag" column="space_tag"/>
+		<result property="img_main" column="img_main"/>
+		<result property="price_weekday" column="price_weekday"/>
+		<result property="time_or_day" column="time_or_day"/>
+	</resultMap> -->
+ 
 	<select id="noticeSelectList" resultType="NoticeDTO">
 			SELECT * FROM (SELECT T.*,ROWNUM R FROM (SELECT S.* FROM NOTICE S
 		<if test="searchWord != null">
@@ -19,5 +33,13 @@
 		<if test="searchWord != null">
 			WHERE CONTENT LIKE '%' || #{searchWord} || '%' OR TITLE LIKE '%' || #{searchWord} || '%'
 		</if>
+	</select>
+	
+	
+	<select id="searchSelectList" parameterType="String" resultType="SearchDTO">
+			SELECT SC.SPACE_NO,SPACE_TYPE,IMG_MAIN,SPACE_NAME,ADDRESS,SPACE_TAG,PRICE_WEEKDAY,TIME_OR_DAY,PRICE_STANDARD,HEART,RANK 
+			FROM SPACE SC INNER JOIN SPACE_RESERVE_INFO SRI ON SC.SPACE_NO=SRI.SPACE_NO	 
+			WHERE SPACE_NAME LIKE '%' || #{searchSpace} || '%' OR SPACE_TYPE LIKE '%' || #{searchSpace} || '%' OR SPACE_TAG LIKE '%' || #{searchSpace} || '%'
+			ORDER BY HEART DESC
 	</select>
 </mapper>

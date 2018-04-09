@@ -77,7 +77,7 @@
 									<ul class="list-unstyled nav1 cl-effect-10">
 										<li><a data-hover="Home" class="active"><span>Home</span></a></li>
 										<li><a data-hover="About" href='<c:url value="/Notice/List.do"/>'><span>About</span></a></li>
-										<li><a data-hover="Rooms" href="resources/rooms.html"><span>Rooms</span></a></li>
+										<li><a data-hover="Rooms" href="<c:url value="/Search/Search.do"/>"><span>Rooms</span></a></li>
 										<li><a data-hover="Gallery" href="resources/gallery.html"><span>Gallery</span></a></li>
 										<li><a data-hover="Dinning" href="resources/dinning.html"><span>Dinning</span></a></li>
 										<li><a data-hover="News" href="resources/news.html"><span>News</span></a></li>

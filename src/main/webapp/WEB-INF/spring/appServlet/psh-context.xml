@@ -12,4 +12,5 @@
 	
 	<context:property-placeholder location="classpath:memoresources/memo.properties"/>
 	
+	<beans:bean id="searchController" class="com.kosmo.spacecloud.web.psh.SearchController"/>	
 </beans:beans>
