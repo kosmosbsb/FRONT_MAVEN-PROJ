@@ -37,6 +37,7 @@ public class PsyTestDTO {
 	
 	//예약 상세보기 공간에 대한 간략한 정보
 	//private String space_name;중복됨
+	private String status;
 	private String address;
 	private String phone;
 	
@@ -44,10 +45,100 @@ public class PsyTestDTO {
 	private String cancel_comment;
 	//private String reserve_date;중복됨
 	//private String reserve_person;중복됨
-	private String cancel_price;
+	private String diff;
+	private String refundprice;
+	
+	//예약폼에 적용할 정보들
+	private String min_day;
+	private String max_day;
+	private String min_person;
+	private String max_person;
+	private String price_standard;
+	private String price_weekday;
+	private String time_or_day;
+	private String oper_time;
+	private String regularly_close;
+	private String totalprice;//180409에 새로 추가함. reserve 에 들어갈 새 컬럼.
 	
 	
-	
+	public String getDiff() {
+		return diff;
+	}
+	public void setDiff(String diff) {
+		this.diff = diff;
+	}
+	public String getRefundprice() {
+		return refundprice;
+	}
+	public void setRefundprice(String refundprice) {
+		this.refundprice = refundprice;
+	}
+	public String getTotalprice() {
+		return totalprice;
+	}
+	public void setTotalprice(String totalprice) {
+		this.totalprice = totalprice;
+	}
+	public String getMin_day() {
+		return min_day;
+	}
+	public void setMin_day(String min_day) {
+		this.min_day = min_day;
+	}
+	public String getMax_day() {
+		return max_day;
+	}
+	public void setMax_day(String max_day) {
+		this.max_day = max_day;
+	}
+	public String getMin_person() {
+		return min_person;
+	}
+	public void setMin_person(String min_person) {
+		this.min_person = min_person;
+	}
+	public String getMax_person() {
+		return max_person;
+	}
+	public void setMax_person(String max_person) {
+		this.max_person = max_person;
+	}
+	public String getPrice_standard() {
+		return price_standard;
+	}
+	public void setPrice_standard(String price_standard) {
+		this.price_standard = price_standard;
+	}
+	public String getPrice_weekday() {
+		return price_weekday;
+	}
+	public void setPrice_weekday(String price_weekday) {
+		this.price_weekday = price_weekday;
+	}
+	public String getTime_or_day() {
+		return time_or_day;
+	}
+	public void setTime_or_day(String time_or_day) {
+		this.time_or_day = time_or_day;
+	}
+	public String getOper_time() {
+		return oper_time;
+	}
+	public void setOper_time(String oper_time) {
+		this.oper_time = oper_time;
+	}
+	public String getRegularly_close() {
+		return regularly_close;
+	}
+	public void setRegularly_close(String regularly_close) {
+		this.regularly_close = regularly_close;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public String getStartdate() {
 		return startdate;
 	}
@@ -125,12 +216,6 @@ public class PsyTestDTO {
 	}
 	public void setCancel_comment(String cancel_comment) {
 		this.cancel_comment = cancel_comment;
-	}
-	public String getCancel_price() {
-		return cancel_price;
-	}
-	public void setCancel_price(String cancel_price) {
-		this.cancel_price = cancel_price;
 	}
 	public String getAddress() {
 		return address;

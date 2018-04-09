@@ -11,11 +11,11 @@
 		select S.SPACE_NAME, H.H_NICKNAME, S.IMG_MAIN, S.SPACE_NO FROM  SPACE S INNER JOIN USER_HOST H on S.id= H.id
 	</select>
 	<select id="reserveView" resultType="PsyTestDTO">
-		select R.RESERVE_NO, R.REGIDATE, S.SPACE_NAME, R.RESERVE_PERSON, R.ASK, R.startDate, R.ENDDATE from RESERVE R INNER JOIN SPACE S on R.SPACE_NO = S.SPACE_NO
+		select R.RESERVE_NO, R.REGIDATE, S.SPACE_NAME, R.RESERVE_PERSON, R.startDate, R.ENDDATE, R.TOTALPRICE from RESERVE R INNER JOIN SPACE S on R.SPACE_NO = S.SPACE_NO
 		where R.reserve_no=#{rn}
 	</select>
 	<select id="reserveViewReserver" resultType="PsyTestDTO">
-		select R.RESERVE_NAME, R.RESERVE_PHONE, R.RESERVE_EMAIL from RESERVE R inner join USER_NORMAL N on R.id = N.id
+		select R.RESERVE_NAME, R.RESERVE_PHONE, R.RESERVE_EMAIL, R.ASK from RESERVE R inner join USER_NORMAL N on R.id = N.id
 		where R.reserve_no=#{rn}
 	</select>
 	<select id="reserveViewRefund" resultType="PsyTestDTO">
@@ -27,37 +27,59 @@
 		where space_no=#{sn}
 	</select>
 	<select id="reserveViewMoney" resultType="PsyTestDTO">
-		select R.RESERVE_NO, RC.cancel_comment,  R.startDate, R.ENDDATE , R.RESERVE_PERSON, RC.cancel_price from reserve_cancel RC inner join RESERVE R on RC.reserve_no = R.reserve_no 
-		where RC.reserve_no=#{rn}
+		select  RC.REGIDATE, R.totalprice, R.startdate, R.enddate,R.RESERVE_PERSON, TO_DATE(R.startdate)-(SELECT TO_DATE(SYSDATE, 'YY/MM/DD') "NOW"  FROM DUAL) as diff, 
+		case when TO_DATE(startdate)-(SELECT TO_DATE(SYSDATE, 'YY/MM/DD') "NOW"  FROM DUAL) = 0 then totalprice*0.2
+		     when TO_DATE(startdate)-(SELECT TO_DATE(SYSDATE, 'YY/MM/DD') "NOW"  FROM DUAL) = 1 then totalprice*0.3
+		     when TO_DATE(startdate)-(SELECT TO_DATE(SYSDATE, 'YY/MM/DD') "NOW"  FROM DUAL) = 2 then totalprice*0.4
+		     when TO_DATE(startdate)-(SELECT TO_DATE(SYSDATE, 'YY/MM/DD') "NOW"  FROM DUAL) = 3 then totalprice*0.5
+		     when TO_DATE(startdate)-(SELECT TO_DATE(SYSDATE, 'YY/MM/DD') "NOW"  FROM DUAL) = 4 then totalprice*0.6
+		     when TO_DATE(startdate)-(SELECT TO_DATE(SYSDATE, 'YY/MM/DD') "NOW"  FROM DUAL) = 5 then totalprice*0.7
+		     when TO_DATE(startdate)-(SELECT TO_DATE(SYSDATE, 'YY/MM/DD') "NOW"  FROM DUAL) = 6 then totalprice*0.8
+		     when TO_DATE(startdate)-(SELECT TO_DATE(SYSDATE, 'YY/MM/DD') "NOW"  FROM DUAL) = 7 then totalprice*0.9
+		     else totalprice
+		     end as refundprice, RC.CANCEL_COMMENT
+		from reserve R inner join reserve_cancel RC on RC.RESERVE_NO=R.RESERVE_NO
+		where R.RESERVE_NO=#{rn}
 	</select>
 	<select id="reserveLoginlist" resultType="PsyTestDTO">
-		select S.space_name, H.H_NICKNAME, S.IMG_MAIN, R.RESERVE_NO, S.SPACE_NO
+		select S.space_name, H.H_NICKNAME, S.IMG_MAIN, R.RESERVE_NO, S.SPACE_NO, R.status, R.regidate
 		from USER_HOST H 
 		INNER JOIN SPACE S on H.id = S.id
 		inner join reserve R on S.SPACE_NO = R.SPACE_NO
 		inner join user_normal N on R.id = N.id
 		where N.N_NICKNAME = #{nickname}
+		order by R.regidate desc
 	</select>
 	<insert id="reserveCancel" parameterType="PsyTestDTO">
-	insert into reserve_cancel values(#{reserve_no},#{cancel_price},#{cancel_comment})
+	insert into reserve_cancel values(#{reserve_no},#{cancel_comment},TO_CHAR(SYSDATE, 'YY/MM/DD'))
 	</insert>
+	<update id="reserveCancelUpdate" parameterType="PsyTestDTO">
+	UPDATE reserve
+    SET status = 3
+    where reserve_name = #{reserve_name}
+    </update>
 	<insert id="reserveInsert" parameterType="PsyTestDTO">
 	INSERT INTO RESERVE values(
 	SEQ_RESERVE.NEXTVAL,
 	#{reserve_name},
 	#{reserve_phone},
 	#{reserve_email},
-	'2',
+	'0',
 	#{reserve_person},
 	default,
 	#{ask},
 	#{space_no},
 	(select id from user_normal where n_nickname=#{reserve_name}), 
 	#{startdate}, 
-	#{enddate}
+	#{enddate},
+	#{totalprice}
 	)
 	</insert>
 	<select id="reserveTest" resultType="PsyTestDTO">
-		select S.SPACE_NO, R.reserve_no from space S inner join reserve R on S.space_no = R.space_no where R.id=(select id from user_normal where N_NICKNAME = #{nickname})
+		select S.SPACE_NO, R.reserve_no, R.status from space S inner join reserve R on S.space_no = R.space_no where R.id=(select id from user_normal where N_NICKNAME = #{nickname})
+	</select>
+	<select id="reserveFormType" resultType="PsyTestDTO">
+		select SRI.MIN_DAY,SRI.MAX_DAY, SRI.MIN_PERSON, SRI.MAX_PERSON, SRI.PRICE_STANDARD, SRI.PRICE_WEEKDAY, SRI.TIME_OR_DAY, SRI.OPER_TIME, SRI.REGULARLY_CLOSE 
+		from space_reserve_info SRI inner join space S on SRI.space_no=S.space_no where S.space_no=#{sn}
 	</select>
 </mapper>

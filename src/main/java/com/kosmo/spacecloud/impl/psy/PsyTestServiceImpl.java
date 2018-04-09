@@ -66,4 +66,13 @@ public class PsyTestServiceImpl implements PsyTestService{
 		return dao.reserveTest(nickname);
 	}
 
+	public int reserveCancelStatUpd(PsyTestDTO dto) {
+		return dao.reserveCancelStatUpd(dto);
+		
+	}
+
+	public List<PsyTestDTO> reserveFormType(String sn) {
+		return dao.reserveFormType(sn);
+	}
+
 }

@@ -53,16 +53,18 @@ public class PsyController {
 		List<PsyTestDTO> list3=service.reserveViewRefund(sn);
 		List<PsyTestDTO> list4=service.reserveViewSpace(sn);
 		List<PsyTestDTO> list5=service.reserveViewMoney(rn);
-		/*
+		
 		for(PsyTestDTO dto:list5) {
 			System.out.println(dto.getReserve_no());
+			System.out.println(dto.getRegidate());
 			System.out.println(dto.getCancel_comment());
-			System.out.println(dto.getReserve_date());
+			System.out.println(dto.getStartdate());
+			System.out.println(dto.getEnddate());
+			System.out.println(dto.getDiff());
 			System.out.println(dto.getReserve_person());
-			System.out.println(dto.getCancel_price());
-			if(dto.getReserve_no().length()==0) {System.out.println("출력할 문장이 없음");}
+			System.out.println(dto.getRefundprice());
 		}
-		*/
+		
 		model.addAttribute("psyList",list);
 		model.addAttribute("reserverList",list2);
 		model.addAttribute("refundList",list3);
@@ -95,21 +97,24 @@ public class PsyController {
 		List<PsyTestDTO> list=service.reserveLoginlist(nickname);
 		model.addAttribute("reserveLoginlist",list);
 		
-		//for(PsyTestDTO dto:list) {
-		//	System.out.println(dto.getH_nickname());
-		//	System.out.println(dto.getSpace_name());
-		//	System.out.println(dto.getImg_main());
-		//}
+		for(PsyTestDTO dto:list) {
+			System.out.println(dto.getH_nickname());
+			System.out.println(dto.getSpace_name());
+			System.out.println(dto.getImg_main());
+			System.out.println(dto.getStatus());
+			System.out.println(dto.getRegidate());
+		}
 		
 		return "/scmain/reserve/ReserveLoginList";
 	}
 	
 	@RequestMapping(value="/NormalReserve/ReserveCancel.do", method=RequestMethod.POST)
-	public String reserveCancel(PsyTestDTO dto,HttpServletRequest req)throws Exception{
-		dto.setCancel_price(req.getParameter("price"));
+	public String reserveCancel(PsyTestDTO dto,HttpServletRequest req,HttpSession session)throws Exception{
 		dto.setCancel_comment(req.getParameter("comment"));
 		dto.setReserve_no(req.getParameter("rn"));
+		dto.setReserve_name((String)session.getAttribute("USER_NICNAME_N"));
 		service.reserveCancel(dto);
+		service.reserveCancelStatUpd(dto);
 		//req.getParameter("rn");
 		//req.getParameter("sn");
 		
@@ -145,13 +150,22 @@ public class PsyController {
 		for(PsyTestDTO dto:list) {
 			//System.out.println(dto.getSpace_no());
 			//System.out.println(dto.getReserve_no());
-			if(dto.getSpace_no().equals(clickedButtonParam)) {
+			if(dto.getSpace_no().equals(clickedButtonParam) && dto.getStatus().equals("0")) {
 				//System.out.println("이미 예약이 되있다.");
 				req.setAttribute("alreadyRes", "1");
 				return "forward:/NormalReserve/Reserve.do";
 			}
-			
 		}
+		System.out.println("여기로 옴 1");
+		List<PsyTestDTO> list2=service.reserveFormType(clickedButtonParam);
+		model.addAttribute("reserveFormType",list2);
+		System.out.println("여기로 옴 2");
+		System.out.println(list2.get(0).getPrice_standard());
+		System.out.println(list2.get(0).getTime_or_day());
+		System.out.println(list2.get(0).getOper_time());
+		System.out.println(list2.get(0).getRegularly_close());
+		
+		
 		return "/scmain/reserve/ReserveForm";
 	}
 	
@@ -167,14 +181,39 @@ public class PsyController {
 		//System.out.println(req.getParameter("endDate"));
 		//System.out.println(session.getAttribute("USER_NICNAME"));
 		//System.out.println(req.getParameter("sn"));
+		//System.out.println(req.getParameter("PTpay") == null? "null":req.getParameter("PTpay"));
+		//System.out.println(req.getParameter("PDpay") == null? "null":req.getParameter("PDpay"));
+		//System.out.println(req.getParameter("STpay") == null? "null":req.getParameter("STpay"));
+		//System.out.println(req.getParameter("SDpay") == null? "null":req.getParameter("STpay"));
 		dto.setReserve_person(req.getParameter("peopleNumber"));
 		dto.setReserve_phone(req.getParameter("reservePhone"));
 		dto.setReserve_email(req.getParameter("reserveEmail"));
 		dto.setAsk(req.getParameter("reserveComment"));
 		dto.setStartdate(req.getParameter("startDate"));
+		System.out.println(req.getParameter("startHour")==null? "null":req.getParameter("startHour"));
+		if(req.getParameter("startHour")!=null) {
+			String hour=req.getParameter("startHour")+","+req.getParameter("endHour");
+			//System.out.println(hour);
+			dto.setEnddate(hour);
+		}
+		else{
 		dto.setEnddate(req.getParameter("endDate"));
-		dto.setReserve_name(session.getAttribute("USER_NICNAME").toString());
-		dto.setSpace_no(req.getParameter("sn"));
+		}
+		
+		dto.setReserve_name(session.getAttribute("USER_NICNAME_N").toString());
+		dto.setSpace_no(req.getParameter("sn"));//totalprice
+		if(req.getParameter("PTpay")!=null) {
+			dto.setTotalprice(req.getParameter("PTpay"));
+		}
+		else if(req.getParameter("PDpay")!=null) {
+			dto.setTotalprice(req.getParameter("PDpay"));
+		}
+		else if(req.getParameter("STpay")!=null) {
+			dto.setTotalprice(req.getParameter("STpay"));
+		}
+		else if(req.getParameter("SDpay")!=null) {
+			dto.setTotalprice(req.getParameter("SDpay"));
+		}
 		service.reserveInsert(dto);
 		
 		return "forward:/NormalReserve/ReserveLoginList.do";

@@ -107,8 +107,10 @@
 				<thead>
 					<tr>
 						<th>공간</th>
+						<th>처리여부status</th>
 						<th>호스트</th>
 						<th>사진</th>
+						<th>예약 날짜</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -123,8 +125,23 @@
 						<tr>
 							<td>${item.space_name}<a style="float:right" href="<c:url value='/NormalReserve/ReserveView.do?rn=${item.reserve_no}&sn=${item.space_no}'/>"
 							class="btn btn-primary">예약 정보 상세보기</a></td>
+							<td>
+							<c:if test="${item.status==0}" var="flag">
+							처리 대기중
+							</c:if>
+							<c:if test="${item.status==1}" var="flag">
+							호스트가 승인함.
+							</c:if>
+							<c:if test="${item.status==2}" var="flag">
+							호스트가 거부함.
+							</c:if>
+							<c:if test="${item.status==3}" var="flag">
+							유저가 취소함
+							</c:if>
+							</td>
 							<td>${item.h_nickname}</td>
 							<td>${item.img_main}</td>
+							<td>${item.regidate}</td>
 						</tr>
 					</c:forEach>
 					</c:if>

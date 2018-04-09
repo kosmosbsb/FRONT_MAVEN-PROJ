@@ -19,16 +19,17 @@
         <link href="resources/fonts/antonio-exotic/stylesheet.css" rel="stylesheet">
         <link rel="resources/stylesheet" href="css/lightbox.min.css">
         <link href="resources/css/responsive.css" rel="stylesheet">
-        <script src="resources/js/jquery.min.js" type="text/javascript"></script>
-        <script src="resources/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="resources/js/lightbox-plus-jquery.min.js" type="text/javascript"></script>
-        <script src="resources/js/instafeed.min.js" type="text/javascript"></script>
-        <script src="resources/js/custom.js" type="text/javascript"></script>
+        <script src="<c:url value='/resources/js/jquery.min.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/resources/js/bootstrap.min.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/resources/js/lightbox-plus-jquery.min.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/resources/js/instafeed.min.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/resources/js/custom.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/resources/js/moment.js'/>" type="text/javascript"></script>
         
         <!--  -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" />
-	    <script src="<c:url value='/resources/js/moment-2.10.3.js'/>" type="text/javascript"></script>
-	    <script src="<c:url value='/resources/js/bootstrap-datetimepicker.js'/>" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+        
         <!--  -->
         
         <script>
@@ -190,13 +191,13 @@
 			<script type="text/javascript">
 				$(function() {
 					$('#datetimepicker6').datetimepicker({
-						format: 'YYYY/MM/DD'
+						format: 'HH:mm'
 						//disabledDates: ['2018-04-25', '2018-04-26'],
 						//hoursDisabled: [0, 1, 2, 3, 4, 5, 6, 7, 8, 18, 19, 20, 21, 22, 23]
 						//daysOfWeekDisabled: [0,3,6]
 					});
 					$('#datetimepicker7').datetimepicker({
-						format: 'YYYY/MM/DD'
+						format: 'HH:mm'
 						
 					});
 					$("#datetimepicker6").on(

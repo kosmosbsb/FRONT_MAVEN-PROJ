@@ -64,4 +64,12 @@ public class PsyTestDAO implements PsyTestService{
 		return sqlMapper_PSY.selectList("reserveTest",nickname);
 	}
 
+	public int reserveCancelStatUpd(PsyTestDTO dto) {
+		return sqlMapper_PSY.update("reserveCancelUpdate",dto);
+	}
+
+	public List<PsyTestDTO> reserveFormType(String sn) {
+		return sqlMapper_PSY.selectList("reserveFormType",sn);
+	}
+
 }

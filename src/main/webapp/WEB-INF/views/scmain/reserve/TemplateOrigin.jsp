@@ -113,7 +113,7 @@
 						<th>예약 시작 날짜</th>
 						<th>예약 끝 날짜</th>
 						<th>인원</th>
-						<th>요청사항</th>
+						<th>최종 결제 가격</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -132,7 +132,7 @@
 							<td>${item.startdate}</td>
 							<td>${item.enddate}</td>
 							<td>${item.reserve_person}</td>
-							<td>${item.ask}</td>
+							<td>${item.totalprice}</td>
 						</tr>
 					</c:forEach>
 					</c:if>
@@ -145,6 +145,7 @@
 						<th>예약자 이름</th>
 						<th>예약자 연락처</th>
 						<th>예약자 이메일</th>
+						<th>질문 사항</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -160,6 +161,7 @@
 							<td>${item2.reserve_name}</td>
 							<td>${item2.reserve_phone}</td>
 							<td>${item2.reserve_email}</td>
+							<td>${item2.ask}</td>
 						</tr>
 					</c:forEach>
 					</c:if>
@@ -237,13 +239,14 @@
 			</table>
 			
 			<table class="table table-hover table-bordered" id="sampleTable">
-				<h1>가격 정보</h1>
+				<h1>처리 결과</h1>
 				<thead>
 					<tr>
 						<th>예약 취소 날짜</th>
 						<th>취소 사유</th>
 						<th>예약 시작 날짜</th>
 						<th>예약 끝 날짜</th>
+						<th>예약일까지 남은 날짜</th>
 						<th>예약 인원</th>
 						<th>환불 가격</th>
 					</tr>
@@ -251,19 +254,20 @@
 				<tbody>
 					<c:if test="${requestScope.moneyList==null}" var="fuck">
 						<tr>
-							<td colspan="6"><a href="<c:url value='#'/>">등록된 자료가
+							<td colspan="7"><a href="<c:url value='#'/>">등록된 자료가
 									없습니다</a></td>
 						</tr>
 					</c:if>
 					<c:if test="${not fuck}">
 					<c:forEach var="item5" items="${moneyList}" varStatus="loop">
 						<tr>
-							<td>DB에 반영했으면 하지만 지금은 없는 컬럼</td>
+							<td>${item5.regidate}</td>
 							<td>${item5.cancel_comment}</td>
 							<td>${item5.startdate}</td>
 							<td>${item5.enddate}</td>
+							<td>${item5.diff}</td>
 							<td>${item5.reserve_person}</td>
-							<td>${item5.cancel_price}</td>
+							<td>${item5.refundprice}</td>
 						</tr>
 					</c:forEach>
 					</c:if>
@@ -296,21 +300,13 @@
 								<!-- Form Name -->
 								<legend>예약 취소 양식</legend>
 								
-								<!-- Text input-->
-								<div class="form-group">
-								  <label class="col-md-4 control-label" for="textinput">가격(임시)</label>  
-								  <div class="col-md-4">
-								  <input id="textinput" name="price" type="text" placeholder="" class="form-control input-md">
-								  <input type="hidden" name="rn" value="${param.rn}">
-								  <input type="hidden" name="sn" value="${param.sn}">
-								  </div>
-								</div>
-								
 								<!-- Textarea -->
 								<div class="form-group">
 								  <label class="col-md-4 control-label" for="textarea">취소 사유</label>
 								  <div class="col-md-4">                     
 								    <textarea class="form-control" id="textarea" name="comment"></textarea>
+								    <input type="hidden" name="rn" value="${param.rn}">
+								  	<input type="hidden" name="sn" value="${param.sn}">
 								  </div>
 								</div>
 								
