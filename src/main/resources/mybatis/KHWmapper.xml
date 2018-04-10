@@ -40,6 +40,10 @@
 		SELECT * FROM USER_HOST WHERE ID=#{id}
 	</select>
 	
+	<select id="selectSpaceInfo" parameterType="String" resultType="SpaceDTO">
+		SELECT * FROM SPACE WHERE ADDRESS LIKE '%' || #{searchWord} || '%'
+	</select>
+	
 </mapper>
 
 

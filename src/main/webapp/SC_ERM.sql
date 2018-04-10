@@ -232,12 +232,12 @@ CREATE TABLE SPACE_RESERVE_INFO
 	-- 공간 일련번호와 동일
 	SPACE_NO number NOT NULL,
 	MIN_DAY number,
+	MAX_DAY number,
 	MIN_PERSON number,
 	MAX_PERSON number,
 	-- 공간당가격(S) OR 1인당가격(P)
 	PRICE_STANDARD char(1 char),
 	PRICE_WEEKDAY number,
-	PRICE_WEEKEND number,
 	-- 개당 최대 100자, 최대 10개
 	PRECAUTION nvarchar2(1000),
 	-- 시간단위(T), 일단위(D)

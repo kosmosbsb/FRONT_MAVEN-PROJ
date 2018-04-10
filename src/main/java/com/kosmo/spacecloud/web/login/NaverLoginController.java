@@ -2,17 +2,20 @@ package com.kosmo.spacecloud.web.login;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.kosmo.spacecloud.impl.login.MemberServiceImpl;
+import com.kosmo.spacecloud.khw.SpaceServiceImpl;
+import com.kosmo.spacecloud.service.khw.SpaceDTO;
 import com.kosmo.spacecloud.service.login.MemberDTO;
 import com.kosmo.spacecloud.service.login.NaverLoginBO;
  
@@ -29,6 +34,9 @@ public class NaverLoginController {
  
 	@Resource(name="memberService")
 	private MemberServiceImpl memberService;
+	
+	@Resource(name="spaceService")
+	private SpaceServiceImpl spaceService;
 	
 	/* NaverLoginBO */
 	private NaverLoginBO naverLoginBO;
@@ -227,4 +235,23 @@ public class NaverLoginController {
 		
 	}
     
+	@RequestMapping("/Space/Search.do")
+	public String searchSpaceList(HttpServletRequest req, Model model) throws Exception{
+
+		List<SpaceDTO> spaceList = spaceService.selectList(req.getParameter("searchWord"));
+		JSONObject jsonObj;
+		JSONArray jsonArr = new JSONArray();
+
+		//json 객체 배열 세팅하기
+		for(SpaceDTO dto : spaceList) {
+			jsonObj = new JSONObject();
+			jsonObj.put("address", dto.getAddress()); //일단 주소값만
+			jsonObj.put("space_name", dto.getSpace_name());//공간명도
+			jsonArr.add(jsonObj);
+		}
+		
+		model.addAttribute("spaceList",jsonArr); 
+		
+		return "/scmain/SCMain";
+	}
 }

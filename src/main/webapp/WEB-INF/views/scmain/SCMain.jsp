@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<% String contextRoot = request.getContextPath(); %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -24,6 +25,11 @@
         <script src="<c:url value='/resources/js/lightbox-plus-jquery.min.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/resources/js/instafeed.min.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/resources/js/custom.js'/>" type="text/javascript"></script>
+        
+        <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=kkks45hOd7btwzmncKgZ&submodules=geocoder"></script>
+        <script src="<c:url value='/resources/khw/accidentdeath.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/resources/khw/MarkerClustering.js'/>" type="text/javascript"></script>
+        
         <script>
         $(function(){
         	$("#menu-close").click(function(e) {
@@ -35,7 +41,193 @@
                 e.preventDefault();
                 $("#sidebar-wrapper").toggleClass("active");
             });
+
+            var HOME_PATH = "<%=contextRoot%>";
+        	
+    	    var map = new naver.maps.Map("map", {
+    	        zoom: 8,
+    	        center: new naver.maps.LatLng(37.483508, 126.919297), //37.483508, 126.919297 집주변  //37.525853, 126.955941 서울주변
+    	        zoomControl: true,
+    	        zoomControlOptions: {
+    	            position: naver.maps.Position.TOP_LEFT,
+    	            style: naver.maps.ZoomControlStyle.SMALL
+    	        }
+    	    });
+
+    	    //공간 받아버리기 (일단은 주소값만 있어)
+			var dataTmp = ${spaceList};
+			
+			//for (var i = 0 ; i < dataTmp.length ; i++){ //확인용
+			//	alert(dataTmp[i].address);
+			//}
+
+        	
+    	    var markers = [],
+	    	infoWindows = [],
+	        data = accidentDeath.searchResult.accidentDeath; //요걸 대체할 수 있어야해
+	
+        	
+        	for (var i = 0 ; i < dataTmp.length ; i++){
+        		searchAddressToCoordinate(dataTmp[i].space_name , dataTmp[i].address, i);
+        		
+			}
+        	
+    
+        	function searchAddressToCoordinate(space_name, address, index) {
+        	    naver.maps.Service.geocode({
+        	        address: address
+        	    }, function(status, response) {
+        	        if (status === naver.maps.Service.Status.ERROR) {
+        	            return alert('Something Wrong!');
+        	        }
+
+
+	        	        //alert(response.result.items[0].point.x);
+	    	            var latlng = new naver.maps.LatLng(response.result.items[0].point.y, response.result.items[0].point.x),
+		    	            marker = new naver.maps.Marker({
+		    	                position: latlng,
+		    	                draggable: false
+		    	            });
+		
+		    	        var infoWindow = new naver.maps.InfoWindow({
+		       	         content: '<div style="width:230px; height:160px; text-align:center;padding:10px;"><div style="width: 100%; height: 75%; background: url(http://192.168.0.8:8082/spacecloud/resources/images/khw/searchIcon.PNG) no-repeat; background-position: center top;"></div><b>'+space_name +'</b></div>'
+		       	     	});
+
+
+
+		       	   	 
+		    	   	     
+		    	        markers.push(marker);
+		    	        infoWindows.push(infoWindow); //띄우는창 세팅
+
+
+
+		        	   	//각 마커에 클릭이벤트 주기
+		       	   	     naver.maps.Event.addListener(marker, 'click', getClickHandler(marker, index));
+
+
+
+
+		        	      /*   
+		        	        var item = response.result.items[0],
+		        	            addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]',
+		        	            point = new naver.maps.Point(item.point.x, item.point.y);
+		
+		
+		    	            alert(item.address+": x좌표: "+point.x+", y좌표: "+point.y);
+		
+		 					*/
+		       	   		//updateMarkers(map, markers);
+
+			       	    //첫 화면에 마커(또는 클러스터)가 안뜨니까. 강제로 갱신 이벤트 발생시키자...
+		       	   		naver.maps.Event.trigger(map,"idle");
+        	    });
+
+ 
+        	}
+
+
+            naver.maps.Event.addListener(map, 'idle', function() {
+		     	updateMarkers(map, markers);
+		 	});
+
+    		
+ 
+
+    	    
+    	   	 // 해당 마커의 인덱스를 seq라는 클로저 변수로 저장하는 이벤트 핸들러를 반환합니다.
+    	   	 function getClickHandler(marker, seq) {
+    	   	     return function(e) {
+    	   	         var infoWindow = infoWindows[seq];
+    	
+    	   	         if (infoWindow.getMap()) {
+    	   	             infoWindow.close();
+    	   	         } else {
+    	   	             infoWindow.open(map, marker);
+    	   	         }
+    	   	     }
+    	   	 }
+
+
+ 	    	
+
+        	 function updateMarkers(map, markers) {
+
+        	     var mapBounds = map.getBounds();
+        	     var marker, position;
+
+        	     for (var i = 0; i < markers.length; i++) {
+
+        	         marker = markers[i]
+        	         position = marker.getPosition();
+
+        	         if (mapBounds.hasLatLng(position)) {
+        	             showMarker(map, marker);
+        	         } else {
+        	             hideMarker(map, marker);
+        	         }
+        	     }
+
+           	    var htmlMarker1 = {
+        	            content: '<div style="cursor:pointer;width:60px;height:60px;line-height:60px;font-size:20px;color:white;text-align:center;font-weight:bold;background:url('+ HOME_PATH +'/resources/images/khw/cluster-marker-1.png);background-size:contain;"></div>',
+        	            size: N.Size(40, 40),
+        	            anchor: N.Point(20, 20)
+        	        },
+        	        htmlMarker2 = {
+        	            content: '<div style="cursor:pointer;width:90px;height:90px;line-height:90px;font-size:40px;color:white;text-align:center;font-weight:bold;background:url('+ HOME_PATH +'/resources/images/khw/cluster-marker-2.png);background-size:contain;"></div>',
+        	            size: N.Size(40, 40),
+        	            anchor: N.Point(20, 20)
+        	        },
+        	        htmlMarker3 = {
+        	            content: '<div style="cursor:pointer;width:120px;height:120px;line-height:120px;font-size:60px;color:white;text-align:center;font-weight:bold;background:url('+ HOME_PATH +'/resources/images/khw/cluster-marker-3.png);background-size:contain;"></div>',
+        	            size: N.Size(40, 40),
+        	            anchor: N.Point(20, 20)
+        	        },
+        	        htmlMarker4 = {
+        	            content: '<div style="cursor:pointer;width:150px;height:150px;line-height:150px;font-size:80px;color:white;text-align:center;font-weight:bold;background:url('+ HOME_PATH +'/resources/images/khw/cluster-marker-4.png);background-size:contain;"></div>',
+        	            size: N.Size(40, 40),
+        	            anchor: N.Point(20, 20)
+        	        },
+        	        htmlMarker5 = {
+        	            content: '<div style="cursor:pointer;width:180px;height:180px;line-height:180px;font-size:100px;color:white;text-align:center;font-weight:bold;background:url('+ HOME_PATH +'/resources/images/khw/cluster-marker-5.png);background-size:contain;"></div>',
+        	            size: N.Size(40, 40),
+        	            anchor: N.Point(20, 20)
+        	        };
+        	
+
+                var markerClustering = new MarkerClustering({
+         	        minClusterSize: 2,
+         	        maxZoom: 10,
+         	        map: map,
+         	        markers: markers,
+         	        disableClickZoom: false,
+         	        gridSize: 120,
+         	        icons: [htmlMarker1, htmlMarker2, htmlMarker3, htmlMarker4, htmlMarker5],
+         	        indexGenerator: [3, 6, 9, 12, 15],
+         	        stylingFunction: function(clusterMarker, count) {
+         	            $(clusterMarker.getElement()).find('div:first-child').text(count);
+         	        }
+         	    });
+        	 }
+
+        	 
+        	 function showMarker(map, marker) {
+
+        	     if (marker.setMap()) return;
+        	     marker.setMap(map);
+        	 }
+
+        	 function hideMarker(map, marker) {
+
+        	     if (!marker.setMap()) return;
+        	     marker.setMap(null);
+        	 }
+
+
+        	 
+        	 
         });
+	
         </script>
     </head>
     <body>
@@ -98,8 +290,47 @@
 		</header>
 		<!--end-->
 		
+		<div id="myCarousel1" class="carousel" data-ride="carousel">
+			
+
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel1" class="active"></li>
+			</ol>
+			<div class="carousel-inner">
+				<div class="item active">
+					<img src="<c:url value='/resources/images/custom/170707_workspace_curation_banner.png'/>"
+						style="width: 100%; height: 500px" alt="First slide">
+					<div class="carousel-caption">
+						
+						
+						
+						<div class="container">
+							<div class="row" align="center">
+								<h2>어떤 공간이 필요하세요?</h2>
+								<br/><br/>
+									<form class="form-inline" method="get" action="<c:url value='/Space/Search.do'/>">
+											<input type="text" name="searchWord" class="form-control" style="width:50%; height: 70px; background-color:transparent; color:white; font-size:3em; font-weight:bolder; border: none; border-bottom-style: solid; border-bottom-width: 3px; border-bottom-color: #FFC600;">
+											<button class="btn btn-default" type="submit" style="background: url(http://192.168.0.8:8082/spacecloud/resources/images/khw/searchIcon.PNG); border:none; width:70px; height: 70px;" ></button>
+									</form>
+							</div>
+							
+						</div>
+
+
+
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+		
+		
+		
+		<!-- 다수 케러셀 보류 -->
+		<!--
 		<div id="myCarousel1" class="carousel slide" data-ride="carousel">
-			<!-- Indicators -->
+			
 
 			<ol class="carousel-indicators">
 				<li data-target="#myCarousel1" data-slide-to="0" class="active"></li>
@@ -146,11 +377,39 @@
 				onmouseout="this.src = 'resources/images/icons/right-arrow.png'" alt="left"></a>
 
 		</div>
+		-->
+		
+		<!-- 이건 머지. 케러셀 관련인가. -->
 		<div class="clearfix"></div>
 
 		<!--service block--->
 		<!-- 삭제 -->
 		<!--gallery block--->
+
+		<div class="container">
+			<div class="row">
+				<div id="map" style="width:100%;height:500px;"></div>
+			</div>
+		</div>
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 		<!----resort-overview--->
 		<section class="resort-overview-block">
