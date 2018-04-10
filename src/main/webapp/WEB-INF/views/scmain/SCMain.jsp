@@ -795,7 +795,7 @@
 			<div class="album py-5 bg-light" style="margin-top: 5em;">
 				<div class="container">
 					<div class="row">
-						<c:forEach var="item" items="${spaceList9}" varStatus="loop">
+						<c:forEach var="item" items="${spaceList}" varStatus="loop">
 			                  <div class="col-md-4"
 			                     style="margin-top: 10px; margin-bottom: 10px;">
 			                     <a href="#" id="space_box">
@@ -816,10 +816,7 @@
 				                           <h3 class="card-text">${item.space_name}</h3>
 				                           <div class="tags">
 				                              <span class="tag_area_name">강남</span>
-				                              <span>#소호사무실</span>
-				                              <span>#주소지이용</span>
-				                              <span>#비상주서비스</span>
-				                              <span>#사업자등록</span>
+				                              <span>${item.space_tag }</span>
 				                           </div>
 				                           <div class="info_price">
 				                           		<strong class="price">${item.price_weekday}</strong>

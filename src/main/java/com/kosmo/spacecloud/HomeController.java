@@ -71,13 +71,16 @@ public class HomeController {
 		
 		////////
 		/////////
-		model.addAttribute("spaceList9",jsonArr);
+		List<SearchDTO>spaceList=searchService.selectList();
+		model.addAttribute("spaceList9", jsonArr);
+		model.addAttribute("spaceList",spaceList);
 		
-		for(SearchDTO tempdto : spaceList9) {
+		for(SearchDTO tempdto : spaceList) {
 			System.out.println("이름:"+tempdto.getSpace_name()+"   주소:"+tempdto.getAddress());
+			System.out.println("tag:"+tempdto.getSpace_tag());
 		}
 		
-		System.out.println(jsonArr.toString());
+		//System.out.println(jsonArr.toString());
 		
 		return "/scmain/SCMain";
 	}
