@@ -69,7 +69,9 @@
         	
         	for (var i = 0 ; i < dataTmp.length ; i++){
         		searchAddressToCoordinate(dataTmp[i].space_name , dataTmp[i].address, i);
-        		
+        		setTimeout(function() {
+        			console.log("??");
+        		}, 10)
 			}
         	
     
@@ -81,7 +83,7 @@
         	            return alert('Something Wrong!');
         	        }
 
-
+						console.log("space_name: "+space_name+" ,address: "+address+" ,index: "+index);
 	        	        //alert(response.result.items[0].point.x);
 	    	            var latlng = new naver.maps.LatLng(response.result.items[0].point.y, response.result.items[0].point.x),
 		    	            marker = new naver.maps.Marker({
