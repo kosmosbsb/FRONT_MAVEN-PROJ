@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<% String contextRoot = request.getContextPath(); %>
 <!DOCTYPE html>
 <html lang="ko">
     <head>
@@ -9,7 +9,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="<c:url value='/resources/images/icons/faviconSC2.png'/>"/>
-        <title>팀플SC</title>
+        <title>SpaceCloud</title>
         <!-- Bootstrap core CSS -->
         <link href="<c:url value='/resources/css/bootstrap.min.css'/>" rel="stylesheet">
         <link href="<c:url value='/resources/font-awesome/css/font-awesome.min.css'/>" rel="stylesheet" type="text/css" />
@@ -24,7 +24,203 @@
         <script src="<c:url value='/resources/js/instafeed.min.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/resources/js/custom.js'/>" type="text/javascript"></script>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<!-- map -->
+        <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=kkks45hOd7btwzmncKgZ&submodules=geocoder"></script>
+        <script src="<c:url value='/resources/khw/accidentdeath.js'/>" type="text/javascript"></script>
+        <script src="<c:url value='/resources/khw/MarkerClustering.js'/>" type="text/javascript"></script>
+        <!-- map -->        
         <!-- /////////////////////////////////////////////////////////////////// -->
+        <!-- 지도 시작-->
+        <script>
+
+        $(function(){
+
+            var HOME_PATH = "<%=contextRoot%>";
+        	
+    	    var map = new naver.maps.Map("map", {
+    	        zoom: 8,
+    	        center: new naver.maps.LatLng(37.483508, 126.919297), //37.483508, 126.919297 집주변  //37.525853, 126.955941 서울주변
+    	        zoomControl: true,
+    	        zoomControlOptions: {
+    	            position: naver.maps.Position.TOP_LEFT,
+    	            style: naver.maps.ZoomControlStyle.SMALL
+    	        }
+    	    });
+
+    	    //공간 받아버리기 (일단은 주소값만 있어)
+			var dataTmp = ${spaceList};
+			
+			//for (var i = 0 ; i < dataTmp.length ; i++){ //확인용
+			//	alert(dataTmp[i].address);
+			//}
+
+        	
+    	    var markers = [],
+	    	infoWindows = [],
+	        data = accidentDeath.searchResult.accidentDeath; //요걸 대체할 수 있어야해
+	
+        	
+        	for (var i = 0 ; i < dataTmp.length ; i++){
+        		searchAddressToCoordinate(dataTmp[i].space_name , dataTmp[i].address, i);
+        		
+			}
+        	
+    
+        	function searchAddressToCoordinate(space_name, address, index) {
+        	    naver.maps.Service.geocode({
+        	        address: address
+        	    }, function(status, response) {
+        	        if (status === naver.maps.Service.Status.ERROR) {
+        	            return alert('Something Wrong!');
+        	        }
+
+
+	        	        //alert(response.result.items[0].point.x);
+	    	            var latlng = new naver.maps.LatLng(response.result.items[0].point.y, response.result.items[0].point.x),
+		    	            marker = new naver.maps.Marker({
+		    	                position: latlng,
+		    	                draggable: false
+		    	            });
+		
+		    	        var infoWindow = new naver.maps.InfoWindow({
+		       	         content: '<div style="width:230px; height:160px; text-align:center;padding:10px;"><div style="width: 100%; height: 75%; background: url(http://192.168.0.8:8082/spacecloud/resources/images/khw/searchIcon.PNG) no-repeat; background-position: center top;"></div><b>'+space_name +'</b></div>'
+		       	     	});
+
+
+
+		       	   	 
+		    	   	     
+		    	        markers.push(marker);
+		    	        infoWindows.push(infoWindow); //띄우는창 세팅
+
+
+
+		        	   	//각 마커에 클릭이벤트 주기
+		       	   	     naver.maps.Event.addListener(marker, 'click', getClickHandler(marker, index));
+
+
+
+
+		        	      /*   
+		        	        var item = response.result.items[0],
+		        	            addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]',
+		        	            point = new naver.maps.Point(item.point.x, item.point.y);
+		
+		
+		    	            alert(item.address+": x좌표: "+point.x+", y좌표: "+point.y);
+		
+		 					*/
+		       	   		//updateMarkers(map, markers);
+
+			       	    //첫 화면에 마커(또는 클러스터)가 안뜨니까. 강제로 갱신 이벤트 발생시키자...
+		       	   		naver.maps.Event.trigger(map,"idle");
+        	    });
+
+ 
+        	}
+
+
+            naver.maps.Event.addListener(map, 'idle', function() {
+		     	updateMarkers(map, markers);
+		 	});
+
+    		
+ 
+
+    	    
+    	   	 // 해당 마커의 인덱스를 seq라는 클로저 변수로 저장하는 이벤트 핸들러를 반환합니다.
+    	   	 function getClickHandler(marker, seq) {
+    	   	     return function(e) {
+    	   	         var infoWindow = infoWindows[seq];
+    	
+    	   	         if (infoWindow.getMap()) {
+    	   	             infoWindow.close();
+    	   	         } else {
+    	   	             infoWindow.open(map, marker);
+    	   	         }
+    	   	     }
+    	   	 }
+
+
+ 	    	
+
+        	 function updateMarkers(map, markers) {
+
+        	     var mapBounds = map.getBounds();
+        	     var marker, position;
+
+        	     for (var i = 0; i < markers.length; i++) {
+
+        	         marker = markers[i]
+        	         position = marker.getPosition();
+
+        	         if (mapBounds.hasLatLng(position)) {
+        	             showMarker(map, marker);
+        	         } else {
+        	             hideMarker(map, marker);
+        	         }
+        	     }
+
+           	    var htmlMarker1 = {
+        	            content: '<div style="cursor:pointer;width:60px;height:60px;line-height:60px;font-size:20px;color:white;text-align:center;font-weight:bold;background:url('+ HOME_PATH +'/resources/images/khw/cluster-marker-1.png);background-size:contain;"></div>',
+        	            size: N.Size(40, 40),
+        	            anchor: N.Point(20, 20)
+        	        },
+        	        htmlMarker2 = {
+        	            content: '<div style="cursor:pointer;width:90px;height:90px;line-height:90px;font-size:40px;color:white;text-align:center;font-weight:bold;background:url('+ HOME_PATH +'/resources/images/khw/cluster-marker-2.png);background-size:contain;"></div>',
+        	            size: N.Size(40, 40),
+        	            anchor: N.Point(20, 20)
+        	        },
+        	        htmlMarker3 = {
+        	            content: '<div style="cursor:pointer;width:120px;height:120px;line-height:120px;font-size:60px;color:white;text-align:center;font-weight:bold;background:url('+ HOME_PATH +'/resources/images/khw/cluster-marker-3.png);background-size:contain;"></div>',
+        	            size: N.Size(40, 40),
+        	            anchor: N.Point(20, 20)
+        	        },
+        	        htmlMarker4 = {
+        	            content: '<div style="cursor:pointer;width:150px;height:150px;line-height:150px;font-size:80px;color:white;text-align:center;font-weight:bold;background:url('+ HOME_PATH +'/resources/images/khw/cluster-marker-4.png);background-size:contain;"></div>',
+        	            size: N.Size(40, 40),
+        	            anchor: N.Point(20, 20)
+        	        },
+        	        htmlMarker5 = {
+        	            content: '<div style="cursor:pointer;width:180px;height:180px;line-height:180px;font-size:100px;color:white;text-align:center;font-weight:bold;background:url('+ HOME_PATH +'/resources/images/khw/cluster-marker-5.png);background-size:contain;"></div>',
+        	            size: N.Size(40, 40),
+        	            anchor: N.Point(20, 20)
+        	        };
+        	
+
+                var markerClustering = new MarkerClustering({
+         	        minClusterSize: 2,
+         	        maxZoom: 10,
+         	        map: map,
+         	        markers: markers,
+         	        disableClickZoom: false,
+         	        gridSize: 120,
+         	        icons: [htmlMarker1, htmlMarker2, htmlMarker3, htmlMarker4, htmlMarker5],
+         	        indexGenerator: [3, 6, 9, 12, 15],
+         	        stylingFunction: function(clusterMarker, count) {
+         	            $(clusterMarker.getElement()).find('div:first-child').text(count);
+         	        }
+         	    });
+        	 }
+
+        	 
+        	 function showMarker(map, marker) {
+
+        	     if (marker.setMap()) return;
+        	     marker.setMap(map);
+        	 }
+
+        	 function hideMarker(map, marker) {
+
+        	     if (!marker.setMap()) return;
+        	     marker.setMap(null);
+        	 }
+        	 
+        });
+        
+		</script>
+        
+        <!-- 지도끝 -->
     </head>
     
     <style>
@@ -439,8 +635,8 @@
           </dt>
       </dl>
          <form role="search" method="post" action="<c:url value="/Search/Search.do"/>">
-             <input type="text" class="search_text" placeholder="검색어를 입력해주세요." name="searchSpace">
-            <button type="submit" class="search_btn"><img src='<c:url value="/resources/images/icons/search_ico2.png"/>'>검색</button>
+             <input id="searchSpace_text" type="text" class="search_text" placeholder="검색어를 입력해주세요." name="searchSpace">
+            <button id="search_btn" type="submit" class="search_btn"><img src='<c:url value="/resources/images/icons/search_ico2.png"/>'>검색</button>
          </form>
     </div>
   </div>
@@ -520,11 +716,11 @@
 	                        <div class="card-body">
 	                           <h3 class="card-text">${item.space_name}</h3>
 	                           <div class="tags">
+	                           
 	                              <span class="tag_area_name">강남</span>
-	                              <span>#소호사무실</span>
-	                              <span>#주소지이용</span>
-	                              <span>#비상주서비스</span>
-	                              <span>#사업자등록</span>
+	                              
+	                              	<span>${item.space_tag}</span>
+	                              
 	                           </div>
 	                           <div class="info_price">
 	                           		<strong class="price">${item.price_weekday}</strong>
@@ -546,16 +742,18 @@
                      </a>
                   </div>
                 </c:forEach>  
-                  
-                  
-                  
-                  
-                  
                </div>
             </div>
          </div>
       </section>
 <!--공간 --------------------------------------------------------------- -->   
+<!-----------------------------------------지도---------------------->
+		<div class="container">
+			<div class="row">
+				<div id="map" style="width: 100%; height: 500px;"></div>
+			</div>
+		</div>
+		<!-----------------------------------------지도---------------------->                  
 
    </main>
 
@@ -590,12 +788,6 @@
            })
         });
         
-        $(function(){
-          $(".notice_view").hide();
-          $(".notice_view_area").click(function () {
-            $(this).next().toggle("slow"); 
-         });  
-        });
         
         
 	$(".hover").mouseleave(function() {

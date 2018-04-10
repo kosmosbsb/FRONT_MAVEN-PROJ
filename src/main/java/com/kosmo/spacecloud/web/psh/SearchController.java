@@ -34,7 +34,7 @@ public class SearchController {
 		}
 		
 		for(SearchDTO tempdto : list) {
-			System.out.println("list:"+tempdto.getSpace_type());
+			System.out.println("list:"+tempdto.getAddress());
 		}
 		
 		model.addAttribute("spaceList",list);

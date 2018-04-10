@@ -55,7 +55,7 @@
     	    });
 
     	    //공간 받아버리기 (일단은 주소값만 있어)
-			var dataTmp = ${spaceList};
+			var dataTmp = ${spaceList9};
 			
 			//for (var i = 0 ; i < dataTmp.length ; i++){ //확인용
 			//	alert(dataTmp[i].address);
@@ -228,7 +228,7 @@
         $(function(){
 			$("button[name='top_search_btn']").click(function() {
 				var fieldString=$('#space_search_text').val();
-				if(fieldString.trim().length==0){
+				if(fieldString.trim().legth==0){
 					alert("검색어를 입력해주세요!");
 					return false;
 				}
