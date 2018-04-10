@@ -20,14 +20,14 @@ public class SearchController {
 	
 	@RequestMapping("/Search/Search.do")
 	public String list(Model model,@RequestParam Map map)throws Exception{
-		List<SearchDTO> list=service.selectList("회의실"/*map.get("searchSpace").toString()*/);
+		List<SearchDTO> list=service.selectList(map.get("searchSpace").toString());
 		
 		for(SearchDTO tempdto : list) {
 			System.out.println("list:"+tempdto.getSpace_type());
 		}
 		
 		model.addAttribute("spaceList",list);
-		model.addAttribute("searchSpace","회의실");
+		model.addAttribute("searchSpace",map.get("searchSpace").toString());
 		
 		
 		return "/scmain/board/search/Search";
