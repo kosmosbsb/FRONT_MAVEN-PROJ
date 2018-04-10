@@ -115,7 +115,7 @@
           	function readURL(input) {
             	var url = input.value;
     			var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
-    			if (input.files && input.files[0]&& (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")){
+    			if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")){
                     var reader = new FileReader();
                     reader.onload = function (e) {
                         $('#image_section').attr('src', e.target.result);
@@ -223,6 +223,18 @@
                 }
             }).open(); 
         }
+      
+        function getThumbnailPrivew(html, $target) {
+            if (html.files && html.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $target.css('display', '');
+                    //$target.css('background-image', 'url(\"' + e.target.result + '\")'); // 배경으로 지정시
+                    $target.html('<img src="' + e.target.result + '" border="0" alt="" />');
+                }
+                reader.readAsDataURL(html.files[0]);
+            }
+        }
         </script>
         
 		<style type="text/css">
@@ -318,6 +330,32 @@
 		}
 		.img_wrap img{
 			width: 100%;
+		}
+		
+		.filebox label {
+		    display: inline-block;
+		    padding: .5em .75em;
+		    color: #999;
+		    font-size: inherit;
+		    line-height: normal;
+		    vertical-align: middle;
+		    background-color: #fdfdfd;
+		    cursor: pointer;
+		    border: 1px solid #ebebeb;
+		    border-bottom-color: #e2e2e2;
+		    border-radius: .25em;
+		    width:100%;
+		    max-width:100%;
+		}
+		.filebox input[type="file"] {  /* 파일 필드 숨기기 */
+		    position: absolute;
+		    width: 1px;
+		    height: 1px;
+		    padding: 0;
+		    margin: -1px;
+		    overflow: hidden;
+		    clip:rect(0,0,0,0);
+		    border: 0;
 		}
 		
 	/* 	input[type=file] {
@@ -661,21 +699,14 @@
 									<span class="tit"> 대표이미지 <span class="ico_required">*</span>
 									</span>
 									<p class="option">2048 *1158 권장, 최대 10MB</p>
-									<div class="file" id="repImageYnError">
-										<!-- [D] 클래스 error 추가시 유효성 오류 (!안내텍스트/input,textarea 등에 border색) 표시됩니다. -->
-										<div class="inner inner_img" id="srimgDest">
-											<div id="_noneImg">이미지 파일을 추가해 주세요. (JPG, JPEG, PNG)</div>
-		
-											<input type="hidden" name="repImageYn" id="repImageYn" required />
-										</div>
-										<div class="btn_box">
-											<label class="btn" for="srimg">
-												<div>파일첨부</div> <input type="file" class="_fileRel"
-												name="uploadFile" id="srimg" style="display: none;"
-												_single="true" accept="image/*">
-											</label>
-										</div>
-									</div>
+									<!-- <form name="form" id="form" action="" method="post" enctype="multipart/form-data" autocomplete="off"> -->
+									    <div class="filebox">
+									        <label for="cma_file">사진 인증샷 업로드</label>
+									        <input type="file" name="cma_file" id="cma_file" accept="image/*" capture="camera" onchange="getThumbnailPrivew(this,$('#cma_image'))" />
+									        <br /><br />
+									        <div id="cma_image" style="width:100%;max-width:100%;border:1px solid #000;display:none;"></div>
+									    </div>
+									<!-- </form> -->
 								</div>
 						<!-- <label class="control-label col-sm-3">대표이미지 <span class="text-danger">*</span></label> -->
 								<!-- <form id="form" runat="server">
@@ -770,8 +801,9 @@
 									<div class="row" id="emailError">
 										<div class="col">
 											<input type="text" name="email" id="_email_addr" title="이메일 주소"
+												placeholder="이메일 주소를 입력해주세요."
 												regExp="^[a-zA-Z0-9-_\,\.]+$" _errorEl="emailError"
-												value="swwt12" required>
+												value="" required>
 										</div>
 										<div class="col">
 											<span class="txt_at">@</span> <input type="text" name="email"
@@ -811,32 +843,358 @@
 					                    <div class="col4">
 					                        <div class="select">
 					                            <select name="mobile1" id="phone11" title="휴대폰 앞자리" class='virtualNum'>
-					                                
-					                                    <option value="010" selected>010</option>
-					                                
-					                                    <option value="011" >011</option>
-					                                
-					                                    <option value="016" >016</option>
-					                                
-					                                    <option value="017" >017</option>
-					                                
-					                                    <option value="018" >018</option>
-					                                
-					                                    <option value="019" >019</option>
-					                                
+			                                    	<option value="010" selected>010</option>
+				                                    <option value="011" >011</option>
+				                                    <option value="016" >016</option>
+				                                    <option value="017" >017</option>
+				                                    <option value="018" >018</option>
+				                                    <option value="019" >019</option>
 					                            </select>
 					                        </div>
 					                    </div>
 					                    <div class="col4">
-					                        <input type="tel" name="mobile2" id="phone12" title="휴대폰 중간자리"  maxLength="4"  _errorEl="mobileError" class="onlyNum virtualNum" style="ime-mode: disabled;" value="6397" required>
+					                        <input type="tel" name="mobile2" id="phone12" placeholder="중간자리를 입력해주세요." title="휴대폰 중간자리"  maxLength="4"  _errorEl="mobileError" class="onlyNum virtualNum" style="ime-mode: disabled;" value="" required>
 					                    </div>
 					                    <div class="col4">
-					                        <input type="tel" name="mobile3" id="phone13" title="휴대폰 뒷자리"  maxLength="4"  _errorEl="mobileError" class="onlyNum virtualNum" style="ime-mode: disabled;" value="5401" required>
+					                        <input type="tel" name="mobile3" id="phone13" placeholder="뒷자리를 입력해주세요." title="휴대폰 뒷자리"  maxLength="4"  _errorEl="mobileError" class="onlyNum virtualNum" style="ime-mode: disabled;" value="" required>
 					                    </div>
 					                </div>
 								</div>
 							</div>
+							<div class="form-group">
+								<div class="box_form day" id="day">
+				                    <span class="tit">
+				                        <label for="day">
+				                            날짜
+				                            <span class="ico_required">*</span>
+				                        </label>
+				                    </span>
+				                </div>
+				                <div class="row day">
+				                	<div class="col4">
+				                        <div class="select">
+				                            <select name="minday" id="minday" title="최소">
+		                                    	<option value="00" selected>최소</option>
+		                                    	<option value="0" >0</option>
+		                                    	<option value="1" >1</option>
+			                                    <option value="1" >1</option>
+			                                    <option value="2" >2</option>
+			                                    <option value="3" >3</option>
+			                                    <option value="4" >4</option>
+			                                    <option value="5" >5</option>
+			                                    <option value="6" >6</option>
+				                            </select>
+				                        </div>
+					                 </div>
+					                 <div class="col4">
+				                        <div class="select">
+				                            <select name="maxday" id="maxday" title="최대">
+		                                    	<option value="00" selected>최대</option>
+		                                    	<option value="0" >0</option>
+			                                    <option value="1" >1</option>
+			                                    <option value="2" >2</option>
+			                                    <option value="3" >3</option>
+			                                    <option value="4" >4</option>
+			                                    <option value="5" >5</option>
+			                                    <option value="6" >6</option>
+				                            </select>
+				                        </div>
+					                 </div>
+				                </div>
+							</div>
 							
+							<div class="form-group">
+								<div class="box_form day" id="day">
+				                    <span class="tit">
+				                        <label for="day">
+				                            날짜
+				                            <span class="ico_required">*</span>
+				                        </label>
+				                    </span>
+				                </div>
+				                <div class="row day">
+				                	<div class="col4">
+				                        <div class="select">
+				                            <select name="minday" id="minday" title="최소">
+		                                    	<option value="00" selected>최소</option>
+		                                    	<option value="0" >0</option>
+		                                    	<option value="1" >1</option>
+			                                    <option value="1" >1</option>
+			                                    <option value="2" >2</option>
+			                                    <option value="3" >3</option>
+			                                    <option value="4" >4</option>
+			                                    <option value="5" >5</option>
+			                                    <option value="6" >6</option>
+				                            </select>
+				                        </div>
+					                 </div>
+					                 <div class="col4">
+				                        <div class="select">
+				                            <select name="maxday" id="maxday" title="최대">
+		                                    	<option value="00" selected>최대</option>
+		                                    	<option value="0" >0</option>
+			                                    <option value="1" >1</option>
+			                                    <option value="2" >2</option>
+			                                    <option value="3" >3</option>
+			                                    <option value="4" >4</option>
+			                                    <option value="5" >5</option>
+			                                    <option value="6" >6</option>
+				                            </select>
+				                        </div>
+					                 </div>
+				                </div>
+							</div>
+							
+							<div class="form-group">
+								<div class="box_form day" id="day">
+				                    <span class="tit">
+				                        <label for="day">
+				                            날짜
+				                            <span class="ico_required">*</span>
+				                        </label>
+				                    </span>
+				                </div>
+				                <div class="row day">
+				                	<div class="col4">
+				                        <div class="select">
+				                            <select name="minday" id="minday" title="최소">
+		                                    	<option value="00" selected>최소</option>
+		                                    	<option value="0" >0</option>
+		                                    	<option value="1" >1</option>
+			                                    <option value="1" >1</option>
+			                                    <option value="2" >2</option>
+			                                    <option value="3" >3</option>
+			                                    <option value="4" >4</option>
+			                                    <option value="5" >5</option>
+			                                    <option value="6" >6</option>
+				                            </select>
+				                        </div>
+					                 </div>
+					                 <div class="col4">
+				                        <div class="select">
+				                            <select name="maxday" id="maxday" title="최대">
+		                                    	<option value="00" selected>최대</option>
+		                                    	<option value="0" >0</option>
+			                                    <option value="1" >1</option>
+			                                    <option value="2" >2</option>
+			                                    <option value="3" >3</option>
+			                                    <option value="4" >4</option>
+			                                    <option value="5" >5</option>
+			                                    <option value="6" >6</option>
+				                            </select>
+				                        </div>
+					                 </div>
+				                </div>
+							</div>
+							
+							<div class="form-group">
+								<div class="box_form person" id="person">
+				                    <span class="tit">
+				                        <label for="person">
+				                            인원
+				                            <span class="ico_required">*</span>
+				                        </label>
+				                    </span>
+				                </div>
+				                <div class="row person">
+				                	<div class="col4">
+				                        <div class="select">
+				                            <select name="minperson" id="minperson" title="최소 인원">
+		                                    	<option value="00" selected>최소</option>
+		                                    	<option value="0" >0</option>
+		                                    	<option value="1" >1</option>
+			                                    <option value="1" >1</option>
+			                                    <option value="2" >2</option>
+			                                    <option value="3" >3</option>
+			                                    <option value="4" >4</option>
+			                                    <option value="5" >5</option>
+			                                    <option value="6" >6</option>
+				                            </select>
+				                        </div>
+					                 </div>
+					                 <div class="col4">
+				                        <div class="select">
+				                            <select name="maxperson" id="maxperson" title="최대 인원">
+		                                    	<option value="00" selected>최대</option>
+		                                    	<option value="0" >0</option>
+			                                    <option value="1" >1</option>
+			                                    <option value="2" >2</option>
+			                                    <option value="3" >3</option>
+			                                    <option value="4" >4</option>
+			                                    <option value="5" >5</option>
+			                                    <option value="6" >6</option>
+				                            </select>
+				                        </div>
+					                 </div>
+				                </div>
+							</div>
+							
+							<div class="form-group">
+								<div class="box_form price" id="price">
+				                    <span class="tit">
+				                        <label for="price">
+				                            금액
+				                            <span class="ico_required">*</span>
+				                        </label>
+				                    </span>
+				                </div>
+				                <div class="row price">
+				                	<div class="col4">
+				                        <div class="select">
+				                            <select name="pricestandard" id="pricestandard" title="금액 기준">
+		                                    	<option value="00" selected>기준</option>
+		                                    	<option value="S" >S(공간당 가격)</option>
+		                                    	<option value="P" >P(1인당 가격)</option>
+				                            </select>
+				                        </div>
+					                 </div>
+					                 <div class="col4">
+					                    <input type="text" name="priceweekday" id="priceweekday" title="금액" placeholder="금액을 입력해주세요.">
+					                 </div>
+				                </div>
+							</div>
+							
+							<div class="form-group">
+								<div class="box_form type" id="type">
+				                    <span class="tit">
+				                        <label for="type">
+				                            단위(시간단위 OR 일단위 )
+				                            <span class="ico_required">*</span>
+				                        </label>
+				                    </span>
+				                    <!-- <div class="col4"> -->
+				                        <div class="select">
+				                            <select name="type" id="type" title="단위" >
+		                                    	<option value="D" selected>D(일)</option>
+			                                    <option value="T" >T(시간)</option>
+				                            </select>
+				                        </div>
+				                    <!-- </div> -->
+					            </div>
+					         </div>
+					         
+					         
+					         <div class="form-group">
+								<div class="box_form precaution" id="precaution" >
+						            <div class="tit" >
+						                <label for="space_precaution">
+						                    주의사항
+						                    <span class="ico_required">*</span>
+						                </label>
+						            </div>
+						            <div class="input"><!-- [D] 클래스 error 추가시 유효성 오류 (!안내텍스트/input,textarea 등에 border색) 표시됩니다. -->
+						                <textarea id="precaution" name="precaution" placeholder="주의사항을 입력하세요."
+						                            maxLength="1000" style="height:108px" ></textarea>
+						            </div>
+					        	</div>
+							</div>
+							
+							<div class="form-group">
+								<div class="box_form opertime" id="opertime">
+				                    <span class="tit">
+				                        <label for="opertime">
+				                            오픈시간
+				                            <span class="ico_required">*</span>
+				                        </label>
+				                    </span>
+				                </div>
+				                <div class="row opertime">
+				                	<div class="col4">
+				                        <div class="select">
+				                            <select name="opertime1" id="opertime1" title="시작시간">
+		                                    	<option value="0" selected>0</option>
+			                                    <option value="1" >1</option>
+			                                    <option value="2" >2</option>
+			                                    <option value="3" >3</option>
+			                                    <option value="4" >4</option>
+			                                    <option value="5" >5</option>
+			                                    <option value="6" >6</option>
+			                                    <option value="7" >7</option>
+			                                    <option value="8" >8</option>
+			                                    <option value="9" >9</option>
+			                                    <option value="10" >10</option>
+			                                    <option value="11" >11</option>
+			                                    <option value="12" >12</option>
+				                            </select>
+				                        </div>
+					                 </div>
+					                 <div class="col4">
+				                        <div class="select">
+				                            <select name="opertime2" id="opertime2" title="종료시간">
+		                                    	<option value="0" selected>0</option>
+		                                    	<option value="1" >1</option>
+			                                    <option value="2" >2</option>
+			                                    <option value="3" >3</option>
+			                                    <option value="4" >4</option>
+			                                    <option value="5" >5</option>
+			                                    <option value="6" >6</option>
+			                                    <option value="7" >7</option>
+			                                    <option value="8" >8</option>
+			                                    <option value="9" >9</option>
+			                                    <option value="10" >10</option>
+			                                    <option value="11" >11</option>
+			                                    <option value="12" >12</option>
+				                            </select>
+				                        </div>
+					                 </div>
+				                </div>
+							</div>
+							
+							<div class="form-group">
+								<div class="box_form regularly_close" id="regularly_close">
+				                    <span class="tit">
+				                        <label for="regularly_close">
+				                            휴무일
+				                            <span class="ico_required">*</span>
+				                        </label>
+				                    </span>
+				                </div>
+				                <div class="row regularly_close">
+				                	<div class="col4">
+				                        <div class="select">
+				                            <select name="regularly_close1" id="regularly_close1" title="regularly_close1">
+		                                    	<option value="0" selected>0</option>
+			                                    <option value="1" >1</option>
+			                                    <option value="2" >2</option>
+			                                    <option value="3" >3</option>
+			                                    <option value="4" >4</option>
+			                                    <option value="5" >5</option>
+			                                    <option value="6" >6</option>
+			                                    <option value="7" >7</option>
+				                            </select>
+				                        </div>
+					                 </div>
+					                 <div class="col4">
+				                        <div class="select">
+				                            <select name="regularly_close2" id="regularly_close2" title="regularly_close2">
+		                                    	<option value="0" selected>0</option>
+		                                    	<option value="1" >1</option>
+			                                    <option value="2" >2</option>
+			                                    <option value="3" >3</option>
+			                                    <option value="4" >4</option>
+			                                    <option value="5" >5</option>
+			                                    <option value="6" >6</option>
+			                                    <option value="7" >7</option>
+				                            </select>
+				                        </div>
+					                 </div>
+					                     <div class="col4">
+				                        <div class="select">
+				                            <select name="regularly_close3" id="regularly_close3" title="regularly_close3">
+		                                    	<option value="0" selected>0</option>
+		                                    	<option value="1" >1</option>
+			                                    <option value="2" >2</option>
+			                                    <option value="3" >3</option>
+			                                    <option value="4" >4</option>
+			                                    <option value="5" >5</option>
+			                                    <option value="6" >6</option>
+			                                    <option value="7" >7</option>
+				                            </select>
+				                        </div>
+					                 </div>
+				                </div>
+							</div>
+					         
 							
 							 <button class="sjaru">넘겨</button>
 							
@@ -882,7 +1240,6 @@
 		
 		$('.sjaru').click(function(){
 			document.forms["trans"].submit();
-			
 		});
 		
 	</script>
