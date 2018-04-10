@@ -626,23 +626,86 @@
 						        <textarea rows="5" cols="20" class="form-control" required="required" name="intro" id="intro" placeholder="Enter your RoomIntro" value="" minLength="20" maxLength="500"_lcount="spcDescCnt"></textarea> -->
 							</div>
 							
-							<div class="form-group">
-								<!-- <label class="control-label col-sm-3">공간태그 <span class="text-danger">*</span></label> -->
-								<div class="box_form">
-	            				<div class="tit">공간태그 <span class="ico_required">*</span></div>
-					            <span class="option"> <span class="txt_guide"> 최대
-											5개 선택가능 <span class="text-danger">*</span></span>
-								</span>
-					            <div class="input_add _spaceTag"><!-- [D] 클래스 error 추가시 유효성 오류 (!안내텍스트/input,textarea 등에 border색) 표시됩니다. -->
-					                <input type="text" name="spaceTagInput" maxLength="10" id="_spaceTagInput" _enter="spaceTagEnter" placeholder="태그를 입력해 주세요.">
-					                <div class="btn_box">
-					                  <a href="javascript:void(0);" class="btn" id="spaceTagEnter"><span class="btn_inner">추가</span></a>
-					                </div>
-					            </div>
-					            <div class="tag_wrap" id="_tag_required">
-					                <input type="hidden" id="_tagRequiredTarget" _errorEl="_tag_required" required>
-					            </div>
-					            </div> 
+							<div class="row">
+							<script>
+							$(function(){
+								
+								$("#buttonId").on('click',function(){
+									//console.log($("#taginputId").val()==null? "null":"null아님");
+									if($("#taginputId").val()==""){
+										$("#tagoutputId").val("");
+									}
+									else{
+									$("#tagoutputId").val($("#tagoutputId").val()+"#"+$("#taginputId").val());
+									$("#taginputId").val("");
+									}
+								});
+								
+								$("#faciloutputId").change(function(){
+									$("#faciloutputId").val("");
+								});
+								
+								$("#buttonId2").on('click',function(){
+									//console.log($("#taginputId").val()==null? "null":"null아님");
+									if($("#facilinputId").val()==""){
+										$("#faciloutputId").val("");
+									}
+									else{
+										if($("#faciloutputId").val()==""){
+											$("#faciloutputId").val($("#facilinputId").val())
+											$("#facilinputId").val("");
+										}
+										else{
+											$("#faciloutputId").val($("#faciloutputId").val()+"\r\n"+$("#facilinputId").val());
+											$("#facilinputId").val("");
+										}
+									}
+									console.log("#faciloutputId"+$("#faciloutputId").val());
+									$("#facilhiddenId").val($("#faciloutputId").val());
+									console.log("#facilhiddenId"+$("#facilhiddenId").val());
+								});
+								
+								$("#faciloutputId").change(function(){
+									$("#faciloutputId").val("");
+								});
+								
+							});
+							</script>
+							<div style="margin:auto;width:80%;">
+								<div class="col-lg-4">
+									<div class="input-group">
+									<span class="input-group-addon">태그를 입력하고 버튼을 누르세요!</span>
+									<input type="text" name="taginputName" class="form-control" id="taginputId">
+									<span class="input-group-addon" id="buttonId">버튼</span>
+									<!-- <button id="buttonId" class="btn btn-primary">버튼이다</button> -->
+									</div>
+								</div>
+								<div class="col-lg-8">
+									<div class="input-group">
+									<span class="input-group-addon">입력된 태그들(#로 구분하세요!)</span>
+									<input type="text" name="tagoutputName" class="form-control" id="tagoutputId">
+									</div>
+								</div>
+							</div>
+							
+							<div style="margin:auto;width:80%;margin-top:50px;">
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="input-group">
+									<span class="input-group-addon">시설 안내사항을 입력하고 버튼을 누르세요!</span>
+									<input type="text" name="taginputName" class="form-control" id="facilinputId">
+									<span class="input-group-addon" id="buttonId2">버튼</span>
+									<!-- <button id="buttonId" class="btn btn-primary">버튼이다</button> -->
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-12">
+									<textarea class="form-control custom-control" rows="5" style="resize:none" id="faciloutputId"></textarea>
+									<input type="hidden" value="" id="facilhiddenId" name="facilParam">
+								</div>
+							</div>
+							</div>
 							</div>
 							
 							<div class="form-group">

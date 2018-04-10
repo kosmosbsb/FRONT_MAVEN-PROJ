@@ -29,7 +29,6 @@
 	String spcDesc= request.getParameter("spcDesc");
 	String spcTag= request.getParameter("spcTag");
 	
-	String fill= request.getParameter("fill");
 	String addr= request.getParameter("addr");
 	String addrdetail= request.getParameter("addrdetail");
 	String mobile1= request.getParameter("mobile1");
@@ -37,6 +36,10 @@
 	String mobile3= request.getParameter("mobile3");
 	String email= request.getParameter("email");
 	String domain= request.getParameter("domain");
+	
+	String tagOutputName = request.getParameter("tagoutputName");
+	
+	String facilParam = "#"+request.getParameter("facilParam").replaceAll("\r\n", "#");
 
 %>
 <!DOCTYPE html>
@@ -54,8 +57,8 @@
                         	<li>subTtl:<%=subTtl %></li>
                         	
                         	<li>spcDesc:<%=spcDesc%></li>
-                        	<li>spaceTagInput:<%=spcTag %></li>
-                        	<li>fill:<%=fill %></li>
+                        	<li>spaceTagInput:<%=tagOutputName %></li>
+                        	<li>fill:<%=facilParam %></li>
                         	<li>addr:<%=addr %></li>
                         	<li>addrdetail:<%=addrdetail %></li>
                         	<li>mobile1:<%=mobile1 %></li>

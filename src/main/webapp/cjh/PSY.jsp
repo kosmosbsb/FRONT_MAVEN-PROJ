@@ -28,124 +28,7 @@
         //console.log("what");
         //console.log();
         </script>
-        <style>
-        @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
-		
-		label{
-			position: relative;
-			cursor: pointer;
-			color: #666;
-			font-size: 30px;
-		}
-		
-		input[type="checkbox"], input[type="radio"]{
-			position: absolute;
-			right: 9000px;
-		}
-		
-		/*Check box*/
-		input[type="checkbox"] + .label-text:before{
-			content: "\f096";
-			font-family: "FontAwesome";
-			speak: none;
-			font-style: normal;
-			font-weight: normal;
-			font-variant: normal;
-			text-transform: none;
-			line-height: 1;
-			-webkit-font-smoothing:antialiased;
-			width: 1em;
-			display: inline-block;
-			margin-right: 5px;
-		}
-		
-		input[type="checkbox"]:checked + .label-text:before{
-			content: "\f14a";
-			color: #2980b9;
-			animation: effect 250ms ease-in;
-		}
-		
-		input[type="checkbox"]:disabled + .label-text{
-			color: #aaa;
-		}
-		
-		input[type="checkbox"]:disabled + .label-text:before{
-			content: "\f0c8";
-			color: #ccc;
-		}
-		
-		/*Radio box*/
-		
-		input[type="radio"] + .label-text:before{
-			content: "\f10c";
-			font-family: "FontAwesome";
-			speak: none;
-			font-style: normal;
-			font-weight: normal;
-			font-variant: normal;
-			text-transform: none;
-			line-height: 1;
-			-webkit-font-smoothing:antialiased;
-			width: 1em;
-			display: inline-block;
-			margin-right: 5px;
-		}
-		
-		input[type="radio"]:checked + .label-text:before{
-			content: "\f192";
-			color: #8e44ad;
-			animation: effect 250ms ease-in;
-		}
-		
-		input[type="radio"]:disabled + .label-text{
-			color: #aaa;
-		}
-		
-		input[type="radio"]:disabled + .label-text:before{
-			content: "\f111";
-			color: #ccc;
-		}
-		
-		/*Radio Toggle*/
-		
-		.toggle input[type="radio"] + .label-text:before{
-			content: "\f204";
-			font-family: "FontAwesome";
-			speak: none;
-			font-style: normal;
-			font-weight: normal;
-			font-variant: normal;
-			text-transform: none;
-			line-height: 1;
-			-webkit-font-smoothing:antialiased;
-			width: 1em;
-			display: inline-block;
-			margin-right: 10px;
-		}
-		
-		.toggle input[type="radio"]:checked + .label-text:before{
-			content: "\f205";
-			color: #16a085;
-			animation: effect 250ms ease-in;
-		}
-		
-		.toggle input[type="radio"]:disabled + .label-text{
-			color: #aaa;
-		}
-		
-		.toggle input[type="radio"]:disabled + .label-text:before{
-			content: "\f204";
-			color: #ccc;
-		}
-		
-		
-		@keyframes effect{
-			0%{transform: scale(0);}
-			25%{transform: scale(1.3);}
-			75%{transform: scale(1.4);}
-			100%{transform: scale(1);}
-		}
-        </style>
+        
         <script>//사이드바 메뉴 스크립트
         $(function(){
         	$("#menu-close").click(function(e) {
@@ -223,75 +106,86 @@
 		<div class="clearfix"></div>
 		<!----resort-overview--->
 		<section class="resort-overview-block">
-		<div class="container">
-		<h2>1. Customs Checkboxes</h2>
-			<div class="col-md-4">
-				<form><!-- input 에 checked 혹은 disabled 옵션 있음 -->
-					<div class="form-check">
-						<label> <input type="checkbox" name="check">
-							<span class="label-text">회의실</span>
-						</label>
-					</div>
-					<div class="form-check">
-						<label> <input type="checkbox" name="check"> <span
-							class="label-text">작업실</span>
-						</label>
-					</div>
-					<div class="form-check">
-						<label> <input type="checkbox" name="check"> <span
-							class="label-text">공연장</span>
-						</label>
-					</div>
-					<div class="form-check">
-						<label> <input type="checkbox" name="check">
-							<span class="label-text">스터디룸</span>
-						</label>
-					</div>
-				</form>
+		<div class="row">
+		<script>
+		$(function(){
+			
+			$("#buttonId").on('click',function(){
+				//console.log($("#taginputId").val()==null? "null":"null아님");
+				if($("#taginputId").val()==""){
+					$("#tagoutputId").val("");
+				}
+				else{
+				$("#tagoutputId").val($("#tagoutputId").val()+"#"+$("#taginputId").val());
+				$("#taginputId").val("");
+				}
+			});
+			
+			$("#faciloutputId").change(function(){
+				$("#faciloutputId").val("");
+			});
+			
+			$("#buttonId2").on('click',function(){
+				//console.log($("#taginputId").val()==null? "null":"null아님");
+				if($("#facilinputId").val()==""){
+					$("#faciloutputId").val("");
+				}
+				else{
+					if($("#faciloutputId").val()==""){
+						$("#faciloutputId").val($("#facilinputId").val())
+						$("#facilinputId").val("");
+					}
+					else{
+						$("#faciloutputId").val($("#faciloutputId").val()+"\r\n"+$("#facilinputId").val());
+						$("#facilinputId").val("");
+					}
+				}
+				console.log("#faciloutputId"+$("#faciloutputId").val());
+				$("#facilhiddenId").val($("#faciloutputId").val());
+				console.log("#facilhiddenId"+$("#facilhiddenId").val());
+			});
+			
+			$("#faciloutputId").change(function(){
+				$("#faciloutputId").val("");
+			});
+			
+		});
+		</script>
+		<div style="margin:auto;width:80%;">
+			<div class="col-lg-4">
+				<div class="input-group">
+				<span class="input-group-addon">태그를 입력하고 버튼을 누르세요!</span>
+				<input type="text" name="taginputName" class="form-control" id="taginputId">
+				<span class="input-group-addon" id="buttonId">버튼</span>
+				<!-- <button id="buttonId" class="btn btn-primary">버튼이다</button> -->
+				</div>
 			</div>
-			<div class="col-md-4">
-				<form>
-					<div class="form-check">
-						<label> <input type="checkbox" name="check">
-							<span class="label-text">세미나실</span>
-						</label>
-					</div>
-					<div class="form-check">
-						<label> <input type="checkbox" name="check"> <span
-							class="label-text">레저시설</span>
-						</label>
-					</div>
-					<div class="form-check">
-						<label> <input type="checkbox" name="check"> <span
-							class="label-text">연습실</span>
-						</label>
-					</div>
-					<div class="form-check">
-						<label> <input type="checkbox" name="check">
-							<span class="label-text">엠티장소</span>
-						</label>
-					</div>
-				</form>
+			<div class="col-lg-8">
+				<div class="input-group">
+				<span class="input-group-addon">입력된 태그들(#로 구분하세요!)</span>
+				<input type="text" name="tagoutputName" class="form-control" id="tagoutputId">
+				</div>
 			</div>
-			<div class="col-md-4">
-				<form>
-					<div class="form-check">
-						<label> <input type="checkbox" name="check">
-							<span class="label-text">다목적홀</span>
-						</label>
-					</div>
-					<div class="form-check">
-						<label> <input type="checkbox" name="check"> <span
-							class="label-text">파티룸</span>
-						</label>
-					</div>
-					<div class="form-check">
-						<label> <input type="checkbox" name="check"> <span
-							class="label-text">카페</span>
-						</label>
-					</div>
-				</form>
+		</div>
+		
+		<div style="margin:auto;width:80%;margin-top:50px;">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="input-group">
+				<span class="input-group-addon">시설 안내사항을 입력하고 버튼을 누르세요!</span>
+				<input type="text" name="taginputName" class="form-control" id="facilinputId">
+				<span class="input-group-addon" id="buttonId2">버튼</span>
+				<!-- <button id="buttonId" class="btn btn-primary">버튼이다</button> -->
+				</div>
 			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<textarea class="form-control custom-control" rows="5" style="resize:none" id="faciloutputId"></textarea>
+				<input type="hidden" value="" id="facilhiddenId">
+			</div>
+		</div>
+		</div>
 		</div>
 		</section>
 
