@@ -20,4 +20,9 @@ public class SearchDAO implements SearchService{
 	public List<SearchDTO> selectList(String searchSpace) {
 		return sqlMapper_PSH.selectList("searchSelectList",searchSpace);
 	}
+
+	@Override
+	public List<SearchDTO> selectList() {
+		return sqlMapper_PSH.selectList("mainSpaceList");
+	}
 }

@@ -14,8 +14,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.kosmo.spacecloud.impl.psh.SearchServiceImpl;
 import com.kosmo.spacecloud.khw.SpaceServiceImpl;
 import com.kosmo.spacecloud.service.khw.SpaceDTO;
+import com.kosmo.spacecloud.service.psh.SearchDTO;
 
 
 /**
@@ -26,6 +28,9 @@ public class HomeController {
 	
 	@Resource(name="spaceService")
 	private SpaceServiceImpl spaceService;
+	
+	@Resource(name="searchService")
+	private SearchServiceImpl searchService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -52,8 +57,10 @@ public class HomeController {
 		
 		model.addAttribute("spaceList",jsonArr); 
 		
-		
-		
+		////////////////////////////////////공간 좋아요 최상위 9개 목록
+		List<SearchDTO> spaceList9=searchService.selectList();
+		System.out.println("뭐야"+spaceList9);
+		model.addAttribute("spaceList9",spaceList9);
 		
 		return "/scmain/SCMain";
 	}

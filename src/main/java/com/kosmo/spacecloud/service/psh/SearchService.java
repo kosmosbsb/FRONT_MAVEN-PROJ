@@ -5,4 +5,6 @@ import java.util.Map;
 
 public interface SearchService {
 	List<SearchDTO> selectList(String searchSpace);
+	///mainspaceList
+	List<SearchDTO> selectList();
 }

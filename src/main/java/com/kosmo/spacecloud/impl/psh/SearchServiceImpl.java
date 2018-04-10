@@ -20,6 +20,11 @@ public class SearchServiceImpl implements SearchService{
 	public List<SearchDTO> selectList(String searchSpace) {
 		return dao.selectList(searchSpace);
 	}
+
+	@Override
+	public List<SearchDTO> selectList() {
+		return dao.selectList();
+	}
 	
 	
 }
