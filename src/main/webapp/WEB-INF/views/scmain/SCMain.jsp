@@ -243,7 +243,7 @@
 					<div class="row">
 						<div class="col-md-2 col-sm-6 col-xs-6">
 							<div id="logo">
-								<a href="index.html"><img src="<c:url value='/resources/images/custom/sclogo2.png'/>"
+								<a href="<c:url value='/spacecloud.do'/>"><img src="<c:url value='/resources/images/custom/sclogo2.png'/>"
 									alt="logo" width=160px height=38px></a>
 								<!--<a href="index.html"><span>vacay</span>home</a>-->
 							</div>
@@ -308,7 +308,7 @@
 							<div class="row" align="center">
 								<h2>어떤 공간이 필요하세요?</h2>
 								<br/><br/>
-									<form class="form-inline" method="get" action="<c:url value='/Space/Search.do'/>">
+									<form class="form-inline" method="get" action="<c:url value='/Search/Search.do'/>">
 											<input type="text" name="searchWord" class="form-control" style="width:50%; height: 70px; background-color:transparent; color:white; font-size:3em; font-weight:bolder; border: none; border-bottom-style: solid; border-bottom-width: 3px; border-bottom-color: #FFC600;">
 											<button class="btn btn-default" type="submit" style="background: url(http://192.168.0.8:8082/spacecloud/resources/images/khw/searchIcon.PNG); border:none; width:70px; height: 70px;" ></button>
 									</form>

@@ -416,7 +416,7 @@
                   
                   <div>
                      <div id="logo" style="margin-top: -1.8em; right: 150px; position: relative;">
-                        <a href='<c:url value="/index.jsp"/>'>
+                        <a href='<c:url value="/spacecloud.do"/>'>
                            <img src="<c:url value='/resources/images/custom/sclogo2.png'/>" alt="logo" width=160px height=38px>
                         </a>
                         <!--<a href="index.html"><span>vacay</span>home</a>-->

@@ -104,7 +104,7 @@ public class NaverLoginController {
 		//업로드폴더 경로 찾는 테스트
 		//System.out.println(session.getServletContext().getRealPath("/Upload/HostImg"));
 		
-		return new ModelAndView("/scmain/SCMain", "result", jsonObject_tail);
+		return new ModelAndView("forward:/spacecloud.do", "result", jsonObject_tail);
     }
 
     @RequestMapping("/logout.do")
