@@ -31,11 +31,26 @@
 	
 	String addr= request.getParameter("addr");
 	String addrdetail= request.getParameter("addrdetail");
+	
+	
 	String mobile1= request.getParameter("mobile1");
 	String mobile2= request.getParameter("mobile2");
 	String mobile3= request.getParameter("mobile3");
 	String email= request.getParameter("email");
 	String domain= request.getParameter("domain");
+	String minday= request.getParameter("minday");
+	String maxday= request.getParameter("maxday");
+	String minperson= request.getParameter("minperson");
+	String maxperson= request.getParameter("maxperson");
+	String pricestandard= request.getParameter("pricestandard");
+	String priceweekday= request.getParameter("priceweekday");
+	String type= request.getParameter("type");
+	String precaution= request.getParameter("precaution");
+	String opertime1= request.getParameter("opertime1");
+	String opertime2= request.getParameter("opertime2");
+	String regularlyclose= request.getParameter("regularlyclose");
+	
+
 	
 	String tagOutputName = request.getParameter("tagoutputName");
 	
@@ -65,7 +80,19 @@
                         	<li>mobile1:<%=mobile2 %></li>
                         	<li>mobile1:<%=mobile3 %></li>
                         	<li>email:<%=email %></li>
-                        	<li>email:<%=domain %></li>
+                        	<li>domain:<%=domain %></li>
+                        	<li>minday:<%=minday %></li>
+                        	<li>maxday:<%=maxday %></li>
+                        	<li>minperson:<%=minperson %></li>
+                        	<li>maxperson:<%=maxperson %></li>
+                        	<li>pricestandard:<%=pricestandard %></li>
+                        	<li>priceweekday:<%=priceweekday %></li>
+                        	<li>type:<%=type %></li>
+                        	<li>precaution:<%=precaution %></li>
+                        	<li>opertime1:<%=opertime1 %></li>
+                        	<li>opertime2:<%=opertime2 %></li>
+                        	<li>regularlyclose:<%=regularlyclose %></li>
+                        	
                         </ul>
 </body>
 </html>

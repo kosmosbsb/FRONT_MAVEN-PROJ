@@ -52,6 +52,19 @@
   		<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
         <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=239669b7f7d7e65aded229c4bee98d24&libraries=services"></script>
 		
+		<!-- 체크박스 css -->
+		<link href="../resources/css/checkboxes.css" rel="stylesheet">
+		<script>
+		$("input[name=chk]").change(function(){
+		    var max= 3;
+		    if( $("input[name=chk]:checked").length == max ){
+		        $("input[name=chk]").attr('disabled', 'disabled');
+		        $("input[name=chk]:checked").removeAttr('disabled');
+		    }else{
+		         $("input[name=chk]").removeAttr('disabled');
+		    }
+		});
+		</script>
 		
         <script>
         $(function(){
@@ -136,9 +149,13 @@
         
         <script type="text/javascript">
         function checkCount() {
-			var checkList = $('input:checkbox[name="space"]:checked').length;
+			var checkList = $('input:checkbox[id="cate"]:checked').length;
 			if(checkList == 0){
 				alert("1개이상 선택하세요");
+				location.href="Register.jsp";
+			}
+			else if(checkList >= 5){
+				alert("5개이하로 선택하세요");
 				location.href="Register.jsp";
 			}
 		}
@@ -147,7 +164,6 @@
         function execDaumPostcode() {	
             new daum.Postcode({    	  	
                 oncomplete: function(data) {
-                	console.log("test");
                     // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
                     // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
                     // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
@@ -499,6 +515,7 @@
 				<div class="row setup-content" id="step-1">
 					<div class="col-xs-12">
 						<div class="col-md-12">
+						<div class="container"><!-- form1 -->
 							<h3>Step 1</h3>
 							<div class="form-group">
 					            <p class="tit_register_guide">등록하기 전 신중하게 공간유형을 선택해주세요!</p>
@@ -512,53 +529,71 @@
 									</span>
 								</div>
 								<div class="row" >
-									<ul class="check_list space" id="categoryListEl" _max=5>
-										<li><input type="checkbox" name="space" id="cate1"
-											value="1"> <label for="cate1" class="ellip">회의실</label>
-										</li>
-		
-										<li><input type="checkbox" name="space" id="cate2"
-											value="2"> <label for="cate2" class="ellip">세미나실</label>
-										</li>
-		
-										<li><input type="checkbox" name="space" id="cate3"
-											value="3"> <label for="cate3" class="ellip">다목적홀</label>
-										</li>
-		
-										<li><input type="checkbox" name="space" id="cate4"
-											value="4"> <label for="cate4" class="ellip">작업실</label>
-										</li>
-		
-										<li><input type="checkbox" name="space" id="cate5"
-											value="5"> <label for="cate5" class="ellip">레저시설</label>
-										</li>
-		
-										<li><input type="checkbox" name="space" id="cate6"
-											value="6"> <label for="cate6" class="ellip">파티룸</label>
-										</li>
-		
-										<li><input type="checkbox" name="space" id="cate7"
-											value="7"> <label for="cate7" class="ellip">공연장</label>
-										</li>
-		
-										<li><input type="checkbox" name="space" id="cate8"
-											value="8"> <label for="cate8" class="ellip">연습실</label>
-										</li>
-		
-										<li><input type="checkbox" name="space" id="cate9"
-											value="9"> <label for="cate9" class="ellip">카페</label>
-										</li>
-		
-										<li><input type="checkbox" name="space" id="cate10"
-											value="10"> <label for="cate10" class="ellip">스터디룸</label>
-										</li>
-		
-										<li><input type="checkbox" name="space" id="cate11"
-											value="11"> <label for="cate11" class="ellip">엠티장소</label>
-										</li>
-									</ul>
+									<div class="col-md-4">
+										<!-- input 에 checked 혹은 disabled 옵션 있음 -->
+											<div class="form-check">
+												<label> <input type="checkbox" name="space1" id="cate1" value="회의실" form="trans">
+													<span class="label-text">회의실</span>
+												</label>
+											</div>
+											<div class="form-check">
+												<label> <input type="checkbox" name="space2" id="cate2" value="작업실" form="trans"> <span
+													class="label-text">작업실</span>
+												</label>
+											</div>
+											<div class="form-check">
+												<label> <input type="checkbox" name="space3" id="cate3" value="공연장" form="trans"> <span
+													class="label-text">공연장</span>
+												</label>
+											</div>
+											<div class="form-check">
+												<label> <input type="checkbox" name="space4" id="cate4" value="스터디룸" form="trans">
+													<span class="label-text">스터디룸</span>
+												</label>
+											</div>
+									</div>
+									<div class="col-md-4">
+											<div class="form-check">
+												<label> <input type="checkbox" name="space5" id="cate" value="세미나실" form="trans">
+													<span class="label-text">세미나실</span>
+												</label>
+											</div>
+											<div class="form-check">
+												<label> <input type="checkbox" name="space6" id="cate" value="레저시설" form="trans"> <span
+													class="label-text">레저시설</span>
+												</label>
+											</div>
+											<div class="form-check">
+												<label> <input type="checkbox" name="space7" id="cate" value="연습실" form="trans"> <span
+													class="label-text">연습실</span>
+												</label>
+											</div>
+											<div class="form-check">
+												<label> <input type="checkbox" name="space8" id="cate" value="엠티장소" form="trans">
+													<span class="label-text">엠티장소</span>
+												</label>
+											</div>
+									</div>
+									<div class="col-md-4">
+											<div class="form-check">
+												<label> <input type="checkbox" name="space9" id="cate" value="다목적홀" form="trans">
+													<span class="label-text">다목적홀</span>
+												</label>
+											</div>
+											<div class="form-check">
+												<label> <input type="checkbox" name="space10" id="cate" value="파티룸" form="trans"> <span
+													class="label-text">파티룸</span>
+												</label>
+											</div>
+											<div class="form-check">
+												<label> <input type="checkbox" name="space11" id="cate" value="카페" form="trans"> <span
+													class="label-text">카페</span>
+												</label>
+											</div>
+									</div>
 								</div>
 							</div>
+						</div>
 						
 							<button class="btn btn-primary nextBtn btn-lg pull-right"
 								type="button" onclick="checkCount()">Next</button>
@@ -643,55 +678,86 @@
 						        <textarea rows="5" cols="20" class="form-control" required="required" name="intro" id="intro" placeholder="Enter your RoomIntro" value="" minLength="20" maxLength="500"_lcount="spcDescCnt"></textarea> -->
 							</div>
 							
-							<div class="form-group">
-								<!-- <label class="control-label col-sm-3">공간태그 <span class="text-danger">*</span></label> -->
-								<div class="box_form">
-	            				<div class="tit">공간태그 <span class="ico_required">*</span></div>
-					            <span class="option"> <span class="txt_guide"> 최대
-											5개 선택가능 <span class="text-danger">*</span></span>
-								</span>
-					            <div class="input_add _spaceTag"><!-- [D] 클래스 error 추가시 유효성 오류 (!안내텍스트/input,textarea 등에 border색) 표시됩니다. -->
-					                <input type="text" name="spaceTagInput" maxLength="10" id="_spaceTagInput" _enter="spaceTagEnter" placeholder="태그를 입력해 주세요.">
-					                <div class="btn_box">
-					                  <a href="javascript:void(0);" class="btn" id="spaceTagEnter"><span class="btn_inner">추가</span></a>
-					                </div>
-					            </div>
-					            <div class="tag_wrap" id="_tag_required">
-					                <input type="hidden" id="_tagRequiredTarget" _errorEl="_tag_required" required>
-					            </div>
-					            </div> 
-							</div>
-							
-							<div class="form-group">
-								<div class="box_form">
-									<div class="tit">
-										<label for="space_name"> 시설안내 <span class="ico_required">*</span>
-										</label>
-									</div>
-									<span class="option"> <span class="txt_count"> <em
-											id="spcFctsGuideCnt">0</em>자/<em>100</em>자
-									</span>
-									</span>
-									<div class="input_add" id="_spcFctsGuide">
-										<!-- [D] 클래스 error 추가시 유효성 오류 (!안내텍스트/input,textarea 등에 border색) 표시됩니다. -->
-										<input type="text" id="_spcFctsGuideInput" name="fill"
-											placeholder="최대 10개까지 작성가능합니다." _enter="fctsEnter"
-											_lcount="spcFctsGuideCnt" maxLength="100">
-										<div class="btn_box">
-											<a href="javascript:void(0);" class="btn _addGuide"
-												_type="spcFctsGuide" id="fctsEnter"> <span
-												class="btn_inner">추가</span>
-											</a>
-										</div>
-									</div>
-									<div class="input_add_text" id="_spcFctsGuideList"
-										style="display: none;">
-										<input type="hidden" id="_fctsRequiredTarget"
-											_errorEl="_spcFctsGuide" value="" required>
+							<div class="row">
+							<script>
+							$(function(){
+								
+								$("#buttonId").on('click',function(){
+									//console.log($("#taginputId").val()==null? "null":"null아님");
+									if($("#taginputId").val()==""){
+										$("#tagoutputId").val("");
+									}
+									else{
+									$("#tagoutputId").val($("#tagoutputId").val()+"#"+$("#taginputId").val());
+									$("#taginputId").val("");
+									}
+								});
+								
+								$("#faciloutputId").change(function(){
+									$("#faciloutputId").val("");
+								});
+								
+								$("#buttonId2").on('click',function(){
+									//console.log($("#taginputId").val()==null? "null":"null아님");
+									if($("#facilinputId").val()==""){
+										$("#faciloutputId").val("");
+									}
+									else{
+										if($("#faciloutputId").val()==""){
+											$("#faciloutputId").val($("#facilinputId").val())
+											$("#facilinputId").val("");
+										}
+										else{
+											$("#faciloutputId").val($("#faciloutputId").val()+"\r\n"+$("#facilinputId").val());
+											$("#facilinputId").val("");
+										}
+									}
+									console.log("#faciloutputId"+$("#faciloutputId").val());
+									$("#facilhiddenId").val($("#faciloutputId").val());
+									console.log("#facilhiddenId"+$("#facilhiddenId").val());
+								});
+								
+								$("#faciloutputId").change(function(){
+									$("#faciloutputId").val("");
+								});
+								
+							});
+							</script>
+							<div style="margin:auto;width:80%;">
+								<div class="col-lg-4">
+									<div class="input-group">
+									<span class="input-group-addon">태그를 입력하고 버튼을 누르세요!</span>
+									<input type="text" name="taginputName" class="form-control" id="taginputId">
+									<span class="input-group-addon" id="buttonId">버튼</span>
+									<!-- <button id="buttonId" class="btn btn-primary">버튼이다</button> -->
 									</div>
 								</div>
-						<!-- <label class="control-label col-sm-3">시설안내 <span class="text-danger">*</span></label>
-						        <input maxlength="200" type="text" class="form-control" required="required" name="facilities" id="facilities" placeholder="Enter your Roomfacilities" value=""> -->
+								<div class="col-lg-8">
+									<div class="input-group">
+									<span class="input-group-addon">입력된 태그들(#로 구분하세요!)</span>
+									<input type="text" name="tagoutputName" class="form-control" id="tagoutputId">
+									</div>
+								</div>
+							</div>
+							
+							<div style="margin:auto;width:80%;margin-top:50px;">
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="input-group">
+									<span class="input-group-addon">시설 안내사항을 입력하고 버튼을 누르세요!</span>
+									<input type="text" name="taginputName" class="form-control" id="facilinputId">
+									<span class="input-group-addon" id="buttonId2">버튼</span>
+									<!-- <button id="buttonId" class="btn btn-primary">버튼이다</button> -->
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-12">
+									<textarea class="form-control custom-control" rows="5" style="resize:none" id="faciloutputId"></textarea>
+									<input type="hidden" value="" id="facilhiddenId" name="facilParam">
+								</div>
+							</div>
+							</div>
 							</div>
 							
 							<div class="form-group">
@@ -853,96 +919,13 @@
 					                        </div>
 					                    </div>
 					                    <div class="col4">
-					                        <input type="tel" name="mobile2" id="phone12" placeholder="중간자리를 입력해주세요." title="휴대폰 중간자리"  maxLength="4"  _errorEl="mobileError" class="onlyNum virtualNum" style="ime-mode: disabled;" value="" required>
+					                        <input type="tel" name="mobile2" id="mobile2" placeholder="중간자리를 입력해주세요." title="휴대폰 중간자리"  maxLength="4"  _errorEl="mobileError" class="onlyNum virtualNum" style="ime-mode: disabled;" value="" required>
 					                    </div>
 					                    <div class="col4">
-					                        <input type="tel" name="mobile3" id="phone13" placeholder="뒷자리를 입력해주세요." title="휴대폰 뒷자리"  maxLength="4"  _errorEl="mobileError" class="onlyNum virtualNum" style="ime-mode: disabled;" value="" required>
+					                        <input type="tel" name="mobile3" id="mobile3" placeholder="뒷자리를 입력해주세요." title="휴대폰 뒷자리"  maxLength="4"  _errorEl="mobileError" class="onlyNum virtualNum" style="ime-mode: disabled;" value="" required>
 					                    </div>
 					                </div>
 								</div>
-							</div>
-							<div class="form-group">
-								<div class="box_form day" id="day">
-				                    <span class="tit">
-				                        <label for="day">
-				                            날짜
-				                            <span class="ico_required">*</span>
-				                        </label>
-				                    </span>
-				                </div>
-				                <div class="row day">
-				                	<div class="col4">
-				                        <div class="select">
-				                            <select name="minday" id="minday" title="최소">
-		                                    	<option value="00" selected>최소</option>
-		                                    	<option value="0" >0</option>
-		                                    	<option value="1" >1</option>
-			                                    <option value="1" >1</option>
-			                                    <option value="2" >2</option>
-			                                    <option value="3" >3</option>
-			                                    <option value="4" >4</option>
-			                                    <option value="5" >5</option>
-			                                    <option value="6" >6</option>
-				                            </select>
-				                        </div>
-					                 </div>
-					                 <div class="col4">
-				                        <div class="select">
-				                            <select name="maxday" id="maxday" title="최대">
-		                                    	<option value="00" selected>최대</option>
-		                                    	<option value="0" >0</option>
-			                                    <option value="1" >1</option>
-			                                    <option value="2" >2</option>
-			                                    <option value="3" >3</option>
-			                                    <option value="4" >4</option>
-			                                    <option value="5" >5</option>
-			                                    <option value="6" >6</option>
-				                            </select>
-				                        </div>
-					                 </div>
-				                </div>
-							</div>
-							
-							<div class="form-group">
-								<div class="box_form day" id="day">
-				                    <span class="tit">
-				                        <label for="day">
-				                            날짜
-				                            <span class="ico_required">*</span>
-				                        </label>
-				                    </span>
-				                </div>
-				                <div class="row day">
-				                	<div class="col4">
-				                        <div class="select">
-				                            <select name="minday" id="minday" title="최소">
-		                                    	<option value="00" selected>최소</option>
-		                                    	<option value="0" >0</option>
-		                                    	<option value="1" >1</option>
-			                                    <option value="1" >1</option>
-			                                    <option value="2" >2</option>
-			                                    <option value="3" >3</option>
-			                                    <option value="4" >4</option>
-			                                    <option value="5" >5</option>
-			                                    <option value="6" >6</option>
-				                            </select>
-				                        </div>
-					                 </div>
-					                 <div class="col4">
-				                        <div class="select">
-				                            <select name="maxday" id="maxday" title="최대">
-		                                    	<option value="00" selected>최대</option>
-		                                    	<option value="0" >0</option>
-			                                    <option value="1" >1</option>
-			                                    <option value="2" >2</option>
-			                                    <option value="3" >3</option>
-			                                    <option value="4" >4</option>
-			                                    <option value="5" >5</option>
-			                                    <option value="6" >6</option>
-				                            </select>
-				                        </div>
-					                 </div>
-				                </div>
 							</div>
 							
 							<div class="form-group">
@@ -1149,50 +1132,9 @@
 				                        </label>
 				                    </span>
 				                </div>
-				                <div class="row regularly_close">
-				                	<div class="col4">
-				                        <div class="select">
-				                            <select name="regularly_close1" id="regularly_close1" title="regularly_close1">
-		                                    	<option value="0" selected>0</option>
-			                                    <option value="1" >1</option>
-			                                    <option value="2" >2</option>
-			                                    <option value="3" >3</option>
-			                                    <option value="4" >4</option>
-			                                    <option value="5" >5</option>
-			                                    <option value="6" >6</option>
-			                                    <option value="7" >7</option>
-				                            </select>
-				                        </div>
-					                 </div>
-					                 <div class="col4">
-				                        <div class="select">
-				                            <select name="regularly_close2" id="regularly_close2" title="regularly_close2">
-		                                    	<option value="0" selected>0</option>
-		                                    	<option value="1" >1</option>
-			                                    <option value="2" >2</option>
-			                                    <option value="3" >3</option>
-			                                    <option value="4" >4</option>
-			                                    <option value="5" >5</option>
-			                                    <option value="6" >6</option>
-			                                    <option value="7" >7</option>
-				                            </select>
-				                        </div>
-					                 </div>
-					                     <div class="col4">
-				                        <div class="select">
-				                            <select name="regularly_close3" id="regularly_close3" title="regularly_close3">
-		                                    	<option value="0" selected>0</option>
-		                                    	<option value="1" >1</option>
-			                                    <option value="2" >2</option>
-			                                    <option value="3" >3</option>
-			                                    <option value="4" >4</option>
-			                                    <option value="5" >5</option>
-			                                    <option value="6" >6</option>
-			                                    <option value="7" >7</option>
-				                            </select>
-				                        </div>
-					                 </div>
-				                </div>
+				                <div class="regularly_close">
+					               <input type="text" id="regularlyclose" name ="regularlyclose" placeholder="휴무일을 입력하세요(,로구분)">
+				               </div>
 							</div>
 					         
 							
