@@ -28,7 +28,7 @@
 	</select>
 	<select id="reserveViewMoney" resultType="PsyTestDTO">
 		select  RC.REGIDATE, R.totalprice, R.startdate, R.enddate,R.RESERVE_PERSON, TO_DATE(R.startdate)-(SELECT TO_DATE(SYSDATE, 'YY/MM/DD') "NOW"  FROM DUAL) as diff, 
-		case when TO_DATE(startdate)-(SELECT TO_DATE(SYSDATE, 'YY/MM/DD') "NOW"  FROM DUAL) = 0 then totalprice*0.2
+		case when TO_DATE(startdate)-(SELECT TO_DATE(SYSDATE, 'YY/MM/DD') "NOW"  FROM DUAL) &lt;= 0 then totalprice*0.2
 		     when TO_DATE(startdate)-(SELECT TO_DATE(SYSDATE, 'YY/MM/DD') "NOW"  FROM DUAL) = 1 then totalprice*0.3
 		     when TO_DATE(startdate)-(SELECT TO_DATE(SYSDATE, 'YY/MM/DD') "NOW"  FROM DUAL) = 2 then totalprice*0.4
 		     when TO_DATE(startdate)-(SELECT TO_DATE(SYSDATE, 'YY/MM/DD') "NOW"  FROM DUAL) = 3 then totalprice*0.5
