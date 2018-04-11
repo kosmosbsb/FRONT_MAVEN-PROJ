@@ -48,7 +48,7 @@
     	    });
 
     	    //공간 받아버리기 (일단은 주소값만 있어)
-			var dataTmp = ${spaceList};
+			var dataTmp = ${jsonspaceList};
 			
 			//for (var i = 0 ; i < dataTmp.length ; i++){ //확인용
 			//	alert(dataTmp[i].address);
@@ -216,11 +216,49 @@
         	     marker.setMap(null);
         	 }
         	 
+        	 
+        	 
+             $(function(){
+                 $("#menu-close").click(function(e) {
+                      e.preventDefault();
+                      $("#sidebar-wrapper").toggleClass("active");
+                  });
+                  
+                  $("#menu-toggle").click(function(e) {
+                      e.preventDefault();
+                      $("#sidebar-wrapper").toggleClass("active");
+                  });
+              });
+              
+              $(function(){
+                 $("#history").click(function(){
+                    history.back();
+                 })
+              });
+              
+      	$(".hover").mouseleave(function() {
+      		$(this).removeClass("hover");
+      	});
+      	
+      	$('#map_area').hide();
+      	$('.show_map_btn').on('click',function(){
+      		$('.main').hide();
+      		$('#map_area').show();
+      	});
+        	 
+      	$("#cal_exit").on("click", function(){
+			$("#map_area").hide();
+			$(".main").show();
+		});	 
+        	 
+        	 
+        	 
         });
         
 		</script>
         
         <!-- 지도끝 -->
+        
     </head>
     
     <style>
@@ -751,9 +789,16 @@
 		<!-----------------------------------------지도---------------------->                  
 
    </main>
-		<div id="map_area" class="container" style="margin-top: 2em;">
+		<div id="map_area" class="container">
 			<div class="row">
-				<div id="map" style="width: 100%; height: 500px;"></div>
+				<div class="col-md-12">
+					<div class="row" align="right" style="padding-top: 20px;">
+						<span id="cal_exit" style="color: black; cursor: pointer; font-size: 2em;">
+							<img src="<c:url value='/resources/images/icons/X.png'/>">
+						</span>
+					</div>
+					<div id="map" style="height: 500px;"></div>
+				</div>
 			</div>
 		</div>
 
@@ -769,32 +814,3 @@
   </body>
 </html>
 
-<script>
-        $(function(){
-           $("#menu-close").click(function(e) {
-                e.preventDefault();
-                $("#sidebar-wrapper").toggleClass("active");
-            });
-            
-            $("#menu-toggle").click(function(e) {
-                e.preventDefault();
-                $("#sidebar-wrapper").toggleClass("active");
-            });
-        });
-        
-        $(function(){
-           $("#history").click(function(){
-              history.back();
-           })
-        });
-        
-	$(".hover").mouseleave(function() {
-		$(this).removeClass("hover");
-	});
-	
-	$('#map_area').hide();
-	$('.show_map_btn').on('click',function(){
-		$('.main').hide();
-		$('#map_area').show();
-	});
-</script>
