@@ -9,7 +9,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="<c:url value='/resources/images/icons/faviconSC2.png'/>"/>
-        <title>SpaceCloud</title>
+        <title>${searchSpace } 검색결과</title>
         <!-- Bootstrap core CSS -->
         <link href="<c:url value='/resources/css/bootstrap.min.css'/>" rel="stylesheet">
         <link href="<c:url value='/resources/font-awesome/css/font-awesome.min.css'/>" rel="stylesheet" type="text/css" />
@@ -627,7 +627,7 @@
 <!-- -----middle--------------------------------------------------------------------------------------------------- -->
    <main class="main">
 <!--3/30 --------------------------------------------------------------------- -->   
-  <div class="app-content" >
+  <div class="app-content">
     <div class="box_search">
        <dl>
           <dt>
@@ -748,14 +748,14 @@
       </section>
 <!--공간 --------------------------------------------------------------- -->   
 <!-----------------------------------------지도---------------------->
-		<div class="container">
+		<!-----------------------------------------지도---------------------->                  
+
+   </main>
+		<div id="map_area" class="container" style="margin-top: 2em;">
 			<div class="row">
 				<div id="map" style="width: 100%; height: 500px;"></div>
 			</div>
 		</div>
-		<!-----------------------------------------지도---------------------->                  
-
-   </main>
 
 <!-----------footer--------------------------------------------------------------------------------------------------->
       <jsp:include page="/WEB-INF/template/Footer.jsp"/>
@@ -788,9 +788,13 @@
            })
         });
         
-        
-        
 	$(".hover").mouseleave(function() {
 		$(this).removeClass("hover");
+	});
+	
+	$('#map_area').hide();
+	$('.show_map_btn').on('click',function(){
+		$('.main').hide();
+		$('#map_area').show();
 	});
 </script>

@@ -230,7 +230,8 @@
         $(function(){
 			$("button[name='top_search_btn']").click(function() {
 				var fieldString=$('#space_search_text').val();
-				if(fieldString.trim().legth==0){
+				//alert("여기야"+fieldString.trim().length);
+				if(fieldString.trim().length==0){
 					alert("검색어를 입력해주세요!");
 					return false;
 				}
