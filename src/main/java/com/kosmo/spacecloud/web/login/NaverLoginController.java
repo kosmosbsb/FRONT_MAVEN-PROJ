@@ -29,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.kosmo.spacecloud.impl.login.MemberServiceImpl;
+import com.kosmo.spacecloud.khw.FCMTokenServiceImpl;
 import com.kosmo.spacecloud.khw.SpaceServiceImpl;
 import com.kosmo.spacecloud.service.khw.SpaceDTO;
 import com.kosmo.spacecloud.service.login.MemberDTO;
@@ -43,6 +44,10 @@ public class NaverLoginController {
 	@Resource(name="spaceService")
 	private SpaceServiceImpl spaceService;
 	
+	@Resource(name="fCMTokenService")
+	private FCMTokenServiceImpl fCMTokenService;
+	
+	
 	/* NaverLoginBO */
 	private NaverLoginBO naverLoginBO;
 	
@@ -51,6 +56,8 @@ public class NaverLoginController {
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO){
 		this.naverLoginBO = naverLoginBO;
 	}
+	
+	private static String userFCMToken;
 	
     @RequestMapping("/login.do")
     public String login(HttpSession session) {
@@ -96,6 +103,15 @@ public class NaverLoginController {
 			dto.setGender(jsonObject_tail.get("gender").toString());
 			dto.setAge(jsonObject_tail.get("age").toString());
 			memberService.insert(dto);
+		}
+		
+		//살아계심 ㅇㅇ
+		//System.out.println("토큰님 살아계신가요?: "+userFCMToken);
+
+		
+		//서버 껐다가 켜면 기존 앱 다운받은 단말기에서 로그인 불가...ㅠㅠ //일단 이대로 간다
+		if(userFCMToken != null) {
+			fCMTokenService.tokenIDmapper(userFCMToken, jsonObject_tail.get("id").toString());
 		}
 		
 		//회원 아이디(키값), 이름, 닉네임, 프로필 이미지 경로, 이메일주소는 세션에 박아둘게요
@@ -260,54 +276,15 @@ public class NaverLoginController {
 		return "/scmain/SCMain";
 	}
 	
-	
+	//최초 앱 설치시, 단말기로부터 전송된 토큰을 DB에 저장해주는 메소드
 	@RequestMapping("/mobile/sendFCM.do")
-    public String index(Model model, HttpServletRequest request, HttpSession session /*MobileTokenVO vo*/)throws Exception{
-            System.out.println("토큰님?: "+request.getParameter("Token"));
-            //List<MobileTokenVO> tokenList = fcmService.loadFCMInfoList(vo); 
+    public String tokenCreater(Model model, HttpServletRequest request, HttpSession session /*MobileTokenVO vo*/)throws Exception{
+            System.out.println("토큰 하이?: "+request.getParameter("Token"));
             
-                //String token = tokenList.get(count).getDEVICE_ID();
+            userFCMToken = request.getParameter("Token");
+            fCMTokenService.insertToken(request.getParameter("Token"));
                 
-                final String apiKey = "AAAAu2-Ecco:APA91bFK9WlCbvV00BvveSSUqSokR2I639j14IxOMEJ81pY-aecemd0nyaF_mp7R9u1yVp2W_xz7EUUN0Dq61dybulwvV11z4kibWgx6EkuZn2IAyjaT698mw4Bch6MlZUXQuXOe8obp";
-                URL url = new URL("https://fcm.googleapis.com/fcm/send");
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setDoOutput(true);
-                conn.setRequestMethod("POST");
-                conn.setRequestProperty("Content-Type", "application/json");
-                conn.setRequestProperty("Authorization", "key=" + apiKey);
- 
-                conn.setDoOutput(true);
                 
-                String userId =(String) request.getSession().getAttribute("ssUserId");
- 
-                // 이렇게 보내면 주제를 ALL로 지정해놓은 모든 사람들한테 알림을 날려준다.
-                //String input = "{\"notification\" : {\"title\" : \"여기다 제목 넣기 \", \"body\" : \"여기다 내용 넣기\"}, \"to\":\"/topics/ALL\"}";
-                
-                // 이걸로 보내면 특정 토큰을 가지고있는 어플에만 알림을 날려준다  위에 둘중에 한개 골라서 날려주자
-                String input = "{\"notification\" : {\"title\" : \" 여기다 제목넣기 \", \"body\" : \"여기다 내용 넣기\"}, \"to\":\""+request.getParameter("Token")+"\"}";
- 
-                OutputStream os = conn.getOutputStream();
-                
-                // 서버에서 날려서 한글 깨지는 사람은 아래처럼  UTF-8로 인코딩해서 날려주자
-                os.write(input.getBytes("UTF-8"));
-                os.flush();
-                os.close();
- 
-                int responseCode = conn.getResponseCode();
-                System.out.println("\nSending 'POST' request to URL : " + url);
-                System.out.println("Post parameters : " + input);
-                System.out.println("Response Code : " + responseCode);
-                
-                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                String inputLine;
-                StringBuffer response = new StringBuffer();
- 
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
-                }
-                in.close();
-                // print result
-                System.out.println(response.toString());
                 
  
         return "redirect:/spacecloud.do";

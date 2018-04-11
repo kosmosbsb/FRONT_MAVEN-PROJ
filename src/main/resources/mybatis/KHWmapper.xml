@@ -44,6 +44,14 @@
 		SELECT * FROM SPACE WHERE ADDRESS LIKE '%' || #{searchWord} || '%'
 	</select>
 	
+	<insert id="insertToken" parameterType="String">
+		INSERT INTO FCM_TOKEN VALUES(SEQ_FCM_TOKEN_TOKEN_INDEX.NEXTVAL, #{token}, null)
+	</insert>
+	
+	<update id="tokenIDmapper" parameterType="java.util.Map">
+		UPDATE FCM_TOKEN SET ID=#{id} WHERE TOKEN=#{token}
+	</update>
+	
 </mapper>
 
 
