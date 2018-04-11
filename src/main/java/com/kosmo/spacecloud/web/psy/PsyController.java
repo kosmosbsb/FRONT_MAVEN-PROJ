@@ -50,10 +50,10 @@ public class PsyController {
 		
 		List<PsyTestDTO> list=service.reserveView(rn);
 		List<PsyTestDTO> list2=service.reserveViewReserver(rn);
-		List<PsyTestDTO> list3=service.reserveViewRefund(sn);
+		//List<PsyTestDTO> list3=service.reserveViewRefund(sn);
 		List<PsyTestDTO> list4=service.reserveViewSpace(sn);
 		List<PsyTestDTO> list5=service.reserveViewMoney(rn);
-		
+		/*
 		for(PsyTestDTO dto:list5) {
 			System.out.println(dto.getReserve_no());
 			System.out.println(dto.getRegidate());
@@ -63,11 +63,11 @@ public class PsyController {
 			System.out.println(dto.getDiff());
 			System.out.println(dto.getReserve_person());
 			System.out.println(dto.getRefundprice());
-		}
+		}*/
 		
 		model.addAttribute("psyList",list);
 		model.addAttribute("reserverList",list2);
-		model.addAttribute("refundList",list3);
+		//model.addAttribute("refundList",list3);
 		model.addAttribute("spaceList",list4);
 		//System.out.println(list5.isEmpty());
 		if(!list5.isEmpty())
@@ -132,6 +132,33 @@ public class PsyController {
 		//}
 		
 		return "forward:/NormalReserve/ReserveView.do";
+	}
+	
+	@RequestMapping(value="/NormalReserve/ReserveHostCancel.do", method=RequestMethod.POST)
+	public String reservehostCancel(PsyTestDTO dto,HttpServletRequest req,HttpSession session)throws Exception{
+		System.out.println("켄슬 컨트롤러");
+		dto.setCancel_comment(req.getParameter("comment"));
+		dto.setReserve_no(req.getParameter("rn"));
+		service.reserveCancel(dto);
+		System.out.println(req.getParameter("rn"));
+		service.reservehostCancelStatUpd(dto);
+		//req.getParameter("rn");
+		//req.getParameter("sn");
+		
+		//System.out.println(req.getParameter("price"));
+		//System.out.println(req.getParameter("comment"));
+		//System.out.println(req.getParameter("rn"));
+		//System.out.println(req.getParameter("sn"));
+		//req.setAttribute("rn", req.getParameter("rn"));
+		//req.setAttribute("sn", req.getParameter("sn"));
+		
+		//for(PsyTestDTO dto:list) {
+		//	System.out.println(dto.getH_nickname());
+		//	System.out.println(dto.getSpace_name());
+		//	System.out.println(dto.getImg_main());
+		//}
+		
+		return "forward:/NormalReserve/ReserveHostView.do";
 	}
 	
 	@RequestMapping(value="/NormalReserve/ReserveForm.do", method=RequestMethod.GET)
@@ -217,6 +244,103 @@ public class PsyController {
 		service.reserveInsert(dto);
 		
 		return "forward:/NormalReserve/ReserveLoginList.do";
+	}
+	
+	@RequestMapping("/NormalReserve/ReserveHostList.do")
+	public String reservehostInfoList(Model model, HttpSession session)throws Exception{
+
+
+		//System.out.println(session.getAttribute("USER_NICNAME"));//사이드메뉴 로긴기능을 통해 세션에서 닉네임 가져오기
+		
+		//Map map = new HashMap();
+		//map.put("nickname",session.getAttribute("USER_NICNAME"));
+		String nickname = (String)session.getAttribute("USER_NICNAME_H");
+		//System.out.println(nickname);
+		List<PsyTestDTO> list=service.reservehostInfoList(nickname);
+		model.addAttribute("reserveHostlist",list);
+		
+		//for(PsyTestDTO dto:list) {
+		//	System.out.println(dto.getH_nickname());
+		//	System.out.println(dto.getSpace_name());
+		//	System.out.println(dto.getImg_main());
+		//	System.out.println(dto.getStatus());
+		//	System.out.println(dto.getRegidate());
+		//}
+		
+		return "/scpartner/reserve/ReserveHostList";
+	}
+	
+	@RequestMapping("/NormalReserve/ReserveHostView.do")
+	public String reserveHostView(Model model, HttpServletRequest req)throws Exception{
+		
+		String rn = req.getParameter("rn");
+		String sn = req.getParameter("sn");
+		//System.out.println(rn);
+		//System.out.println(sn);
+		
+		List<PsyTestDTO> list=service.reserveView(rn);
+		List<PsyTestDTO> list2=service.reserveViewReserver(rn);
+		//List<PsyTestDTO> list3=service.reserveViewRefund(sn);
+		List<PsyTestDTO> list4=service.reserveViewSpace(sn);
+		List<PsyTestDTO> list5=service.reserveViewMoney(rn);
+		
+		//for(PsyTestDTO dto:list5) {
+		//	System.out.println(dto.getReserve_no());
+		//	System.out.println(dto.getRegidate());
+		//	System.out.println(dto.getCancel_comment());
+		//	System.out.println(dto.getStartdate());
+		//	System.out.println(dto.getEnddate());
+		//	System.out.println(dto.getDiff());
+		//	System.out.println(dto.getReserve_person());
+		//	System.out.println(dto.getRefundprice());
+		//}
+		
+		model.addAttribute("psyList",list);
+		model.addAttribute("reserverList",list2);
+		//model.addAttribute("refundList",list3);
+		model.addAttribute("spaceList",list4);
+		//System.out.println(list5.isEmpty());
+		if(!list5.isEmpty())
+		model.addAttribute("moneyList",list5);
+		
+		//for(PsyTestDTO dto:list) {
+			//System.out.println(dto.getReserve_no());
+			//System.out.println(dto.getRegidate());
+			//System.out.println(dto.getSpace_name());
+			//System.out.println(dto.getReserve_date());
+			//System.out.println(dto.getReserve_person());
+			//System.out.println(dto.getAsk());
+		//}
+		
+		return "/scpartner/reserve/TemplateOrigin";
+	}
+	
+	@RequestMapping("/NormalReserve/ReserveHostAccept.do")
+	public String reservehostAccept(PsyTestDTO dto,HttpServletRequest req,HttpSession session)throws Exception{
+		System.out.println("엑셉트 컨트롤러");
+		dto.setCancel_comment(req.getParameter("comment"));
+		dto.setReserve_no(req.getParameter("rn"));
+		service.reserveCancel(dto);
+		System.out.println(req.getParameter("rn"));
+		service.reservehostAcceptStatUpd(dto);
+		req.setAttribute("accepted", "1");
+		//req.getParameter("rn");
+		//req.getParameter("sn");
+		
+		//System.out.println(req.getParameter("price"));
+		//System.out.println(req.getParameter("comment"));
+		//System.out.println(req.getParameter("rn"));
+		//System.out.println(req.getParameter("sn"));
+		//req.setAttribute("rn", req.getParameter("rn"));
+		//req.setAttribute("sn", req.getParameter("sn"));
+		
+		//for(PsyTestDTO dto:list) {
+		//	System.out.println(dto.getH_nickname());
+		//	System.out.println(dto.getSpace_name());
+		//	System.out.println(dto.getImg_main());
+		//}
+		
+		return "forward:/NormalReserve/ReserveHostView.do";
 	}
 	
 }

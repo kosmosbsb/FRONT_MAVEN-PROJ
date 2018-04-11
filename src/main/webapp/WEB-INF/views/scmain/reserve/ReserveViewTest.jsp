@@ -58,7 +58,6 @@
 						</div>
 						<div class="col-sm-6 visible-sm">
 							<div class="text-right">
-								<button type="button" class="book-now-btn">Book Now</button>
 							</div>
 						</div>
 						<div class="col-md-8 col-sm-12 col-xs-12 remove-padd">
@@ -74,16 +73,6 @@
 								</div>
 								<div
 									class="collapse navigation navbar-collapse navbar-ex1-collapse remove-space">
-									<ul class="list-unstyled nav1 cl-effect-10">
-										<li><a data-hover="Home" class="active"><span>Home</span></a></li>
-										<li><a data-hover="About" href="about.html"><span>About</span></a></li>
-										<li><a data-hover="Rooms" href="rooms.html"><span>Rooms</span></a></li>
-										<li><a data-hover="Gallery" href="gallery.html"><span>Gallery</span></a></li>
-										<li><a data-hover="Dinning" href="dinning.html"><span>Dinning</span></a></li>
-										<li><a data-hover="News" href="news.html"><span>News</span></a></li>
-										<li><a data-hover="Contact Us" href="contact.html"><span>contact
-													Us</span></a></li>
-									</ul>
 
 								</div>
 							</nav>

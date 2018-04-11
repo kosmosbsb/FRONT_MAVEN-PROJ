@@ -75,4 +75,18 @@ public class PsyTestServiceImpl implements PsyTestService{
 		return dao.reserveFormType(sn);
 	}
 
+	public List<PsyTestDTO> reservehostInfoList(String nickname) {
+		return dao.reservehostInfoList(nickname);
+	}
+
+	public int reservehostCancelStatUpd(PsyTestDTO dto) {
+		return dao.reservehostCancelStatUpd(dto);
+		
+	}
+
+	public int reservehostAcceptStatUpd(PsyTestDTO dto) {
+		return dao.reservehostAcceptStatUpd(dto);
+		
+	}
+
 }

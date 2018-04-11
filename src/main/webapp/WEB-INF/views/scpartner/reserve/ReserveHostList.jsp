@@ -5,13 +5,19 @@
 <!DOCTYPE html>
 <html lang="ko">
     <head>
+    	<style>
+    	th{
+    	background-color:#B0FEFF;
+    	
+    	}
+    	</style>
     	<meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="<c:url value='/resources/images/icons/faviconSC2.png'/>"/>
-        
         <title>팀플SC</title>
         <!-- Bootstrap core CSS -->
+        
         <link href="<c:url value='/resources/css/bootstrap.min.css'/>" rel="stylesheet">
         <link href="<c:url value='/resources/font-awesome/css/font-awesome.min.css'/>" rel="stylesheet" type="text/css" />
         <!-- Custom styles for this template -->
@@ -23,14 +29,9 @@
         <script src="<c:url value='/resources/js/bootstrap.min.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/resources/js/lightbox-plus-jquery.min.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/resources/js/instafeed.min.js'/>" type="text/javascript"></script>
-        <script src="<c:url value='/resources/js/instafeed.min.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/resources/js/custom.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/resources/js/fullcalendar.js'/>" type="text/javascript"></script>
         <link href="<c:url value='/resources/css/fullcalendar.css'/>" rel="stylesheet">
-        <script>
-        //console.log("what");
-        //console.log();
-        </script>
         
         <script>//사이드바 메뉴 스크립트
         $(function(){
@@ -45,9 +46,8 @@
             });
         });
         </script>
-        
-        <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
-		<script>
+               <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+        <script>
 		
 			$(document).ready(function() {
 			    var date = new Date();
@@ -195,11 +195,11 @@
     <body>
 	<div id="page">
 		<!--사이드 바 -->
-		<jsp:include page="/WEB-INF/template/SideMenu.jsp"/>
+		<jsp:include page="/WEB-INF/template/SideMenu_host.jsp"/>
 		
 		<!---header top---->
 		<!--header--->
-		<header class="header-container" style="background-color: #FFC600">
+		<header class="header-container" style="background-color: #693CED">
 			<div class="container">
 				<div class="top-row">
 					<div class="row">
@@ -210,41 +210,9 @@
 								<!--<a href="index.html"><span>vacay</span>home</a>-->
 							</div>
 						</div>
-						<div class="col-sm-6 visible-sm">
-							<div class="text-right">
-								<button type="button" class="book-now-btn">Book Now</button>
-							</div>
-						</div>
-						<div class="col-md-8 col-sm-12 col-xs-12 remove-padd">
-							<nav class="navbar navbar-default">
-								<div class="navbar-header page-scroll">
-									<button data-target=".navbar-ex1-collapse"
-										data-toggle="collapse" class="navbar-toggle" type="button">
-										<span class="sr-only">Toggle navigation</span> <span
-											class="icon-bar"></span> <span class="icon-bar"></span> <span
-											class="icon-bar"></span>
-									</button>
-
-								</div>
-								<div
-									class="collapse navigation navbar-collapse navbar-ex1-collapse remove-space">
-									<ul class="list-unstyled nav1 cl-effect-10">
-										<li><a data-hover="Home" class="active"><span>Home</span></a></li>
-										<li><a data-hover="About" href="about.html"><span>About</span></a></li>
-										<li><a data-hover="Rooms" href="rooms.html"><span>Rooms</span></a></li>
-										<li><a data-hover="Gallery" href="gallery.html"><span>Gallery</span></a></li>
-										<li><a data-hover="Dinning" href="dinning.html"><span>Dinning</span></a></li>
-										<li><a data-hover="News" href="news.html"><span>News</span></a></li>
-										<li><a data-hover="Contact Us" href="contact.html"><span>contact
-													Us</span></a></li>
-									</ul>
-
-								</div>
-							</nav>
-						</div>
-						<div class="col-md-2  col-sm-4 col-xs-12 hidden-sm">
-							<div class="text-right">
-								<button type="button" class="book-now-btn">Book Now</button>
+						<div class="col-md-8 col-sm-12 col-xs-12">
+							<div style="margin-left:40%; width:100%;">
+							<p style="font-size:30px;font-style: inherit;color: #FFC600">예약 정보 입력 페이지</p>
 							</div>
 						</div>
 					</div>
@@ -253,102 +221,63 @@
 		</header>
 		<!--end-->
 		<div class="clearfix"></div>
+
 		<!----resort-overview--->
 		<section class="resort-overview-block">
-		<div class="row">
-		<script>
-		$(function(){
-			
-			$("#buttonId").on('click',function(){
-				//console.log($("#taginputId").val()==null? "null":"null아님");
-				if($("#taginputId").val()==""){
-					$("#tagoutputId").val("");
-				}
-				else{
-				$("#tagoutputId").val($("#tagoutputId").val()+"#"+$("#taginputId").val());
-				$("#taginputId").val("");
-				}
-			});
-			
-			$("#faciloutputId").change(function(){
-				$("#faciloutputId").val("");
-			});
-			
-			$("#buttonId2").on('click',function(){
-				//console.log($("#taginputId").val()==null? "null":"null아님");
-				if($("#facilinputId").val()==""){
-					$("#faciloutputId").val("");
-				}
-				else{
-					if($("#faciloutputId").val()==""){
-						$("#faciloutputId").val($("#facilinputId").val())
-						$("#facilinputId").val("");
-					}
-					else{
-						$("#faciloutputId").val($("#faciloutputId").val()+"\r\n"+$("#facilinputId").val());
-						$("#facilinputId").val("");
-					}
-				}
-				console.log("#faciloutputId"+$("#faciloutputId").val());
-				$("#facilhiddenId").val($("#faciloutputId").val());
-				console.log("#facilhiddenId"+$("#facilhiddenId").val());
-			});
-			
-			$("#faciloutputId").change(function(){
-				$("#faciloutputId").val("");
-			});
-			
-		});
-		</script>
-		<div style="margin:auto;width:80%;">
-			<div class="col-lg-4">
-				<div class="input-group">
-				<span class="input-group-addon">태그를 입력하고 버튼을 누르세요!</span>
-				<input type="text" name="taginputName" class="form-control" id="taginputId">
-				<span class="input-group-addon" id="buttonId">버튼</span>
-				<!-- <button id="buttonId" class="btn btn-primary">버튼이다</button> -->
-				</div>
-			</div>
-			<div class="col-lg-8">
-				<div class="input-group">
-				<span class="input-group-addon">입력된 태그들(#로 구분하세요!)</span>
-				<input type="text" name="tagoutputName" class="form-control" id="tagoutputId">
-				</div>
-			</div>
-		</div>
 		
-		<div style="margin:auto;width:80%;margin-top:50px;">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="input-group">
-				<span class="input-group-addon">시설 안내사항을 입력하고 버튼을 누르세요!</span>
-				<input type="text" name="taginputName" class="form-control" id="facilinputId">
-				<span class="input-group-addon" id="buttonId2">버튼</span>
-				<!-- <button id="buttonId" class="btn btn-primary">버튼이다</button> -->
-				</div>
+			<div style="margin:auto;width:80%;margin-top:50px;">
+			<div id='wrap'>
+			<div id='calendar'></div>
+			<div style='clear:both'></div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-12">
-				<textarea class="form-control custom-control" rows="5" style="resize:none" id="faciloutputId"></textarea>
-				<input type="hidden" value="" id="facilhiddenId">
 			</div>
-		</div>
-		</div>
-		<div style="margin:auto;width:80%;margin-top:50px;">
-			<form id="formtest" action="<c:url value='/CJH/ControllerTest.do'/>"></form>
-			<button form="formtest" id="singlebutton" name="singlebutton" class="btn btn-primary">예약 신청</button>
-		</div>
-		<div style="margin:auto;width:80%;margin-top:50px;">
 		
+			<table class="table table-hover table-bordered" id="sampleTable">
 
-		<div id='wrap'>
-		<div id='calendar'></div>
-		<div style='clear:both'></div>
-		
-		
-		</div>
-		</div>
+				<thead>
+					<tr>
+						<th>공간명</th>
+						<th>처리여부</th>
+						<th>예약자</th>
+						<th>사진</th>
+						<th>예약 날짜</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:if test="${requestScope.reserveHostlist==null}" var="flag">
+						<tr>
+							<td colspan="5"><a href="<c:url value='#'/>">등록된 자료가
+									없습니다</a></td>
+						</tr>
+					</c:if>
+					<c:if test="${not flag}">
+					<c:forEach var="item" items="${reserveHostlist}" varStatus="loop">
+						<tr>
+							<td>${item.space_name}<a style="float:right" href="<c:url value='/NormalReserve/ReserveHostView.do?rn=${item.reserve_no}&sn=${item.space_no}'/>"
+							class="btn btn-primary">예약 정보 상세보기</a></td>
+							<td>
+							<c:if test="${item.status==0}" var="flag">
+							처리 대기중
+							</c:if>
+							<c:if test="${item.status==1}" var="flag">
+							호스트가 승인함.
+							</c:if>
+							<c:if test="${item.status==2}" var="flag">
+							호스트가 거부함.
+							</c:if>
+							<c:if test="${item.status==3}" var="flag">
+							유저가 취소함
+							</c:if>
+							</td>
+							<td>${item.n_nickname}</td>
+							<td>${item.img_main}</td>
+							<td>${item.regidate}</td>
+						</tr>
+					</c:forEach>
+					</c:if>
+				</tbody>
+			</table>
+
 		</section>
 
 		<!---footer--->

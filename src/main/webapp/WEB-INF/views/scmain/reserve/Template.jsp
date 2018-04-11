@@ -5,6 +5,12 @@
 <!DOCTYPE html>
 <html lang="ko">
     <head>
+    	<style>
+    	th{
+    	background-color:#B0FEFF;
+    	
+    	}
+    	</style>
     	<meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -60,41 +66,9 @@
 								<!--<a href="index.html"><span>vacay</span>home</a>-->
 							</div>
 						</div>
-						<div class="col-sm-6 visible-sm">
-							<div class="text-right">
-								<button type="button" class="book-now-btn">Book Now</button>
-							</div>
-						</div>
-						<div class="col-md-8 col-sm-12 col-xs-12 remove-padd">
-							<nav class="navbar navbar-default">
-								<div class="navbar-header page-scroll">
-									<button data-target=".navbar-ex1-collapse"
-										data-toggle="collapse" class="navbar-toggle" type="button">
-										<span class="sr-only">Toggle navigation</span> <span
-											class="icon-bar"></span> <span class="icon-bar"></span> <span
-											class="icon-bar"></span>
-									</button>
-
-								</div>
-								<div
-									class="collapse navigation navbar-collapse navbar-ex1-collapse remove-space">
-									<ul class="list-unstyled nav1 cl-effect-10">
-										<li><a data-hover="Home" class="active"><span>Home</span></a></li>
-										<li><a data-hover="About" href="about.html"><span>About</span></a></li>
-										<li><a data-hover="Rooms" href="rooms.html"><span>Rooms</span></a></li>
-										<li><a data-hover="Gallery" href="gallery.html"><span>Gallery</span></a></li>
-										<li><a data-hover="Dinning" href="dinning.html"><span>Dinning</span></a></li>
-										<li><a data-hover="News" href="news.html"><span>News</span></a></li>
-										<li><a data-hover="Contact Us" href="contact.html"><span>contact
-													Us</span></a></li>
-									</ul>
-
-								</div>
-							</nav>
-						</div>
-						<div class="col-md-2  col-sm-4 col-xs-12 hidden-sm">
-							<div class="text-right">
-								<button type="button" class="book-now-btn">Book Now</button>
+						<div class="col-md-8 col-sm-12 col-xs-12">
+							<div style="margin-left:40%; width:100%;">
+							<p style="font-size:30px;font-style: inherit;color: #693CED">공간 목록</p>
 							</div>
 						</div>
 					</div>

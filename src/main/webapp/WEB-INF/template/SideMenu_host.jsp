@@ -84,7 +84,7 @@
 			<li><a href="#" style="color: white;">보유 크래딧</a></li>
 			<li><a href="#" style="color: white;">호스트센터 홈</a></li>
 			<li><a href="#" style="color: white;">내 공간정보 관리</a></li>
-			<li><a href="#" style="color: white;">예약 리스트</a></li>
+			<li><a href="<c:url value="/NormalReserve/ReserveHostList.do" />" style="color: white;">예약 리스트</a></li>
 			<li><a href="#" style="color: white;">이용후기/Q&amp;A 관리</a></li>
 			<li class="majormenu"><a href="#" style="color: white;">1:1문의</a></li>
 			<li id="doQuestion" class="submenu1"><a href="#" style="color: white;">&nbsp;&nbsp;◎문의하기</a></li>

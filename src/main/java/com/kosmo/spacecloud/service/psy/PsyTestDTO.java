@@ -8,6 +8,7 @@ public class PsyTestDTO {
 	private String h_nickname;
 	private String img_main;
 	private String space_no;
+	private String n_nickname;
 	
 	//예약 상세보기 예약내용
 	private String reserve_no;
@@ -61,6 +62,12 @@ public class PsyTestDTO {
 	private String totalprice;//180409에 새로 추가함. reserve 에 들어갈 새 컬럼.
 	
 	
+	public String getN_nickname() {
+		return n_nickname;
+	}
+	public void setN_nickname(String n_nickname) {
+		this.n_nickname = n_nickname;
+	}
 	public String getDiff() {
 		return diff;
 	}

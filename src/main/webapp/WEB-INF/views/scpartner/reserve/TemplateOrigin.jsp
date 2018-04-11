@@ -48,11 +48,11 @@
     <body>
 	<div id="page">
 		<!--사이드 바 -->
-		<jsp:include page="/WEB-INF/template/SideMenu.jsp"/>
+		<jsp:include page="/WEB-INF/template/SideMenu_host.jsp"/>
 		
 		<!---header top---->
 		<!--header--->
-				<header class="header-container" style="background-color: #FFC600">
+		<header class="header-container" style="background-color: #693CED">
 			<div class="container">
 				<div class="top-row">
 					<div class="row">
@@ -65,7 +65,7 @@
 						</div>
 						<div class="col-md-8 col-sm-12 col-xs-12">
 							<div style="margin-left:40%; width:100%;">
-							<p style="font-size:30px;font-style: inherit;color: #693CED"><c:forEach var="item" items="${psyList}" varStatus="loop">${item.space_name}</c:forEach> 예약 정보</p>
+							<p style="font-size:30px;font-style: inherit;color: #FFC600"><c:forEach var="item2" items="${reserverList}" varStatus="loop">${item2.reserve_name}</c:forEach>의 예약 정보</p>
 							</div>
 						</div>
 					</div>
@@ -157,7 +157,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
+						<tr>
 							<td>100%</td>
 							<td>90%</td>
 							<td>80%</td>
@@ -177,6 +177,8 @@
 						<th>공간명</th>
 						<th>주소</th>
 						<th>연락처</th>
+						<th>longitude</th>
+						<th>latitude</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -192,6 +194,8 @@
 							<td>${item4.space_name}</td>
 							<td>${item4.address}</td>
 							<td>${item4.phone}</td>
+							<td>DB에 반영했으면 하지만 지금은 없는 컬럼</td>
+							<td>DB에 반영했으면 하지만 지금은 없는 컬럼</td>
 						</tr>
 					</c:forEach>
 					</c:if>
@@ -209,7 +213,7 @@
 						<th>예약 끝 날짜</th>
 						<th>예약일까지 남은 날짜</th>
 						<th>예약 인원</th>
-						<th>환불 가격</th>
+						<th>최종/환불 가격</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -248,14 +252,21 @@
 					</c:if>
 				</tbody>
 			</table>
-			
 			<!-- Button trigger modal -->
 			<c:if test="${fuck}">
+			<div class="row">
+			<div class="col-lg-1">
 			<button style="display: flex; justify-content: center;" type="button" class="btn btn-primary" data-toggle="modal"
-				data-target="#exampleModalCenter">예약 취소하기</button>
+				data-target="#exampleModalCenter">예약거부하기</button>
+			</div>	
+			<div class="col-lg-1">
+			<button style="display: flex; justify-content: center;" type="button" class="btn btn-primary" data-toggle="modal"
+				data-target="#exampleModalCenter2">예약승인하기</button>	
+			</div>
+			</div>
 			</c:if>
-			<!-- Modal -->
 			
+			<!-- Modal -->
 			<div class="modal fade" id="exampleModalCenter" tabindex="-1"
 				role="dialog" aria-labelledby="exampleModalCenterTitle"
 				aria-hidden="true">
@@ -270,11 +281,11 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							<form class="form-horizontal" id="form1" action="<c:url value='/NormalReserve/ReserveCancel.do'/>" method="post">
+							<form class="form-horizontal" id="form1" action="<c:url value='/NormalReserve/ReserveHostCancel.do'/>" method="post">
 								<fieldset>
 								
 								<!-- Form Name -->
-								<legend>예약 취소 양식</legend>
+								<legend>예약 거부 양식</legend>
 								
 								<!-- Textarea -->
 								<div class="form-group">
@@ -293,6 +304,49 @@
 							<button type="button" class="btn btn-secondary"
 								data-dismiss="modal">Close</button>
 							<button type="submit" form="form1" class="btn btn-primary">예약 취소 신청</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Modal -->
+			<div class="modal fade" id="exampleModalCenter2" tabindex="-1"
+				role="dialog" aria-labelledby="exampleModalCenterTitle"
+				aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">Modal
+								title</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form class="form-horizontal" id="form2" action="<c:url value='/NormalReserve/ReserveHostAccept.do'/>" method="post">
+								<fieldset>
+								
+								<!-- Form Name -->
+								<legend>예약 승인 확인</legend>
+								
+								<!-- Textarea -->
+								<div class="form-group">
+								  <label class="col-md-4 control-label" for="textarea">예약자에게 남길 말</label>
+								  <div class="col-md-4">                     
+								    <textarea class="form-control" id="textarea" name="comment"></textarea>
+								    <input type="hidden" name="rn" value="${param.rn}">
+								  	<input type="hidden" name="sn" value="${param.sn}">
+								  </div>
+								</div>
+								
+								</fieldset>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+							<button type="submit" form="form2" class="btn btn-primary">예약승인!</button>
 						</div>
 					</div>
 				</div>
