@@ -239,7 +239,6 @@
 						<th>공간명</th>
 						<th>처리여부</th>
 						<th>예약자</th>
-						<th>사진</th>
 						<th>예약 날짜</th>
 					</tr>
 				</thead>
@@ -270,7 +269,6 @@
 							</c:if>
 							</td>
 							<td>${item.n_nickname}</td>
-							<td>${item.img_main}</td>
 							<td>${item.regidate}</td>
 						</tr>
 					</c:forEach>

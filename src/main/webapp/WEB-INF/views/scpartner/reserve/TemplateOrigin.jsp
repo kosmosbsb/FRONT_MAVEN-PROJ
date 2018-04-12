@@ -177,8 +177,6 @@
 						<th>공간명</th>
 						<th>주소</th>
 						<th>연락처</th>
-						<th>longitude</th>
-						<th>latitude</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -194,8 +192,6 @@
 							<td>${item4.space_name}</td>
 							<td>${item4.address}</td>
 							<td>${item4.phone}</td>
-							<td>DB에 반영했으면 하지만 지금은 없는 컬럼</td>
-							<td>DB에 반영했으면 하지만 지금은 없는 컬럼</td>
 						</tr>
 					</c:forEach>
 					</c:if>
