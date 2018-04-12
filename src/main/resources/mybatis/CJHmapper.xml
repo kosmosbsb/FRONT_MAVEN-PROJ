@@ -6,7 +6,19 @@
 
 <!-- sql 매핑하기 (Comment.xml, OneMemo.xml 참고) -->
 <mapper namespace="mybatis.CJHmapper"> 
-
+	<select id="selectListsp" resultType="CjhDTO">
+		select space_no, space_name, intro_main, space_tag, intro_detail from space 
+		where space_no=#{sn}
+	</select>
+	<select id="selectListhost" resultType="CjhDTO">
+		select H.h_nickname, H.introduce, S.mail, S.phone from space S inner join user_host H on S.id=H.id 
+		where S.space_no=#{sn}
+	</select>
+	<select id="selectListres" resultType="CjhDTO">
+		select space_no, oper_time, regularly_close, min_day, max_day, min_person, max_person, price_standard, time_or_day, price_weekday, precaution 
+		from space_reserve_info 
+		where space_no=#{sn}
+	</select>
 </mapper>
 
 

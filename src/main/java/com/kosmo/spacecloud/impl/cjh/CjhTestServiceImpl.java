@@ -21,5 +21,17 @@ public class CjhTestServiceImpl implements CjhService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public List<CjhDTO> selectListsp(String sn) {
+		return dao.selectListsp(sn);
+	}
+
+	public List<CjhDTO> selectListhost(String sn) {
+		return dao.selectListhost(sn);
+	}
+
+	public List<CjhDTO> selectListres(String sn) {
+		return dao.selectListres(sn);
+	}
 	
 }

@@ -21,4 +21,16 @@ public class CjhDAO implements CjhService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public List<CjhDTO> selectListsp(String sn) {
+		return sqlMapper_CJH.selectList("selectListsp",sn);
+	}
+
+	public List<CjhDTO> selectListhost(String sn) {
+		return sqlMapper_CJH.selectList("selectListhost",sn);
+	}
+
+	public List<CjhDTO> selectListres(String sn) {
+		return sqlMapper_CJH.selectList("selectListres",sn);
+	}
 }

@@ -26,6 +26,20 @@
         <script src="<c:url value='/resources/js/instafeed.min.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/resources/js/custom.js'/>" type="text/javascript"></script>
         
+        <script>//사이드바 메뉴 스크립트
+        $(function(){
+        	$("#menu-close").click(function(e) {
+                e.preventDefault();
+                $("#sidebar-wrapper").toggleClass("active");
+            });
+            
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#sidebar-wrapper").toggleClass("active");
+            });
+        });
+        </script>
+        
     </head>
     <body>
 	<div id="page">
@@ -128,7 +142,6 @@
 					</c:if>
 					<c:if test="${not pana}">
 					<c:forEach var="item1" items="${spaceInfo}" varStatus="loop">
-					<c:set var="spaceNo" value="${spaceInfo.space_no}"/>
 					<tr>
 						<td>${item1.space_no}</td>
 						<td>${item1.space_name}</td>
@@ -199,8 +212,8 @@
 					<tr>
 						<td>${item3.oper_time}</td>
 						<td>${item3.regularly_close}</td>
-						<td>${item3.min_day}~${item.max_day}</td>
-						<td>${item3.min_person}~${item.max_person}</td>
+						<td>${item3.min_day}~${item3.max_day}</td>
+						<td>${item3.min_person}~${item3.max_person}</td>
 						<td>${item3.price_standard}</td>
 						<td>${item3.time_or_day}</td>
 						<td>${item3.price_weekday}</td>
@@ -212,7 +225,7 @@
 			</table>
 			</div>
 			<div style="margin:auto; width:80%; margin-top: 50px;">
-			<a style="float:center" href="<c:url value='/NormalReserve/ReserveForm.do?sn=${spaceNo}'/>"
+			<a style="float:center" href="<c:url value='/NormalReserve/ReserveForm.do?sn=${param.sn}'/>"
 							class="btn btn-primary btn-block">예약하기</a>
 			</div>
 		</section>
