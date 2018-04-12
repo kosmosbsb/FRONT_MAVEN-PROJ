@@ -221,34 +221,20 @@
                 	        marker.setMap(map);
                 	       
                 	        //주소 정보 전달
-                	        /* $('#roadAddress').val(fullRoadAddr);
+                	        $('#roadAddress').val(fullRoadAddr);
                 	        $('#jibunAddress').val(data.jibunAddress);
                 	        $('#sido').val(data.sido);
                 	        $('#sigungu').val(data.sigungu);
                 	        $('#bname').val(data.bname);
                 	        $('#bname1').val(data.bname1);
                 	        $('#lat').val(lat);
-                	        $('#lng').val(lng); */
+                	        $('#lng').val(lng); 
                         }
                     });	                   
                 }
             }).open(); 
         }
       
-      
-      
-        /* function getThumbnailPrivew(html, $target) {
-            if (html.files && html.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $target.css('display', '');
-                    //$target.css('background-image', 'url(\"' + e.target.result + '\")'); // 배경으로 지정시
-                    $target.html('<img src="' + e.target.result + '" border="0" alt="" />');
-                }
-                reader.readAsDataURL(html.files[0]);
-                $('#cma_file').val(e.target.result);
-            }
-        } */
         
         // 대표 이미지
    		var sel_file;
@@ -608,7 +594,7 @@
 			</div>
 			</section>
 			
-			<form action="Complete.jsp" class="form-horizontal" method="post" id="trans" enctype="Multipart/form-data">
+			<form action="Complete.jsp" class="form-horizontal" method="post" id="trans">
 				<div class="row setup-content" id="step-1">
 					<div class="col-xs-12">
 						<div class="col-md-12">
@@ -842,6 +828,16 @@
 							       				<input class="form-control" type="text" id="addrdetail" name ="addrdetail" placeholder="상세주소">
 							       			</div>
 											<div id="map" style="width:100%;height:500px;margin-top:10px;display:none"></div>
+											<input type="hidden" id="lat" name="lat">
+											<input type="hidden" id="lng" name="lng">
+											<input type="hidden" id="roadAddress" name="roadAddress">
+											<input type="hidden" id="jibunAddress" name="jibunAddress">
+											<input type="hidden" id="sido" name="sido">
+											<input type="hidden" id="sigungu" name="sigungu">
+											<input type="hidden" id="bname" name="bname">
+											<input type="hidden" id="bname1" name="bname1">
+											
+											
 										</div>
 									</div>																						
 										

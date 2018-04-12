@@ -2,28 +2,33 @@ package com.kosmo.spacecloud.service.cjh;
 
 public class CjhDTO {
 
+	// space
 	private String space_no;
 	private String space_name;
 	private String intro_main;
 	private String space_tag;
 	private String intro_detail;
 	
+	// view 필요정보
 	private String h_nickname;
 	private String introduce;
+	
+	// reserve
 	private String mail;
 	private String phone;
-	
 	private String oper_time;
 	private String regularly_close;
 	private String min_day;
 	private String max_day;
 	private String min_person;
 	private String max_person;
-	
 	private String price_standard;
 	private String time_or_day;
 	private String price_weekday;
 	private String precaution;
+	
+	
+	
 	public String getSpace_no() {
 		return space_no;
 	}

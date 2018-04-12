@@ -19,6 +19,8 @@
 		from space_reserve_info 
 		where space_no=#{sn}
 	</select>
+	
+	
 </mapper>
 
 

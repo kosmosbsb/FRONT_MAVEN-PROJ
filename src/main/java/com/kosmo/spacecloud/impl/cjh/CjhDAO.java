@@ -33,4 +33,8 @@ public class CjhDAO implements CjhService{
 	public List<CjhDTO> selectListres(String sn) {
 		return sqlMapper_CJH.selectList("selectListres",sn);
 	}
+
+	public Object insertspace() {
+		return sqlMapper_CJH.insert("insertspace");
+	}
 }
