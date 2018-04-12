@@ -164,6 +164,7 @@ CREATE TABLE SPACE
 	HEART number,
 	-- 회의실, 파티룸, 공연장, 다목적룸 등등
 	SPACE_TYPE nvarchar2(100),
+	facilities varchar2(100),
 	INTRO_MAIN nvarchar2(27),
 	INTRO_DETAIL nvarchar2(500),
 	ADDRESS nvarchar2(150),
