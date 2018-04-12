@@ -114,21 +114,24 @@ td {
 			<div class="container">
 				<div class="top-row">
 					<div class="row">
-						<div class="col-md-1" align="left" style="margin-top: -20px; right: 200px;">
+						<div class="col-md-1 col-sm-1 col-xs-1" align="left" style="margin-top: -20px; right: 200px;">
 							<a id="history">
 								<img src='<c:url value='/resources/images/icons/prev_ico.png'/>'/>
 							</a>
 						</div>
 						
-						<div>
+						<div class="col-md-3 col-sm-3 col-xs-3">
 							<div id="logo" style="margin-top: -1.8em; right: 150px; position: relative;">
-								<a href='<c:url value="/index.jsp"/>'>
+								<a href='<c:url value="/spacecloud.do"/>'>
 									<img src="<c:url value='/resources/images/custom/sclogo2.png'/>" alt="logo" width=160px height=38px>
 								</a>
 								<!--<a href="index.html"><span>vacay</span>home</a>-->
 							</div>
 						</div>
+						<div class="col-md-4 col-sm-4 col-xs-4" style="margin-top: -15px; text-align: center;">
 						
+							<span style="font-size:25px; font-weight: bold;">공지 사항</span>
+						</div>
 						
 					</div>
 				</div>
@@ -191,7 +194,7 @@ td {
 	        </div>
 	      </div>
 <!-- --------------------------------------페이징 -->
-		<div class="row">
+		<div class="row" style="margin-left: 10em;">
 			${pagingString}
 		</div>
 

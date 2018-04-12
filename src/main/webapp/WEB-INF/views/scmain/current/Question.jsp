@@ -96,7 +96,7 @@
 						
 						<div class="col-md-3 col-sm-3 col-xs-3">
 							<div id="logo" style="margin-top: -1.8em; right: 150px; position: relative;">
-								<a href='<c:url value="/spacecloud/spacecloud.do"/>'>
+								<a href='<c:url value="/spacecloud.do"/>'>
 									<img src="<c:url value='/resources/images/custom/sclogo2.png'/>" alt="logo" width=160px height=38px>
 								</a>
 								<!--<a href="index.html"><span>vacay</span>home</a>-->
