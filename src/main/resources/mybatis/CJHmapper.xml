@@ -7,8 +7,7 @@
 <!-- sql 매핑하기 (Comment.xml, OneMemo.xml 참고) -->
 <mapper namespace="mybatis.CJHmapper"> 
 	<select id="selectListsp" resultType="CjhDTO">
-		select space_no, space_name, intro_main, space_tag, intro_detail, img_main
-		from space 
+		select space_no, space_name, intro_main, space_tag, intro_detail from space 
 		where space_no=#{sn}
 	</select>
 	<select id="selectListhost" resultType="CjhDTO">
@@ -21,6 +20,13 @@
 		where space_no=#{sn}
 	</select>
 	
+	<insert id="insertSpace" parameterType="CjhDTO">
+		insert into space(SPACE_NO, SPACE_NAME, HEART, SPACE_TYPE, FACILITIES, INTRO_MAIN, INTRO_DETAIL, ADDRESS, SPACE_TAG, IMG_MAIN, MAIL, PHONE, SIGUNGU, ID) values(SPACE_SEQ.NEXTVAL,#{dto.space_name},#{dto.heart},#{dto.space_type},#{dto.facilities},#{dto.intro_main},#{dto.intro_detail},#{dto.address},#{dto.space_tag},#{dto.img_main},#{dto.mail},#{dto.phone},#{dto.sigungu},#{dto.id})
+	</insert>
+	
+	<insert id="insertReserveInfo" parameterType="CjhDTO">
+		insert into SPACE_RESERVE_INFO(SPACE_NO, MIN_DAY, MAX_DAY, MIN_PERSON, MAX_PERSON, PRICE_STANDARD, PRICE_WEEKDAY, PRECAUTION, TIME_OR_DAY, OPER_TIME, REGULARLY_CLOSE) values(RESERVEINFO_SEQ.NEXTVAL,#{dto.min_day},#{dto.max_day},#{dto.min_person},#{dto.max_person},#{dto.price_standard},#{dto.price_weekday},#{dto.precaution},#{dto.time_or_day},#{dto.oper_time},#{dto.regularly_close})
+	</insert>
 	
 </mapper>
 

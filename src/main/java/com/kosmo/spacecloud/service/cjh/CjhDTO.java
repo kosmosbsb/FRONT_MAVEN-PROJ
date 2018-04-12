@@ -5,36 +5,79 @@ public class CjhDTO {
 	// space
 	private String space_no;
 	private String space_name;
+	private String heart;
+	private String space_type;
+	private String facilities;
 	private String intro_main;
-	private String space_tag;
 	private String intro_detail;
+	private String address;
+	private String space_tag;
+	private String img_main;
+	private String mail;
+	private String phone;
+	private String sigungu;
+	private String id;
 	
+
 	// view 필요정보
 	private String h_nickname;
 	private String introduce;
-	private String img_main; 
 	
 	// reserve
-	private String mail;
-	private String phone;
-	private String oper_time;
-	private String regularly_close;
 	private String min_day;
 	private String max_day;
 	private String min_person;
 	private String max_person;
 	private String price_standard;
-	private String time_or_day;
 	private String price_weekday;
 	private String precaution;
+	private String time_or_day;
+	private String oper_time;
+	private String regularly_close;
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	
 	
-	
+	public String getHeart() {
+		return heart;
+	}
+	public void setHeart(String heart) {
+		this.heart = heart;
+	}
+	public String getSpace_type() {
+		return space_type;
+	}
+	public void setSpace_type(String space_type) {
+		this.space_type = space_type;
+	}
+	public String getFacilities() {
+		return facilities;
+	}
+	public void setFacilities(String facilities) {
+		this.facilities = facilities;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 	public String getImg_main() {
 		return img_main;
 	}
 	public void setImg_main(String img_main) {
 		this.img_main = img_main;
+	}
+	public String getSigungu() {
+		return sigungu;
+	}
+	public void setSigungu(String sigungu) {
+		this.sigungu = sigungu;
 	}
 	public String getSpace_no() {
 		return space_no;
