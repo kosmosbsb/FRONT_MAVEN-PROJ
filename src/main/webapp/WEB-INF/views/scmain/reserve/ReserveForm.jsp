@@ -205,6 +205,7 @@
 			        	
 			        	console.log(text4);
 			        	console.log(days);
+			        	console.log(${reserveFormType[0].price_weekday});
 			        	
 			            document.getElementById("modal1").innerHTML = text1;
 			            document.getElementById("modal2").innerHTML = text2;
@@ -213,10 +214,13 @@
 			            
 			            var pd = days * ${reserveFormType[0].price_weekday} * text1;
 			            var sd = days * ${reserveFormType[0].price_weekday};
+			            console.log("sd는:"+sd)
 			            
 			            try{
 			            	document.getElementById("pd").innerHTML = pd;
 			            	document.getElementById("PDpayid").value = pd;
+			            }catch(err){console.log(err+"기능하는데 문제 없음.")}
+			            try{
 			            	document.getElementById("sd").innerHTML = sd;
 			            	document.getElementById("SDpayid").value = sd;
 			            }catch(err){console.log(err+"기능하는데 문제 없음.")}
@@ -328,6 +332,8 @@
 			            try{
 			            	document.getElementById("pt").innerHTML = pt;
 			            	document.getElementById("PTpayid").value = pt;
+			            }catch(err){console.log(err+"기능하는데 문제 없음.")}
+			            try{
 			            	document.getElementById("st").innerHTML = st;
 			            	document.getElementById("STpayid").value = st;
 			            }catch(err){console.log(err+"기능하는데 문제 없음.")}
@@ -341,6 +347,7 @@
 			        </script>
 					</c:if>
 				<!-- Button -->
+				<!-- 
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="singlebutton"></label>
 						<div class="col-md-4">
@@ -348,13 +355,14 @@
 								class="btn btn-primary">예약 신청</button>
 						</div>
 					</div>
+				 -->
 				<!-- 모달 -->	
 					<c:set var = "pricemethod" value = "${reserveFormType[0].price_standard},${reserveFormType[0].time_or_day}" />
 					<div class="form-group">${firstString}
 						<label class="col-md-4 control-label" for="singlebutton"></label>
 						<div class="col-md-4">
 							<button style="display: flex; justify-content: center;" type="button" class="btn btn-primary" data-toggle="modal"
-							data-target="#exampleModalCenter" onclick="modal()">모달</button>
+							data-target="#exampleModalCenter" onclick="modal()">예약 신청</button>
 						</div>
 					</div>
 						<!-- Modal -->
@@ -364,7 +372,7 @@
 							<div class="modal-dialog modal-dialog-centered" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLongTitle">Modal
+										<h5 class="modal-title" id="exampleModalLongTitle">예약 신청 확인
 											title</h5>
 										<button type="button" class="close" data-dismiss="modal"
 											aria-label="Close">

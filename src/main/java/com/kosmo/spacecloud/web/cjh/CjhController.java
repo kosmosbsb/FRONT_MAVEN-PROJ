@@ -21,7 +21,7 @@ public class CjhController {
 
 	@RequestMapping("/CJH/ControllerTest.do")
 	public String controllerTestCJH(Model model) throws Exception{
-		System.out.println("CJH 컨트롤러 테스트 요청으로 들어옴.");
+		//System.out.println("CJH 컨트롤러 테스트 요청으로 들어옴.");
 		return "/scmain/space/Template";
 	}
 	
@@ -34,10 +34,20 @@ public class CjhController {
 		List<CjhDTO> list2 = service.selectListhost(sn);
 		List<CjhDTO> list3 = service.selectListres(sn);
 		
-		//for(CjhDTO dto:list) {
-		//	System.out.println(dto.getSpace_no());
-		//}
-		
+		for(CjhDTO dto:list) {
+			req.setAttribute("Hname", dto.getImg_main());
+			//System.out.println(dto.getImg_main());
+				if(dto.getImg_main().contains("#")) {
+					String[] imgs = dto.getImg_main().split("#");
+					for(int i=0;i<=imgs.length-1;i++) {
+						//System.out.println(imgs[i]);
+						req.setAttribute("img"+i, imgs[i]);
+					}
+				}else {
+					req.setAttribute("img0", dto.getImg_main());
+					//System.out.println(dto.getImg_main());
+				}
+		}
 		model.addAttribute("spaceInfo",list);
 		model.addAttribute("spaceHostInfo",list2);
 		model.addAttribute("spaceResInfo",list3);

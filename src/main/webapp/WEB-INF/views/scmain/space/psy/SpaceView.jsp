@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <% String contextRoot = request.getContextPath(); %>
 
 <!DOCTYPE html>
@@ -61,7 +62,7 @@
 						</div>
 						<div class="col-md-8 col-sm-12 col-xs-12">
 							<div style="margin-left:40%; width:100%;">
-							<p style="font-size:30px;font-style: inherit;color: #693CED">공간 뷰</p>
+							<p style="font-size:30px;font-style: inherit;color: #693CED"><c:forEach var="item1" items="${spaceInfo}" varStatus="loop">${item1.space_name} 공간 정보</c:forEach></p>
 							</div>
 						</div>
 					</div>
@@ -74,38 +75,92 @@
 			
 
 			<ol class="carousel-indicators">
+				<c:if test="${requestScope.img0!=null}">
 				<li data-target="#myCarousel1" data-slide-to="0" class="active"></li>
+				</c:if>
+				<c:if test="${requestScope.img1!=null}">
 				<li data-target="#myCarousel1" data-slide-to="1"></li>
+				</c:if>
+				<c:if test="${requestScope.img2!=null}">
 				<li data-target="#myCarousel1" data-slide-to="2"></li>
+				</c:if>
+				<c:if test="${requestScope.img3!=null}">
+				<li data-target="#myCarousel1" data-slide-to="3"></li>
+				</c:if>
+				<c:if test="${requestScope.img4!=null}">
+				<li data-target="#myCarousel1" data-slide-to="4"></li>
+				</c:if>
+				<c:if test="${requestScope.img5!=null}">
+				<li data-target="#myCarousel1" data-slide-to="5"></li>
+				</c:if>
 			</ol>
 			<div class="carousel-inner">
-				<div class="item active">
-					<img src="<c:url value='/resources/images/custom/170707_workspace_curation_banner.png'/>"
-						style="width: 100%; height: 500px" alt="First slide">
-					<div class="carousel-caption">
-						<h2>
-							
-						</h2>
+				<c:if test="${requestScope.img0!=null}">
+					<div class="item active">
+						<img src="${img0}"
+							style="width: 100%; height: 500px">
+						<div class="carousel-caption">
+							<h2>
+								
+							</h2>
+						</div>
 					</div>
-				</div>
-				<div class="item">
-					<img src="<c:url value='/resources/images/custom/180228_curation_banner_1.png'/>"
-						style="width: 100%; height: 500px" alt="Second slide">
-					<div class="carousel-caption">
-						<h2>
-							
-						</h2>
+				</c:if>
+				<c:if test="${requestScope.img1!=null}">
+					<div class="item">
+						<img src="${img1}"
+							style="width: 100%; height: 500px">
+						<div class="carousel-caption">
+							<h2>
+								
+							</h2>
+						</div>
 					</div>
-				</div>
-				<div class="item">
-					<img src="<c:url value='/resources/images/custom/180228_curation_banner_3.png'/>"
-						style="width: 100%; height: 500px" alt="Third slide">
-					<div class="carousel-caption">
-						<h2>
-							
-						</h2>
+				</c:if>
+				<c:if test="${requestScope.img2!=null}">
+					<div class="item">
+						<img src="${img2}"
+							style="width: 100%; height: 500px">
+						<div class="carousel-caption">
+							<h2>
+								
+							</h2>
+						</div>
 					</div>
-				</div>
+				</c:if>
+				<c:if test="${requestScope.img3!=null}">
+					<div class="item">
+						<img src="${img3}"
+							style="width: 100%; height: 500px">
+						<div class="carousel-caption">
+							<h2>
+								
+							</h2>
+						</div>
+					</div>
+				</c:if>
+				<c:if test="${requestScope.img4!=null}">
+					<div class="item">
+						<img src="${img4}"
+							style="width: 100%; height: 500px">
+						<div class="carousel-caption">
+							<h2>
+								
+							</h2>
+						</div>
+					</div>
+				</c:if>
+				<c:if test="${requestScope.img5!=null}">
+					<div class="item">
+						<img src="${img5}"
+							style="width: 100%; height: 500px">
+						<div class="carousel-caption">
+							<h2>
+								
+							</h2>
+						</div>
+					</div>
+				</c:if>
 
 			</div>
 			<a class="left carousel-control" href="#myCarousel1"
@@ -209,13 +264,29 @@
 					</c:if>
 					<c:if test="${not panc}">
 					<c:forEach var="item3" items="${spaceResInfo}" varStatus="loop">
+					<c:set var = "string1" value = "${item3.oper_time}" />
+					<c:set var = "string2" value = "${fn:replace(string1, ',', '시 오픈 /  ')}" />
+					<c:set var = "daystr1" value = "${item3.regularly_close}" />
+					<c:set var = "daystr2" value = "${fn:replace(daystr1, '0', '일')}" />
+					<c:set var = "daystr3" value = "${fn:replace(daystr2, '1', '월')}" />
+					<c:set var = "daystr4" value = "${fn:replace(daystr3, '2', '화')}" />
+					<c:set var = "daystr5" value = "${fn:replace(daystr4, '3', '수')}" />
+					<c:set var = "daystr6" value = "${fn:replace(daystr5, '4', '목')}" />
+					<c:set var = "daystr7" value = "${fn:replace(daystr6, '5', '금')}" />
+					<c:set var = "daystr8" value = "${fn:replace(daystr7, '6', '토')}" />
 					<tr>
-						<td>${item3.oper_time}</td>
-						<td>${item3.regularly_close}</td>
-						<td>${item3.min_day}~${item3.max_day}</td>
-						<td>${item3.min_person}~${item3.max_person}</td>
-						<td>${item3.price_standard}</td>
-						<td>${item3.time_or_day}</td>
+						<td>${string2}시 종료</td>
+						<td>${daystr8}</td>
+						<td>최소${item3.min_day}일~최대${item3.max_day}일</td>
+						<td>최소${item3.min_person}명~최대${item3.max_person}명</td>
+						<td>
+						<c:if test="${item3.price_standard=='P'}" var="isP">인원 단위 계산</c:if>
+						<c:if test="${not isP}">공간 단위 계산</c:if>
+						</td>
+						<td>
+						<c:if test="${item3.time_or_day=='T'}" var="isT">시간 단위 예약</c:if>
+						<c:if test="${not isT}">일 단위 예약</c:if>
+						</td>
 						<td>${item3.price_weekday}</td>
 						<td>${item3.precaution}</td>
 					</tr>

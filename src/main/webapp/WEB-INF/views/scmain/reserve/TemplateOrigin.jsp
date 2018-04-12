@@ -215,7 +215,7 @@
 				<tbody>
 					<c:if test="${requestScope.moneyList==null}" var="fuck">
 						<tr>
-							<td colspan="7"><a href="<c:url value='#'/>">등록된 자료가
+							<td colspan="8"><a href="<c:url value='#'/>">등록된 자료가
 									없습니다</a></td>
 						</tr>
 					</c:if>

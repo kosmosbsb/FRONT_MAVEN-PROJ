@@ -91,7 +91,6 @@
 					<tr>
 						<th>공간</th>
 						<th>호스트</th>
-						<th>사진</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -114,7 +113,6 @@
 							</td>
 							</c:if>
 							<td>${item.h_nickname}</td>
-							<td>${item.img_main}</td>
 						</tr>
 					</c:forEach>
 					</c:if>

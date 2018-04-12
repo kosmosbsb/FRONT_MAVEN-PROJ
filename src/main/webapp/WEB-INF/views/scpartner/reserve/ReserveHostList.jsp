@@ -212,7 +212,7 @@
 						</div>
 						<div class="col-md-8 col-sm-12 col-xs-12">
 							<div style="margin-left:40%; width:100%;">
-							<p style="font-size:30px;font-style: inherit;color: #FFC600">예약 정보 입력 페이지</p>
+							<p style="font-size:30px;font-style: inherit;color: #FFC600">고객 예약 정보</p>
 							</div>
 						</div>
 					</div>

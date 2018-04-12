@@ -12,6 +12,7 @@ public class CjhDTO {
 	// view 필요정보
 	private String h_nickname;
 	private String introduce;
+	private String img_main; 
 	
 	// reserve
 	private String mail;
@@ -29,6 +30,12 @@ public class CjhDTO {
 	
 	
 	
+	public String getImg_main() {
+		return img_main;
+	}
+	public void setImg_main(String img_main) {
+		this.img_main = img_main;
+	}
 	public String getSpace_no() {
 		return space_no;
 	}

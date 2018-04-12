@@ -7,7 +7,8 @@
 <!-- sql 매핑하기 (Comment.xml, OneMemo.xml 참고) -->
 <mapper namespace="mybatis.CJHmapper"> 
 	<select id="selectListsp" resultType="CjhDTO">
-		select space_no, space_name, intro_main, space_tag, intro_detail from space 
+		select space_no, space_name, intro_main, space_tag, intro_detail, img_main
+		from space 
 		where space_no=#{sn}
 	</select>
 	<select id="selectListhost" resultType="CjhDTO">
