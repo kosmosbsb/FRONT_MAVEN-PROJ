@@ -71,8 +71,8 @@ public class QuestionController {
 		for(QuestionDTO dto1:list_Answer) 
 			System.out.println("list1:"+dto1.getAnswer_date());
 		
-		model.addAttribute("answer_List",list_all);
-		model.addAttribute("noAnswer_List",list_Answer);
+		model.addAttribute("list_all",list_all);
+		model.addAttribute("list_Answer",list_Answer);
 		
 		
 		return "/scmain/current/Question";

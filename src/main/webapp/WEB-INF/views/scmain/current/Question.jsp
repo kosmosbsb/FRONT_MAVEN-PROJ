@@ -48,15 +48,20 @@
 	$(function(){
 	    $(".notice_view_review").hide();
 		 $(".notice_view_area").click(function () {
-			$(this).next().toggle("slow"); 
-		});  
+			$(this).next().toggle("slow");
+			if($(this).next().next().attr("class")!="notice_view_area"){
+				$(this).next().next().toggle("slow");
+			}
+		});
+		 
+		 
     });
 	
 </script>
     <style>
 .main{
 	padding-left: 5em;
-	margin-top: 2%;
+	margin-top: 3%;
 }
 
 
@@ -83,21 +88,24 @@
 			<div class="container">
 				<div class="top-row">
 					<div class="row">
-						<div class="col-md-1" align="left" style="margin-top: -20px; right: 200px;">
+						<div class="col-md-1 col-sm-1 col-xs-1" align="left" style="margin-top: -20px; right: 200px;">
 							<a id="history">
 								<img src='<c:url value='/resources/images/icons/prev_ico.png'/>'/>
 							</a>
 						</div>
 						
-						<div>
+						<div class="col-md-3 col-sm-3 col-xs-3">
 							<div id="logo" style="margin-top: -1.8em; right: 150px; position: relative;">
-								<a href='<c:url value="/index.jsp"/>'>
+								<a href='<c:url value="/spacecloud/spacecloud.do"/>'>
 									<img src="<c:url value='/resources/images/custom/sclogo2.png'/>" alt="logo" width=160px height=38px>
 								</a>
 								<!--<a href="index.html"><span>vacay</span>home</a>-->
 							</div>
 						</div>
+						<div class="col-md-4 col-sm-4 col-xs-4" style="margin-top: -20px; text-align: center;">
 						
+							<span style="font-size:25px; font-weight: bold;">문의 처리 현황</span>
+						</div>
 						
 					</div>
 				</div>
@@ -108,9 +116,7 @@
 <!--3/30 --------------------------------------------------------------------- -->	
 
 <div class="container">
-	<div>
-		<h3>문의 처리 현황</h3>
-	</div>
+	
     <div class="row col-md-12 custyle">
     <table class="table table-hover custab">
     <thead>
@@ -123,15 +129,44 @@
             <th></th>
         </tr>
     </thead>
-         <c:forEach var="item" items="${answer_List}" varStatus="loop">
+         <c:forEach var="item" items="${list_all}" varStatus="loop">
             <tr class="notice_view_area">
                 <td>${item.question_type }</td>
                 <td>${item.question_title }</td>
                 <td>${item.regidate }</td>
                 
-                <td>처리대기중</td>
+                <c:if test="${item.state == 1 }" var="reviewOK">
+                	<td>답변 완료</td>
+                </c:if>
+                <c:if test="${not reviewOK }">
+                	<td>처리 대기중</td>
+                	<td align="center">처리 대기중</td>
+                </c:if>
                 
-                <td class="text-center">2018-03-03</td>
+                
+                
+              <c:forEach var="answer_date" items="${list_Answer }" varStatus="loop">  
+	                
+	                <c:choose>
+	                	<c:when test="${item.no == answer_date.no}">
+	                		<td class="text-center">${answer_date.answer_date }</td>
+	                	</c:when>
+	                </c:choose>
+	                
+				</c:forEach>
+				<c:if test="${item.state == null }">
+				<c:forEach var="answer_date" items="${list_Answer }" varStatus="loop">  
+	                
+	                <c:choose>
+	                	<c:when test="${item.no != answer_date.no}">
+	                		<td class="text-center">처리 대기중</td>
+	                	</c:when>
+	                </c:choose>
+	                
+				</c:forEach>
+				</c:if>
+				
+				
 				<td>
 					<span>
 						<img class="notice_view_ico" src="<c:url value="/resources/images/icons/notice_view.png"/>">
@@ -147,7 +182,7 @@
 				</td>
             </tr>
             
-            <c:forEach var="review" items="${noAnswer_List }">
+            <c:forEach var="review" items="${list_Answer }">
 	            <c:if test="${item.no == review.no}">
 					<!-- <tr class="notice_view_review">
 						<td align="center" colspan="6">
