@@ -108,7 +108,8 @@
 							<td>${item.space_name}</td>
 							</c:if>
 							<c:if test="${oauth_state != null}">
-							<td>${item.space_name}<a style="float:right" href="<c:url value='/NormalReserve/ReserveForm.do?sn=${item.space_no}'/>"
+							<td>${item.space_name}<a style="float:right" href="<c:url value='/Normal/spaceview.do?sn=${item.space_no}'/>"
+							class="btn btn-primary">자세히 보기</a><a style="float:right" href="<c:url value='/NormalReserve/ReserveForm.do?sn=${item.space_no}'/>"
 							class="btn btn-primary">예약하기</a></td>
 							</c:if>
 							<td>${item.h_nickname}</td>
