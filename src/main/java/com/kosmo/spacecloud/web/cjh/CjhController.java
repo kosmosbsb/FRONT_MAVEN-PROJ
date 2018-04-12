@@ -133,11 +133,11 @@ public class CjhController {
 	      
 	      for(CjhDTO dto:list) {
 	         req.setAttribute("Hname", dto.getImg_main());
-	         //System.out.println(dto.getImg_main());
-	            if(dto.getImg_main().contains("#")) {
+	         System.out.println(dto.getImg_main());
+	            if(dto.getImg_main()!=null && dto.getImg_main().contains("#")) {
 	               String[] imgs = dto.getImg_main().split("#");
 	               for(int i=0;i<=imgs.length-1;i++) {
-	                  //System.out.println(imgs[i]);
+	                  System.out.println(imgs[i]);
 	                  req.setAttribute("img"+i, imgs[i]);
 	               }
 	            }else {

@@ -358,11 +358,10 @@
 				 -->
 				<!-- 모달 -->	
 					<c:set var = "pricemethod" value = "${reserveFormType[0].price_standard},${reserveFormType[0].time_or_day}" />
-					<div class="form-group">${firstString}
+					<div class="form-group">
 						<label class="col-md-4 control-label" for="singlebutton"></label>
 						<div class="col-md-4">
-							<button style="display: flex; justify-content: center;" type="button" class="btn btn-primary" data-toggle="modal"
-							data-target="#exampleModalCenter" onclick="modal()">예약 신청</button>
+							<button style="display: flex; justify-content: center;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onclick="modal()">예약 신청</button>
 						</div>
 					</div>
 						<!-- Modal -->
