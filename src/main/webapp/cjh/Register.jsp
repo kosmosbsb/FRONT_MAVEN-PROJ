@@ -594,7 +594,7 @@
 			</div>
 			</section>
 			
-			<form action="/CJH/ControllerTest.do" class="form-horizontal" method="post" id="trans">
+			<form action="<c:url value="/CJH/ControllerTest.do"/>" class="form-horizontal" method="post" id="trans">
 				<div class="row setup-content" id="step-1">
 					<div class="col-xs-12">
 						<div class="col-md-12">
@@ -1038,7 +1038,7 @@
 				                    </span>
 				                    <!-- <div class="col4"> -->
 				                        <div class="select">
-				                            <select name="type" id="type" title="단위" >
+				                            <select name="time_or_day" id="time_or_day" title="단위" >
 		                                    	<option value="D" selected>D(일)</option>
 			                                    <option value="T" >T(시간)</option>
 				                            </select>

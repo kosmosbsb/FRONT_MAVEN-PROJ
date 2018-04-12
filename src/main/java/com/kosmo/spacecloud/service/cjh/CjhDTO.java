@@ -5,7 +5,7 @@ public class CjhDTO {
 	// space
 	private String space_no;
 	private String space_name;
-	private String heart;
+	private int heart;
 	private String space_type;
 	private String facilities;
 	private String intro_main;
@@ -43,10 +43,10 @@ public class CjhDTO {
 	}
 	
 	
-	public String getHeart() {
+	public int getHeart() {
 		return heart;
 	}
-	public void setHeart(String heart) {
+	public void setHeart(int heart) {
 		this.heart = heart;
 	}
 	public String getSpace_type() {

@@ -53,19 +53,35 @@ public class CjhController {
 		
 		String phone = request.getParameter("mobile1") +request.getParameter("mobile2") +request.getParameter("mobile3");  
 		
-		String mail= request.getParameter("email") + "@" + request.getParameter("domain"); 
+		String mail= request.getParameter("email") + "@" + request.getParameter("domain");
+		
+		
 		String min_day= request.getParameter("minday");
 		String max_day= request.getParameter("maxday");
 		String min_person= request.getParameter("minperson");
 		String max_person= request.getParameter("maxperson");
 		String price_standard= request.getParameter("pricestandard");
 		String price_weekday= request.getParameter("priceweekday");
-		String space_type= request.getParameter("type");
 		String precaution= request.getParameter("precaution");
+		String time_or_day = request.getParameter("time_or_day");
 		String oper_time = request.getParameter("opertime1") +","+request.getParameter("opertime2"); 
 		String regularly_close= request.getParameter("regularlyclose");
 		String tagOutputName = request.getParameter("tagoutputName");
 		String facilities = "#"+request.getParameter("facilParam").replaceAll("\r\n", "#");
+		
+		System.out.println(mail);
+		System.out.println(min_day);
+		System.out.println(max_day);
+		System.out.println(min_person);
+		System.out.println(max_person);
+		System.out.println(price_standard);
+		System.out.println(price_weekday);
+		System.out.println(precaution);
+		System.out.println(oper_time);
+		System.out.println(regularly_close);
+		System.out.println(tagOutputName);
+		System.out.println(facilities);
+		System.out.println("접속하고있는 유저 아이디"+session.getAttribute("USER_ID"));
 		
 		CjhDTO dto = new CjhDTO();
 		dto.setSpace_name(space_name);
@@ -75,6 +91,7 @@ public class CjhController {
 		dto.setImg_main("https://media.immediate.co.uk/volatile/sites/3/2017/11/imagenotavailable1-39de324.png?quality=90&resize=620,413");
 		dto.setSpace_tag(tagOutputName);
 		dto.setFacilities(facilities);
+		dto.setHeart(4);
 		dto.setAddress(address);
 		dto.setSigungu(sigungu);
 		dto.setMail(mail);
@@ -87,10 +104,13 @@ public class CjhController {
 		dto.setMin_person(min_person);
 		dto.setPrice_standard(price_standard);
 		dto.setPrice_weekday(price_weekday);
-		dto.setSpace_type(space_type);
 		dto.setPrecaution(precaution);
+		dto.setTime_or_day(time_or_day);
 		dto.setOper_time(oper_time);
 		dto.setRegularly_close(regularly_close);
+		
+		service.insertSpace(dto);
+		service.insertReserveInfo(dto);
 		
 		return "/scmain/space/Template";
 	}
