@@ -112,9 +112,15 @@ public class CjhController {
 		service.insertSpace(dto);
 		service.insertReserveInfo(dto);
 		
-		return "/scmain/space/Template";
+		return "redirect:/SCPartnerMain.do";
 	}
 	
+	@RequestMapping("/rgst/Register.do")
+	public String registerForm() {
+		
+		
+		return "scpartner/rgst/Register";
+	}
 	
 	@RequestMapping("/Normal/spaceview.do")
 	   public String spaceView(Model model, HttpServletRequest req) throws Exception{
