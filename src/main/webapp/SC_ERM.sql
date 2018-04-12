@@ -162,19 +162,18 @@ CREATE TABLE SPACE
 	SPACE_NO number NOT NULL,
 	SPACE_NAME nvarchar2(18),
 	HEART number,
-	-- 0~5
-	RANK number,
 	-- 회의실, 파티룸, 공연장, 다목적룸 등등
-	SPACE_TYPE nvarchar2(10),
+	SPACE_TYPE nvarchar2(100),
 	INTRO_MAIN nvarchar2(27),
 	INTRO_DETAIL nvarchar2(500),
 	ADDRESS nvarchar2(150),
 	-- 최대 5개 단어 나열
-	SPACE_TAG nvarchar2(50),
-	IMG_MAIN varchar2(100 char),
+	SPACE_TAG nvarchar2(100),
+	IMG_MAIN varchar2(1000 char),
 	MAIL varchar2(30 char),
 	-- 휴대폰번호 또는 지역번호
 	PHONE varchar2(15),
+	sigungu nvarchar2(20),
 	-- 호스트 아이디와 동일
 	ID varchar2(15 char) NOT NULL,
 	PRIMARY KEY (SPACE_NO)
@@ -567,7 +566,6 @@ COMMENT ON COLUMN SC_ADMIN.ADMIN_LEVEL IS '마스터관리자(M), CS관리자(C)
 COMMENT ON COLUMN SEARCH_KEYWORD.KEYWORD IS '10자 이상 검색어는 미포함';
 COMMENT ON COLUMN SPACE.SPACE_NO IS '공간 일련번호와 동일
 ';
-COMMENT ON COLUMN SPACE.RANK IS '0~5';
 COMMENT ON COLUMN SPACE.SPACE_TYPE IS '회의실, 파티룸, 공연장, 다목적룸 등등';
 COMMENT ON COLUMN SPACE.SPACE_TAG IS '최대 5개 단어 나열';
 COMMENT ON COLUMN SPACE.PHONE IS '휴대폰번호 또는 지역번호';

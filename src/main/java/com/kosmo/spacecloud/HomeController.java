@@ -58,11 +58,11 @@ public class HomeController {
 		model.addAttribute("spaceList",jsonArr); */
 		
 		////////////////////////////////////공간 좋아요 최상위 9개 목록
-		List<SearchDTO> spaceList9=searchService.selectList();
+		List<SpaceDTO> spaceList=spaceService.selectList(" ");
 		JSONObject jsonObj;
 		JSONArray jsonArr = new JSONArray();
 		
-		for(SearchDTO dto : spaceList9) {
+		for(SpaceDTO dto : spaceList) {
 			jsonObj = new JSONObject();
 			jsonObj.put("address", dto.getAddress()); //일단 주소값만
 			jsonObj.put("space_name", dto.getSpace_name());//공간명도
@@ -71,11 +71,11 @@ public class HomeController {
 		
 		////////
 		/////////
-		List<SearchDTO>spaceList=searchService.selectList();
-		model.addAttribute("spaceList9", jsonArr);
-		model.addAttribute("spaceList",spaceList);
+		List<SearchDTO>spaceList9=searchService.selectList();
+		model.addAttribute("spaceList", jsonArr);
+		model.addAttribute("spaceList9",spaceList9);
 		
-		for(SearchDTO tempdto : spaceList) {
+		for(SearchDTO tempdto : spaceList9) {
 			System.out.println("이름:"+tempdto.getSpace_name()+"   주소:"+tempdto.getAddress());
 			System.out.println("tag:"+tempdto.getSpace_tag());
 		}

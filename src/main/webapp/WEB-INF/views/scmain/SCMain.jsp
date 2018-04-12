@@ -27,10 +27,47 @@
         <script src="<c:url value='/resources/js/custom.js'/>" type="text/javascript"></script>
         <!-- map -->
         <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=kkks45hOd7btwzmncKgZ&submodules=geocoder"></script>
-        <script src="<c:url value='/resources/khw/accidentdeath.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/resources/khw/MarkerClustering.js'/>" type="text/javascript"></script>
         <!-- map -->
         <script>
+
+        
+        function newMap() {
+        	  var map = {};
+        	  map.value = {};
+        	  map.getKey = function(id) {
+        	    return "k_"+id;
+        	  };
+        	  map.put = function(id, value) {
+        	    var key = map.getKey(id);
+        	    map.value[key] = value;
+        	  };
+        	  map.contains = function(id) {
+        	    var key = map.getKey(id);
+        	    if(map.value[key]) {
+        	      return true;
+        	    } else {
+        	      return false;
+        	    }
+        	  };
+        	  map.get = function(id) {
+        	    var key = map.getKey(id);
+        	    if(map.value[key]) {
+        	      return map.value[key];
+        	    }
+        	    return null;
+        	  };
+        	  map.remove = function(id) {
+        	    var key = map.getKey(id);
+        	    if(map.contains(id)){
+        	      map.value[key] = undefined;
+        	    }
+        	  };
+        	 
+        	  return map;
+        	}
+        
+        
         $(function(){
         	$("#menu-close").click(function(e) {
                 e.preventDefault();
@@ -45,8 +82,8 @@
             var HOME_PATH = "<%=contextRoot%>";
         	
     	    var map = new naver.maps.Map("map", {
-    	        zoom: 8,
-    	        center: new naver.maps.LatLng(37.483508, 126.919297), //37.483508, 126.919297 집주변  //37.525853, 126.955941 서울주변
+    	        zoom: 7,
+    	        center: new naver.maps.LatLng(37.546608, 126.979297), //37.483508, 126.919297 집주변  //37.525853, 126.955941 서울주변
     	        zoomControl: true,
     	        zoomControlOptions: {
     	            position: naver.maps.Position.TOP_LEFT,
@@ -55,57 +92,72 @@
     	    });
 
     	    //공간 받아버리기 (일단은 주소값만 있어)
-			var dataTmp = ${spaceList9};
+			var dataTmp = ${spaceList};
 			
 			//for (var i = 0 ; i < dataTmp.length ; i++){ //확인용
 			//	alert(dataTmp[i].address);
 			//}
 
         	
-    	    var markers = [],
-	    	infoWindows = [],
-	        data = accidentDeath.searchResult.accidentDeath; //요걸 대체할 수 있어야해
-	
-        	
-        	for (var i = 0 ; i < dataTmp.length ; i++){
-        		searchAddressToCoordinate(dataTmp[i].space_name , dataTmp[i].address, i);
-        		setTimeout(function() {
-        			console.log("??");
-        		}, 10)
+    	    var markers_arr = [];
+	    	//infoWindows = [];
+	    	
+	    	//커스텀 맵으로!
+	    	var markers = newMap();
+	    	var infoWindows = newMap();
+
+    		
+			for (var i = 0 ; i < dataTmp.length ; i++){
+				searchAddressToCoordinate(dataTmp[i].space_name ,dataTmp[i].address, i);
 			}
-        	
+			
+			
+			//차선책
+			/*
+    	    (function looper (i) {
+    	    	setTimeout(function() {
+    	    		searchAddressToCoordinate(dataTmp[i].space_name ,dataTmp[i].address, i);
+    	    		if ( dataTmp.length > ++i )
+    	    			looper (i);
+    	    	}, 200)
+    	    })(0);
+    	    */
+    	    
+	
     
         	function searchAddressToCoordinate(space_name, address, index) {
+
         	    naver.maps.Service.geocode({
         	        address: address
         	    }, function(status, response) {
         	        if (status === naver.maps.Service.Status.ERROR) {
         	            return alert('Something Wrong!');
         	        }
-
-						console.log("space_name: "+space_name+" ,address: "+address+" ,index: "+index);
+						//console.log(index);
+						//console.log("space_name: "+space_name+" ,address: "+address+" ,index: "+index);
 	        	        //alert(response.result.items[0].point.x);
 	    	            var latlng = new naver.maps.LatLng(response.result.items[0].point.y, response.result.items[0].point.x),
 		    	            marker = new naver.maps.Marker({
+			    	            title: space_name,
 		    	                position: latlng,
-		    	                draggable: false
+		    	                draggable: false,
+		    	                animation: naver.maps.Animation.DROP//애니메이션 추가는 선택사항
 		    	            });
 		
-		    	        var infoWindow = new naver.maps.InfoWindow({
+		    	        infoWindow = new naver.maps.InfoWindow({
 		       	         content: '<div style="width:230px; height:160px; text-align:center;padding:10px;"><div style="width: 100%; height: 75%; background: url(http://192.168.0.8:8082/spacecloud/resources/images/khw/searchIcon.PNG) no-repeat; background-position: center top;"></div><b>'+space_name +'</b></div>'
 		       	     	});
 
 
+		    	        markers_arr.push(marker);
+		    	        //infoWindows.push(infoWindow); //띄우는창 세팅
 
-		       	   	 
-		    	   	     
-		    	        markers.push(marker);
-		    	        infoWindows.push(infoWindow); //띄우는창 세팅
-
-
+		    	        //커스텀 맵으로!
+ 						markers.put(index, marker);
+ 						infoWindows.put(index, infoWindow);
 
 		        	   	//각 마커에 클릭이벤트 주기
-		       	   	     naver.maps.Event.addListener(marker, 'click', getClickHandler(marker, index));
+		       	   	    naver.maps.Event.addListener(marker, 'click', getClickHandler(marker, index));
 
 
 
@@ -123,24 +175,29 @@
 
 			       	    //첫 화면에 마커(또는 클러스터)가 안뜨니까. 강제로 갱신 이벤트 발생시키자...
 		       	   		naver.maps.Event.trigger(map,"idle");
+
+
+
         	    });
 
+        		
+        	    
  
         	}
 
-
+    	    
+    	    //naver.maps.Event.addListener(marker, 'click', getClickHandler(marker, index));
+    	    
+    	    
             naver.maps.Event.addListener(map, 'idle', function() {
 		     	updateMarkers(map, markers);
 		 	});
-
-    		
- 
 
     	    
     	   	 // 해당 마커의 인덱스를 seq라는 클로저 변수로 저장하는 이벤트 핸들러를 반환합니다.
     	   	 function getClickHandler(marker, seq) {
     	   	     return function(e) {
-    	   	         var infoWindow = infoWindows[seq];
+    	   	         var infoWindow = infoWindows.get(seq);
     	
     	   	         if (infoWindow.getMap()) {
     	   	             infoWindow.close();
@@ -158,9 +215,10 @@
         	     var mapBounds = map.getBounds();
         	     var marker, position;
 
-        	     for (var i = 0; i < markers.length; i++) {
+        	     for (var i = 0; i < dataTmp.length; i++) {
 
-        	         marker = markers[i]
+        	         //marker = markers[i]
+        	         marker = markers.get(i);
         	         position = marker.getPosition();
 
         	         if (mapBounds.hasLatLng(position)) {
@@ -181,17 +239,17 @@
         	            anchor: N.Point(20, 20)
         	        },
         	        htmlMarker3 = {
-        	            content: '<div style="cursor:pointer;width:120px;height:120px;line-height:120px;font-size:60px;color:white;text-align:center;font-weight:bold;background:url('+ HOME_PATH +'/resources/images/khw/cluster-marker-3.png);background-size:contain;"></div>',
+        	            content: '<div style="cursor:pointer;width:110px;height:110px;line-height:110px;font-size:60px;color:white;text-align:center;font-weight:bold;background:url('+ HOME_PATH +'/resources/images/khw/cluster-marker-3.png);background-size:contain;"></div>',
         	            size: N.Size(40, 40),
         	            anchor: N.Point(20, 20)
         	        },
         	        htmlMarker4 = {
-        	            content: '<div style="cursor:pointer;width:150px;height:150px;line-height:150px;font-size:80px;color:white;text-align:center;font-weight:bold;background:url('+ HOME_PATH +'/resources/images/khw/cluster-marker-4.png);background-size:contain;"></div>',
+        	            content: '<div style="cursor:pointer;width:125px;height:125px;line-height:125px;font-size:80px;color:white;text-align:center;font-weight:bold;background:url('+ HOME_PATH +'/resources/images/khw/cluster-marker-4.png);background-size:contain;"></div>',
         	            size: N.Size(40, 40),
         	            anchor: N.Point(20, 20)
         	        },
         	        htmlMarker5 = {
-        	            content: '<div style="cursor:pointer;width:180px;height:180px;line-height:180px;font-size:100px;color:white;text-align:center;font-weight:bold;background:url('+ HOME_PATH +'/resources/images/khw/cluster-marker-5.png);background-size:contain;"></div>',
+        	            content: '<div style="cursor:pointer;width:140px;height:140px;line-height:140px;font-size:100px;color:white;text-align:center;font-weight:bold;background:url('+ HOME_PATH +'/resources/images/khw/cluster-marker-5.png);background-size:contain;"></div>',
         	            size: N.Size(40, 40),
         	            anchor: N.Point(20, 20)
         	        };
@@ -201,7 +259,7 @@
          	        minClusterSize: 2,
          	        maxZoom: 10,
          	        map: map,
-         	        markers: markers,
+         	        markers: markers_arr,
          	        disableClickZoom: false,
          	        gridSize: 120,
          	        icons: [htmlMarker1, htmlMarker2, htmlMarker3, htmlMarker4, htmlMarker5],
@@ -619,20 +677,15 @@
 		
 		<!---header top---->
 		<!--header--->
-		<header class="header-container" style="background-color: #FFC600">
-			<div class="container">
-				<div class="top-row">
+		<header class="header-container" style="background-color: #FFC600;">
+			<div class="container" >
+				<div class="top-row" style="height:80px;">
 					<div class="row">
 						<div class="col-md-2 col-sm-6 col-xs-6">
 							<div id="logo">
 								<a href="<c:url value='/spacecloud.do'/>"><img src="<c:url value='/resources/images/custom/sclogo2.png'/>"
-									alt="logo" width=160px height=38px></a>
+									alt="logo" style="width:200px; height:auto;" ></a>
 								<!--<a href="index.html"><span>vacay</span>home</a>-->
-							</div>
-						</div>
-						<div class="col-sm-6 visible-sm">
-							<div class="text-right">
-								<button type="button" class="book-now-btn">Book Now</button>
 							</div>
 						</div>
 						<div class="col-md-8 col-sm-12 col-xs-12 remove-padd">
@@ -644,27 +697,8 @@
 											class="icon-bar"></span> <span class="icon-bar"></span> <span
 											class="icon-bar"></span>
 									</button>
-
-								</div>
-								<div
-									class="collapse navigation navbar-collapse navbar-ex1-collapse remove-space">
-									<ul class="list-unstyled nav1 cl-effect-10">
-										<li><a data-hover="Home" class="active"><span>Home</span></a></li>
-										<li><a data-hover="About" href="<c:url value='/resources/about.html'/>"><span>About</span></a></li>
-										<li><a data-hover="Rooms" href="<c:url value='/resources/rooms.html'/>"><span>Rooms</span></a></li>
-										<li><a data-hover="Gallery" href="<c:url value='/resources/gallery.html'/>"><span>Gallery</span></a></li>
-										<li><a data-hover="Dinning" href="<c:url value='/resources/dinning.html'/>"><span>Dinning</span></a></li>
-										<li><a data-hover="News" href="<c:url value='/resources/news.html'/>"><span>News</span></a></li>
-										<li><a data-hover="Contact Us" href="<c:url value='/resources/contact.html'/>"><span>contactUs</span></a></li>
-									</ul>
-
 								</div>
 							</nav>
-						</div>
-						<div class="col-md-2  col-sm-4 col-xs-12 hidden-sm">
-							<div class="text-right">
-								<button type="button" class="book-now-btn">Book Now</button>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -798,7 +832,7 @@
 			<div class="album py-5 bg-light" style="margin-top: 5em;">
 				<div class="container">
 					<div class="row">
-						<c:forEach var="item" items="${spaceList}" varStatus="loop">
+						<c:forEach var="item" items="${spaceList9}" varStatus="loop">
 			                  <div class="col-md-4"
 			                     style="margin-top: 10px; margin-bottom: 10px;">
 			                     <a href="#" id="space_box">
