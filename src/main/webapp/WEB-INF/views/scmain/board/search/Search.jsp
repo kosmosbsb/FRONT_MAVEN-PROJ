@@ -33,8 +33,44 @@
         <!-- 지도 시작-->
         <script>
 
+        var map = {};
+	  	  map.value = {};
+	  	  map.getKey = function(id) {
+	  	    return "k_"+id;
+	  	  };
+	  	  map.put = function(id, value) {
+	  	    var key = map.getKey(id);
+	  	    map.value[key] = value;
+	  	  };
+	  	  map.contains = function(id) {
+	  	    var key = map.getKey(id);
+	  	    if(map.value[key]) {
+	  	      return true;
+	  	    } else {
+	  	      return false;
+	  	    }
+	  	  };
+	  	  map.get = function(id) {
+	  	    var key = map.getKey(id);
+	  	    if(map.value[key]) {
+	  	      return map.value[key];
+	  	    }
+	  	    return null;
+	  	  };
+	  	  map.remove = function(id) {
+	  	    var key = map.getKey(id);
+	  	    if(map.contains(id)){
+	  	      map.value[key] = undefined;
+	  	    }
+	  	  };
+	  	 
+	  	  return map;
+	  	}
+
         $(function(){
 
+
+        	
             var HOME_PATH = "<%=contextRoot%>";
         	
     	    var map = new naver.maps.Map("map", {
@@ -55,10 +91,13 @@
 			//}
 
         	
-    	    var markers = [],
-	    	infoWindows = [],
-	        data = accidentDeath.searchResult.accidentDeath; //요걸 대체할 수 있어야해
-	
+    	    var markers_arr = [];
+	    	//infoWindows = [];
+	    	
+	    	//커스텀 맵으로!
+	    	var markers = newMap();
+	    	var infoWindows = newMap();
+	    	
         	
         	for (var i = 0 ; i < dataTmp.length ; i++){
         		searchAddressToCoordinate(dataTmp[i].space_name , dataTmp[i].address, i);
@@ -79,19 +118,21 @@
 	    	            var latlng = new naver.maps.LatLng(response.result.items[0].point.y, response.result.items[0].point.x),
 		    	            marker = new naver.maps.Marker({
 		    	                position: latlng,
-		    	                draggable: false
+		    	                draggable: false,
+		    	                animation: naver.maps.Animation.DROP//애니메이션 추가는 선택사항
 		    	            });
 		
-		    	        var infoWindow = new naver.maps.InfoWindow({
+		    	        infoWindow = new naver.maps.InfoWindow({
 		       	         content: '<div style="width:230px; height:160px; text-align:center;padding:10px;"><div style="width: 100%; height: 75%; background: url(http://192.168.0.8:8082/spacecloud/resources/images/khw/searchIcon.PNG) no-repeat; background-position: center top;"></div><b>'+space_name +'</b></div>'
 		       	     	});
 
 
-
+		    	        markers_arr.push(marker);
 		       	   	 
 		    	   	     
-		    	        markers.push(marker);
-		    	        infoWindows.push(infoWindow); //띄우는창 세팅
+		    	        //커스텀 맵으로!
+ 						markers.put(index, marker);
+ 						infoWindows.put(index, infoWindow);
 
 
 
@@ -131,7 +172,7 @@
     	   	 // 해당 마커의 인덱스를 seq라는 클로저 변수로 저장하는 이벤트 핸들러를 반환합니다.
     	   	 function getClickHandler(marker, seq) {
     	   	     return function(e) {
-    	   	         var infoWindow = infoWindows[seq];
+    	   	         var infoWindow = infoWindows.get(seq);
     	
     	   	         if (infoWindow.getMap()) {
     	   	             infoWindow.close();
@@ -149,9 +190,9 @@
         	     var mapBounds = map.getBounds();
         	     var marker, position;
 
-        	     for (var i = 0; i < markers.length; i++) {
+        	     for (var i = 0; i < dataTmp.length; i++) {
 
-        	         marker = markers[i]
+        	    	 marker = markers.get(i);
         	         position = marker.getPosition();
 
         	         if (mapBounds.hasLatLng(position)) {
@@ -172,17 +213,17 @@
         	            anchor: N.Point(20, 20)
         	        },
         	        htmlMarker3 = {
-        	            content: '<div style="cursor:pointer;width:120px;height:120px;line-height:120px;font-size:60px;color:white;text-align:center;font-weight:bold;background:url('+ HOME_PATH +'/resources/images/khw/cluster-marker-3.png);background-size:contain;"></div>',
+        	            content: '<div style="cursor:pointer;width:110px;height:110px;line-height:110px;font-size:60px;color:white;text-align:center;font-weight:bold;background:url('+ HOME_PATH +'/resources/images/khw/cluster-marker-3.png);background-size:contain;"></div>',
         	            size: N.Size(40, 40),
         	            anchor: N.Point(20, 20)
         	        },
         	        htmlMarker4 = {
-        	            content: '<div style="cursor:pointer;width:150px;height:150px;line-height:150px;font-size:80px;color:white;text-align:center;font-weight:bold;background:url('+ HOME_PATH +'/resources/images/khw/cluster-marker-4.png);background-size:contain;"></div>',
+        	            content: '<div style="cursor:pointer;width:125px;height:125px;line-height:125px;font-size:80px;color:white;text-align:center;font-weight:bold;background:url('+ HOME_PATH +'/resources/images/khw/cluster-marker-4.png);background-size:contain;"></div>',
         	            size: N.Size(40, 40),
         	            anchor: N.Point(20, 20)
         	        },
         	        htmlMarker5 = {
-        	            content: '<div style="cursor:pointer;width:180px;height:180px;line-height:180px;font-size:100px;color:white;text-align:center;font-weight:bold;background:url('+ HOME_PATH +'/resources/images/khw/cluster-marker-5.png);background-size:contain;"></div>',
+        	            content: '<div style="cursor:pointer;width:140px;height:140px;line-height:140px;font-size:100px;color:white;text-align:center;font-weight:bold;background:url('+ HOME_PATH +'/resources/images/khw/cluster-marker-5.png);background-size:contain;"></div>',
         	            size: N.Size(40, 40),
         	            anchor: N.Point(20, 20)
         	        };
@@ -192,7 +233,7 @@
          	        minClusterSize: 2,
          	        maxZoom: 10,
          	        map: map,
-         	        markers: markers,
+         	        markers: markers_arr,
          	        disableClickZoom: false,
          	        gridSize: 120,
          	        icons: [htmlMarker1, htmlMarker2, htmlMarker3, htmlMarker4, htmlMarker5],
