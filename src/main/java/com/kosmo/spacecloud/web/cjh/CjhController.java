@@ -123,33 +123,33 @@ public class CjhController {
 	}
 	
 	@RequestMapping("/Normal/spaceview.do")
-	   public String spaceView(Model model, HttpServletRequest req) throws Exception{
-	      String sn = req.getParameter("sn");
-	      //System.out.println(sn);
-	      //System.out.println("공간뷰 컨트롤러로 들어옴.");
-	      List<CjhDTO> list = service.selectListsp(sn);
-	      List<CjhDTO> list2 = service.selectListhost(sn);
-	      List<CjhDTO> list3 = service.selectListres(sn);
-	      
-	      for(CjhDTO dto:list) {
-	         req.setAttribute("Hname", dto.getImg_main());
-	         System.out.println(dto.getImg_main());
-	            if(dto.getImg_main()!=null && dto.getImg_main().contains("#")) {
-	               String[] imgs = dto.getImg_main().split("#");
-	               for(int i=0;i<=imgs.length-1;i++) {
-	                  System.out.println(imgs[i]);
-	                  req.setAttribute("img"+i, imgs[i]);
-	               }
-	            }else {
-	               req.setAttribute("img0", dto.getImg_main());
-	               //System.out.println(dto.getImg_main());
-	            }
-	      }
-	      model.addAttribute("spaceInfo",list);
-	      model.addAttribute("spaceHostInfo",list2);
-	      model.addAttribute("spaceResInfo",list3);
-	      
-	      return "/scmain/space/psy/SpaceView";
-	   }
+    public String spaceView(Model model, HttpServletRequest req) throws Exception{
+       String sn = req.getParameter("sn");
+       //System.out.println(sn);
+       //System.out.println("공간뷰 컨트롤러로 들어옴.");
+       List<CjhDTO> list = service.selectListsp(sn);
+       List<CjhDTO> list2 = service.selectListhost(sn);
+       List<CjhDTO> list3 = service.selectListres(sn);
+       
+       for(CjhDTO dto:list) {
+          req.setAttribute("Hname", dto.getImg_main());
+          System.out.println(dto.getImg_main());
+             if(dto.getImg_main()!=null && dto.getImg_main().contains("#")) {
+                String[] imgs = dto.getImg_main().split("#");
+                for(int i=0;i<=imgs.length-1;i++) {
+                   System.out.println(imgs[i]);
+                   req.setAttribute("img"+i, imgs[i]);
+                }
+             }else {
+                req.setAttribute("img0", dto.getImg_main());
+                //System.out.println(dto.getImg_main());
+             }
+       }
+       model.addAttribute("spaceInfo",list);
+       model.addAttribute("spaceHostInfo",list2);
+       model.addAttribute("spaceResInfo",list3);
+       
+       return "/scmain/space/psy/SpaceView";
+    }
 	
 }

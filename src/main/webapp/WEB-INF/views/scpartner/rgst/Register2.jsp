@@ -147,11 +147,11 @@
 			var checkList = $('input:checkbox[id="cate"]:checked').length;
 			if(checkList == 0){
 				alert("1개이상 선택하세요");
-				location.href="<c:url value='/rgst/Register.do'/>";
+				location.href="Register.jsp";
 			}
 			else if(checkList > 5){
 				alert("최대 5개까지 선택 가능합니다");
-				location.href="<c:url value='/rgst/Register.do'/>";
+				location.href="Register.jsp";
 			}
 		}
         
@@ -711,7 +711,7 @@
 										<div class="form-group">
 											<label class="col-md-4 control-label" for="textarea">공간 소개</label>
 										  	<div class="col-md-6">                     
-										    	<textarea class="form-control" id="intro_detail" name="intro_detail" placeholder="공간을 상세하게 소개해보세요"></textarea>
+										    	<textarea class="form-control" id="intro_detail" name="intro_detail" rows="5" placeholder="공간을 상세하게 소개해보세요"></textarea>
 										  	</div>
 										</div>
 									</div>
@@ -849,237 +849,236 @@
 					</div>
 				</div>
 			
-				<!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  -->
-		      <div class="row setup-content" id="step-3">
-		         <div class="col-xs-12">
-		            <div class="col-md-12">
-		               <div class="container">
-		                  <h3>Step 3</h3>
-		
-		                  <div class="form-group">
-		                     <label class="col-md-4 control-label" for="textinput">*이메일</label>
-		                     <div class="col-md-6">
-		                        <input style="width: 45%" type="text" style="font-size: 1.0em" name="email"
-		                           id="_email_addr" title="이메일 주소" placeholder="이메일 주소를 입력해주세요."
-		                           regExp="^[a-zA-Z0-9-_\,\.]+$" _errorEl="emailError" value=""
-		                           required> 
-		                        <select style="width: 35% " title="이메일 도메인 선택"
-		                        id="_email_selector" name="domain">
-		                           <option value="@naver.com" selected>@naver.com</option>
-		                           <option value="@dreamwiz.com">@dreamwiz.com</option>
-		                           <option value="@gmail.com">@gmail.com</option>
-		                           <option value="@hanafos.com">@hanafos.com</option>
-		                           <option value="@hanmail.net">@hanmail.net</option>
-		                           <option value="@hanmir.com">@hanmir.com</option>
-		                           <option value="@hotmail.com">@hotmail.com</option>
-		                           <option value="@korea.com">@korea.com</option>
-		                           <option value="@nate.com">@nate.com</option>
-		                           <option value="NONE">직접입력</option>
-		                        </select>
-		                     </div>
-		                  </div>
-		
-		
-		                  <div class="form-group">
-		                     <label class="col-md-4 control-label" for="phone11">*휴대폰</label>
-		                     <div class="col-md-6">
-		
-		                        <select name="mobile1" id="phone11" title="휴대폰 앞자리"
-		                           class='virtualNum'>
-		                           <option value="010" selected>010</option>
-		                           <option value="011">011</option>
-		                           <option value="016">016</option>
-		                           <option value="017">017</option>
-		                           <option value="018">018</option>
-		                           <option value="019">019</option>
-		                        </select> 
-		                        <input style="width: 30%" type="tel" name="mobile2"
-		                           id="mobile2" placeholder="중간자리를 입력해주세요." title="휴대폰 중간자리"
-		                           maxLength="4" _errorEl="mobileError" class="onlyNum virtualNum"
-		                           style="ime-mode: disabled;" value="" required>
-		                           
-		                        <input style="width: 40%" type="tel" name="mobile3" id="mobile3"
-		                           placeholder="뒷자리를 입력해주세요." title="휴대폰 뒷자리" maxLength="4"
-		                           _errorEl="mobileError" class="onlyNum virtualNum"
-		                           style="ime-mode: disabled;" value="" required>
-		
-		                     </div>
-		                  </div>
+	  <!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  -->
+      <div class="row setup-content" id="step-3">
+         <div class="col-xs-12">
+            <div class="col-md-12">
+               <div class="container">
+                  <h3>Step 3</h3>
 
-		                  <div class="form-group">
-		                     <label class="col-md-4 control-label" for="day">*요일</label>
-		                     <div class="col-md-6">
-		
-		                        <select class="form-control input-md" style="width: 40%" name="minday" id="minday" title="최소 요일">
-		                           <option value="00" selected>최소 요일</option>
-		                           <option value="0">일</option>
-		                           <option value="1">월</option>
-		                           <option value="2">화</option>
-		                           <option value="3">수</option>
-		                           <option value="4">목</option>
-		                           <option value="5">금</option>
-		                           <option value="6">토</option>
-		                        </select> 
-		                        <select class="form-control input-md" style="width: 40%" name="maxday" id="maxday" title="최대 요일">
-		                           <option value="00" selected>최대 요일</option>
-		                           <option value="0">일</option>
-		                           <option value="1">월</option>
-		                           <option value="2">화</option>
-		                           <option value="3">수</option>
-		                           <option value="4">목</option>
-		                           <option value="5">금</option>
-		                           <option value="6">토</option>
-		                        </select>
-		
-		                     </div>
-		                  </div>
-		                  
-		                  <div class="form-group">
-		                     <label class="col-md-4 control-label" for="person">*인원</label>
-		                     <div class="col-md-6">
-		
-		                        <select class="form-control input-md" style="width: 40%" name="minperson" id="minperson" title="최소 인원">
-		                           <option value="00" selected>최소 인원</option>
-		                           <option value="0">0(명)</option>
-		                           <option value="1">1(명)</option>                           
-		                           <option value="2">2(명)</option>
-		                           <option value="3">3(명)</option>
-		                           <option value="4">4(명)</option>
-		                           <option value="5">5(명)</option>
-		                           <option value="6">6(명)</option>
-		                        </select> 
-		                        <select class="form-control input-md" style="width: 40%" name="maxperson" id="maxperson" title="최대 인원">
-		                           <option value="00" selected>최대 인원</option>
-		                           <option value="0">0(명)</option>
-		                           <option value="1">1(명)</option>                           
-		                           <option value="2">2(명)</option>
-		                           <option value="3">3(명)</option>
-		                           <option value="4">4(명)</option>
-		                           <option value="5">5(명)</option>
-		                           <option value="6">6(명)</option>
-		                        </select>
-		
-		                     </div>
-		                  </div>
-		                  
-		                  
-		                  <div class="form-group">
-		                     <label class="col-md-4 control-label" for="price">*금액</label>
-		                     <div class="col-md-6">
-		                        <select class="form-control input-md" style="width: 40%" name="pricestandard" id="pricestandard" title="금액 기준">
-		                           <option value="00" selected>가격</option>
-		                           <option value="S">공간당 가격</option>
-		                           <option value="P">1인당 가격</option>
-		                        </select> 
-		                        <input class="form-control input-md" style="width: 40%" type="text" name="priceweekday" id="priceweekday"
-		                           title="금액" placeholder="금액을 입력해주세요.">
-		                     </div>
-		                  </div>
-		
-		
-		                  <div class="form-group">
-		                     <label class="col-md-4 control-label" for="time_or_day">*단위(시간단위 OR 일단위 )</label>
-		                     <div class="col-md-6">
-		                        <select class="form-control input-md" style="width: 40%" name="time_or_day" id="time_or_day" title="단위">
-		                           <option value="00" selected>단위</option>
-		                           <option value="D">D(일)</option>
-		                           <option value="T">T(시간)</option>
-		                        </select>
-		
-		                     </div>
-		                  </div>
-		
-		                  <div class="form-group">
-		                     <label class="col-md-4 control-label" for="space_precaution">*주의사항</label>
-		                     <div class="col-md-6">
-		                        <div class="input">
-		                           <!-- [D] 클래스 error 추가시 유효성 오류 (!안내텍스트/input,textarea 등에 border색) 표시됩니다. -->
-		                           <textarea style="width: 80%; height:108px;" placeholder="주의사항을 입력하세요." rows="5" class="form-control col-sm-5" id="precaution" name="precaution"maxLength="1000"></textarea>
-		                        </div>
-		                     </div>
-		                  </div>
-		
-		
-		                  <div class="form-group">
-		                     <label class="col-md-4 control-label" for="opertime">*오픈시간</label>
-		                     <div class="col-md-6">
-		                        <select class="form-control input-md" style="width: 40%" name="opertime2" id="opertime2" title="시작시간">
-		                           <option value="0" selected>시작시간</option>
-		                           <option value="1">01 시</option>
-		                           <option value="2">02 시</option>
-		                           <option value="3">03 시</option>
-		                           <option value="4">04 시</option>
-		                           <option value="5">05 시</option>
-		                           <option value="6">06 시</option>
-		                           <option value="7">07 시</option>
-		                           <option value="8">08 시</option>
-		                           <option value="9">09 시</option>
-		                           <option value="10">10 시</option>
-		                           <option value="11">11 시</option>
-		                           <option value="12">12 시</option>
-		                           <option value="13">13 시</option>
-		                           <option value="14">14 시</option>
-		                           <option value="15">15 시</option>
-		                           <option value="16">16 시</option>
-		                           <option value="17">17 시</option>
-		                           <option value="18">18 시</option>
-		                           <option value="19">19 시</option>
-		                           <option value="20">20 시</option>
-		                           <option value="21">21 시</option>
-		                           <option value="22">22 시</option>
-		                           <option value="23">23 시</option>
-		                           <option value="24">24 시</option>
-		                        </select> 
-		                        <select class="form-control input-md" style="width: 40%" name="opertime2" id="opertime2" title="종료시간">
-		                           <option value="0" selected>종료시간</option>
-		                           <option value="1">01 시</option>
-		                           <option value="2">02 시</option>
-		                           <option value="3">03 시</option>
-		                           <option value="4">04 시</option>
-		                           <option value="5">05 시</option>
-		                           <option value="6">06 시</option>
-		                           <option value="7">07 시</option>
-		                           <option value="8">08 시</option>
-		                           <option value="9">09 시</option>
-		                           <option value="10">10 시</option>
-		                           <option value="11">11 시</option>
-		                           <option value="12">12 시</option>
-		                           <option value="13">13 시</option>
-		                           <option value="14">14 시</option>
-		                           <option value="15">15 시</option>
-		                           <option value="16">16 시</option>
-		                           <option value="17">17 시</option>
-		                           <option value="18">18 시</option>
-		                           <option value="19">19 시</option>
-		                           <option value="20">20 시</option>
-		                           <option value="21">21 시</option>
-		                           <option value="22">22 시</option>
-		                           <option value="23">23 시</option>
-		                           <option value="24">24 시</option>
-		                        </select>
-		
-		                     </div>
-		                  </div>
-		                  
-		                  
-		                  <div class="form-group">
-		                     <label class="col-md-4 control-label" for="regularly_close">*휴무일</label>
-		                     <div class="col-md-6">                        
-		                           <input class="form-control input-md" style="width: 80%" type="text" id="regularlyclose" name ="regularlyclose" placeholder="휴무일을 입력하세요(,로구분 0(일),1(월)..5(금),6(토))">
-		                        
-		                     </div>
-		                  </div>
-		
-		                  
-		               </div> <!-- container -->
-		               <button class="btn btn-primary nextBtn btn-lg pull-right" id="submit"
-		                           >Finish</button>
-		               
-		            </div>
-		         </div>
-		      </div>
-		
-		      <!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  -->
+                  <div class="form-group">
+                     <label class="col-md-4 control-label" for="textinput">*이메일</label>
+                     <div class="col-md-6">
+                        <input class="form-control" style="width: 25%" type="text" style="font-size: 1.0em" name="email"
+                           id="_email_addr" title="이메일 주소" placeholder="이메일 주소를 입력해주세요."
+                           regExp="^[a-zA-Z0-9-_\,\.]+$" _errorEl="emailError" value=""
+                           required> 
+                        <select class="form-control" style="width: 35% " title="이메일 도메인 선택"
+                        id="_email_selector" name="domain">
+                           <option value="@naver.com" selected>@naver.com</option>
+                           <option value="@dreamwiz.com">@dreamwiz.com</option>
+                           <option value="@gmail.com">@gmail.com</option>
+                           <option value="@hanafos.com">@hanafos.com</option>
+                           <option value="@hanmail.net">@hanmail.net</option>
+                           <option value="@hanmir.com">@hanmir.com</option>
+                           <option value="@hotmail.com">@hotmail.com</option>
+                           <option value="@korea.com">@korea.com</option>
+                           <option value="@nate.com">@nate.com</option>
+                           <option value="NONE">직접입력</option>
+                        </select>
+                     </div>
+                  </div>
+
+                  <div class="form-group">
+                     <label class="col-md-4 control-label" for="phone11">*휴대폰</label>
+                     <div class="col-md-6">
+
+                        <select name="mobile1" id="phone11" title="휴대폰 앞자리">
+                           <option value="010" selected>010</option>
+                           <option value="011">011</option>
+                           <option value="016">016</option>
+                           <option value="017">017</option>
+                           <option value="018">018</option>
+                           <option value="019">019</option>
+                        </select> 
+                        <input style="width: 35%" type="tel" name="mobile2"
+                           id="mobile2" placeholder="중간자리를 입력해주세요." title="휴대폰 중간자리"
+                           maxLength="4" _errorEl="mobileError" class="form-control"
+                           style="ime-mode: disabled;" value="" required>
+                           
+                        <input style="width: 45%" type="tel" name="mobile3" id="mobile3"
+                           placeholder="뒷자리를 입력해주세요." title="휴대폰 뒷자리" maxLength="4"
+                           _errorEl="mobileError" class="form-control"
+                           style="ime-mode: disabled;" value="" required>
+
+                     </div>
+                  </div>
+
+                  
+
+                  <div class="form-group">
+                     <label class="col-md-4 control-label" for="day">*요일</label>
+                     <div class="col-md-6">
+
+                        <select class="form-control input-md" style="width: 40%" name="minday" id="minday" title="최소">
+                           <option value="00" selected>최소</option>
+                           <option value="0">일</option>
+                           <option value="1">월</option>
+                           <option value="2">화</option>
+                           <option value="3">수</option>
+                           <option value="4">목</option>
+                           <option value="5">금</option>
+                           <option value="6">토</option>
+                        </select> 
+                        <select class="form-control input-md" style="width: 40%" name="maxday" id="maxday" title="최대">
+                           <option value="00" selected>최대</option>
+                           <option value="0">일</option>
+                           <option value="1">월</option>
+                           <option value="2">화</option>
+                           <option value="3">수</option>
+                           <option value="4">목</option>
+                           <option value="5">금</option>
+                           <option value="6">토</option>
+                        </select>
+
+                     </div>
+                  </div>
+                  
+                  <div class="form-group">
+                     <label class="col-md-4 control-label" for="person">*인원</label>
+                     <div class="col-md-6">
+
+                        <select class="form-control input-md" style="width: 40%" name="minperson" id="minperson" title="최소 인원">
+                           <option value="00" selected>최소</option>
+                           <option value="0">0(명)</option>
+                           <option value="1">1(명)</option>                           
+                           <option value="2">2(명)</option>
+                           <option value="3">3(명)</option>
+                           <option value="4">4(명)</option>
+                           <option value="5">5(명)</option>
+                           <option value="6">6(명)</option>
+                        </select> 
+                        <select class="form-control input-md" style="width: 40%" name="maxperson" id="maxperson" title="최대 인원">
+                           <option value="00" selected>최대</option>
+                           <option value="0">0(명)</option>
+                           <option value="1">1(명)</option>                           
+                           <option value="2">2(명)</option>
+                           <option value="3">3(명)</option>
+                           <option value="4">4(명)</option>
+                           <option value="5">5(명)</option>
+                           <option value="6">6(명)</option>
+                        </select>
+
+                     </div>
+                  </div>
+                  
+                  
+                  <div class="form-group">
+                     <label class="col-md-4 control-label" for="price">*금액</label>
+                     <div class="col-md-6">
+                        <select class="form-control input-md" style="width: 40%" name="pricestandard" id="pricestandard" title="금액 기준">
+                           <option value="00" selected>기준</option>
+                           <option value="S">공간당 가격</option>
+                           <option value="P">1인당 가격</option>
+                        </select> 
+                        <input class="form-control input-md" style="width: 40%" type="text" name="priceweekday" id="priceweekday"
+                           title="금액" placeholder="금액을 입력해주세요.">
+                     </div>
+                  </div>
+
+
+                  <div class="form-group">
+                     <label class="col-md-4 control-label" for="time_or_day">*단위(시간단위 OR 일단위 )</label>
+                     <div class="col-md-6">
+                        <select class="form-control input-md" style="width: 40%" name="time_or_day" id="time_or_day" title="단위">
+                           <option value="D" selected>D(일)</option>
+                           <option value="T">T(시간)</option>
+                        </select>
+
+                     </div>
+                  </div>
+
+                  <div class="form-group">
+                     <label class="col-md-4 control-label" for="space_precaution">*주의사항</label>
+                     <div class="col-md-6">
+                        <div class="input">
+                           <!-- [D] 클래스 error 추가시 유효성 오류 (!안내텍스트/input,textarea 등에 border색) 표시됩니다. -->
+                           <textarea style="width: 80%; height:108px;" placeholder="주의사항을 입력하세요." rows="5" class="form-control col-sm-5" id="precaution" name="precaution"maxLength="1000"></textarea>
+                        </div>
+                     </div>
+                  </div>
+
+
+                  <div class="form-group">
+                     <label class="col-md-4 control-label" for="opertime">*오픈시간</label>
+                     <div class="col-md-6">
+                        <select class="form-control input-md" style="width: 40%" name="opertime2" id="opertime2" title="시작시간">
+                           <option value="0" selected>시작시간</option>
+                           <option value="1">01 시</option>
+                           <option value="2">02 시</option>
+                           <option value="3">03 시</option>
+                           <option value="4">04 시</option>
+                           <option value="5">05 시</option>
+                           <option value="6">06 시</option>
+                           <option value="7">07 시</option>
+                           <option value="8">08 시</option>
+                           <option value="9">09 시</option>
+                           <option value="10">10 시</option>
+                           <option value="11">11 시</option>
+                           <option value="12">12 시</option>
+                           <option value="13">13 시</option>
+                           <option value="14">14 시</option>
+                           <option value="15">15 시</option>
+                           <option value="16">16 시</option>
+                           <option value="17">17 시</option>
+                           <option value="18">18 시</option>
+                           <option value="19">19 시</option>
+                           <option value="20">20 시</option>
+                           <option value="21">21 시</option>
+                           <option value="22">22 시</option>
+                           <option value="23">23 시</option>
+                           <option value="24">24 시</option>
+                        </select> 
+                        <select class="form-control input-md" style="width: 40%" name="opertime2" id="opertime2" title="종료시간">
+                           <option value="0" selected>종료시간</option>
+                           <option value="1">01 시</option>
+                           <option value="2">02 시</option>
+                           <option value="3">03 시</option>
+                           <option value="4">04 시</option>
+                           <option value="5">05 시</option>
+                           <option value="6">06 시</option>
+                           <option value="7">07 시</option>
+                           <option value="8">08 시</option>
+                           <option value="9">09 시</option>
+                           <option value="10">10 시</option>
+                           <option value="11">11 시</option>
+                           <option value="12">12 시</option>
+                           <option value="13">13 시</option>
+                           <option value="14">14 시</option>
+                           <option value="15">15 시</option>
+                           <option value="16">16 시</option>
+                           <option value="17">17 시</option>
+                           <option value="18">18 시</option>
+                           <option value="19">19 시</option>
+                           <option value="20">20 시</option>
+                           <option value="21">21 시</option>
+                           <option value="22">22 시</option>
+                           <option value="23">23 시</option>
+                           <option value="24">24 시</option>
+                        </select>
+
+                     </div>
+                  </div>
+                  
+                  
+                  <div class="form-group">
+                     <label class="col-md-4 control-label" for="regularly_close">*휴무일</label>
+                     <div class="col-md-6">                        
+                           <input class="form-control input-md" style="width: 80%" type="text" id="regularlyclose" name ="regularlyclose" placeholder="휴무일을 입력하세요(,로구분 0(일),1(월)..5(금),6(토))">
+                        
+                     </div>
+                  </div>
+
+                  
+               </div> <!-- container -->
+               <button class="btn btn-primary nextBtn btn-lg pull-right" id="submit"
+                           >Finish</button>
+               
+            </div>
+         </div>
+      </div>
+
+      <!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  -->
 				
 			</form>
 
@@ -1095,7 +1094,7 @@
     
 	
 	<script type="text/javascript">
-		$('.sjaru').click(function(){
+		$('#submit').click(function(){
 			document.forms["trans"].submit();
 		});
 		
