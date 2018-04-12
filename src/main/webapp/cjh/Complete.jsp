@@ -25,31 +25,18 @@
 	String spaceResult3= spaceResult2.replace("null,", "");
 	
 	//
-	String spcNm= request.getParameter("spcNm");
-	String name= request.getParameter("name");
-	String simpleintro= request.getParameter("simpleintro");
+	String space_name= request.getParameter("space_name");
+	String intro_main= request.getParameter("intro_main");
+	String intro_detail= request.getParameter("intro_detail");
 	String spcTag= request.getParameter("spcTag");
 	String fileName1= request.getParameter("fileName1");
 	String addr= request.getParameter("addr");
 	String addrdetail= request.getParameter("addrdetail");
-	String lat= request.getParameter("lat");
-	String lng= request.getParameter("lng");
-	String roadAddress= request.getParameter("roadAddress");
-	String jibunAddress= request.getParameter("jibunAddress");
-	String sido= request.getParameter("sido");
 	String sigungu= request.getParameter("sigungu");
-	String bname= request.getParameter("bname");
-	String bname1= request.getParameter("bname1");
 	
 	
-	/* String mobile1= request.getParameter("mobile1");
-	String mobile2= request.getParameter("mobile2");
-	String mobile3= request.getParameter("mobile3"); */
 	String mobile = request.getParameter("mobile1") +request.getParameter("mobile2") +request.getParameter("mobile3");  
 	
-	/* String email= request.getParameter("email");
-	String domain= request.getParameter("domain");
-	 */
 	 String email= request.getParameter("email") + "@" + request.getParameter("domain"); 
 	String minday= request.getParameter("minday");
 	String maxday= request.getParameter("maxday");
@@ -59,15 +46,18 @@
 	String priceweekday= request.getParameter("priceweekday");
 	String type= request.getParameter("type");
 	String precaution= request.getParameter("precaution");
-	String opertime1= request.getParameter("opertime1");
-	String opertime2= request.getParameter("opertime2");
+	/* String opertime1= request.getParameter("opertime1");
+	String opertime2= request.getParameter("opertime2"); */
+	
+	String opertime = request.getParameter("opertime1") +","+request.getParameter("opertime2"); 
+	
 	String regularlyclose= request.getParameter("regularlyclose");
 	
 
 	
 	String tagOutputName = request.getParameter("tagoutputName");
 	
-	String facilParam = "#"+request.getParameter("facilParam").replaceAll("\r\n", "#");
+	String facilities = "#"+request.getParameter("facilParam").replaceAll("\r\n", "#");
 
 %>
 <!DOCTYPE html>
@@ -81,26 +71,16 @@
 	<h2>목록형태로 표시하기</h2>
                         <ul style="list-style-type: decimal;">
                         	<li>공간 유형 : <%=spaceResult3 %></li>
-                        	<li>spcNm:<%=spcNm %></li>
-                        	<li>name:<%=name %></li>
-                        	<li>simpleintro:<%=simpleintro%></li>
+                        	<li>space_name:<%=space_name %></li>
+                        	<li>intro_main:<%=intro_main%></li>
+                        	<li>intro_detail:<%=intro_detail%></li>
                         	<li>fileName1:<%=fileName1%></li>
                         	<li>spaceTagInput:<%=tagOutputName %></li>
-                        	<li>fill:<%=facilParam %></li>
+                        	<li>facilities:<%=facilities %></li>
                         	<li>addr:<%=addr %></li>
                         	<li>addrdetail:<%=addrdetail %></li>
-                        	<li>lat:<%=lat %></li>
-                        	<li>lng:<%=lng %></li>
-                        	<li>roadAddress:<%=roadAddress %></li>
-                        	<li>jibunAddress:<%=jibunAddress %></li>
-                        	<li>sido:<%=sido %></li>
                         	<li>sigungu:<%=sigungu %></li>
-                        	<li>bname:<%=bname %></li>
-                        	<li>bname1:<%=bname1 %></li>
                         	
-                        	<%-- <li>mobile1:<%=mobile1 %></li>
-                        	<li>mobile1:<%=mobile2 %></li>
-                        	<li>mobile1:<%=mobile3 %></li> --%>
                         	<li>mobile:<%=mobile %></li>
                         	<li>email:<%=email %></li>
                         	<%-- <li>domain:<%=domain %></li> --%>
@@ -112,8 +92,7 @@
                         	<li>priceweekday:<%=priceweekday %></li>
                         	<li>type:<%=type %></li>
                         	<li>precaution:<%=precaution %></li>
-                        	<li>opertime1:<%=opertime1 %></li>
-                        	<li>opertime2:<%=opertime2 %></li>
+                        	<li>opertime:<%=opertime %></li>
                         	<li>regularlyclose:<%=regularlyclose %></li>
                         	
                         </ul>

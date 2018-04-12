@@ -33,5 +33,15 @@ public class CjhTestServiceImpl implements CjhService{
 	public List<CjhDTO> selectListres(String sn) {
 		return dao.selectListres(sn);
 	}
+
+	@Override
+	public int insertSpace(CjhDTO dto) {
+		return dao.insertSpace(dto);
+	}
+
+	@Override
+	public int insertReserveInfo(CjhDTO dto) {
+		return dao.insertReserveInfo(dto);
+	}
 	
 }

@@ -34,7 +34,16 @@ public class CjhDAO implements CjhService{
 		return sqlMapper_CJH.selectList("selectListres",sn);
 	}
 
-	public Object insertspace() {
-		return sqlMapper_CJH.insert("insertspace");
+	@Override
+	public int insertSpace(CjhDTO dto) {
+		return sqlMapper_CJH.insert("insertSpace",dto);
 	}
+
+	@Override
+	public int insertReserveInfo(CjhDTO dto) {
+		return sqlMapper_CJH.insert("insertReserveInfo",dto);
+	}
+	
+
+
 }

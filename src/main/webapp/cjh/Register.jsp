@@ -594,7 +594,7 @@
 			</div>
 			</section>
 			
-			<form action="Complete.jsp" class="form-horizontal" method="post" id="trans">
+			<form action="/CJH/ControllerTest.do" class="form-horizontal" method="post" id="trans">
 				<div class="row setup-content" id="step-1">
 					<div class="col-xs-12">
 						<div class="col-md-12">
@@ -691,7 +691,7 @@
 									<div class="form-group">
 									  <label class="col-md-4 control-label" for="textinput">공간명</label>  
 									  <div class="col-md-6">
-									  	<input id="name" name="name" type="text" placeholder="공간명을 입력하세요" class="form-control input-md">
+									  	<input id="space_name" name="space_name" type="text" placeholder="공간명을 입력하세요" class="form-control input-md">
 									  </div>
 									</div>
 									</div>
@@ -701,7 +701,7 @@
 									<div class="form-group">
 								 		<label class="col-md-4 control-label" for="textinput">공간 한줄 소개</label>  
 								  		<div class="col-md-6">
-								  			<input id="simpleintro" name="simpleintro" type="text" placeholder="공간을 소개하는 한줄 문장을 입력해주세요" class="form-control input-md">
+								  			<input id="intro_main" name="intro_main" type="text" placeholder="공간을 소개하는 한줄 문장을 입력해주세요" class="form-control input-md">
 								 		</div>
 									</div>
 									</div>
@@ -711,7 +711,7 @@
 										<div class="form-group">
 											<label class="col-md-4 control-label" for="textarea">공간 소개</label>
 										  	<div class="col-md-6">                     
-										    	<textarea class="form-control" id="intro" name="intro" placeholder="공간을 상세하게 소개해보세요"></textarea>
+										    	<textarea class="form-control" id="intro_detail" name="intro_detail" placeholder="공간을 상세하게 소개해보세요"></textarea>
 										  	</div>
 										</div>
 									</div>

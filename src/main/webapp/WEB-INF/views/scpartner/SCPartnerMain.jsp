@@ -197,7 +197,7 @@
 				<br/>
 				<br/>
 				<div>
-					<a href="/download/guide/registmanual"><button class="btn" style="width: 280px; height: 70px; background-color: #704de4; color: white; font-size: 1.4em; font-weight: bold;">공간 등록하기</button></a>
+					<a href="/cjh/Register.jsp"><button class="btn" style="width: 280px; height: 70px; background-color: #704de4; color: white; font-size: 1.4em; font-weight: bold;">공간 등록하기</button></a>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<a href="<c:url value='/SpaceRegiMenual/Download.do'/>"><button class="btn" style="width: 280px; height: 70px; background-color: #ffbb00; color: white; font-size: 1.4em; font-weight: bold;">공간 등록 매뉴얼</button></a>
 				</div>
