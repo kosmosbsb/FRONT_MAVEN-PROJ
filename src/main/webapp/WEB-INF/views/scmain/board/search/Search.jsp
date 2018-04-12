@@ -261,6 +261,14 @@
         	$('#searchSpace_text').val($('.search_keyword').html());
         });
         
+        $("#search_btn").click(function() {
+			var fieldString=$('#searchSpace_text').val();
+			//alert("여기야"+fieldString.trim().length);
+			if(fieldString.trim().length==0){
+				alert("검색어를 입력해주세요!");
+				return false;
+			}
+		});
         
         });
         
