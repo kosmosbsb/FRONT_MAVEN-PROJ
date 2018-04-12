@@ -708,37 +708,7 @@
 							</div>
 							</div>
 							
-							<div class="form-group">
-								<div class="box_form">
-									<div class="tit">
-										<label for="space_name"> 시설안내 <span class="ico_required">*</span>
-										</label>
-									</div>
-									<span class="option"> <span class="txt_count"> <em
-											id="spcFctsGuideCnt">0</em>자/<em>100</em>자
-									</span>
-									</span>
-									<div class="input_add" id="_spcFctsGuide">
-										<!-- [D] 클래스 error 추가시 유효성 오류 (!안내텍스트/input,textarea 등에 border색) 표시됩니다. -->
-										<input type="text" id="_spcFctsGuideInput" name="fill"
-											placeholder="최대 10개까지 작성가능합니다." _enter="fctsEnter"
-											_lcount="spcFctsGuideCnt" maxLength="100">
-										<div class="btn_box">
-											<a href="javascript:void(0);" class="btn _addGuide"
-												_type="spcFctsGuide" id="fctsEnter"> <span
-												class="btn_inner">추가</span>
-											</a>
-										</div>
-									</div>
-									<div class="input_add_text" id="_spcFctsGuideList"
-										style="display: none;">
-										<input type="hidden" id="_fctsRequiredTarget"
-											_errorEl="_spcFctsGuide" value="" required>
-									</div>
-								</div>
-						<!-- <label class="control-label col-sm-3">시설안내 <span class="text-danger">*</span></label>
-						        <input maxlength="200" type="text" class="form-control" required="required" name="facilities" id="facilities" placeholder="Enter your Roomfacilities" value=""> -->
-							</div>
+							
 							
 							<div class="form-group">
 								<div class="box_form">

@@ -17,6 +17,12 @@
         <link rel="icon" href="../resources/images/icons/faviconSC2.png"/>
         <title>공간등록</title>
 
+		<link rel="icon" href="https://ssl.pstatic.net/spacecloud/static/center/20171113/favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="https://ssl.pstatic.net/spacecloud/static/center/20171113/spacecloud_icon.png" type="image/x-icon">
+		<link rel="apple-touch-icon" href="https://ssl.pstatic.net/spacecloud/static/center/20171113/spacecloud_icon.png">
+        
+		<link rel="stylesheet" href="https://ssl.pstatic.net/spacecloud/static/center/css/deploy/20180329055913/min/host.min.css" type="text/css">
+
         <!-- Bootstrap core CSS -->
         <link href="../resources/css/bootstrap.min.css" rel="stylesheet">
         <link href="../resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -149,8 +155,8 @@
 				alert("1개이상 선택하세요");
 				location.href="Register.jsp";
 			}
-			else if(checkList > 5){
-				alert("최대 5개까지 선택 가능합니다");
+			else if(checkList >= 5){
+				alert("5개이하로 선택하세요");
 				location.href="Register.jsp";
 			}
 		}
@@ -265,7 +271,6 @@
         function handleImgFileSelect(e) {
         	 var files = e.target.files;
              var filesArr = Array.prototype.slice.call(files);
-             var index = 0;
              
              filesArr.forEach(function(f) {
             	 if(!f.type.match("image.*")) {
@@ -276,12 +281,10 @@
             	 sel_file = f;
             	 var reader = new FileReader();
                  reader.onload = function(e) {
-                	 /* $("#img").attr("src",e.target.result); */
-                	 var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'></a>";
-                     $(".img_wrap").html(html);
-                     /* index++; */
+                	 $("#img").attr("src",e.target.result);
                  }
                  reader.readAsDataURL(f);
+                 $('#filename').val(f);
              });
 		}
         
@@ -335,12 +338,15 @@
             $(img_id).remove(); 
         }
 
+
         </script>
         
         
         
 		<style type="text/css">
 		
+		@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700);
+		@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700);
 		
 		.stepwizard-step p {
 			margin-top: 10px;
@@ -404,11 +410,6 @@
 			text-transform:uppercase;
 		}
 		
-		.option{
-			float: right;
-		}
-		
-		
 		input.upload {
 		    position: absolute;
 		    top: 0;
@@ -427,14 +428,12 @@
 		}
 		.control-label {
 		    color:#333333;
-		    font-size: 15px;
-		    font-family: 'Roboto', sans-serif;
 		}
 		
 		.img_wrap{
 			border: 2px solid #A8A8A8;
-            margin-top: 20px;
-            margin-bottom: 20px;
+            margin-top: 30px;
+            margin-bottom: 30px;
             padding-top: 10px;
             padding-bottom: 10px;
 		}
@@ -459,7 +458,7 @@
 		    width:100%;
 		    max-width:100%;
 		}
-		 .filebox input[type="file"] {  /* 파일 필드 숨기기 */
+		/* .filebox input[type="file"] {  /* 파일 필드 숨기기 */
 		    position: absolute;
 		    width: 1px;
 		    height: 1px;
@@ -468,7 +467,7 @@
 		    overflow: hidden;
 		    clip:rect(0,0,0,0);
 		    border: 0;
-		}
+		} */
 		
 
 		input[type=file] {
@@ -608,21 +607,24 @@
 			</div>
 			</section>
 			
-			<form action="Complete.jsp" class="form-horizontal" method="post" id="trans" enctype="Multipart/form-data">
+			<form action="Complete.jsp" method="post" id="trans" enctype="Multipart/form-data">
 				<div class="row setup-content" id="step-1">
 					<div class="col-xs-12">
 						<div class="col-md-12">
 						<div class="container"><!-- form1 -->
 							<h3>Step 1</h3>
 							<div class="form-group">
+					            <p class="tit_register_guide">등록하기 전 신중하게 공간유형을 선택해주세요!</p>
+					            <ul class="ul_guide">
+					                <li>모임장소는 용도에 따라 최대 5개까지 선택해야 합니다.</li>
+					            </ul>
 								<div class="box_form">
-									<!-- <label class="control-label col-sm-3">모임장소<span class="text-danger">*</span></label> -->
 									<div class="tit">모임장소</div>
 									<span class="option"> <span class="txt_guide"> 최대
 											5개 선택가능 <span class="text-danger">*</span></span>
 									</span>
 								</div>
-								<div class="row">
+								<div class="row" >
 									<div class="col-md-4">
 										<!-- input 에 checked 혹은 disabled 옵션 있음 -->
 											<div class="form-check">
@@ -698,157 +700,227 @@
 				<div class="row setup-content" id="step-2">
 					<div class="col-xs-12">
 						<div class="col-md-12">
-							<div class="container">
-								<h3>Step 2</h3>
-									<div class="row">
-									<!-- Text input-->
-									<div class="form-group">
-									  <label class="col-md-4 control-label" for="textinput">공간명</label>  
-									  <div class="col-md-6">
-									  	<input id="name" name="name" type="text" placeholder="공간명을 입력하세요" class="form-control input-md">
-									  </div>
+							<h3>Step 2</h3>
+							<div class="form-group">
+								<div class="box_form" id="_spcNm_required">
+						            <div class="tit">
+						                <label for="space_name">
+						                    공간명
+						                    <span class="ico_required">*</span>
+						                </label>
+						            </div>
+										<span class="option">
+											<span class="txt_count">
+												<em id="spcNmCnt">0</em>자/<em>18</em>자
+											</span>
+										</span>
+						            <div class="input"><!-- [D] 클래스 error 추가시 유효성 오류 (!안내텍스트/input,textarea 등에 border색) 표시됩니다. -->
+						                <input type="text" name="spcNm" id="space_name" placeholder="공간명을 입력해주세요."
+						                       _errorEl="_spcNm_required" maxLength="18" value="" _lcount="spcNmCnt" required>
+						            </div>
+						         </div>
+								<!-- <label class="control-label col-sm-3">공간명 <span class="text-danger">*</span></label>
+									<span class="txt_count">
+										<em id="spcNmCnt">0</em>자/<em>18</em>자
+									</span>
+						        <input maxlength="18" type="text" class="form-control" required="required" name="name" id="name" placeholder="Enter your RoomName" _errorEl="_spcNm_required" maxLength="18" value="" _lcount="spcNmCnt"> -->
+							</div>
+							
+							<div class="form-group">
+								<div class="box_form">
+						            <div class="tit" id="_subTtl_required">
+						                <label for="space_intro">
+						                    공간 한줄 소개
+						                    <span class="ico_required">*</span>
+						                </label>
+						            </div>
+					                <span class="option">
+					                    <span class="txt_count">
+					                        <em id="subTtlCnt">0</em>자/<em>27</em>자
+					                    </span>
+					                </span>
+						            <div class="input"><!-- [D] 클래스 error 추가시 유효성 오류 (!안내텍스트/input,textarea 등에 border색) 표시됩니다. -->
+						                <input type="text" name="subTtl" id="space_intro" placeholder="공간을 소개하는 한줄 문장을 입력해주세요."
+						                       _errorEl="_subTtl_required" maxLength="27" value="" _lcount="subTtlCnt" required>
+						            </div>
+						         </div>
+								<!-- <label class="control-label col-sm-3">공간한줄 소개 <span class="text-danger">*</span></label>
+				                    <span class="txt_count">
+				                        <em id="subTtlCnt">0</em>자/<em>27</em>자
+				                    </span>
+						        <input maxlength="27" type="text" class="form-control" required="required" name="simple" id="simple" placeholder="Enter your simpleIntro" _errorEl="_subTtl_required" maxLength="27" value="" _lcount="subTtlCnt"> -->
+							</div>
+							
+							<div class="form-group">
+								<div class="box_form">
+						            <div class="tit" id="_spcDesc_required">
+						                <label for="space_text">
+						                    공간 소개
+						                    <span class="ico_required">*</span>
+						                </label>
+						            </div>
+						            <span class="option">
+						                <span class="txt_count"><em id="spcDescCnt">0</em>자/<em>500</em>자<span class="txt_guide">(최소 20자)</span></span>
+						            </span>
+						            <div class="input"><!-- [D] 클래스 error 추가시 유효성 오류 (!안내텍스트/input,textarea 등에 border색) 표시됩니다. -->
+						                <textarea id="space_text" name="spcDesc" placeholder="공간을 상세하게 소개해보세요. 공간의 특징이나 주변환경 등의 세부정보를 작성하시면 효과적입니다."
+						                          _errorEl="_spcDesc_required" minLength="20" maxLength="500" style="height:108px" _lcount="spcDescCnt" required ></textarea>
+						            </div>
+					        	</div>
+								<!-- <label class="control-label col-sm-3">공간소개 <span class="text-danger">*</span></label>
+								<span class="txt_count">
+				                	<span class="txt_count"><em id="spcDescCnt">0</em>자/<em>500</em>자<span class="txt_guide">(최소 20자)</span></span>
+				                </span>
+						        <textarea rows="5" cols="20" class="form-control" required="required" name="intro" id="intro" placeholder="Enter your RoomIntro" value="" minLength="20" maxLength="500"_lcount="spcDescCnt"></textarea> -->
+							</div>
+							
+							<div class="row">
+							<script>
+							$(function(){
+								$("#buttonId").on('click',function(){
+									//console.log($("#taginputId").val()==null? "null":"null아님");
+									if($("#taginputId").val()==""){
+										$("#tagoutputId").val("");
+									}
+									else{
+									$("#tagoutputId").val($("#tagoutputId").val()+"#"+$("#taginputId").val());
+									$("#taginputId").val("");
+									}
+								});
+								
+								$("#faciloutputId").change(function(){
+									$("#faciloutputId").val("");
+								});
+								
+								$("#buttonId2").on('click',function(){
+									//console.log($("#taginputId").val()==null? "null":"null아님");
+									if($("#facilinputId").val()==""){
+										$("#faciloutputId").val("");
+									}
+									else{
+										if($("#faciloutputId").val()==""){
+											$("#faciloutputId").val($("#facilinputId").val())
+											$("#facilinputId").val("");
+										}
+										else{
+											$("#faciloutputId").val($("#faciloutputId").val()+"\r\n"+$("#facilinputId").val());
+											$("#facilinputId").val("");
+										}
+									}
+									console.log("#faciloutputId"+$("#faciloutputId").val());
+									$("#facilhiddenId").val($("#faciloutputId").val());
+									console.log("#facilhiddenId"+$("#facilhiddenId").val());
+								});
+								
+								$("#faciloutputId").change(function(){
+									$("#faciloutputId").val("");
+								});
+								
+							});
+							</script>
+							<div style="margin:auto;width:80%;">
+								<div class="col-lg-4">
+									<div class="input-group">
+									<span class="input-group-addon">태그를 입력하고 버튼을 누르세요!</span>
+									<input type="text" name="taginputName" class="form-control" id="taginputId">
+									<span class="input-group-addon" id="buttonId">버튼</span>
+									<!-- <button id="buttonId" class="btn btn-primary">버튼이다</button> -->
 									</div>
+								</div>
+								<div class="col-lg-8">
+									<div class="input-group">
+									<span class="input-group-addon">입력된 태그들(#로 구분하세요!)</span>
+									<input type="text" name="tagoutputName" class="form-control" id="tagoutputId">
 									</div>
-									
-									<div class="row">
-									<!-- Text input-->
-									<div class="form-group">
-								 		<label class="col-md-4 control-label" for="textinput">공간 한줄 소개</label>  
-								  		<div class="col-md-6">
-								  			<input id="simpleintro" name="simpleintro" type="text" placeholder="공간을 소개하는 한줄 문장을 입력해주세요" class="form-control input-md">
-								 		</div>
+								</div>
+							</div>
+							
+							<div style="margin:auto;width:80%;margin-top:50px;">
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="input-group">
+									<span class="input-group-addon">시설 안내사항을 입력하고 버튼을 누르세요!</span>
+									<input type="text" name="taginputName" class="form-control" id="facilinputId">
+									<span class="input-group-addon" id="buttonId2">버튼</span>
+									<!-- <button id="buttonId" class="btn btn-primary">버튼이다</button> -->
 									</div>
-									</div>
-									
-									<div class="row">
-										<!-- Textarea -->
-										<div class="form-group">
-											<label class="col-md-4 control-label" for="textarea">공간 소개</label>
-										  	<div class="col-md-6">                     
-										    	<textarea class="form-control" id="intro" name="intro" placeholder="공간을 상세하게 소개해보세요"></textarea>
-										  	</div>
-										</div>
-									</div>
-									
-									<div class="row">
-									<script>
-										$(function(){
-											$("#buttonId").on('click',function(){
-												//console.log($("#taginputId").val()==null? "null":"null아님");
-												if($("#taginputId").val()==""){
-													$("#tagoutputId").val("");
-												}
-												else{
-												$("#tagoutputId").val($("#tagoutputId").val()+"#"+$("#taginputId").val());
-												$("#taginputId").val("");
-												}
-											});
-											
-											$("#faciloutputId").change(function(){
-												$("#faciloutputId").val("");
-											});
-											
-											$("#buttonId2").on('click',function(){
-												//console.log($("#taginputId").val()==null? "null":"null아님");
-												if($("#facilinputId").val()==""){
-													$("#faciloutputId").val("");
-												}
-												else{
-													if($("#faciloutputId").val()==""){
-														$("#faciloutputId").val($("#facilinputId").val())
-														$("#facilinputId").val("");
-													}
-													else{
-														$("#faciloutputId").val($("#faciloutputId").val()+"\r\n"+$("#facilinputId").val());
-														$("#facilinputId").val("");
-													}
-												}
-												console.log("#faciloutputId"+$("#faciloutputId").val());
-												$("#facilhiddenId").val($("#faciloutputId").val());
-												console.log("#facilhiddenId"+$("#facilhiddenId").val());
-											});
-											
-											$("#faciloutputId").change(function(){
-												$("#faciloutputId").val("");
-											});
-											
-										});
-										</script>
-										
-										<div style="margin:auto;width:80%;">
-										<div class="col-lg-5">
-											<div class="input-group">
-											<span class="input-group-addon">태그를 입력하고 버튼을 누르세요!</span>
-											<input type="text" name="taginputName" class="form-control" id="taginputId">
-											<span class="input-group-addon" id="buttonId">버튼</span>
-											<!-- <button id="buttonId" class="btn btn-primary">버튼이다</button> -->
-											</div>
-										</div>
-										<div class="col-lg-7">
-											<div class="input-group">
-											<span class="input-group-addon">입력된 태그들(#로 구분하세요!)</span>
-											<input type="text" name="tagoutputName" class="form-control" id="tagoutputId">
-											</div>
-										</div>
-									</div>
-									<div style="margin:auto;width:80%;margin-top:50px;">
-									<div class="row">
-										<div class="col-lg-12">
-											<div class="input-group">
-											<span class="input-group-addon">시설 안내사항을 입력하고 버튼을 누르세요!</span>
-											<input type="text" name="taginputName" class="form-control" id="facilinputId">
-											<span class="input-group-addon" id="buttonId2">버튼</span>
-											<!-- <button id="buttonId" class="btn btn-primary">버튼이다</button> -->
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-lg-12">
-											<textarea class="form-control custom-control" rows="5" style="resize:none" id="faciloutputId"></textarea>
-											<input type="hidden" value="" id="facilhiddenId" name="facilParam">
-										</div>
-									</div>
-									</div>
-									</div>
-									
-									<div class="row">
-										<!-- File Button --> 
-										<div class="form-group" style="padding: 5px;" >
-										  <label class="col-md-4 control-label" for="filebutton">대표 이미지</label>
-										  <div class="col-md-4">
-										    <!-- <input class="btn btn-default" id="img" name="img" class="input-file" type="file"> -->
-										    <div class="file_wrap">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-12">
+									<textarea class="form-control custom-control" rows="5" style="resize:none" id="faciloutputId"></textarea>
+									<input type="hidden" value="" id="facilhiddenId" name="facilParam">
+								</div>
+							</div>
+							</div>
+							</div>
+							
+							<div class="form-group">
+								<div class="box_form">
+									<span class="tit"> 대표이미지 <span class="ico_required">*</span>
+									</span>
+									<!-- <p class="option">2048 *1158 권장, 최대 10MB</p> -->
+									<!-- <form name="form" id="form" action="" method="post" enctype="multipart/form-data" autocomplete="off"> -->
+									    <!-- <div class="filebox"> -->
+									    	<!-- <div class="file_wrap">
 									        	<a href="javascript:void(0)" onclick="fileUploadAction()" class="my_button">파일 업로드</a>
 									        	<input type='file' accept="image/*" id="input_img" name="input_img"/>
+									        <input type="file" name="cma_file" id="cma_file" accept="image/*" capture="camera" onchange="getThumbnailPrivew(this,$('#cma_image'))" />
+									        	<input type="hidden" id="filename" /> 
 									        </div>
-										    
-										    <div class="img_wrap" id="img_wrap">
+									        
+									        <div class="img_wrap" id="img_wrap">
 									        	<img id="img" />
-									        </div>
-										  </div>
-										</div>
-									</div>
-									
-									<div class="row">
-										<div class="form-group">
-											<label class="col-md-4 control-label" for="filebutton">주소 검색</label>
-											<div class="col-md-4">
-											<input class="btn btn-primary" type="button" onclick="execDaumPostcode()" value="주소 검색"><br>
-											</div>
-											<div class="col-lg-6" style="padding: 10px;">
-												<input class="form-control" type="text" id="addr" name ="addr" placeholder="주소">
-											</div>
-											<div class="col-lg-6" style="padding: 10px;">
-							       				<input class="form-control" type="text" id="addrdetail" name ="addrdetail" placeholder="상세주소">
-							       			</div>
-											<div id="map" style="width:100%;height:500px;margin-top:10px;display:none"></div>
-										</div>
-									</div>																						
-										
+									        </div> -->
+									        파일명1 : <input type="file" name="fileName1" /><br/>
+        <input type="submit" value="전송" />  
+        <input type="reset" value="취소" />
+
+
+									    <!-- </div> -->
+									<!-- </form> -->
+								</div>
+						<!-- <label class="control-label col-sm-3">대표이미지 <span class="text-danger">*</span></label> -->
+								<!-- <form id="form" runat="server">
+							    	<input type='file' accept="image/*" id="imgInput" />
+							    	<img id="image_section" src="#" alt="your image" />
+								</form> -->
+							</div>
 							
-							</div> <!-- container -->
-								<button class="btn btn-primary nextBtn btn-lg pull-right"
-									type="button">Next</button>
+							<!-- <div class="form-group">
+								<div class="box_form"> -->
+									<span class="tit">이미지</span>
+									<div class="input_wrap">
+							            <a href="javascript:void(0)" onclick="fileUploadActions()" class="my_button">파일 업로드</a>
+							            <input type="file" id="input_imgs" name="input_imgs" multiple/>
+							        </div>
+							        <div class="imgs_wrap">
+							            <img id="imgs" />
+							        </div>
+								<!-- </div>	
+						<label class="control-label col-sm-3">이미지 <span class="text-danger">*</span></label>
+							</div>  -->
+							
+							<div class="form-group">
+								<div class="box_form">
+						            <div class="tit" id="_spcDesc_required">
+						                <label for="space_text">
+						                   주소입력
+						                    <span class="ico_required">*</span>
+						                </label>
+						            </div>
+						        <div  class="btn_box">
+									<input type="button" onclick="execDaumPostcode()" value="주소 검색"><br>
+								</div>
+						       	<input type="text" id="addr" name ="addr" placeholder="주소">
+						       	<input type="text" id="addrdetail" name ="addrdetail" placeholder="상세주소">
+						       
+								<div id="map" style="width:100%;height:500px;margin-top:10px;display:none"></div>
+								</div>
+							</div>
+							
+							<button class="btn btn-primary nextBtn btn-lg pull-right"
+								type="button">Next</button>
 						</div>
 					</div>
 				</div>
@@ -857,10 +929,14 @@
 					<div class="col-xs-12">
 						<div class="col-md-12">
 							<h3>Step 3</h3>
-							<div class="row">
 							<div class="form-group">
-							<label class="col-md-4 control-label" for="textinput">이메일</label>
-								<div class="col">
+								<div class="box_form email">
+									<span class="tit" id="space_email"> <label
+										for="space_email"> 이메일 <span class="ico_required">*</span>
+									</label>
+									</span>
+									<div class="row" id="emailError">
+										<div class="col">
 											<input type="text" name="email" id="_email_addr" title="이메일 주소"
 												placeholder="이메일 주소를 입력해주세요."
 												regExp="^[a-zA-Z0-9-_\,\.]+$" _errorEl="emailError"
@@ -1151,8 +1227,30 @@
             </a>
     </body>
     
+    <script src="https://ssl.pstatic.net/spacecloud/static/center/js/deploy/20180329055913/min/jquery_core_min.js" type="text/javascript"></script>
+	<!--[if lt IE 10]>
+	<script src="https://ssl.pstatic.net/spacecloud/static/center/js/deploy/20180329055913/min/jquery_core_ie10_min.js" type="text/javascript"></script>
+	<![endif]-->
+	<script src="https://ssl.pstatic.net/spacecloud/static/center/js/deploy/20180329055913/min/jquery_upload_min.js" type="text/javascript"></script>
+	<script src="https://ssl.pstatic.net/spacecloud/static/center/js/deploy/20180329055913/min/wsrgst_page_min.js" type="text/javascript"></script>
+	<script src="https://ssl.pstatic.net/spacecloud/static/center/js/deploy/20180329055913/min/space_manage_page_min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/maps3.js?_v20151103"></script>
+	<script src="https://ssl.pstatic.net/spacecloud/static/center/js/deploy/20180329055913/min/search_address_map_min.js" type="text/javascript"></script>
 	
 	<script type="text/javascript">
+		var imageDomain = 'https://scloud.pstatic.net';
+		var jsonPageData = {
+			userTpCd : '',			// host / LCR / LCM
+			hostId : '',	// host Id managed by LC
+			maxPossbleStep : '',	// step2~cmpl
+			spaceId : '', 
+			productId : '', 
+			currentStep : '',	// step1~cmpl
+			rgstTpCd : ''	// rgst / mod
+			
+			
+		};  
+		
 		$('.sjaru').click(function(){
 			document.forms["trans"].submit();
 		});

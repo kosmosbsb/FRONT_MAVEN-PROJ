@@ -28,7 +28,7 @@
 	String subTtl= request.getParameter("subTtl");
 	String spcDesc= request.getParameter("spcDesc");
 	String spcTag= request.getParameter("spcTag");
-	
+	String fileName1= request.getParameter("fileName1");
 	String addr= request.getParameter("addr");
 	String addrdetail= request.getParameter("addrdetail");
 	
@@ -54,7 +54,7 @@
 	
 	String tagOutputName = request.getParameter("tagoutputName");
 	
-	String facilParam = "#"+request.getParameter("facilParam").replaceAll("\r\n", "#");
+	//String facilParam = "#"+request.getParameter("facilParam").replaceAll("\r\n", "#");
 
 %>
 <!DOCTYPE html>
@@ -70,10 +70,10 @@
                         	<li>공간 유형 : <%=spaceResult3 %></li>
                         	<li>spcNm:<%=spcNm %></li>
                         	<li>subTtl:<%=subTtl %></li>
-                        	
                         	<li>spcDesc:<%=spcDesc%></li>
+                        	<li>fileName1:<%=fileName1%></li>
                         	<li>spaceTagInput:<%=tagOutputName %></li>
-                        	<li>fill:<%=facilParam %></li>
+                        	<%-- <li>fill:<%=facilParam %></li> --%>
                         	<li>addr:<%=addr %></li>
                         	<li>addrdetail:<%=addrdetail %></li>
                         	<li>mobile1:<%=mobile1 %></li>
