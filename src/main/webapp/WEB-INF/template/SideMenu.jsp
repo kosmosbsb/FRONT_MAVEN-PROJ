@@ -85,7 +85,7 @@
 			<li><a href="#" style="color: white;">내가 가고 싶은 공간</a></li>
 			<li class="majormenu"><a href="#" style="color: white;">1:1문의</a></li>
 			<li id="doQuestion" class="submenu1"><a href="#" style="color: white;">&nbsp;&nbsp;◎문의하기</a></li>
-			<li class="submenu1"><a href="#" style="color: white;">&nbsp;&nbsp;◎처리현황</a></li>
+			<li class="submenu1"><a href="<c:url value='/Question/current.do'/>" style="color: white;">&nbsp;&nbsp;◎처리현황</a></li>
 			</c:if>
 		</li>
 		<li><a href="<c:url value="/Notice/List.do"/>" style="color: white;">공지사항</a></li>

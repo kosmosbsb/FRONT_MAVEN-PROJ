@@ -251,8 +251,17 @@
 			$(".main").show();
 		});	 
         	 
-        	 
-        	 
+        /*
+        $(':button:eq(0)').click(function(){
+			$('#desc').val($('#src').val());
+		});
+        */	 
+        $(".search_keyword").click(function(){
+        	//alert("ds");
+        	$('#searchSpace_text').val($('.search_keyword').html());
+        });
+        
+        
         });
         
 		</script>

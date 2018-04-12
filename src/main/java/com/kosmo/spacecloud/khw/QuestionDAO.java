@@ -16,10 +16,23 @@ public class QuestionDAO implements QuestionService{
 	//SqlSessionTemplate객체 주입]
 	@Resource(name="sqlMapper_KHW")
 	private SqlSessionTemplate sqlMapper_KHW;
+	
+	@Resource(name="sqlMapper_PSH")
+	private SqlSessionTemplate sqlMapper_PSH;
 
 	@Override
 	public int write(QuestionDTO dto) {
 		return sqlMapper_KHW.insert("questionInsert",dto);
+	}
+
+	@Override
+	public List<QuestionDTO> question_List(String id) {
+		return sqlMapper_PSH.selectList("questionSelect", id);
+	}
+
+	@Override
+	public List<QuestionDTO> answer_List(String id) {
+		return sqlMapper_PSH.selectList("questionSelectById", id);
 	}
 
 }

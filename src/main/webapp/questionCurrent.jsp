@@ -25,72 +25,41 @@
         <script src="<c:url value='/resources/js/instafeed.min.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/resources/js/custom.js'/>" type="text/javascript"></script>
         
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        
     </head>
-    
+<script>
+///////////////////////////////이거 존나안되네 시바  
+	/* $(function(){
+		$(".notice_view").hide();
+		
+		 $(".notice_view_area").click(function () {
+		   		
+				 if($(this).next().css('display')=='none')
+						 $(this).next().show(); 
+				 else if ($(this).next().css('display')!='none')
+						 $(".notice_view").hide();	
+			}); 
+		
+	}); */
+	 ///////////////////////////////이거 존나안되네 시바  	
+	$(function(){
+	    $(".notice_view").hide();
+		 $(".notice_view_area").click(function () {
+			$(this).next().toggle("slow"); 
+		});  
+    });
+	
+</script>
     <style>
-.main {
-	width: 90%;
+.main{
+	padding-left: 5em;
+	margin-top: 2%;
 }
 
-.app-content {
-	padding-top: 30px;
-	padding-left: 14%;
-	padding-bottom: 30px;
-	/* padding: 30px 120px; */
-	position: relative;
-}
 
-tr:nth-child(1) {
-	border-top: 2px solid #656565;
-}
-
-td {
-	font-size: medium;
-}
-
-.date {
-	display: inline-block;
-	width: 20%;
-	float: right;
-	color: #949494;
-	font-size: 16px;
-}
-
-.notice_content>a>p {
-	width: 70%;
-	float: left;
-}
-
-.notice_view_ico {
-	right: 30px;
-	position: absolute;
-}
-
-.notice_view {
-	padding: 0 30px 30px 30px;
-}
-
-.search_btn {
-	width: 138px;
-	height: 50px;
-	background-color: #704de4;
-	color: white;
-	font-size: 20px;
-}
-
-.box_search {
-	position: relative;
-	padding: 30px;
-	border: 4px solid #704de4;
-	background: #fff;
-}
-
-.search_text {
-	height: 50px;
-	font-size: 16px;
-	width: 80%;
-	margin-right: 10px;
-}
 
 .pagination {
 	display: block;
@@ -128,9 +97,7 @@ td {
 								<!--<a href="index.html"><span>vacay</span>home</a>-->
 							</div>
 						</div>
-						<div  style="text-align: center; margin-top: -32px;">
-							<h3>공지사항</h3>
-						</div>
+						
 						
 					</div>
 				</div>
@@ -139,59 +106,58 @@ td {
 <!-- -----middle--------------------------------------------------------------------------------------------------- -->
 	<main class="main">
 <!--3/30 --------------------------------------------------------------------- -->	
-  <div class="app-content" >
-    <div class="box_search">
-	    <dl>
-		    <dt>
-		    	<label style="font-size: 16px;">공지사항 검색</label>
-		    </dt>
-		</dl>
-	      <form role="search" method="post" action="<c:url value="/Notice/List.do"/>">
-	          <input type="text" class="search_text" placeholder="검색어를 입력해주세요." name="searchWord">
-	     	 <button type="submit" class="search_btn"><img src='<c:url value="/resources/images/icons/search_ico2.png"/>'>검색</button>
-	      </form>
-	    
+
+<div class="container">
+	<div>
+		<h3>문의 처리 현황</h3>
+	</div>
+    <div class="row col-md-12 custyle">
+    <table class="table table-hover custab">
+    <thead>
+        <tr>
+            <th>유형</th>
+            <th>제목</th>
+            <th>등록날짜</th>
+            <th>처리여부</th>
+            <th class="text-center">처리날짜</th>
+            <th></th>
+        </tr>
+    </thead>
+            <tr class="notice_view_area">
+                <td>예약</td>
+                <td>예약이 안되요</td>
+                <td>2018-01-01</td>
+                <td>처리대기중</td>
+                <td class="text-center">2018-03-03</td>
+				<td>
+					<span>
+						<img class="notice_view_ico" src="<c:url value="/resources/images/icons/notice_view.png"/>">
+					</span>
+				</td>
+            </tr>
+			<tr class="notice_view">
+				<td colspan="6" align="center">hi</td>
+			</tr>
+			<tr class="notice_view_area">
+                <td>예약</td>
+                <td>예약이 안되요</td>
+                <td>2018-01-01</td>
+                <td>처리대기중</td>
+                <td class="text-center">2018-03-03</td>
+				<td>
+					<span>
+						<img class="notice_view_ico" src="<c:url value="/resources/images/icons/notice_view.png"/>">
+					</span>
+				</td>
+            </tr>
+			<tr class="notice_view">
+				<td colspan="6" align="center">hi</td>
+			</tr>
+
+
+				</table>
     </div>
-  </div>
-<!-- --------------------------------------------------------------------- -->	
-	      <div class="row" style="margin-left: 5cm;" >
-	        <div class="col-md-12">
-	          <div class="tile" >
-	            <table class="table table-hover" id="notice">
-	              <tbody>
-	              <!-----------------------------미완성------- ------------------------------------------ -->
-						<c:if test="${noticeList==null}">
-							<tr>
-								<td colspan="6">
-									<h>등록된 공지가 없습니다.</h>
-								</td>
-							</tr>
-						</c:if>
-					<!-- ------------------------------------------ -->
-					<c:if test="${noticeList!=null}">
-		              <c:forEach var="item" items="${noticeList}" varStatus="loop">
-		                <tr class="notice_view_area">
-			                  <td style="text-align: center;">${item.category }</td>
-			                  <td class="notice_content">
-				                  <a>
-				                 	 <p>${item.title }</p>
-				                 	 <span class="date">${item.regidate }</span>
-				                  <img class="notice_view_ico" src="<c:url value="/resources/images/icons/notice_view.png"/>">
-				                  </a>
-			                  </td>
-		                </tr>
-		                <tr class="notice_view">
-			                <td colspan="2" align="center" style="text-align: center;">
-				                ${item.content }
-			                </td>
-		                </tr>
-		                </c:forEach>
-		             </c:if>
-	              </tbody>
-	            </table>
-	          </div>
-	        </div>
-	      </div>
+</div>
 <!-- --------------------------------------페이징 -->
 		<div class="row">
 			${pagingString}
@@ -214,7 +180,10 @@ td {
 </html>
 
 <script>
-        $(function(){
+	
+		$(function(){
+			$(".notice_view").hide();
+			
         	$("#menu-close").click(function(e) {
                 e.preventDefault();
                 $("#sidebar-wrapper").toggleClass("active");
@@ -227,18 +196,16 @@ td {
         });
         
         $(function(){
+        	
         	$("#history").click(function(){
         		history.back();
         	})
+        	
+        	        	
         });
+			  
+       
         
-        $(function(){
-		    $(".notice_view").hide();
-			 $(".notice_view_area").click(function () {
-				$(this).next().toggle("slow"); 
-			});  
-        });
-        
-
+		
         
  </script>

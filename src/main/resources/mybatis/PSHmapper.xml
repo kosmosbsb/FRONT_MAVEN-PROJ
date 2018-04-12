@@ -50,4 +50,14 @@
 		ORDER BY HEART DESC)A
 		WHERE ROWNUM BETWEEN 1 AND 9
 	</select>
+	
+	<select id="questionSelect" parameterType="String" resultType="QuestionDTO">
+		SELECT * FROM USER_QUESTION
+		WHERE ID LIKE #{id}
+	</select>
+	
+	<select id="questionSelectById" parameterType="String" resultType="QuestionDTO">
+		SELECT * FROM (SELECT NO FROM USER_QUESTION
+		WHERE ID LIKE #{id}) A JOIN ADMIN_ANSWER AA ON A.NO = AA.NO
+	</select>
 </mapper>

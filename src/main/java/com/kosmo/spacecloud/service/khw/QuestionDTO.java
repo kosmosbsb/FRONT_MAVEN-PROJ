@@ -9,9 +9,25 @@ public class QuestionDTO {
 	private String question_title;
 	private String question_content;
 	private java.sql.Date regidate;
-	private int state;
+	private int state;//처리여부
 	private String id;
+	//처리날짜
+	private Date answer_date;
+	private String content;//답변내용
 	
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	
+	public Date getAnswer_date() {
+		return answer_date;
+	}
+	public void setAnswer_date(Date answer_date) {
+		this.answer_date = answer_date;
+	}
 	
 	public String getNo() {
 		return no;

@@ -1,12 +1,19 @@
 package com.kosmo.spacecloud.web.khw;
 
+import java.lang.reflect.Method;
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.kosmo.spacecloud.khw.QuestionServiceImpl;
 import com.kosmo.spacecloud.service.khw.QuestionDTO;
 
@@ -48,4 +55,27 @@ public class QuestionController {
 		
 		return "redirect:/spacecloud.do";
 	}
+	
+	@RequestMapping("/Question/current.do")
+	public String selectList(Model model,HttpSession session)throws Exception{
+		//System.out.println("map:"+map);
+		//System.out.println("id:"+id);
+		System.out.println("id:"+session.getAttribute("USER_ID").toString());
+		
+		List<QuestionDTO> list_all=service.question_List(session.getAttribute("USER_ID").toString());
+		List<QuestionDTO> list_Answer=service.answer_List(session.getAttribute("USER_ID").toString());
+		
+		for(QuestionDTO dto:list_all) 
+			System.out.println("list:"+dto.getState());
+		
+		for(QuestionDTO dto1:list_Answer) 
+			System.out.println("list1:"+dto1.getAnswer_date());
+		
+		model.addAttribute("answer_List",list_all);
+		model.addAttribute("noAnswer_List",list_Answer);
+		
+		
+		return "/scmain/current/Question";
+	}
+	
 }
