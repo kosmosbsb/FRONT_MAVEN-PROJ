@@ -55,7 +55,7 @@
 					<div class="row">
 						<div class="col-md-2 col-sm-6 col-xs-6">
 							<div id="logo">
-								<a href="index.html"><img src="<c:url value='/resources/images/custom/sclogo2.png'/>"
+								<a href="<c:url value='/spacecloud.do'/>"><img src="<c:url value='/resources/images/custom/sclogo2.png'/>"
 									alt="logo" width=160px height=38px></a>
 								<!--<a href="index.html"><span>vacay</span>home</a>-->
 							</div>

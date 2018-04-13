@@ -108,7 +108,7 @@
 
     		
 			for (var i = 0 ; i < dataTmp.length ; i++){
-				searchAddressToCoordinate(dataTmp[i].space_name ,dataTmp[i].address, i);
+				searchAddressToCoordinate(dataTmp[i].space_no, dataTmp[i].space_name ,dataTmp[i].address, i);
 			}
 			
 			
@@ -125,7 +125,7 @@
     	    
 	
     
-        	function searchAddressToCoordinate(space_name, address, index) {
+        	function searchAddressToCoordinate(space_no, space_name, address, index) {
 
         	    naver.maps.Service.geocode({
         	        address: address
@@ -145,9 +145,8 @@
 		    	            });
 		
 		    	        infoWindow = new naver.maps.InfoWindow({
-		       	         content: '<div style="width:230px; height:160px; text-align:center;padding:10px;"><div style="width: 100%; height: 75%; background: url(http://192.168.0.8:8082/spacecloud/resources/images/khw/searchIcon.PNG) no-repeat; background-position: center top;"></div><b>'+space_name +'</b></div>'
+		       	         content: '<div style="width:230px; height:160px; text-align:center;padding:10px;"><div style="width: 100%; height: 75%; background: url(http://192.168.0.8:8082/spacecloud/resources/images/khw/searchIcon.PNG) no-repeat; background-position: center top;"></div><a href="/spacecloud/Normal/spaceview.do?sn='+space_no+'"><b>' + space_name + '</b></a></div>'
 		       	     	});
-
 
 		    	        markers_arr.push(marker);
 		    	        //infoWindows.push(infoWindow); //띄우는창 세팅
@@ -835,7 +834,7 @@
 						<c:forEach var="item" items="${spaceList9}" varStatus="loop">
 			                  <div class="col-md-4"
 			                     style="margin-top: 10px; margin-bottom: 10px;">
-			                     <a href="#" id="space_box">
+			                     <a href="<c:url value='/Normal/spaceview.do?sn=${item.space_no}'/>" id="space_box">
 				                     <div class="card mb-4 box-shadow">
 				                        <div id="upper_img">
 				                        <img class="card-img-top"

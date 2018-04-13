@@ -64,8 +64,9 @@ public class HomeController {
 		
 		for(SpaceDTO dto : spaceList) {
 			jsonObj = new JSONObject();
-			jsonObj.put("address", dto.getAddress()); //일단 주소값만
-			jsonObj.put("space_name", dto.getSpace_name());//공간명도
+			jsonObj.put("space_no", dto.getSpace_no()); //공간고유번호
+			jsonObj.put("address", dto.getAddress()); //주소값
+			jsonObj.put("space_name", dto.getSpace_name());//공간명
 			jsonArr.add(jsonObj);
 		}
 		
