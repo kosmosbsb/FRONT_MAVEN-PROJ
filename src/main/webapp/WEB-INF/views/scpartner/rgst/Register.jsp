@@ -907,7 +907,7 @@
 		                  </div>
 
 		                  <div class="form-group">
-		                     <label class="col-md-4 control-label" for="day">*요일</label>
+		                     <label class="col-md-4 control-label" for="day">*최소/최대 예약일수</label>
 		                     <div class="col-md-6">
 		                        <select class="form-control input-md" style="width: 40%" name="minday" id="minday" title="최소 요일">
 		                           <option value="00" selected>최소 예약일수</option>
