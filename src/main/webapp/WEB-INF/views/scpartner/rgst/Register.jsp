@@ -909,28 +909,26 @@
 		                  <div class="form-group">
 		                     <label class="col-md-4 control-label" for="day">*요일</label>
 		                     <div class="col-md-6">
-		
 		                        <select class="form-control input-md" style="width: 40%" name="minday" id="minday" title="최소 요일">
-		                           <option value="00" selected>최소 요일</option>
-		                           <option value="0">일</option>
-		                           <option value="1">월</option>
-		                           <option value="2">화</option>
-		                           <option value="3">수</option>
-		                           <option value="4">목</option>
-		                           <option value="5">금</option>
-		                           <option value="6">토</option>
+		                           <option value="00" selected>최소 예약일수</option>
+		                           <option value="1">1</option>
+		                           <option value="2">2</option>
+		                           <option value="3">3</option>
+		                           <option value="4">4</option>
+		                           <option value="5">5</option>
+		                           <option value="6">6</option>
+		                           <option value="7">7</option>
 		                        </select> 
 		                        <select class="form-control input-md" style="width: 40%" name="maxday" id="maxday" title="최대 요일">
-		                           <option value="00" selected>최대 요일</option>
-		                           <option value="0">일</option>
-		                           <option value="1">월</option>
-		                           <option value="2">화</option>
-		                           <option value="3">수</option>
-		                           <option value="4">목</option>
-		                           <option value="5">금</option>
-		                           <option value="6">토</option>
+		                           <option value="00" selected>최대 예약일수</option>
+		                           <option value="1">1</option>
+		                           <option value="2">2</option>
+		                           <option value="3">3</option>
+		                           <option value="4">4</option>
+		                           <option value="5">5</option>
+		                           <option value="6">6</option>
+		                           <option value="7">7</option>
 		                        </select>
-		
 		                     </div>
 		                  </div>
 		                  
@@ -940,7 +938,6 @@
 		
 		                        <select class="form-control input-md" style="width: 40%" name="minperson" id="minperson" title="최소 인원">
 		                           <option value="00" selected>최소 인원</option>
-		                           <option value="0">0(명)</option>
 		                           <option value="1">1(명)</option>                           
 		                           <option value="2">2(명)</option>
 		                           <option value="3">3(명)</option>
@@ -950,7 +947,6 @@
 		                        </select> 
 		                        <select class="form-control input-md" style="width: 40%" name="maxperson" id="maxperson" title="최대 인원">
 		                           <option value="00" selected>최대 인원</option>
-		                           <option value="0">0(명)</option>
 		                           <option value="1">1(명)</option>                           
 		                           <option value="2">2(명)</option>
 		                           <option value="3">3(명)</option>
@@ -958,7 +954,6 @@
 		                           <option value="5">5(명)</option>
 		                           <option value="6">6(명)</option>
 		                        </select>
-		
 		                     </div>
 		                  </div>
 		                  
@@ -1063,7 +1058,7 @@
 		                  
 		                  
 		                  <div class="form-group">
-		                     <label class="col-md-4 control-label" for="regularly_close">*휴무일</label>
+		                     <label class="col-md-4 control-label" for="regularly_close">*정기휴무일</label>
 		                     <div class="col-md-6">                        
 		                           <input class="form-control input-md" style="width: 80%" type="text" id="regularlyclose" name ="regularlyclose" placeholder="휴무일을 입력하세요(,로구분 0(일),1(월)..5(금),6(토))">
 		                        
