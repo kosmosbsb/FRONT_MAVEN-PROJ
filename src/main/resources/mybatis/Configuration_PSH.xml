@@ -31,6 +31,7 @@
 	 	<typeAlias alias="NoticeDTO" type="com.kosmo.spacecloud.service.psh.NoticeDTO"/>
 	 	<typeAlias alias="SearchDTO" type="com.kosmo.spacecloud.service.psh.SearchDTO"/>
 	 	<typeAlias alias="QuestionDTO" type="com.kosmo.spacecloud.service.khw.QuestionDTO"/>
+	 	<typeAlias alias="HelpDTO" type="com.kosmo.spacecloud.service.psh.HelpDTO"/>
 	 </typeAliases>	
 	 <!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑) 정보 설정 -->	
 	 <mappers>

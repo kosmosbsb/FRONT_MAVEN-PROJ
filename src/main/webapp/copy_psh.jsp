@@ -36,7 +36,7 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      
+    <!-- 카테고리 -->  
       <ul class="nav navbar-nav">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">베스트 공간 순 <span class="caret"></span></a>
@@ -47,7 +47,7 @@
           </ul>
         </li>
       </ul>
-      
+    <!-- 카테고리 -->  
       <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="검색어를 입력해주세요.">

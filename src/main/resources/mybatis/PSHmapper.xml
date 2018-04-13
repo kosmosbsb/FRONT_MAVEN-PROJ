@@ -60,4 +60,20 @@
 		SELECT * FROM (SELECT NO FROM USER_QUESTION
 		WHERE ID LIKE #{id}) A JOIN ADMIN_ANSWER AA ON A.NO = AA.NO
 	</select>
+	
+<!-- help -->
+	
+	<select id="helpSelectList" resultType="HelpDTO">
+			SELECT * FROM (SELECT T.*,ROWNUM R FROM (SELECT S.* FROM help S
+		<if test="searchWord != null">
+			WHERE CONTENT LIKE '%' || #{searchWord} || '%' OR TITLE LIKE '%' || #{searchWord} || '%'
+		</if>
+		ORDER BY NOTICE_NO DESC) T) WHERE R BETWEEN #{start} AND #{end}
+	</select>
+	<select id="helpTotalCount" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM help
+		<if test="searchWord != null">
+			WHERE CONTENT LIKE '%' || #{searchWord} || '%' OR TITLE LIKE '%' || #{searchWord} || '%'
+		</if>
+	</select>
 </mapper>

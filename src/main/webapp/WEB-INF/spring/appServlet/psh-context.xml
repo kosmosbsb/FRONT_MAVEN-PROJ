@@ -11,7 +11,9 @@
 	<beans:bean id="noticeController" class="com.kosmo.spacecloud.web.psh.NoticeController"/>
 	
 	<context:property-placeholder location="classpath:memoresources/memo.properties"/>
-	
-	<beans:bean id="searchController" class="com.kosmo.spacecloud.web.psh.SearchController"/>	
+	<!-- 검색 컨트롤러 -->
+	<beans:bean id="searchController" class="com.kosmo.spacecloud.web.psh.SearchController"/>
+	<!-- 도움말 컨트롤러 -->
+	<beans:bean id="helpController" class="com.kosmo.spacecloud.web.psh.HelpController"/>
 	
 </beans:beans>
