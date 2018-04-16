@@ -2,6 +2,7 @@ package com.kosmo.spacecloud.web.psh;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +26,8 @@ public class SearchController {
 	public String list(Model model,@RequestParam Map map, HttpServletRequest req)throws Exception{
 		
 		List<SearchDTO> list;
+		List<SearchDTO> time_list = new Vector<SearchDTO>();
+		List<SearchDTO> day_list = new Vector<SearchDTO>();
 		
 		if(req.getMethod().toUpperCase().equals("GET")) {
 			list=service.selectList(req.getParameter("searchWord"));
@@ -36,8 +39,29 @@ public class SearchController {
 		}
 		//
 		for(SearchDTO tempdto : list) {
-			System.out.println("list:"+tempdto.getAddress());
+			System.out.println("list:"+tempdto.getTime_or_day().toString());
 		}
+		//
+		for(SearchDTO temp:list) {
+			if(temp.getTime_or_day().toString().equals("T")) {
+				time_list.add(temp);
+			
+				for(SearchDTO tempdto : time_list) {
+					System.out.println("TIME:"+tempdto.getTime_or_day().toString());
+				}
+			}
+			
+			else if(temp.getTime_or_day().toString().equals("D")) {
+				day_list.add(temp);
+
+				for(SearchDTO tempdto : day_list) {
+					System.out.println("DAY:"+tempdto.getTime_or_day().toString());
+				}
+			}
+		}
+		model.addAttribute("timeList",time_list);
+		
+		model.addAttribute("dayList", day_list);
 		//
 		model.addAttribute("spaceList",list);
 		
@@ -56,5 +80,6 @@ public class SearchController {
 		
 		return "/scmain/board/search/Search";
 	}
+	
 	
 }

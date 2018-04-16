@@ -846,17 +846,27 @@
 				                        </div>
 				                           <span class="btn_reserve">
 				                              <span class="btn_reserve_confirm">승인<br/>결제</span>
-				                              <span class="btn_reserve_day">월단위<br/>예약가능</span>
+				                            <c:if test="${item.time_or_day=='D'}">  
+				                              <span class="btn_reserve_day">일단위<br/>예약가능</span>
+				                            </c:if>  
 				                           </span>
 				                        <div class="card-body">
 				                           <h3 class="card-text">${item.space_name}</h3>
 				                           <div class="tags">
-				                              <span class="tag_area_name">강남</span>
+				                              <span class="tag_area_name">${item.sigungu}</span>
 				                              <span>${item.space_tag }</span>
 				                           </div>
 				                           <div class="info_price">
 				                           		<strong class="price">${item.price_weekday}</strong>
-				                           		<span class="txt_unit">원/월(인)</span>
+				                           		<span class="txt_unit">
+					                           		<c:choose>
+					                           			<c:when test="${item.time_or_day=='D' and item.price_standard eq 'S'}">원/일</c:when>
+					                           			<c:when test="${item.time_or_day=='T' and item.price_standard eq 'S'}">원/시간</c:when>
+					                           			<c:when test="${item.price_standard eq 'P' and item.time_or_day=='D' }">원/일(인)</c:when>
+					                           			<c:when test="${item.price_standard eq 'P' and item.time_or_day=='T' }">원/시간(인)</c:when>
+					                           		</c:choose>
+				                           		</span>
+				                           		
 				                           		<i class="npay_ico">네이버페이</i>
 				                           </div>
 				                           <div class="info_number_love">

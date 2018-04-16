@@ -9,7 +9,8 @@ public class SearchDTO {
 	private String space_type;//공간유형
 	private String address;
 	private String space_tag;
-	private String img_main;//공간 대표 이미지 
+	private String img_main;//공간 대표 이미지
+	private String sigungu;
 	
 	private int review_no;//리뷰 일련번호
 	private String price_standard;//공간당가격(S) OR 1인당가격(P)
@@ -46,6 +47,12 @@ public class SearchDTO {
 		this.price_weekday = price_weekday;
 		this.time_or_day = time_or_day;
 	}*/
+	public String getSigungu() {
+		return sigungu;
+	}
+	public void setSigungu(String sigungu) {
+		this.sigungu = sigungu;
+	}
 	
 	public int getSpace_no() {
 		return space_no;
