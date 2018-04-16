@@ -44,7 +44,7 @@
         <script src="../resources/js/custom.js" type="text/javascript"></script>
         
   		<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-        <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=239669b7f7d7e65aded229c4bee98d24&libraries=services"></script>
+        <script src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=239669b7f7d7e65aded229c4bee98d24&libraries=services"></script>
 		
 		<!-- 체크박스 css -->
 		<link href="../resources/css/checkboxes.css" rel="stylesheet">
