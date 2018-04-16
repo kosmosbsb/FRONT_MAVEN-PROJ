@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form class="form-horizontal" action="Complete.jsp">
+	<form class="form-horizontal" action="Complete2.jsp">
 		<fieldset>
 		
 		<!-- Form Name -->

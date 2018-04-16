@@ -1057,13 +1057,39 @@
 		                  </div>
 		                  
 		                  
-		                  <div class="form-group">
-		                     <label class="col-md-4 control-label" for="regularly_close">*정기휴무일</label>
-		                     <div class="col-md-6">                        
-		                           <input class="form-control input-md" style="width: 80%" type="text" id="regularlyclose" name ="regularlyclose" placeholder="휴무일을 입력하세요(,로구분 0(일),1(월)..5(금),6(토))">
-		                        
-		                     </div>
-		                  </div>
+		                 <div class="form-group">
+			             	<label class="col-md-4 control-label" for="checkboxes">휴무일</label>
+			                <div class="col-md-4">
+		                    <label>
+		                       <input style="width: 10% " type="checkbox" name="check" value="1"> <span style="font-size: 0.7em" class="label-text">월</span>
+		                    </label>
+		                  
+		                    <label>
+		                       <input style="width: 10% " type="checkbox" name="check" value="2"> <span style="font-size: 0.7em" class="label-text">화</span>
+		                    </label>
+		                  
+		                    <label>
+		                       <input style="width: 10% " type="checkbox" name="check" value="3"> <span style="font-size: 0.7em" class="label-text">수</span>
+		                    </label>
+		                  
+		                    <label>
+		                       <input style="width: 10%" type="checkbox" name="check" value="4"> <span style="font-size: 0.7em" class="label-text">목</span>
+		                    </label>
+		                  
+		                    <label>
+		                       <input style="width: 10%" type="checkbox" name="check" value="5" > <span style="font-size: 0.7em" class="label-text">금</span>
+		                    </label>
+		                  
+		                    <label>
+		                       <input style="width: 10%" type="checkbox" name="check" value="6"> <span style="font-size: 0.7em" class="label-text">토</span>
+		                    </label>
+		                  
+		                    <label>
+		                       <input style="width: 10%" type="checkbox" name="check" value="0"> <span style="font-size: 0.7em" class="label-text">일</span>
+		                    </label>
+			                  
+			             	</div>
+			             </div>
 		
 		                  
 		               </div> <!-- container -->

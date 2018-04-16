@@ -40,6 +40,15 @@ public class CjhController {
 		String spaceResult2= spaceResult.replace(",null", "");
 		String spaceResult3= spaceResult2.replace("null,", "");
 		
+		String[] value = request.getParameterValues("check");
+		String checks = "";
+		for(String val : value){
+			checks += val += ",";
+		}
+		if(checks.charAt(checks.length()-1) == ','){
+			checks = checks.substring(0,checks.length()-1);
+		};
+		
 		
 		String space_name= request.getParameter("space_name");
 		String intro_main= request.getParameter("intro_main");
@@ -65,7 +74,7 @@ public class CjhController {
 		String precaution= request.getParameter("precaution");
 		String time_or_day = request.getParameter("time_or_day");
 		String oper_time = request.getParameter("opertime1") +","+request.getParameter("opertime2"); 
-		String regularly_close= request.getParameter("regularlyclose");
+		//String regularly_close= request.getParameter("regularlyclose");
 		String tagOutputName = request.getParameter("tagoutputName");
 		String facilities = "#"+request.getParameter("facilParam").replaceAll("\r\n", "#");
 		
@@ -78,7 +87,7 @@ public class CjhController {
 		System.out.println(price_weekday);
 		System.out.println(precaution);
 		System.out.println(oper_time);
-		System.out.println(regularly_close);
+		System.out.println(checks);
 		System.out.println(tagOutputName);
 		System.out.println(facilities);
 		System.out.println("접속하고있는 유저 아이디"+session.getAttribute("USER_ID"));
@@ -107,7 +116,7 @@ public class CjhController {
 		dto.setPrecaution(precaution);
 		dto.setTime_or_day(time_or_day);
 		dto.setOper_time(oper_time);
-		dto.setRegularly_close(regularly_close);
+		dto.setRegularly_close(checks);
 		
 		service.insertSpace(dto);
 		service.insertReserveInfo(dto);

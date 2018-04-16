@@ -8,10 +8,15 @@
 	request.setCharacterEncoding("UTF-8");
 	//
 	
-	
 	String check = request.getParameter("check");
-	
-	
+	String[] value = request.getParameterValues("check");
+	String checks = "";
+	for(String val : value){
+		checks += val += ",";
+	}
+	if(checks.charAt(checks.length()-1) == ','){
+		checks = checks.substring(0,checks.length()-1);
+	};
 
 %>
 <!DOCTYPE html>
@@ -26,8 +31,7 @@
                         <ul style="list-style-type: decimal;">
                         	
                         	<li>check:<%=check %></li>
-                        	
-                        	
+                        	<li>checks:<%=checks %><li>
                         </ul>
 </body>
 </html>
