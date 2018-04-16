@@ -8,53 +8,57 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form class="form-horizontal">
+	<form class="form-horizontal" action="Complete.jsp">
 		<fieldset>
 		
 		<!-- Form Name -->
 		<legend>Form Name</legend>
 		
-		<!-- Text input-->
-		<div class="form-group">
-		  <label class="col-md-4 control-label" for="textinput">Text Input</label>  
-		  <div class="col-md-4">
-		  <input id="textinput" name="textinput" type="text" placeholder="placeholder" class="form-control input-md">
-		  <span class="help-block">help</span>  
-		  </div>
-		</div>
-		
-		<!-- File Button --> 
-		<div class="form-group">
-		  <label class="col-md-4 control-label" for="filebutton">File Button</label>
-		  <div class="col-md-4">
-		    <input id="filebutton" name="filebutton" class="input-file" type="file">
-		  </div>
-		</div>
-		
-		<!-- Textarea -->
-		<div class="form-group">
-		  <label class="col-md-4 control-label" for="textarea">Text Area</label>
-		  <div class="col-md-4">                     
-		    <textarea class="form-control" id="textarea" name="textarea">default text</textarea>
-		  </div>
-		</div>
-		
-		<!-- Button -->
-		<div class="form-group">
-		  <label class="col-md-4 control-label" for="singlebutton">Single Button</label>
-		  <div class="col-md-4">
-		    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Button</button>
-		  </div>
-		</div>
-		
-		<!-- Text input-->
-		<div class="form-group">
-		  <label class="col-md-4 control-label" for="textinput">Text Input</label>  
-		  <div class="col-md-4">
-		  <input id="textinput" name="textinput" type="text" placeholder="placeholder" class="form-control input-md">
-		  <span class="help-block">help</span>  
-		  </div>
-		</div>
+		<!-- Multiple Checkboxes -->
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="checkboxes">Multiple Checkboxes</label>
+						<div class="col-md-4">
+						<div class="form-check">
+							<label>
+								<input type="checkbox" name="check" value="1"> <span class="label-text">월요일</span>
+							</label>
+						</div>
+						<div class="form-check">
+							<label>
+								<input type="checkbox" name="check" value="2"> <span class="label-text">화요일</span>
+							</label>
+						</div>
+						<div class="form-check">
+							<label>
+								<input type="checkbox" name="check" value="3"> <span class="label-text">수요일</span>
+							</label>
+						</div>
+						<div class="form-check">
+							<label>
+								<input type="checkbox" name="check" value="4"> <span class="label-text">목요일</span>
+							</label>
+						</div>
+						<div class="form-check">
+							<label>
+								<input type="checkbox" name="check" value="5" > <span class="label-text">금요일</span>
+							</label>
+						</div>
+						<div class="form-check">
+							<label>
+								<input type="checkbox" name="check" value="6"> <span class="label-text">토요일</span>
+							</label>
+						</div>
+						<div class="form-check">
+							<label>
+								<input type="checkbox" name="check" value="0"> <span class="label-text">일요일</span>
+							</label>
+						</div>
+						</div>
+					</div>
+					
+					<div>
+						<button type="submit">전송</button>
+					</div>
 		
 		</fieldset>
 		</form>

@@ -23,6 +23,7 @@
 	String spaceResult = String.join(",", space1,space2,space3,space4,space5,space6,space7,space8,space9,space10,space11);
 	String spaceResult2= spaceResult.replace(",null", "");
 	String spaceResult3= spaceResult2.replace("null,", "");
+	String check = request.getParameter("check");
 	
 	//
 	String space_name= request.getParameter("space_name");
@@ -80,6 +81,7 @@
                         	<li>addr:<%=addr %></li>
                         	<li>addrdetail:<%=addrdetail %></li>
                         	<li>sigungu:<%=sigungu %></li>
+                        	<li>check:<%=check %></li>
                         	
                         	<li>mobile:<%=mobile %></li>
                         	<li>email:<%=email %></li>
