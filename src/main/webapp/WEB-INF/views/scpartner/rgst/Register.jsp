@@ -779,7 +779,7 @@
 									<div style="margin:auto;width:80%;margin-top:50px;">
 										<div class="col-lg-5">
 											<div class="form-group">
-											<span class="input-group-addon">시설 안내사항을 입력하고 버튼을 누르세요!</span>
+											<span class="input-group-addon">시설을 입력하고 버튼을 누르세요!</span>
 											<span class="input-group-addon" id="buttonId2">버튼</span>
 											<input type="text" name="taginputName" class="form-control" id="facilinputId">
 											</div>
