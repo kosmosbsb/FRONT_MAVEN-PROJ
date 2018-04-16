@@ -26,45 +26,45 @@
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 		<!-- map -->
         <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=kkks45hOd7btwzmncKgZ&submodules=geocoder"></script>
-        <script src="<c:url value='/resources/khw/accidentdeath.js'/>" type="text/javascript"></script>
         <script src="<c:url value='/resources/khw/MarkerClustering.js'/>" type="text/javascript"></script>
         <!-- map -->        
         <!-- /////////////////////////////////////////////////////////////////// -->
         <!-- 지도 시작-->
         <script>
-
-        var map = {};
-	  	  map.value = {};
-	  	  map.getKey = function(id) {
-	  	    return "k_"+id;
-	  	  };
-	  	  map.put = function(id, value) {
-	  	    var key = map.getKey(id);
-	  	    map.value[key] = value;
-	  	  };
-	  	  map.contains = function(id) {
-	  	    var key = map.getKey(id);
-	  	    if(map.value[key]) {
-	  	      return true;
-	  	    } else {
-	  	      return false;
-	  	    }
-	  	  };
-	  	  map.get = function(id) {
-	  	    var key = map.getKey(id);
-	  	    if(map.value[key]) {
-	  	      return map.value[key];
-	  	    }
-	  	    return null;
-	  	  };
-	  	  map.remove = function(id) {
-	  	    var key = map.getKey(id);
-	  	    if(map.contains(id)){
-	  	      map.value[key] = undefined;
-	  	    }
-	  	  };
+	
+        function newMap() {
+	        var map = {};
+		  	  map.value = {};
+		  	  map.getKey = function(id) {
+		  	    return "k_"+id;
+		  	  };
+		  	  map.put = function(id, value) {
+		  	    var key = map.getKey(id);
+		  	    map.value[key] = value;
+		  	  };
+		  	  map.contains = function(id) {
+		  	    var key = map.getKey(id);
+		  	    if(map.value[key]) {
+		  	      return true;
+		  	    } else {
+		  	      return false;
+		  	    }
+		  	  };
+		  	  map.get = function(id) {
+		  	    var key = map.getKey(id);
+		  	    if(map.value[key]) {
+		  	      return map.value[key];
+		  	    }
+		  	    return null;
+		  	  };
+		  	  map.remove = function(id) {
+		  	    var key = map.getKey(id);
+		  	    if(map.contains(id)){
+		  	      map.value[key] = undefined;
+		  	    }
+		  	  };
+		  	  return map;
 	  	 
-	  	  return map;
 	  	  }
 
         $(function(){
