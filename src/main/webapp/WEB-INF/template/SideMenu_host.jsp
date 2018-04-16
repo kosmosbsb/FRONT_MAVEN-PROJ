@@ -81,20 +81,16 @@
 						-khtml-border-radius: 70px;
 						-webkit-border-radius: 70px;"/><span style="color: white; font-size: 1.6em;">${USER_NICNAME_H}</span></a>
 				</div>
-			<li><a href="#" style="color: white;">보유 크래딧</a></li>
-			<li><a href="#" style="color: white;">호스트센터 홈</a></li>
-			<li><a href="#" style="color: white;">내 공간정보 관리</a></li>
+			<li><a href="<c:url value='/SCPartnerMain.do'/>" style="color: white;">호스트센터 홈</a></li>
 			<li><a href="<c:url value="/NormalReserve/ReserveHostList.do" />" style="color: white;">예약 리스트</a></li>
-			<li><a href="#" style="color: white;">이용후기/Q&amp;A 관리</a></li>
 			<li class="majormenu"><a href="#" style="color: white;">1:1문의</a></li>
 			<li id="doQuestion" class="submenu1"><a href="#" style="color: white;">&nbsp;&nbsp;◎문의하기</a></li>
-			<li class="submenu1"><a href="#" style="color: white;">&nbsp;&nbsp;◎처리현황</a></li>
+			<li class="submenu1"><a href="<c:url value='/Question/current.do'/>" style="color: white;">&nbsp;&nbsp;◎처리현황</a></li>
 			
 			</c:if>
 		</li>
 		<li><a href="<c:url value="/Notice/List.do"/>" style="color: white;">공지사항</a></li>
-		<li><a href="#" style="color: white;">도움말</a></li>
-		<li><a href="#" style="color: white;">서비스정보</a></li>
+		<li><a href="<c:url value="/help/help.do"/>" style="color: white;">도움말</a></li>
 		<c:if test="${oauth_state != null}">
 		<li><a href="<c:url value='/logout.do'/>" style="color: white;">로그아웃</a></li>
 		<li style="background-color: #5130b1"><a href="<c:url value='/spacecloud.do'/>" style="color: white;">스페이스클라우드로 이동</a></li>

@@ -61,28 +61,26 @@ public class NaverLoginController {
 	
     @RequestMapping("/login.do")
     public String login(HttpSession session) {
-        //String message = "Simple Login Page";
-        //return new ModelAndView("login", "message", message);
     
     	/* 네아로 인증 URL을 생성하기 위하여 getAuthorizationUrl을 호출 */
         String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
         
-        
-        /* 생성한 인증 URL로 이동해버리기!!!  */
+        /* 생성한 인증 URL로 이동해버리기!!! */
         return "redirect:"+naverAuthUrl;
     }
  
     @RequestMapping("/callback.do")
-    public ModelAndView callback(@RequestParam String code, @RequestParam String state, HttpSession session) throws IOException{
-        //String message = "Simple Callback Page";
-        //return new ModelAndView("callback", "message", message);
-    	
+    public ModelAndView callback(@RequestParam String code,
+    							 @RequestParam String state,
+    							 HttpSession session) throws IOException{
+        
     	/* 네아로 인증이 성공적으로 완료되면 code 파라미터가 전달되며 이를 통해 access token을 발급 */
-    	/* oauth_state 를 key로 세션에 박힘(로그인 상태 유지)(값은 d6179618-90ea-4023-9f75-092e502f1b26 이런 형태)*/
+    	/* oauth_state 가 key값으로 세션에 박힘(로그인 상태 유지) */
+    	/* (값은 d6179618-90ea-4023-9f75-092e502f1b26 이런 형태) */
 		OAuth2AccessToken oauthToken = naverLoginBO.getAccessToken(session, code, state);
 		String apiResult = naverLoginBO.getUserProfile(oauthToken);
 		
-		/*기존멤버 확인용 dao*/
+		/*기존멤버 확인용 dto*/
 		MemberDTO dto = new MemberDTO();
 		
 		JSONParser jsonParser = new JSONParser();

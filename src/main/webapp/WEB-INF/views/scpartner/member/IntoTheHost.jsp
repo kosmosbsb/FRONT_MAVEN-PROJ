@@ -9,7 +9,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="<c:url value='/resources/images/icons/faviconSC2.png'/>"/>
-        <title>SpaceCloud</title>
+        <title>SpaceCloud 호스트센터</title>
 
         <!-- Bootstrap core CSS -->
         <link href="<c:url value='/resources/css/bootstrap.min.css'/>" rel="stylesheet">

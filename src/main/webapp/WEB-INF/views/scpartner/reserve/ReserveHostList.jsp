@@ -15,7 +15,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="<c:url value='/resources/images/icons/faviconSC2.png'/>"/>
-        <title>팀플SC</title>
+        <title>SpaceCloud 호스트센터</title>
         <!-- Bootstrap core CSS -->
         
         <link href="<c:url value='/resources/css/bootstrap.min.css'/>" rel="stylesheet">
@@ -199,14 +199,14 @@
 		
 		<!---header top---->
 		<!--header--->
-		<header class="header-container" style="background-color: #693CED">
+		<header class="header-container" style="background-color: #704de4;">
 			<div class="container">
 				<div class="top-row">
 					<div class="row">
 						<div class="col-md-2 col-sm-6 col-xs-6">
 							<div id="logo">
-								<a href="index.html"><img src="<c:url value='/resources/images/custom/sclogo2.png'/>"
-									alt="logo" width=160px height=38px></a>
+								<a href="<c:url value='/SCPartnerMain.do'/>"><img src="<c:url value='/resources/images/khw/hostlogo.PNG'/>"
+									alt="logo" style="width: 270px; height: auto;"></a>
 								<!--<a href="index.html"><span>vacay</span>home</a>-->
 							</div>
 						</div>

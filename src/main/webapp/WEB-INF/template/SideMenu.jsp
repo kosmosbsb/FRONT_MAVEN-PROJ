@@ -89,20 +89,15 @@
 				<a href="<c:url value="/NormalReserve/ReserveLoginList.do"/>" style="color: #5130b1;background-color: white;font-size: 1.5em;">나의 예약 정보</a>
 				</c:if>
 			</li>
-			<li><a href="<c:url value="/NormalReserve/Reserve.do"/>" style="color: white;">공간 목록</a></li>
 			<!-- 박수영이 수정한 부분 끝 -->
-			<li><a href="#" style="color: white;">보유 크래딧</a></li>
-			<li><a href="#" style="color: white;">스페이스클라우드 홈</a></li>
-			<li><a href="#" style="color: white;">내가 가고 싶은 공간</a></li>
+			<li><a href="<c:url value='/spacecloud.do'/>" style="color: white;">스페이스클라우드 홈</a></li>
 			<li class="majormenu"><a href="#" style="color: white;">1:1문의</a></li>
 			<li id="doQuestion" class="submenu1"><a href="#" style="color: white;">&nbsp;&nbsp;◎문의하기</a></li>
 			<li class="submenu1"><a href="<c:url value='/Question/current.do'/>" style="color: white;">&nbsp;&nbsp;◎처리현황</a></li>
 			</c:if>
 		</li>
 		<li><a href="<c:url value="/Notice/List.do"/>" style="color: white;">공지사항</a></li>
-		<li><a href="#" style="color: white;">이벤트</a></li>
 		<li><a href="<c:url value="/help/help.do"/>" style="color: white;">도움말</a></li>
-		<li><a href="#" style="color: white;">서비스정보</a></li>
 		<c:if test="${oauth_state != null}">
 		<li><a href="<c:url value='/logout.do'/>" style="color: white;">로그아웃</a></li>
 		<li><a href="<c:url value='/SCPartnerMain.do'/>" style="color: white; background-color: #5130b1">호스트센터로 이동</a></li>

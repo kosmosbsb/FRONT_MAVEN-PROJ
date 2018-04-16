@@ -9,7 +9,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="<c:url value='/resources/images/icons/faviconSC2.png'/>"/>
-        <title>SpaceCloud</title>
+        <title>SpaceCloud 호스트센터</title>
 
         <!-- Bootstrap core CSS -->
         <link href="<c:url value='/resources/css/bootstrap.min.css'/>" rel="stylesheet">
@@ -167,18 +167,10 @@
 				<div class="top-row">
 					<div class="row">
 						<div class="col-md-2 col-sm-6 col-xs-6">
-						<a href="index.html"><img src="<c:url value='/resources/images/khw/hostlogo.PNG'/>"
-							alt="logo" style="width: 270px; height: auto;"></a>
-					</div>
-					<nav class="navbar navbar-default">
-						<div class="navbar-header page-scroll">
-							<button data-target=".navbar-ex1-collapse"
-								data-toggle="collapse" class="navbar-toggle" type="button">
-								<span class="sr-only">Toggle navigation</span>
-							</button>
+							<a href="<c:url value='/SCPartnerMain.do'/>"><img src="<c:url value='/resources/images/khw/hostlogo.PNG'/>"
+								alt="logo" style="width: 270px; height: auto;"></a>
 						</div>
-					</nav>
-				</div>
+					</div>
 				</div>
 			</div>
 		</header>

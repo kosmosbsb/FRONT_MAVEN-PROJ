@@ -15,7 +15,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="../resources/images/icons/faviconSC2.png"/>
-        <title>공간등록</title>
+        <title>SpaceCloud 호스트센터</title>
 
         <!-- Bootstrap core CSS -->
         <link href="../resources/css/bootstrap.min.css" rel="stylesheet">
@@ -142,186 +142,7 @@
         });
         </script>
         
-        <script type="text/javascript">
-        function checkCount() {
-			var checkList = $('input:checkbox[id="cate"]:checked').length;
-			if(checkList == 0){
-				alert("1개이상 선택하세요");
-				location.href="<c:url value='/rgst/Register.do'/>";
-			}
-			else if(checkList > 5){
-				alert("최대 5개까지 선택 가능합니다");
-				location.href="<c:url value='/rgst/Register.do'/>";
-			}
-		}
         
-      //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
-        function execDaumPostcode() {	
-            new daum.Postcode({    	  	
-                oncomplete: function(data) {
-                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-                    // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
-                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                    fullRoadAddr = data.roadAddress; // 도로명 주소 변수
-                    var extraRoadAddr = ''; // 도로명 조합형 주소 변수
-                    
-                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                        extraRoadAddr += data.bname;
-                    }
-                    // 건물명이 있고, 공동주택일 경우 추가한다.
-                    if(data.buildingName !== '' && data.apartment === 'Y'){
-                       extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                    }
-                    // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                    if(extraRoadAddr !== ''){
-                        extraRoadAddr = ' (' + extraRoadAddr + ')';
-                    }
-                    // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
-                    if(fullRoadAddr !== ''){
-                        fullRoadAddr += extraRoadAddr;
-                    }
-
-                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                    document.getElementById('addr').value = fullRoadAddr+"\r\n"+data.jibunAddress;
-                    
-                    //주소-좌표 변환 객체를 생성
-                    var geocoder = new daum.maps.services.Geocoder();
-                    
-                    // 주소로 상세 정보를 검색
-                    geocoder.addressSearch(data.address, function(results, status) {
-                        // 정상적으로 검색이 완료됐으면
-                        if (status === daum.maps.services.Status.OK) {                	 
-
-                            var result = results[0]; //첫번째 결과의 값을 활용
-                            var lat = result.y;
-                            var lng = result.x;
-                            
-                            var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-                            mapOption = {
-                                center: new daum.maps.LatLng(lat, lng), // 지도의 중심좌표
-                                level: 3 // 지도의 확대 레벨
-                            };
-                                                
-                            //지도를 생성
-                	        var map = new daum.maps.Map(mapContainer, mapOption);
-                            
-                	        // 지도에 표시할 원을 생성합니다
-                	        var marker = new daum.maps.Marker({
-                	            position : new daum.maps.LatLng(result.y, result.x),  // 중심좌표 입니다 
-                	            map : map
-                	        });
-
-                	     	// 지도를 보여준다
-                	        mapContainer.style.display = "block";
-                            map.relayout();
-                            
-                	        // 지도에 원을 표시합니다 
-                	        marker.setMap(map);
-                	       
-                	        //주소 정보 전달
-                	        $('#roadAddress').val(fullRoadAddr);
-                	        $('#jibunAddress').val(data.jibunAddress);
-                	        $('#sido').val(data.sido);
-                	        $('#sigungu').val(data.sigungu);
-                	        $('#bname').val(data.bname);
-                	        $('#bname1').val(data.bname1);
-                	        $('#lat').val(lat);
-                	        $('#lng').val(lng); 
-                        }
-                    });	                   
-                }
-            }).open(); 
-        }
-      
-        
-        // 대표 이미지
-   		var sel_file;
-        
-        $(document).ready(function() {
-            $("#input_img").on("change", handleImgFileSelect);
-        });
-        
-        function fileUploadAction() {
-            console.log("fileUploadAction");
-            $("#input_img").trigger('click');
-        }
-       
-        function handleImgFileSelect(e) {
-        	 var files = e.target.files;
-             var filesArr = Array.prototype.slice.call(files);
-             var index = 0;
-             
-             filesArr.forEach(function(f) {
-            	 if(!f.type.match("image.*")) {
-                     alert("확장자는 이미지 확장자만 가능합니다.");
-                     return;
-                 }
-            	 
-            	 sel_file = f;
-            	 var reader = new FileReader();
-                 reader.onload = function(e) {
-                	 /* $("#img").attr("src",e.target.result); */
-                	 var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'></a>";
-                     $(".img_wrap").html(html);
-                     /* index++; */
-                 }
-                 reader.readAsDataURL(f);
-             });
-		}
-        
-        
-     	// 이미지 정보들을 담을 배열
-        var sel_files = [];
-
-        $(document).ready(function() {
-            $("#input_imgs").on("change", handleImgFileSelects);
-        }); 
-
-        function fileUploadActions() {
-            console.log("fileUploadActions");
-            $("#input_imgs").trigger('click');
-        }
-        
-        function handleImgFileSelects(e) {
-            // 이미지 정보들을 초기화
-            sel_files = [];
-            /* $(".imgs_wrap").empty(); */
-
-            var files = e.target.files;
-            var filesArr = Array.prototype.slice.call(files);
-
-            var index = 0;
-            filesArr.forEach(function(f) {
-                if(!f.type.match("image.*")) {
-                    alert("확장자는 이미지 확장자만 가능합니다.");
-                    return;
-                }
-
-                sel_files.push(f);
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'></a>";
-                    $(".imgs_wrap").append(html);
-                    index++;
-
-                }
-                reader.readAsDataURL(f);
-            });
-        }
-
-        function deleteImageAction(index) {
-            console.log("index : "+index);
-            console.log("sel length : "+sel_files.length);
-
-            sel_files.splice(index, 1);
-
-            var img_id = "#img_id_"+index;
-            $(img_id).remove(); 
-        }
-
-        </script>
         
         
         
@@ -491,58 +312,21 @@
 	</head>
     
     <body>
-	<div id="page">
+	
 		<!-- 이거 그 머냐 사이드 -->
 		<jsp:include page="/WEB-INF/template/SideMenu.jsp"/>
 		
 		<!---header top---->
 		<!--header--->
-		<header class="header-container" style="background-color: #FFC600">
+		<header class="header-container" style="background-color: #704de4;">
 			<div class="container">
 				<div class="top-row">
 					<div class="row">
 						<div class="col-md-2 col-sm-6 col-xs-6">
 							<div id="logo">
-								<a href="Register.jsp"><img src="../resources/images/custom/sclogo2.png"
-									alt="logo" width=160px height=38px></a>
+								<a href="<c:url value='/SCPartnerMain.do'/>"><img src="<c:url value='/resources/images/khw/hostlogo.PNG'/>"
+									alt="logo" style="width: 270px; height: auto;"></a>
 								<!--<a href="index.html"><span>vacay</span>home</a>-->
-							</div>
-						</div>
-						<div class="col-sm-6 visible-sm">
-							<div class="text-right">
-								<button type="button" class="book-now-btn">Book Now</button>
-							</div>
-						</div>
-						<div class="col-md-8 col-sm-12 col-xs-12 remove-padd">
-							<nav class="navbar navbar-default">
-								<div class="navbar-header page-scroll">
-									<button data-target=".navbar-ex1-collapse"
-										data-toggle="collapse" class="navbar-toggle" type="button">
-										<span class="sr-only">Toggle navigation</span> <span
-											class="icon-bar"></span> <span class="icon-bar"></span> <span
-											class="icon-bar"></span>
-									</button>
-
-								</div>
-								<div
-									class="collapse navigation navbar-collapse navbar-ex1-collapse remove-space">
-									<ul class="list-unstyled nav1 cl-effect-10">
-										<li><a data-hover="Home" class="active"><span>Home</span></a></li>
-										<li><a data-hover="About" href="../resources/about.html"><span>About</span></a></li>
-										<li><a data-hover="Rooms" href="../resources/rooms.html"><span>Rooms</span></a></li>
-										<li><a data-hover="Gallery" href="../resources/gallery.html"><span>Gallery</span></a></li>
-										<li><a data-hover="Dinning" href="../resources/dinning.html"><span>Dinning</span></a></li>
-										<li><a data-hover="News" href="../resources/news.html"><span>News</span></a></li>
-										<li><a data-hover="Contact Us" href="../resources/contact.html"><span>contact
-													Us</span></a></li>
-									</ul>
-
-								</div>
-							</nav>
-						</div>
-						<div class="col-md-2  col-sm-4 col-xs-12 hidden-sm">
-							<div class="text-right">
-								<button type="button" class="book-now-btn">Register Now</button>
 							</div>
 						</div>
 					</div>
@@ -551,16 +335,6 @@
 		</header>
 		<!--end-->
 		
-			<a class="left carousel-control" href="#myCarousel1"
-				data-slide="prev"> <img src="../resources/images/icons/left-arrow.png"
-				onmouseover="this.src = '../resources/images/icons/left-arrow-hover.png'"
-				onmouseout="this.src = '../resources/images/icons/left-arrow.png'" alt="left"></a>
-			<a class="right carousel-control" href="#myCarousel1"
-				data-slide="next"><img src="../resources/images/icons/right-arrow.png"
-				onmouseover="this.src = '../resources/images/icons/right-arrow-hover.png'"
-				onmouseout="this.src = '../resources/images/icons/right-arrow.png'" alt="left"></a>
-
-		</div>
 		<div class="clearfix"></div>
 
 		<!--service block--->
@@ -761,6 +535,10 @@
 										});
 										</script>
 										
+										<div id="layer" style="display:none;position:absolute;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
+											<img src="//t1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
+										</div>
+										
 										<div style="margin:auto;width:80%;">
 										<div class="col-lg-5">
 											<div class="form-group">
@@ -824,7 +602,8 @@
 											<div class="col-lg-6" style="padding: 10px;">
 							       				<input class="form-control" type="text" id="addrdetail" name ="addrdetail" placeholder="상세주소">
 							       			</div>
-											<div id="map" style="width:100%;height:500px;margin-top:10px;display:none"></div>
+											<div class="col-md-4" id="map" style="width:100%;height:500px;margin-top:10px;display:none;">
+											</div>
 											<input type="hidden" id="lat" name="lat">
 											<input type="hidden" id="lng" name="lng">
 											<input type="hidden" id="roadAddress" name="roadAddress">
@@ -1118,4 +897,225 @@
 		});
 		
 	</script>
+	
+	<script type="text/javascript">
+
+
+        var layer = document.getElementById('layer');
+        
+        
+        
+        function checkCount() {
+			var checkList = $('input:checkbox[id="cate"]:checked').length;
+			if(checkList == 0){
+				alert("1개이상 선택하세요");
+				location.href="<c:url value='/rgst/Register.do'/>";
+			}
+			else if(checkList > 5){
+				alert("최대 5개까지 선택 가능합니다");
+				location.href="<c:url value='/rgst/Register.do'/>";
+			}
+		}
+        
+      //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+        function execDaumPostcode() {	
+            new daum.Postcode({    	  	
+                oncomplete: function(data) {
+                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+                    // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                    fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+                    var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+                    
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraRoadAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                       extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraRoadAddr !== ''){
+                        extraRoadAddr = ' (' + extraRoadAddr + ')';
+                    }
+                    // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+                    if(fullRoadAddr !== ''){
+                        fullRoadAddr += extraRoadAddr;
+                    }
+
+                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                    document.getElementById('addr').value = fullRoadAddr+"\r\n"+data.jibunAddress;
+                    
+                    //주소-좌표 변환 객체를 생성
+                    var geocoder = new daum.maps.services.Geocoder();
+                    
+                    // 주소로 상세 정보를 검색
+                    geocoder.addressSearch(data.address, function(results, status) {
+                        // 정상적으로 검색이 완료됐으면
+                        if (status === daum.maps.services.Status.OK) {                	 
+
+                            var result = results[0]; //첫번째 결과의 값을 활용
+                            var lat = result.y;
+                            var lng = result.x;
+                            
+                            var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+                            mapOption = {
+                                center: new daum.maps.LatLng(lat, lng), // 지도의 중심좌표
+                                level: 3 // 지도의 확대 레벨
+                            };
+                                                
+                            //지도를 생성
+                	        var map = new daum.maps.Map(mapContainer, mapOption);
+                            
+                	        // 지도에 표시할 원을 생성합니다
+                	        var marker = new daum.maps.Marker({
+                	            position : new daum.maps.LatLng(result.y, result.x),  // 중심좌표 입니다 
+                	            map : map
+                	        });
+
+                	     	// 지도를 보여준다
+                	        mapContainer.style.display = "block";
+                            map.relayout();
+                            
+                	        // 지도에 원을 표시합니다 
+                	        marker.setMap(map);
+                	       
+                	        //주소 정보 전달
+                	        $('#roadAddress').val(fullRoadAddr);
+                	        $('#jibunAddress').val(data.jibunAddress);
+                	        $('#sido').val(data.sido);
+                	        $('#sigungu').val(data.sigungu);
+                	        $('#bname').val(data.bname);
+                	        $('#bname1').val(data.bname1);
+                	        $('#lat').val(lat);
+                	        $('#lng').val(lng); 
+
+
+                	        layer.style.display = 'none';
+                        }
+                    });	                   
+                },
+                width : '100%',
+                height : '100%'
+            }).embed(layer);
+
+            layer.style.display = 'block';
+            initLayerPosition();
+            
+        }
+      
+        
+        // 대표 이미지
+   		var sel_file;
+        
+        $(document).ready(function() {
+            $("#input_img").on("change", handleImgFileSelect);
+        });
+        
+        function fileUploadAction() {
+            console.log("fileUploadAction");
+            $("#input_img").trigger('click');
+        }
+       
+        function handleImgFileSelect(e) {
+        	 var files = e.target.files;
+             var filesArr = Array.prototype.slice.call(files);
+             var index = 0;
+             
+             filesArr.forEach(function(f) {
+            	 if(!f.type.match("image.*")) {
+                     alert("확장자는 이미지 확장자만 가능합니다.");
+                     return;
+                 }
+            	 
+            	 sel_file = f;
+            	 var reader = new FileReader();
+                 reader.onload = function(e) {
+                	 /* $("#img").attr("src",e.target.result); */
+                	 var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'></a>";
+                     $(".img_wrap").html(html);
+                     /* index++; */
+                 }
+                 reader.readAsDataURL(f);
+             });
+		}
+        
+        
+     	// 이미지 정보들을 담을 배열
+        var sel_files = [];
+
+        $(document).ready(function() {
+            $("#input_imgs").on("change", handleImgFileSelects);
+        }); 
+
+        function fileUploadActions() {
+            console.log("fileUploadActions");
+            $("#input_imgs").trigger('click');
+        }
+        
+        function handleImgFileSelects(e) {
+            // 이미지 정보들을 초기화
+            sel_files = [];
+            /* $(".imgs_wrap").empty(); */
+
+            var files = e.target.files;
+            var filesArr = Array.prototype.slice.call(files);
+
+            var index = 0;
+            filesArr.forEach(function(f) {
+                if(!f.type.match("image.*")) {
+                    alert("확장자는 이미지 확장자만 가능합니다.");
+                    return;
+                }
+
+                sel_files.push(f);
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'></a>";
+                    $(".imgs_wrap").append(html);
+                    index++;
+
+                }
+                reader.readAsDataURL(f);
+            });
+        }
+
+        function deleteImageAction(index) {
+            console.log("index : "+index);
+            console.log("sel length : "+sel_files.length);
+
+            sel_files.splice(index, 1);
+
+            var img_id = "#img_id_"+index;
+            $(img_id).remove(); 
+        }
+
+
+
+        //혁우 추가 함수
+        function initLayerPosition(){
+            var width = 300; //우편번호 서비스가 들어갈 element의 width
+            var height = 460; //우편번호 서비스가 들어갈 element의 height
+            var borderWidth = 5; //샘플에서 사용하는 border의 두께
+
+            // 위에서 선언한 값들을 실제 element에 넣는다.
+            layer.style.width = width + 'px';
+            layer.style.height = height + 'px';
+            layer.style.border = borderWidth + 'px solid';
+            // 실행되는 순간의 화면 너비와 높이 값을 가져와서 중앙에 뜰 수 있도록 위치를 계산한다.
+            layer.style.left = (((window.innerWidth || document.documentElement.clientWidth) - width)/2 - borderWidth) + 'px';
+            layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
+        }
+
+
+        function closeDaumPostcode() {
+            // iframe을 넣은 element를 안보이게 한다.
+            layer.style.display = 'none';
+        }
+        
+        </script>
+	
+	
 </html>
