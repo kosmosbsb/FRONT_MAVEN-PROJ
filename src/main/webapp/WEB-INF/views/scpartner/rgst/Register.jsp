@@ -763,39 +763,36 @@
 										
 										<div style="margin:auto;width:80%;">
 										<div class="col-lg-5">
-											<div class="input-group">
-											<span class="input-group-addon">태그를 입력하고 버튼을 누르세요!</span>
-											<input type="text" name="taginputName" class="form-control" id="taginputId">
-											<span class="input-group-addon" id="buttonId">버튼</span>
-											<!-- <button id="buttonId" class="btn btn-primary">버튼이다</button> -->
+											<div class="form-group">
+												<span class="input-group-addon">태그를 입력하고 버튼을 누르세요!</span>
+												<span class="input-group-addon" id="buttonId">버튼</span>
+												<input type="text" name="taginputName" class="form-control" id="taginputId">
 											</div>
 										</div>
 										<div class="col-lg-7">
-											<div class="input-group">
-											<span class="input-group-addon">입력된 태그들(#로 구분하세요!)</span>
-											<input type="text" name="tagoutputName" class="form-control" id="tagoutputId">
+											<div class="form-group">
+												<span class="input-group-addon">입력된 태그들(#로 구분하세요!)</span>
+												<input type="text" name="tagoutputName" class="form-control" id="tagoutputId">
 											</div>
 										</div>
 									</div>
 									<div style="margin:auto;width:80%;margin-top:50px;">
-									<div class="row">
-										<div class="col-lg-12">
-											<div class="input-group">
+										<div class="col-lg-5">
+											<div class="form-group">
 											<span class="input-group-addon">시설 안내사항을 입력하고 버튼을 누르세요!</span>
-											<input type="text" name="taginputName" class="form-control" id="facilinputId">
 											<span class="input-group-addon" id="buttonId2">버튼</span>
-											<!-- <button id="buttonId" class="btn btn-primary">버튼이다</button> -->
+											<input type="text" name="taginputName" class="form-control" id="facilinputId">
+											</div>
+										</div>
+										<div class="col-lg-7">
+											<div class="form-group">
+											<span class="input-group-addon">입력된 시설들(줄바꿈으로 구분하세요!)</span>
+											<textarea class="form-control custom-control" rows="5" style="resize:none" id="faciloutputId"></textarea>
+											<input type="hidden" value="" id="facilhiddenId" name="facilParam">
 											</div>
 										</div>
 									</div>
-									<div class="row">
-										<div class="col-lg-12">
-											<textarea class="form-control custom-control" rows="5" style="resize:none" id="faciloutputId"></textarea>
-											<input type="hidden" value="" id="facilhiddenId" name="facilParam">
-										</div>
-									</div>
-									</div>
-									</div>
+								</div>
 									
 									<div class="row">
 										<!-- File Button --> 
