@@ -73,7 +73,7 @@ public class CjhController {
 		String price_weekday= request.getParameter("priceweekday");
 		String precaution= request.getParameter("precaution");
 		String time_or_day = request.getParameter("time_or_day");
-		String oper_time = request.getParameter("opertime1") +","+request.getParameter("opertime2"); 
+		String oper_time = request.getParameter("opertime1") +","+request.getParameter("opertime2");
 		//String regularly_close= request.getParameter("regularlyclose");
 		String tagOutputName = request.getParameter("tagoutputName");
 		String facilities = "#"+request.getParameter("facilParam").replaceAll("\r\n", "#");

@@ -774,17 +774,17 @@
 		                  <div class="form-group">
 		                     <label class="col-md-4 control-label" for="opertime">*오픈시간</label>
 		                     <div class="col-md-6">
-		                        <select class="form-control input-md" style="width: 40%" name="opertime2" id="opertime2" title="시작시간">
+		                        <select class="form-control input-md" style="width: 40%" name="opertime1" id="opertime1" title="시작시간">
 		                           <option value="0" selected>시작시간</option>
-		                           <option value="1">01 시</option>
-		                           <option value="2">02 시</option>
-		                           <option value="3">03 시</option>
-		                           <option value="4">04 시</option>
-		                           <option value="5">05 시</option>
-		                           <option value="6">06 시</option>
-		                           <option value="7">07 시</option>
-		                           <option value="8">08 시</option>
-		                           <option value="9">09 시</option>
+		                           <option value="01">01 시</option>
+		                           <option value="02">02 시</option>
+		                           <option value="03">03 시</option>
+		                           <option value="04">04 시</option>
+		                           <option value="05">05 시</option>
+		                           <option value="06">06 시</option>
+		                           <option value="07">07 시</option>
+		                           <option value="08">08 시</option>
+		                           <option value="09">09 시</option>
 		                           <option value="10">10 시</option>
 		                           <option value="11">11 시</option>
 		                           <option value="12">12 시</option>
@@ -803,15 +803,15 @@
 		                        </select> 
 		                        <select class="form-control input-md" style="width: 40%" name="opertime2" id="opertime2" title="종료시간">
 		                           <option value="0" selected>종료시간</option>
-		                           <option value="1">01 시</option>
-		                           <option value="2">02 시</option>
-		                           <option value="3">03 시</option>
-		                           <option value="4">04 시</option>
-		                           <option value="5">05 시</option>
-		                           <option value="6">06 시</option>
-		                           <option value="7">07 시</option>
-		                           <option value="8">08 시</option>
-		                           <option value="9">09 시</option>
+		                           <option value="01">01 시</option>
+		                           <option value="02">02 시</option>
+		                           <option value="03">03 시</option>
+		                           <option value="04">04 시</option>
+		                           <option value="05">05 시</option>
+		                           <option value="06">06 시</option>
+		                           <option value="07">07 시</option>
+		                           <option value="08">08 시</option>
+		                           <option value="09">09 시</option>
 		                           <option value="10">10 시</option>
 		                           <option value="11">11 시</option>
 		                           <option value="12">12 시</option>
