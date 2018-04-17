@@ -29,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.kosmo.spacecloud.impl.login.MemberServiceImpl;
+import com.kosmo.spacecloud.impl.login.UserToken;
 import com.kosmo.spacecloud.khw.FCMTokenServiceImpl;
 import com.kosmo.spacecloud.khw.SpaceServiceImpl;
 import com.kosmo.spacecloud.service.khw.SpaceDTO;
@@ -47,6 +48,8 @@ public class NaverLoginController {
 	@Resource(name="fCMTokenService")
 	private FCMTokenServiceImpl fCMTokenService;
 	
+	@Resource(name="userToken")
+	private UserToken userToken;
 	
 	/* NaverLoginBO */
 	private NaverLoginBO naverLoginBO;
@@ -57,7 +60,6 @@ public class NaverLoginController {
 		this.naverLoginBO = naverLoginBO;
 	}
 	
-	private static String userFCMToken;
 	
     @RequestMapping("/login.do")
     public String login(HttpSession session) {
@@ -106,10 +108,10 @@ public class NaverLoginController {
 		//살아계심 ㅇㅇ
 		//System.out.println("토큰님 살아계신가요?: "+userFCMToken);
 
-		
+		System.out.println("로그인할때 토큰 확인용!: "+ userToken.getUserToken());
 		//서버 껐다가 켜면 기존 앱 다운받은 단말기에서 로그인 불가...ㅠㅠ //일단 이대로 간다
-		if(userFCMToken != null) {
-			fCMTokenService.tokenIDmapper(userFCMToken, jsonObject_tail.get("id").toString());
+		if(userToken.getUserToken() != null) {
+			fCMTokenService.tokenIDmapper(userToken.getUserToken(), jsonObject_tail.get("id").toString());
 		}
 		
 		//회원 아이디(키값), 이름, 닉네임, 프로필 이미지 경로, 이메일주소는 세션에 박아둘게요
@@ -279,7 +281,7 @@ public class NaverLoginController {
     public String tokenCreater(Model model, HttpServletRequest request, HttpSession session /*MobileTokenVO vo*/)throws Exception{
             System.out.println("토큰 하이?: "+request.getParameter("Token"));
             
-            userFCMToken = request.getParameter("Token");
+            userToken.setUserToken(request.getParameter("Token"));
             fCMTokenService.insertToken(request.getParameter("Token"));
                 
                 
