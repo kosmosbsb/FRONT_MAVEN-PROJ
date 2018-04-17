@@ -1,6 +1,7 @@
 package com.kosmo.spacecloud.web.cjh;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -163,10 +165,6 @@ public class CjhController {
 			
 			
 		}
-		
-		
-		
-		
 		
 		return "redirect:/SCPartnerMain.do";
 	}

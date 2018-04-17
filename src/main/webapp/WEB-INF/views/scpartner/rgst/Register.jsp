@@ -1013,6 +1013,9 @@
         
         $(document).ready(function() {
             $("#input_img").on("change", handleImgFileSelect);
+            $("#submit").on("click", function(){
+					alert("공간 등록이 완료되었습니다.");
+                });
         });
         
         function fileUploadAction() {
