@@ -28,6 +28,14 @@
 		insert into SPACE_RESERVE_INFO(SPACE_NO, MIN_DAY, MAX_DAY, MIN_PERSON, MAX_PERSON, PRICE_STANDARD, PRICE_WEEKDAY, PRECAUTION, TIME_OR_DAY, OPER_TIME, REGULARLY_CLOSE) values(RESERVEINFO_SEQ.NEXTVAL,#{min_day},#{max_day},#{min_person},#{max_person},#{price_standard},#{price_weekday},#{precaution},#{time_or_day},#{oper_time},#{regularly_close})
 	</insert>
 	
+	<select id="selectRecentSpace" resultType="CjhDTO">
+		SELECT * FROM SPACE WHERE SPACE_NO = (SELECT MAX(SPACE_NO) FROM SPACE)
+	</select>
+	
+	<update id="updateSpaceImg" parameterType="java.util.Map">
+		UPDATE SPACE SET IMG_MAIN=#{spaceImg} WHERE SPACE_NO=#{space_no}
+	</update>
+	
 </mapper>
 
 

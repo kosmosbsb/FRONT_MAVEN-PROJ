@@ -1,6 +1,7 @@
 package com.kosmo.spacecloud.impl.cjh;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -42,6 +43,17 @@ public class CjhDAO implements CjhService{
 	@Override
 	public int insertReserveInfo(CjhDTO dto) {
 		return sqlMapper_CJH.insert("insertReserveInfo",dto);
+	}
+
+	@Override
+	public CjhDTO selectRecentSpace() {
+		// TODO Auto-generated method stub
+		return sqlMapper_CJH.selectOne("selectRecentSpace");
+	}
+
+	@Override
+	public int updateSpaceImg(Map map) {
+		return sqlMapper_CJH.update("updateSpaceImg",map);
 	}
 	
 

@@ -1,6 +1,9 @@
 package com.kosmo.spacecloud.web.cjh;
 
+import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -10,9 +13,12 @@ import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kosmo.spacecloud.impl.cjh.CjhTestServiceImpl;
 import com.kosmo.spacecloud.service.cjh.CjhDTO;
+import com.kosmo.spacecloud.service.login.MemberDTO;
 
 @Controller
 public class CjhController {
@@ -21,7 +27,7 @@ public class CjhController {
 	private CjhTestServiceImpl service;
 
 	@RequestMapping("/CJH/ControllerTest.do")
-	public String controllerTestCJH(Model model,HttpSession session,HttpServletRequest request) throws Exception{
+	public String controllerTestCJH(Model model,HttpSession session,MultipartHttpServletRequest request) throws Exception{
 		System.out.println("CJH 컨트롤러 테스트 요청으로 들어옴.");
 		
 		String space1= request.getParameter("space1")==null? null:request.getParameter("space1");
@@ -121,6 +127,47 @@ public class CjhController {
 		service.insertSpace(dto);
 		service.insertReserveInfo(dto);
 		
+		CjhDTO dto2 = service.selectRecentSpace();
+		
+		
+		//1]서버의 물리적 경로 얻기
+    	String phisicalPath=request.getSession().getServletContext().getRealPath("/Upload/SpaceImg");
+    	System.out.println( "서버의 물리적 경로: "+phisicalPath);
+		//1-1]MultipartHttpServletRequest객체의 getFile("파라미터명")메소드로
+		//    MultipartFile객체 얻기
+		MultipartFile upload= request.getFile("input_img");
+		
+		//2]File객체 생성
+		////2-1] 파일 중복시 이름 변경
+		//String newFileName=FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
+		
+		//유저ID가 곧 파일명 (ex. IMG38502203.jpg)
+		
+		if(!"".equals(upload.getOriginalFilename())) { //파일이 들어왔을 때면 등록해준다. 
+			System.out.println(upload.getOriginalFilename());
+			//.으로 나눌려면 이렇게해야해... 안해주면 .을 정규식문자로 인식하니깐
+			String[] tempStrings = upload.getOriginalFilename().split("\\.");
+			
+			File file = new File(phisicalPath+File.separator+"IMG"+dto2.getSpace_no()+"."+tempStrings[tempStrings.length-1]);		
+			
+			//3]업로드 처리
+			upload.transferTo(file);
+			//dto.setImg("IMG"+session.getAttribute("USER_ID")+"."+tempStrings[tempStrings.length-1]);
+			//memberService.insertHostImg(dto);
+			
+			Map map = new HashMap();
+			map.put("spaceImg", "IMG"+dto2.getSpace_no()+"."+tempStrings[tempStrings.length-1]);
+			map.put("space_no", dto2.getSpace_no());
+			
+			service.updateSpaceImg(map);
+			
+			
+		}
+		
+		
+		
+		
+		
 		return "redirect:/SCPartnerMain.do";
 	}
 	
@@ -140,25 +187,82 @@ public class CjhController {
        List<CjhDTO> list2 = service.selectListhost(sn);
        List<CjhDTO> list3 = service.selectListres(sn);
        
-       for(CjhDTO dto:list) {
-          req.setAttribute("Hname", dto.getImg_main());
-          System.out.println(dto.getImg_main());
-             if(dto.getImg_main()!=null && dto.getImg_main().contains("#")) {
-                String[] imgs = dto.getImg_main().split("#");
-                for(int i=0;i<=imgs.length-1;i++) {
-                   System.out.println(imgs[i]);
-                   req.setAttribute("img"+i, imgs[i]);
-                }
-             }else {
-                req.setAttribute("img0", dto.getImg_main());
-                //System.out.println(dto.getImg_main());
-             }
-       }
+
+       model.addAttribute("img_main",list.get(0).getImg_main());
+       
+       
        model.addAttribute("spaceInfo",list);
        model.addAttribute("spaceHostInfo",list2);
        model.addAttribute("spaceResInfo",list3);
        
        return "/scmain/space/psy/SpaceView";
+    }
+	
+	
+	@RequestMapping("/SpaceImg/Upload.do")
+    public String regi_host(MultipartHttpServletRequest mhsr, HttpSession session) throws Exception{
+    	/*
+    	//호스트 등록안된 유저만 처리한다.
+    	if(!memberService.isHost(session.getAttribute("USER_ID").toString())) {
+		    	MemberDTO dto = new MemberDTO();
+		    	dto.setId(session.getAttribute("USER_ID").toString());
+		    	dto.setH_nickname(mhsr.getParameter("h_nickname"));
+		    	dto.setIntroduce(mhsr.getParameter("introduce"));
+		    	
+		    	if("Y".equals(mhsr.getParameter("h_alarm_sms"))) {
+		    		dto.setH_alarm_sms(mhsr.getParameter("h_alarm_sms"));
+		    	}
+		    	else {
+		    		dto.setH_alarm_sms("N");
+		    	}
+		    	if("Y".equals(mhsr.getParameter("h_alarm_mail"))) {
+		    		dto.setH_alarm_mail(mhsr.getParameter("h_alarm_mail"));
+		    	}
+		    	else {
+		    		dto.setH_alarm_mail("N");
+		    	}
+		    	memberService.insertHost(dto);
+	    	
+	    	
+			//1]서버의 물리적 경로 얻기
+	    	String phisicalPath=mhsr.getSession().getServletContext().getRealPath("/Upload/HostImg");
+	    	System.out.println( "서버의 물리적 경로: "+phisicalPath);
+			//1-1]MultipartHttpServletRequest객체의 getFile("파라미터명")메소드로
+			//    MultipartFile객체 얻기
+			MultipartFile upload= mhsr.getFile("hostImg");
+			
+			//2]File객체 생성
+			////2-1] 파일 중복시 이름 변경
+			//String newFileName=FileUpDownUtils.getNewFileName(phisicalPath, upload.getOriginalFilename());
+			
+			//유저ID가 곧 파일명 (ex. IMG38502203.jpg)
+			
+			if(!"".equals(upload.getOriginalFilename())) { //파일이 들어왔을 때면 등록해준다. 
+				System.out.println(upload.getOriginalFilename());
+				//.으로 나눌려면 이렇게해야해... 안해주면 .을 정규식문자로 인식하니깐
+				String[] tempStrings = upload.getOriginalFilename().split("\\.");
+				
+				File file = new File(phisicalPath+File.separator+"IMG"+session.getAttribute("USER_ID")+"."+tempStrings[tempStrings.length-1]);		
+				
+				//3]업로드 처리
+				upload.transferTo(file);
+				dto.setImg("IMG"+session.getAttribute("USER_ID")+"."+tempStrings[tempStrings.length-1]);
+				memberService.insertHostImg(dto);
+			}
+			
+			//4]리퀘스트 영역에 데이타 저장
+			mhsr.setAttribute("writer", mhsr.getParameter("writer"));
+			mhsr.setAttribute("title", mhsr.getParameter("title"));
+			//파일과 관련된 정보 저장
+			mhsr.setAttribute("original",upload.getOriginalFilename());
+			mhsr.setAttribute("size",(int)Math.ceil(upload.getSize()/1024.0));
+			mhsr.setAttribute("type",upload.getContentType());
+			//파일 오리지날 이름 (ex. picture.jpg)
+			//mhsr.setAttribute("real","IMG"+session.getAttribute("USER_ID")+"."+tempStrings[tempStrings.length-1]);
+
+    	}
+    */	
+    	return "redirect:/SCPartnerMain.do";
     }
 	
 }

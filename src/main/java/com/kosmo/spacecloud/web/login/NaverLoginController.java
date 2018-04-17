@@ -240,6 +240,7 @@ public class NaverLoginController {
     	return "redirect:/SCPartnerMain.do";
     }
     
+    
     //공간 등록 메뉴얼 파일 다운로드 
 	@RequestMapping("/SpaceRegiMenual/Download.do")
 	public void download(HttpServletRequest req, HttpServletResponse resp) throws Exception{

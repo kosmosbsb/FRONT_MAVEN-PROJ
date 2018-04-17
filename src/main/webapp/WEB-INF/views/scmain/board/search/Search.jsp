@@ -824,7 +824,7 @@
 				                        <img class="card-img-top"
 				                           data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
 				                           alt="Thumbnail [100%x225]"
-				                           src="<c:url value="/resources/images/room1.png"/>"
+				                           src="<c:url value="/Upload/SpaceImg/${item.img_main}"/>"
 				                           data-holder-rendered="true"
 				                           style="height: 225px; width: 100%; display: block;">
 				                        </div>
@@ -880,7 +880,7 @@
 				                        <img class="card-img-top"
 				                           data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
 				                           alt="Thumbnail [100%x225]"
-				                           src="<c:url value="/resources/images/room1.png"/>"
+				                           src="<c:url value="/Upload/SpaceImg/${item.img_main}"/>"
 				                           data-holder-rendered="true"
 				                           style="height: 225px; width: 100%; display: block;">
 				                        </div>
@@ -936,7 +936,7 @@
 				                        <img class="card-img-top"
 				                           data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
 				                           alt="Thumbnail [100%x225]"
-				                           src="<c:url value="/resources/images/room1.png"/>"
+				                           src="<c:url value="/Upload/SpaceImg/${item.img_main}"/>"
 				                           data-holder-rendered="true"
 				                           style="height: 225px; width: 100%; display: block;">
 				                        </div>

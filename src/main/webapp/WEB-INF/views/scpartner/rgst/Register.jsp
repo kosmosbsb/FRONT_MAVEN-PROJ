@@ -65,6 +65,7 @@
 		
         <script>
         $(function(){
+
         	var navListItems = $('div.setup-panel div a'),
 	           allWells = $('.setup-content'),
 	           allNextBtn = $('.nextBtn');
@@ -368,7 +369,7 @@
 			</div>
 			</section>
 			
-			<form action="<c:url value="/CJH/ControllerTest.do"/>" class="form-horizontal" method="post" id="trans">
+			<form action="<c:url value="/CJH/ControllerTest.do"/>" class="form-horizontal" method="post" id="trans" enctype="multipart/form-data">
 				<div class="row setup-content" id="step-1">
 					<div class="col-xs-12">
 						<div class="col-md-12">

@@ -70,109 +70,14 @@
 			</div>
 		</header>
 		<!--end-->
-		<!-- 다수 케러셀 보류 -->
-		<div id="myCarousel1" class="carousel slide" data-ride="carousel">
-			
+		
+		
 
-			<ol class="carousel-indicators">
-				<c:if test="${requestScope.img0!=null}">
-				<li data-target="#myCarousel1" data-slide-to="0" class="active"></li>
-				</c:if>
-				<c:if test="${requestScope.img1!=null}">
-				<li data-target="#myCarousel1" data-slide-to="1"></li>
-				</c:if>
-				<c:if test="${requestScope.img2!=null}">
-				<li data-target="#myCarousel1" data-slide-to="2"></li>
-				</c:if>
-				<c:if test="${requestScope.img3!=null}">
-				<li data-target="#myCarousel1" data-slide-to="3"></li>
-				</c:if>
-				<c:if test="${requestScope.img4!=null}">
-				<li data-target="#myCarousel1" data-slide-to="4"></li>
-				</c:if>
-				<c:if test="${requestScope.img5!=null}">
-				<li data-target="#myCarousel1" data-slide-to="5"></li>
-				</c:if>
-			</ol>
-			<div class="carousel-inner">
-				<c:if test="${requestScope.img0!=null}">
-					<div class="item active">
-						<img src="${img0}"
-							style="width: 100%; height: 500px">
-						<div class="carousel-caption">
-							<h2>
-								
-							</h2>
-						</div>
-					</div>
-				</c:if>
-				<c:if test="${requestScope.img1!=null}">
-					<div class="item">
-						<img src="${img1}"
-							style="width: 100%; height: 500px">
-						<div class="carousel-caption">
-							<h2>
-								
-							</h2>
-						</div>
-					</div>
-				</c:if>
-				<c:if test="${requestScope.img2!=null}">
-					<div class="item">
-						<img src="${img2}"
-							style="width: 100%; height: 500px">
-						<div class="carousel-caption">
-							<h2>
-								
-							</h2>
-						</div>
-					</div>
-				</c:if>
-				<c:if test="${requestScope.img3!=null}">
-					<div class="item">
-						<img src="${img3}"
-							style="width: 100%; height: 500px">
-						<div class="carousel-caption">
-							<h2>
-								
-							</h2>
-						</div>
-					</div>
-				</c:if>
-				<c:if test="${requestScope.img4!=null}">
-					<div class="item">
-						<img src="${img4}"
-							style="width: 100%; height: 500px">
-						<div class="carousel-caption">
-							<h2>
-								
-							</h2>
-						</div>
-					</div>
-				</c:if>
-				<c:if test="${requestScope.img5!=null}">
-					<div class="item">
-						<img src="${img5}"
-							style="width: 100%; height: 500px">
-						<div class="carousel-caption">
-							<h2>
-								
-							</h2>
-						</div>
-					</div>
-				</c:if>
-
-			</div>
-			<a class="left carousel-control" href="#myCarousel1"
-				data-slide="prev"> <img src="<c:url value='/resources/images/icons/left-arrow.png'/>"
-				onmouseover="this.src = '<c:url value='/resources/images/icons/left-arrow-hover.png'/>'"
-				onmouseout="this.src = '<c:url value='/resources/images/icons/left-arrow.png'/>'" alt="left"></a>
-			<a class="right carousel-control" href="#myCarousel1"
-				data-slide="next"><img src="<c:url value='/resources/images/icons/right-arrow.png'/>"
-				onmouseover="this.src = '<c:url value='/resources/images/icons/right-arrow-hover.png'/>'"
-				onmouseout="this.src = '<c:url value='/resources/images/icons/right-arrow.png'/>'" alt="left"></a>
-
-		</div>
+		<p style="text-align: center;"><img src="<c:url value="/Upload/SpaceImg/${img_main}"/>"
+			style="width: 700px; height: 450px;" alt="??wfmnwklflkwfmklwmf"></p>
+	
+					
+					
 		<!----resort-overview--->
 		<!----resort-overview--->
 		<section class="resort-overview-block">
