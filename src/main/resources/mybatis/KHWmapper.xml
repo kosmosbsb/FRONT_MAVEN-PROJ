@@ -41,7 +41,7 @@
 	</select>
 	
 	<select id="selectSpaceInfo" parameterType="String" resultType="SpaceDTO">
-		SELECT * FROM SPACE WHERE ADDRESS LIKE '%' || #{searchWord} || '%'
+		SELECT * FROM SPACE WHERE ADDRESS LIKE '%' || #{searchWord} || '%' ORDER BY SPACE_NO DESC
 	</select>
 	
 	<insert id="insertToken" parameterType="String">
